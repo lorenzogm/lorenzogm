@@ -1,6 +1,6 @@
 ---
 title: React Component
-date: 2022/01/22
+date: 2022-01-22
 tag: Project Foundation, Front-End, React
 description: Defining a React component
 ---
