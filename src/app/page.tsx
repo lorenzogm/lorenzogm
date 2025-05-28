@@ -1,8 +1,16 @@
-import { getAllPosts } from '@/lib/blog';
+import { getAllPosts, BlogPostMetadata } from '@/lib/blog';
 import { BlogCard } from '@/components/BlogCard';
 
 export default async function Home() {
-  const posts = await getAllPosts();
+  console.log('Home component is being rendered');
+  let posts: BlogPostMetadata[] = [];
+  
+  try {
+    posts = await getAllPosts();
+    console.log('Posts loaded successfully:', posts.length);
+  } catch (error) {
+    console.error('Error loading posts:', error);
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -41,7 +49,7 @@ export default async function Home() {
       <footer className="bg-white border-t border-gray-200 mt-16">
         <div className="max-w-4xl mx-auto px-4 py-8 text-center">
           <p className="text-gray-600">
-            © 2025 Tech Blog. Built with Next.js and Tailwind CSS.
+            © 2025 Tech Blog. All rights reserved.
           </p>
         </div>
       </footer>

@@ -28,28 +28,38 @@ export interface BlogPostMetadata {
 }
 
 export async function getAllPosts(): Promise<BlogPostMetadata[]> {
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames
-    .filter((fileName) => fileName.endsWith('.md'))
-    .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, '');
-      const fullPath = path.join(postsDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const matterResult = matter(fileContents);
+  try {
+    const fileNames = fs.readdirSync(postsDirectory);
+    const allPostsData = fileNames
+      .filter((fileName) => fileName.endsWith('.md'))
+      .map((fileName) => {
+        const slug = fileName.replace(/\.md$/, '');
+        const fullPath = path.join(postsDirectory, fileName);
+        const fileContents = fs.readFileSync(fullPath, 'utf8');
+        const matterResult = matter(fileContents);
 
-      return {
-        slug,
-        title: matterResult.data.title,
-        date: matterResult.data.date,
-        excerpt: matterResult.data.excerpt,
-        image: matterResult.data.image,
-        author: matterResult.data.author,
-        tags: matterResult.data.tags || [],
-      };
-    });
+        // Generate excerpt from content if not provided
+        const excerpt = matterResult.data.excerpt || 
+          matterResult.data.description || 
+          matterResult.content.substring(0, 150) + '...';
 
-  // Sort posts by date (newest first)
-  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+        return {
+          slug,
+          title: matterResult.data.title || 'Untitled',
+          date: matterResult.data.date || new Date().toISOString().split('T')[0],
+          excerpt,
+          image: matterResult.data.image || '/placeholder-image.jpg',
+          author: matterResult.data.author || 'Lorenzo GM',
+          tags: matterResult.data.tag ? matterResult.data.tag.split(', ') : (matterResult.data.tags || []),
+        };
+      });
+
+    // Sort posts by date (newest first)
+    return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+  } catch (error) {
+    console.error('Error loading posts:', error);
+    return [];
+  }
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
@@ -65,14 +75,19 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     
     const contentHtml = processedContent.toString();
 
+    // Generate excerpt from content if not provided
+    const excerpt = matterResult.data.excerpt || 
+      matterResult.data.description || 
+      matterResult.content.substring(0, 150) + '...';
+
     return {
       slug,
-      title: matterResult.data.title,
-      date: matterResult.data.date,
-      excerpt: matterResult.data.excerpt,
-      image: matterResult.data.image,
-      author: matterResult.data.author,
-      tags: matterResult.data.tags || [],
+      title: matterResult.data.title || 'Untitled',
+      date: matterResult.data.date || new Date().toISOString().split('T')[0],
+      excerpt,
+      image: matterResult.data.image || '/placeholder-image.jpg',
+      author: matterResult.data.author || 'Lorenzo GM',
+      tags: matterResult.data.tag ? matterResult.data.tag.split(', ') : (matterResult.data.tags || []),
       content: contentHtml,
     };
   } catch (error) {

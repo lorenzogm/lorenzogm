@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { BlogPostMetadata } from '@/lib/blog';
 import { formatDate } from '@/lib/utils';
 
@@ -12,12 +11,10 @@ export function BlogCard({ post }: BlogCardProps) {
     <article className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <Link href={`/blog/${post.slug}`}>
         <div className="relative h-48 w-full">
-          <Image
+          <img
             src={post.image}
             alt={post.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="p-6">
