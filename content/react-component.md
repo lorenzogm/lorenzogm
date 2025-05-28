@@ -3,6 +3,7 @@ title: React Component
 date: 2022-01-22
 tag: Project Foundation, Front-End, React
 description: Defining a React component
+image: https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80
 ---
 
 I like to follow some guidelines when writing React components.

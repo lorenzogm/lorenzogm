@@ -2,6 +2,8 @@
 title: TypeScript Interface vs Type Alias
 date: 2022-02-07
 tag: Project Foundation, Front-End, TypeScript
+description: Understanding the differences between interfaces and type aliases in TypeScript
+image: https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1631&q=80
 ---
 
 # TypeScript Interface vs Type Alias

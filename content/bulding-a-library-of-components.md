@@ -2,6 +2,11 @@
 title: Building a library of components
 date: 2022-08-02
 tag: Front-End, Design System, UI Library
+description: Building your own library of components it's something that many engineers and companies have thought about at some point in time. In our team, we have gone through that process and the aim of this document is to share our experience.
+image: https://images.unsplash.com/photo-1618477388954-7852f32655ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1484&q=80
+---tle: Building a library of components
+date: 2022-08-02
+tag: Front-End, Design System, UI Library
 description: Building your own library of components it’s something that many engineers and companies have thought about at some point in time. In our team, we have gone through that process and the aim of this document is to share our experience.
 ---
 

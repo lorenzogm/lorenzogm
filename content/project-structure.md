@@ -3,6 +3,7 @@ title: Project Structure
 date: 2022-05-29
 tag: Project Foundation
 description: This project structure could be shared across disciplines to facilitate the communication in the team.
+image: https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80
 ---
 
 This project structure could be shared across disciplines to facilitate the communication in the team.

@@ -3,6 +3,7 @@ title: Testing Automation in the Front-End
 date: 2022-02-07
 tag: Project Foundation, Front-End, Testing
 description: Strategy to write automated tests
+image: https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80
 ---
 
 # Testing Automation in the Front-End

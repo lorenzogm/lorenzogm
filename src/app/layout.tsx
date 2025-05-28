@@ -13,7 +13,6 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://lorenzogm.github.io/lorenzogm'),
   title: "Tech Blog - Latest Web Development Trends",
   description: "Exploring the latest trends and technologies in web development. Stay up to date with Next.js, React, and modern web development practices.",
   keywords: ["web development", "Next.js", "React", "TypeScript", "JavaScript", "tech blog"],

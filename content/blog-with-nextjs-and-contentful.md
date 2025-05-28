@@ -3,6 +3,7 @@ title: Blog with Next.js and Contentful
 date: 2020-11-02
 tag: Blog, Next.js, Contentful, Tailwind CSS
 description: Building a blog with Next.js, Tailwind CSS and Contentful as headless CMS
+image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80
 ---
 
 Hello!

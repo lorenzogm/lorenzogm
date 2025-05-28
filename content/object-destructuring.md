@@ -2,6 +2,8 @@
 title: Object destructuring
 date: 2025-01-10
 tag: Front-End, Project Foundation, React
+description: Understanding object destructuring in JavaScript and React
+image: https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1421&q=80
 ---
 
 # Object destructuring
