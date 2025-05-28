@@ -1,6 +1,6 @@
 ---
 title: SASS vs Tailwind CSS
-date: 2025/10/22
+date: 2025-10-22
 tag: Project Foundation, Front-End, Styling
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Encapsulate Dependencies
-date: 2025/01/10
+date: 2025-01-10
 tag: Front-End, Project Foundation
 description: When working with dependencies, like a React component imported from a library, it's recommended to reference the library only once in your project.
 ---

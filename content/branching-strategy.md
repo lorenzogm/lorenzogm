@@ -1,6 +1,6 @@
 ---
 title: Branching Strategy
-date: 2022/02/05
+date: 2022-02-05
 description: 'Details for a git workflow: Branching, commiting, Pull Requests and Versioning'
 tag: Project Foundation, Git
 ---

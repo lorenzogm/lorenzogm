@@ -1,6 +1,6 @@
 ---
 title: A Better React Folder Structure
-date: 2021/11/30
+date: 2021-11-30
 tag: Front-End, Project Foundation, React
 description: Benefits investing some time to identify the best folder structure which works for you
 ---

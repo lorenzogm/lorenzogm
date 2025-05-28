@@ -1,6 +1,6 @@
 ---
 title: Naming convention for files and folders
-date: 2025/01/10
+date: 2025-01-10
 tag: Front-End, Project Foundation
 ---
 

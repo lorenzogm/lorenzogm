@@ -1,6 +1,6 @@
 ---
 title: TypeScript Interface vs Type Alias
-date: 2025/02/07
+date: 2025-02-07
 tag: Project Foundation, Front-End, TypeScript
 ---
 

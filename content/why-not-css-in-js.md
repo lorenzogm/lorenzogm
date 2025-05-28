@@ -1,6 +1,6 @@
 ---
 title: Why don't we use Styled Components?
-date: 2025/03/07
+date: 2025-03-07
 tag: Project Foundation, Front-End, Styling
 ---
 

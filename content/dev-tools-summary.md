@@ -1,6 +1,6 @@
 ---
 title: Dev Tools
-date: 2022/01/10
+date: 2022-01-10
 tag: Front-End, Project Foundation
 description: Must have dev tools
 ---

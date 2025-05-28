@@ -1,6 +1,6 @@
 ---
 title: Blog with Next.js and Contentful
-date: 2020/11/02
+date: 2020-11-02
 tag: Blog, Next.js, Contentful, Tailwind CSS
 description: Building a blog with Next.js, Tailwind CSS and Contentful as headless CMS
 ---

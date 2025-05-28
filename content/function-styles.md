@@ -1,6 +1,6 @@
 ---
 title: Function Styles
-date: 2025/01/10
+date: 2025-01-10
 tag: Front-End, Project Foundation
 description: A function can be defined with the keyword "function" (function declaration or regular functions) or as a variable (function expression or arrow functions)
 ---

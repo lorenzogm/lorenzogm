@@ -1,6 +1,6 @@
 ---
 title: Array types in TypeScript
-date: 2021/11/30
+date: 2021-11-30
 tag: Front-End, Project Foundation, TypeScript
 description: Which type of array notation shall we use in TypeScript?
 ---

@@ -1,6 +1,6 @@
 ---
 title: Rendering on the web
-date: 2020/10/22
+date: 2020-10-22
 tag: Web Foundation, Rendering
 description: Comparison between rendering on the client, server and static-site generation
 ---
