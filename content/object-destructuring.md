@@ -10,4 +10,4 @@ image: https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&
 
 The main reason to avoid object destructuring in Ring is to improve the readability and avoid losing the context. Keeping the root of the source (`props`, `state`, `localStorage`, `url`) tell us where the data is coming from.
 
-There is a good article about the topic: https://medium.com/@Producdevity/breaking-the-habit-the-overuse-of-object-destructuring-in-react-5404ab53eb6d
+There is a good article about the topic: [Breaking the Habit: The Overuse of Object Destructuring in React](https://medium.com/@Producdevity/breaking-the-habit-the-overuse-of-object-destructuring-in-react-5404ab53eb6d)
