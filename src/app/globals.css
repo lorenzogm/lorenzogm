@@ -157,17 +157,103 @@ body {
   line-height: 1.7;
   margin-bottom: 1.25em;
 }
+/* Inline code */
 .prose code {
-  background: #f3f4f6;
-  color: #2563eb;
-  padding: 0.2em 0.4em;
-  border-radius: 0.25em;
-  font-size: 0.95em;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 0.2em 0.5em;
+  border-radius: 0.375em;
+  font-size: 0.9em;
+  font-weight: 500;
+  border: 1px solid #e2e8f0;
 }
+
+/* Code blocks */
 .prose pre {
-  background: #18181b;
-  color: #f3f4f6;
-  border-radius: 0.5em;
-  padding: 1em;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 0.75em;
+  padding: 1.5em;
   overflow-x: auto;
+  margin: 2em 0;
+  border: 1px solid #1e293b;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.prose pre:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.prose pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.875em;
+  border: none;
+  box-shadow: none;
+}
+
+/* Language label for code blocks */
+.prose pre[data-language]:before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.75em;
+  right: 1em;
+  font-size: 0.75em;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.prose pre {
+  position: relative;
+}
+
+/* Scrollbar styling for code blocks */
+.prose pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.prose pre::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+.prose pre::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+.prose pre::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Syntax highlighting enhancement */
+.prose pre .token.comment {
+  color: #64748b;
+}
+
+.prose pre .token.keyword {
+  color: #f59e0b;
+}
+
+.prose pre .token.string {
+  color: #10b981;
+}
+
+.prose pre .token.number {
+  color: #3b82f6;
+}
+
+.prose pre .token.function {
+  color: #8b5cf6;
+}
+
+.prose pre .token.operator {
+  color: #f97316;
 }
