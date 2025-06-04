@@ -55,8 +55,12 @@ export async function getAllPosts(): Promise<BlogPostMetadata[]> {
         };
       });
 
-    // Sort posts by date (newest first)
-    return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+    // Sort posts by date (newest first) - convert to Date objects for proper comparison
+    return allPostsData.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB.getTime() - dateA.getTime();
+    });
   } catch (error) {
     console.error('Error loading posts:', error);
     return [];
