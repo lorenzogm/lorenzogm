@@ -31,11 +31,23 @@ export default async function Home() {
           <p className="text-gray-600">Stay up to date with the latest in web development</p>
         </div>
 
-        {/* Blog Posts Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-          {posts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
+        {/* Blog Posts */}
+        <div className="space-y-8">
+          {/* Featured Post - Full Width */}
+          {posts.length > 0 && (
+            <div className="w-full">
+              <BlogCard key={posts[0].slug} post={posts[0]} />
+            </div>
+          )}
+          
+          {/* Remaining Posts - Grid Layout */}
+          {posts.length > 1 && (
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+              {posts.slice(1).map((post) => (
+                <BlogCard key={post.slug} post={post} />
+              ))}
+            </div>
+          )}
         </div>
 
         {posts.length === 0 && (
