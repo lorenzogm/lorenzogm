@@ -3,11 +3,13 @@ title: MCP Servers Cheatsheet
 date: 2025-06-04
 tag: Development Tools, Configuration
 description: Complete guide and cheatsheet for setting up Model Context Protocol (MCP) servers in VS Code with detailed configuration examples
-image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80
+image: https://miro.medium.com/v2/resize:fit:1400/format:webp/1*RyV23VMOd1BpympBxpsvjg.png
 author: Lorenzo GM
 ---
 
 # MCP Servers Cheatsheet
+
+*Source: [Descope - MCP Guide](https://www.descope.com/learn/post/mcp?ref=jeffreybowdoin.com)*
 
 This article serves as a comprehensive cheatsheet for setting up Model Context Protocol (MCP) servers in VS Code. MCP servers extend your development environment with powerful integrations for design tools, project management, browser automation, and more.
 
