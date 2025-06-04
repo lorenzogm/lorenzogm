@@ -5,13 +5,14 @@ import { formatDate } from '@/lib/utils';
 
 interface BlogCardProps {
   post: BlogPostMetadata;
+  featured?: boolean;
 }
 
-export function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ post, featured = false }: BlogCardProps) {
   return (
     <article className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <Link href={`/blog/${post.slug}`}>
-        <div className="relative h-48 w-full">
+        <div className={`relative w-full ${featured ? 'h-64 md:h-80' : 'h-48'}`}>
           <Image
             src={post.image}
             alt={post.title}

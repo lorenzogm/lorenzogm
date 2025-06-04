@@ -36,7 +36,7 @@ export default async function Home() {
           {/* Featured Post - Full Width */}
           {posts.length > 0 && (
             <div className="w-full">
-              <BlogCard key={posts[0].slug} post={posts[0]} />
+              <BlogCard key={posts[0].slug} post={posts[0]} featured={true} />
             </div>
           )}
           
