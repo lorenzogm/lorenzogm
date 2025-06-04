@@ -27,13 +27,61 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     };
   }
 
+  const baseUrl = 'https://lorenzogm.com';
+  const postUrl = `${baseUrl}/blog/${slug}`;
+
   return {
-    title: post.title,
+    title: `${post.title} | Lorenzo GM`,
     description: post.excerpt,
+    keywords: post.tags.join(', '),
+    authors: [{ name: post.author }],
+    creator: post.author,
+    publisher: 'Lorenzo GM',
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: postUrl,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
+      url: postUrl,
+      siteName: 'Lorenzo GM - Tech Blog',
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+      locale: 'en_US',
+      type: 'article',
+      publishedTime: post.date,
+      authors: [post.author],
+      tags: post.tags,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      creator: '@lorenzogm', // Update this to your actual Twitter handle
       images: [post.image],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
   };
 }
@@ -127,7 +175,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <footer className="bg-white border-t border-gray-200 mt-16">
         <div className="max-w-4xl mx-auto px-4 py-8 text-center">
           <p className="text-gray-600">
-            © 2025 Tech Blog. Built with Next.js and Tailwind CSS.
+            © 2025 Lorenzo GM. Built with Next.js and Tailwind CSS.
           </p>
         </div>
       </footer>

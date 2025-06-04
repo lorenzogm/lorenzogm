@@ -13,14 +13,63 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lorenzo GM - Tech Blog",
+  title: {
+    default: "Lorenzo GM - Tech Blog",
+    template: "%s | Lorenzo GM"
+  },
   description: "Lorenzo GM's insights on web development, software engineering, and modern tech practices. Exploring Next.js, React, TypeScript, and development best practices.",
   keywords: ["Lorenzo GM", "web development", "Next.js", "React", "TypeScript", "JavaScript", "software engineering", "tech blog"],
   authors: [{ name: "Lorenzo GM" }],
+  creator: "Lorenzo GM",
+  publisher: "Lorenzo GM",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://lorenzogm.com"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://lorenzogm.com",
     title: "Lorenzo GM - Tech Blog",
     description: "Lorenzo GM's insights on web development, software engineering, and modern tech practices",
-    type: "website",
+    siteName: "Lorenzo GM - Tech Blog",
+    images: [
+      {
+        url: "/og-image.jpg", // You'll need to add this image to your public folder
+        width: 1200,
+        height: 630,
+        alt: "Lorenzo GM - Tech Blog",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lorenzo GM - Tech Blog",
+    description: "Lorenzo GM's insights on web development, software engineering, and modern tech practices",
+    creator: "@lorenzogm", // Update this to your actual Twitter handle
+    images: ["/og-image.jpg"], // Same image as OpenGraph
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    // Add these when you have them
+    // google: "your-google-verification-code",
+    // yandex: "your-yandex-verification-code",
+    // yahoo: "your-yahoo-verification-code",
   },
 };
 

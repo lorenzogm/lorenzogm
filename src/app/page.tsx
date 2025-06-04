@@ -17,9 +17,9 @@ export default async function Home() {
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-4xl mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Tech Blog</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Lorenzo GM</h1>
           <p className="text-lg text-gray-600">
-            Exploring the latest trends and technologies in web development
+            Insights on web development, software engineering, and modern tech practices
           </p>
         </div>
       </header>
