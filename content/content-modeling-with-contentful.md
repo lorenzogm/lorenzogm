@@ -91,7 +91,7 @@ The model uses a component-based approach with specialized content types:
 ```
 📚 Article
 ├── Internal Name
-├── Page (Reference to Page)
+├── Slug (Text) - URL-friendly identifier
 ├── Title
 ├── Date
 ├── Image (Reference to Image)
