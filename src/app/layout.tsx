@@ -13,13 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tech Blog - Latest Web Development Trends",
-  description: "Exploring the latest trends and technologies in web development. Stay up to date with Next.js, React, and modern web development practices.",
-  keywords: ["web development", "Next.js", "React", "TypeScript", "JavaScript", "tech blog"],
-  authors: [{ name: "Tech Blog" }],
+  title: "Lorenzo GM - Tech Blog",
+  description: "Lorenzo GM's insights on web development, software engineering, and modern tech practices. Exploring Next.js, React, TypeScript, and development best practices.",
+  keywords: ["Lorenzo GM", "web development", "Next.js", "React", "TypeScript", "JavaScript", "software engineering", "tech blog"],
+  authors: [{ name: "Lorenzo GM" }],
   openGraph: {
-    title: "Tech Blog - Latest Web Development Trends",
-    description: "Exploring the latest trends and technologies in web development",
+    title: "Lorenzo GM - Tech Blog",
+    description: "Lorenzo GM's insights on web development, software engineering, and modern tech practices",
     type: "website",
   },
 };
