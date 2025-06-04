@@ -20,6 +20,7 @@ This article serves as a comprehensive cheatsheet for setting up Model Context P
 | **Lighthouse** | Performance Audits | Web performance and quality audits |
 | **Atlassian** | Project Management | Jira and Confluence integration |
 | **Fetch** | Development Utilities | HTTP requests and web scraping |
+| **Firecrawl** | Development Utilities | Advanced web scraping and content extraction |
 | **Filesystem** | Development Utilities | File system operations for specific directories |
 | **Git** | Development Utilities | Git repository operations and version control |
 | **Memory** | AI & Memory | Persistent memory and knowledge graph |
@@ -49,6 +50,12 @@ Add these inputs to your `settings.json` to support the various MCP servers:
 {
   "mcp": {
     "inputs": [
+      {
+        "type": "promptString",
+        "id": "FIRECRAWL_API_KEY",
+        "description": "Firecrawl API Key - API key for web scraping and content extraction service at firecrawl.dev",
+        "password": true
+      },
       {
         "type": "promptString",
         "id": "FIGMA_API_KEY",
@@ -198,6 +205,26 @@ Add these inputs to your `settings.json` to support the various MCP servers:
 
 **Repository**: https://github.com/modelcontextprotocol/servers/tree/main/src/fetch
 
+#### Firecrawl MCP Server
+**Purpose**: Advanced web scraping and content extraction service with intelligent crawling capabilities.
+
+```json
+"firecrawl": {
+  "command": "npx",
+  "args": ["-y", "firecrawl-mcp"],
+  "env": {
+    "FIRECRAWL_API_KEY": "${input:FIRECRAWL_API_KEY}"
+  }
+}
+```
+
+**Setup Requirements**:
+- Get your Firecrawl API key from [firecrawl.dev](https://firecrawl.dev)
+- Create an account and generate an API token
+- More advanced than basic fetch with smart content extraction
+
+**Repository**: https://github.com/mendableai/firecrawl
+
 #### Filesystem MCP Server
 **Purpose**: File system operations and management for specific directories.
 
@@ -295,4 +322,125 @@ Add these inputs to your `settings.json` to support the various MCP servers:
 
 ---
 
-This setup provides a powerful development environment that integrates design tools, project management, browser automation, and infrastructure management all within VS Code.
+## Complete Configuration Example
+
+Here's a complete example of how your `settings.json` should look with all MCP servers configured:
+
+```json
+{
+  "mcp": {
+    "inputs": [
+      {
+        "type": "promptString",
+        "id": "FIRECRAWL_API_KEY",
+        "description": "Firecrawl API Key - API key for web scraping and content extraction service at firecrawl.dev",
+        "password": true
+      },
+      {
+        "type": "promptString",
+        "id": "FIGMA_API_KEY",
+        "description": "Figma API Key - Personal access token from Figma account settings for accessing design files and components",
+        "password": true
+      },
+      {
+        "type": "promptString",
+        "id": "ATLASSIAN_API_KEY",
+        "description": "Atlassian API Token - Personal access token for Jira and Confluence integration (create at id.atlassian.com)",
+        "password": true
+      },
+      {
+        "type": "promptString",
+        "id": "EMAIL",
+        "description": "Email address used for Atlassian authentication and API access",
+        "default": "your.email@company.com",
+        "password": false
+      },
+      {
+        "type": "promptString",
+        "id": "ATLASSIAN_URL",
+        "description": "Atlassian instance URL - Base URL for your organization's Jira and Confluence workspace",
+        "default": "https://your-organization.atlassian.net",
+        "password": false
+      }
+    ],
+    "servers": {
+      "figma": {
+        "command": "npx",
+        "args": ["-y", "figma-developer-mcp", "--stdio"],
+        "env": {
+          "FIGMA_API_KEY": "${input:FIGMA_API_KEY}"
+        }
+      },
+      "playwright": {
+        "command": "npx",
+        "args": ["-y", "@playwright/mcp@latest"]
+      },
+      "lighthouse": {
+        "command": "npx",
+        "args": ["lighthouse-mcp"]
+      },
+      "atlassian": {
+        "command": "docker",
+        "args": [
+          "run", "-i", "--rm",
+          "-e", "CONFLUENCE_URL",
+          "-e", "CONFLUENCE_USERNAME",
+          "-e", "CONFLUENCE_API_TOKEN",
+          "-e", "JIRA_URL",
+          "-e", "JIRA_USERNAME",
+          "-e", "JIRA_API_TOKEN",
+          "ghcr.io/sooperset/mcp-atlassian:latest"
+        ],
+        "env": {
+          "CONFLUENCE_URL": "${input:ATLASSIAN_URL}/wiki",
+          "CONFLUENCE_USERNAME": "${input:EMAIL}",
+          "CONFLUENCE_API_TOKEN": "${input:ATLASSIAN_API_KEY}",
+          "JIRA_URL": "${input:ATLASSIAN_URL}",
+          "JIRA_USERNAME": "${input:EMAIL}",
+          "JIRA_API_TOKEN": "${input:ATLASSIAN_API_KEY}"
+        }
+      },
+      "fetch": {
+        "command": "uvx",
+        "args": ["mcp-server-fetch"]
+      },
+      "firecrawl": {
+        "command": "npx",
+        "args": ["-y", "firecrawl-mcp"],
+        "env": {
+          "FIRECRAWL_API_KEY": "${input:FIRECRAWL_API_KEY}"
+        }
+      },
+      "filesystem": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-filesystem",
+          "/path/to/your/project"
+        ]
+      },
+      "git": {
+        "command": "uvx",
+        "args": ["mcp-server-git"]
+      },
+      "memory": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-memory"]
+      },
+      "sequentialthinking": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+      },
+      "terraform": {
+        "command": "docker",
+        "args": [
+          "run", "-i", "--rm",
+          "hashicorp/terraform-mcp-server"
+        ]
+      }
+    }
+  }
+}
+```
+
+This setup provides a powerful development environment that integrates design tools, project management, browser automation, advanced web scraping, and infrastructure management all within VS Code.
