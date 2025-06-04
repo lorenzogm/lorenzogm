@@ -95,42 +95,45 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-red-50/30">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 py-4">
+      <nav className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-red-100/50">
+        <div className="max-w-5xl mx-auto px-4 py-4">
           <Link 
             href="/" 
-            className="text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
+            className="inline-flex items-center text-red-600 hover:text-red-700 font-semibold transition-colors duration-200 group"
           >
-            ← Back to Blog
+            <svg className="w-4 h-4 mr-2 transition-transform duration-200 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+            </svg>
+            Back to Blog
           </Link>
         </div>
       </nav>
 
       {/* Article Header */}
-      <header className="bg-white">
-        <div className="max-w-4xl mx-auto px-4 py-12">
-          <div className="mb-6">
-            <div className="flex items-center text-sm text-gray-500 mb-4">
-              <time dateTime={post.date}>{formatDate(post.date)}</time>
-              <span className="mx-2">•</span>
-              <span>{post.author}</span>
+      <header className="bg-white/80 backdrop-blur-sm">
+        <div className="max-w-4xl mx-auto px-4 py-16">
+          <div className="mb-8">
+            <div className="flex items-center text-sm text-gray-500 mb-6">
+              <time dateTime={post.date} className="font-medium">{formatDate(post.date)}</time>
+              <span className="mx-3 text-red-400">•</span>
+              <span className="font-medium">{post.author}</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               {post.title}
             </h1>
             
-            <p className="text-xl text-gray-600 leading-relaxed mb-6">
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8 max-w-3xl">
               {post.excerpt}
             </p>
             
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full"
+                  className="inline-block bg-red-50 text-red-700 text-sm font-semibold px-4 py-2 rounded-full border border-red-200/50"
                 >
                   {tag}
                 </span>
@@ -138,7 +141,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           </div>
           
-          <div className="relative h-64 md:h-96 w-full rounded-lg overflow-hidden">
+          <div className="relative h-72 md:h-96 w-full rounded-2xl overflow-hidden shadow-2xl">
             <Image
               src={post.image}
               alt={post.title}
@@ -147,13 +150,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
           </div>
         </div>
       </header>
 
       {/* Article Content */}
-      <main className="max-w-4xl mx-auto px-4 py-12">
-        <article className="bg-white rounded-lg shadow-sm p-8 md:p-12">
+      <main className="max-w-4xl mx-auto px-4 py-16">
+        <article className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-8 md:p-16 border border-red-100/50">
           <div 
             className="prose prose-lg max-w-none"
             dangerouslySetInnerHTML={{ __html: post.content }}
@@ -161,21 +165,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </article>
 
         {/* Back to Blog Button */}
-        <div className="mt-12 text-center">
+        <div className="mt-16 text-center">
           <Link 
             href="/"
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 group"
           >
-            ← Back to All Posts
+            <svg className="w-5 h-5 mr-2 transition-transform duration-200 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+            </svg>
+            Back to All Posts
           </Link>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-16">
-        <div className="max-w-4xl mx-auto px-4 py-8 text-center">
+      <footer className="bg-white/80 backdrop-blur-sm border-t border-red-100/50 mt-20">
+        <div className="max-w-5xl mx-auto px-4 py-10 text-center">
           <p className="text-gray-600">
-            © 2025 Lorenzo GM. Built with Next.js and Tailwind CSS.
+            © 2025 Lorenzo GM.
           </p>
         </div>
       </footer>
