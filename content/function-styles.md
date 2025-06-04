@@ -3,7 +3,7 @@ title: Function Styles
 date: 2025-01-10
 tag: Front-End, Project Foundation
 description: A function can be defined with the keyword "function" (function declaration or regular functions) or as a variable (function expression or arrow functions)
-image: https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80
+image: https://eslint.org/og?title=func-style&summary=A%20pluggable%20and%20configurable%20linter%20tool%20for%20identifying%20and%20reporting%20on%20patterns%20in%20JavaScript.%20Maintain%20your%20code%20quality%20with%20ease.%0A&is_rule=true&recommended=false&fixable=&suggestions=
 ---
 
 # Function Styles
