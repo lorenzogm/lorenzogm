@@ -3,7 +3,7 @@ title: Next.js Architecture - API SDK + UI Separation
 date: 2025-06-04
 tag: Next.js, Architecture, TypeScript
 description: A clean architecture pattern for separating API/SDK logic from UI components using TypeScript interfaces and adapters
-image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80
+image: https://www.0xkishan.com/_next/image?url=%2Fblogs%2Fnextjs%2Fhero.png&w=3840&q=75
 ---
 
 # Next.js Architecture: API SDK + UI Separation
