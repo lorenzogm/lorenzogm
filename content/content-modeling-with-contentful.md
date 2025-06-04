@@ -58,22 +58,6 @@ Configuration and structural components:
 
 This structured approach creates a flexible, maintainable content ecosystem where each type has a clear responsibility and can be composed together to build complex digital experiences.
 
-### Navigation & Links
-- **Navigation Link**: Individual navigation items with support for nested sub-navigation
-- **Link List**: Grouped navigation collections for organizing related links
-- **Link**: Basic link component for both internal and external references
-
-### Media & Information
-- **Image**: Centralized image management with accessibility metadata
-- **FAQ**: Structured question-and-answer content with categorization and priority
-
-### System & Configuration
-- **Config**: Site-wide configuration settings and URL structure definitions
-- **Layout**: Global layout components including headers, footers, and navigation structure
-- **SEO Metadata**: Dedicated SEO fields for optimizing search engine visibility
-
-This modular approach allows for maximum flexibility while maintaining consistency across the entire content management system. Each content type is designed to work independently while seamlessly integrating with others through references and relationships.
-
 ## Core Content Types
 
 Let's examine the fundamental building blocks of a robust content model:
