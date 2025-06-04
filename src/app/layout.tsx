@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     siteName: "Lorenzo GM - Tech Blog",
     images: [
       {
-        url: "/og-image.jpg", // You'll need to add this image to your public folder
+        url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
         width: 1200,
         height: 630,
         alt: "Lorenzo GM - Tech Blog",
@@ -51,8 +51,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Lorenzo GM - Tech Blog",
     description: "Lorenzo GM's insights on web development, software engineering, and modern tech practices",
-    creator: "@lorenzogm", // Update this to your actual Twitter handle
-    images: ["/og-image.jpg"], // Same image as OpenGraph
+    creator: "@lorenzogm",
+    images: ["https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"],
   },
   robots: {
     index: true,
@@ -80,6 +80,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="theme-color" content="#3b82f6" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
