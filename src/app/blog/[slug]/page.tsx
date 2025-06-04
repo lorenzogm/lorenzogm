@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   const postUrl = `${baseUrl}/blog/${slug}`;
 
   return {
-    title: `${post.title} | Lorenzo GM`,
+    title: post.title,
     description: post.excerpt,
     keywords: post.tags.join(', '),
     authors: [{ name: post.author }],
