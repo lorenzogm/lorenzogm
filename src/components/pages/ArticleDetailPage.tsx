@@ -125,15 +125,6 @@ export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
             </div>
           </Container>
         </main>
-
-        {/* Footer */}
-        <footer className="bg-white/80 backdrop-blur-sm border-t border-red-100/50 mt-20">
-          <Container className="py-10 text-center">
-            <p className="text-gray-600">
-              © 2025 Lorenzo GM.
-            </p>
-          </Container>
-        </footer>
       </div>
     )
   }

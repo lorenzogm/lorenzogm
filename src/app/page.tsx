@@ -58,15 +58,6 @@ export default async function Home() {
           )}
         </Container>
       </main>
-
-      {/* Footer */}
-      <footer className="mt-20">
-        <Container className="py-10 text-center">
-          <p className="text-gray-600">
-            © 2025 Lorenzo GM.
-          </p>
-        </Container>
-      </footer>
     </div>
   );
 }

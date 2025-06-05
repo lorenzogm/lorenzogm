@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import PiwikProProvider from '@piwikpro/next-piwik-pro';
 import { AnalyticsProvider } from '@/components/Analytics';
+import { Container } from '@/components/elements/Container';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -80,6 +81,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const renderContent = (
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-1">
+        {children}
+      </main>
+      <footer className="bg-white border-t border-gray-200 mt-auto">
+        <Container className="py-6 text-center">
+          <p className="text-gray-600">
+            © {new Date().getFullYear()} Lorenzo GM.
+          </p>
+        </Container>
+      </footer>
+    </div>
+  );
+
   return (
     <html lang="en">
       <head>
@@ -99,15 +115,11 @@ export default function RootLayout({
             containerId={process.env.NEXT_PUBLIC_PIWIK_PRO_CONTAINER_ID}
           >
             <AnalyticsProvider>
-              <div className="min-h-screen">
-                {children}
-              </div>
+              {renderContent}
             </AnalyticsProvider>
           </PiwikProProvider>
         ) : (
-          <div className="min-h-screen">
-            {children}
-          </div>
+          renderContent
         )}
       </body>
     </html>
