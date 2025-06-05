@@ -83,16 +83,28 @@ export default function RootLayout({
 }>) {
   const renderContent = (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-1">
-        {children}
-      </main>
-      <footer className="bg-white border-t border-gray-200 mt-auto">
-        <Container className="py-6 text-center">
-          <p className="text-gray-600">
-            © {new Date().getFullYear()} Lorenzo GM.
+      {/* Header */}
+      <Container as="header" className="bg-white py-12">
+        <div className="text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-3">
+            Lorenzo<span className="text-red-600"> GM</span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Insights on web development, software engineering, and modern tech practices
           </p>
-        </Container>
-      </footer>
+          <div className="mt-6 w-20 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto rounded-full"></div>
+        </div>
+      </Container>
+      
+      <Container as="main" className="flex-1">
+        {children}
+      </Container>
+      
+      <Container as="footer" className="bg-white border-t border-gray-200 mt-auto py-6 text-center">
+        <p className="text-gray-600">
+          © {new Date().getFullYear()} Lorenzo GM.
+        </p>
+      </Container>
     </div>
   );
 
