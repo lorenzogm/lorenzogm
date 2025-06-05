@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import PiwikProProvider from '@piwikpro/next-piwik-pro';
 import { AnalyticsProvider } from '@/components/Analytics';
@@ -84,11 +85,13 @@ export default function RootLayout({
   const renderContent = (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <Container as="header" className="bg-white py-12">
+      <Container as="header" className="bg-white py-12" fullWidth>
         <div className="text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-3">
-            Lorenzo<span className="text-red-600"> GM</span>
-          </h1>
+          <Link href="/" className="inline-block hover:opacity-80 transition-opacity duration-200">
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-3">
+              Lorenzo<span className="text-red-600"> GM</span>
+            </h1>
+          </Link>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Insights on web development, software engineering, and modern tech practices
           </p>
@@ -96,11 +99,11 @@ export default function RootLayout({
         </div>
       </Container>
       
-      <Container as="main" className="flex-1">
+      <Container as="main" className="flex-1 bg-white py-16" fullWidth>
         {children}
       </Container>
       
-      <Container as="footer" className="bg-white border-t border-gray-200 mt-auto py-6 text-center">
+      <Container as="footer" className="bg-white border-t border-gray-200 mt-auto py-6 text-center" fullWidth>
         <p className="text-gray-600">
           © {new Date().getFullYear()} Lorenzo GM.
         </p>
