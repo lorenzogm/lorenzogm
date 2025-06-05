@@ -4,7 +4,7 @@ date: "2025-06-06"
 excerpt: "Essential guidelines and project structure insights for AI assistants working with my codebase. Learn about my coding preferences, architecture patterns, and development workflow to provide better assistance."
 author: "Lorenzo GM"
 tags: ["AI", "GitHub Copilot", "Development", "Project Structure", "Best Practices"]
-image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+image: "https://github.githubassets.com/assets/copilot-chat-ee053e45453d.png"
 ---
 
 # My GitHub Copilot Instructions
