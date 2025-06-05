@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { BlogPostMetadata } from '@/lib/blog';
 import { formatDate } from '@/lib/utils';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/elements/Button';
 
 interface BlogCardProps {
   post: BlogPostMetadata;

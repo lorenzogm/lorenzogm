@@ -99,11 +99,15 @@ export default function RootLayout({
             containerId={process.env.NEXT_PUBLIC_PIWIK_PRO_CONTAINER_ID}
           >
             <AnalyticsProvider>
-              {children}
+              <div className="min-h-screen">
+                {children}
+              </div>
             </AnalyticsProvider>
           </PiwikProProvider>
         ) : (
-          children
+          <div className="min-h-screen">
+            {children}
+          </div>
         )}
       </body>
     </html>

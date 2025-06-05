@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { getPostBySlug, getAllPostSlugs } from '@/lib/blog';
 import { formatDate } from '@/lib/utils';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/elements/Button';
+import { Container } from '@/components/elements/Container';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -95,10 +96,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-red-50/30">
+    <div className="bg-gradient-to-br from-gray-50 to-red-50/30">
       {/* Navigation */}
       <nav className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-red-100/50">
-        <div className="max-w-5xl mx-auto px-4 py-4">
+        <Container className="py-4">
           <Button
             href="/" 
             event={{
@@ -113,12 +114,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </svg>
             Back to Blog
           </Button>
-        </div>
+        </Container>
       </nav>
 
       {/* Article Header */}
       <header className="bg-white/80 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto px-4 py-16">
+        <Container className="py-16">
           <div className="mb-8">
             <div className="flex items-center text-sm text-gray-500 mb-6">
               <time dateTime={post.date} className="font-medium">{formatDate(post.date)}</time>
@@ -157,44 +158,46 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
           </div>
-        </div>
+        </Container>
       </header>
 
       {/* Article Content */}
-      <main className="max-w-4xl mx-auto px-4 py-16">
-        <article className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-8 md:p-16 border border-red-100/50">
-          <div 
-            className="prose prose-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
-        </article>
+      <main>
+        <Container className="py-16">
+          <article className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-8 md:p-16 border border-red-100/50">
+            <div 
+              className="prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
+          </article>
 
-        {/* Back to Blog Button */}
-        <div className="mt-16 text-center">
-          <Button
-            href="/"
-            event={{
-              category: "Navigation",
-              action: "Back Button Click",
-              name: "Article to Homepage"
-            }}
-            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-          >
-            <svg className="w-5 h-5 mr-2 transition-transform duration-200 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-            </svg>
-            Back to All Posts
-          </Button>
-        </div>
+          {/* Back to Blog Button */}
+          <div className="mt-16 text-center">
+            <Button
+              href="/"
+              event={{
+                category: "Navigation",
+                action: "Back Button Click",
+                name: "Article to Homepage"
+              }}
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              <svg className="w-5 h-5 mr-2 transition-transform duration-200 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+              </svg>
+              Back to All Posts
+            </Button>
+          </div>
+        </Container>
       </main>
 
       {/* Footer */}
       <footer className="bg-white/80 backdrop-blur-sm border-t border-red-100/50 mt-20">
-        <div className="max-w-5xl mx-auto px-4 py-10 text-center">
+        <Container className="py-10 text-center">
           <p className="text-gray-600">
             © 2025 Lorenzo GM.
           </p>
-        </div>
+        </Container>
       </footer>
     </div>
   );

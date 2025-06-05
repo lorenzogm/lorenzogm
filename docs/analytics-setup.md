@@ -58,7 +58,7 @@ This project uses analytics-enabled components that track user interactions auto
 The project includes a `Button` component that automatically tracks clicks, conversions, and other events:
 
 ```tsx
-import { Button } from '@/components/Button';
+import { Button } from '@/components/elements/Button';
 
 // Example: Blog card with automatic click tracking
 <Button
