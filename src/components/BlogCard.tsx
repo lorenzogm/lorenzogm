@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { BlogPostMetadata } from '@/lib/blog';
 import { formatDate } from '@/lib/utils';
+import { Button } from '@/components/Button';
 
 interface BlogCardProps {
   post: BlogPostMetadata;
@@ -11,7 +11,17 @@ interface BlogCardProps {
 export function BlogCard({ post, featured = false }: BlogCardProps) {
   return (
     <article className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-red-100/50">
-      <Link href={`/blog/${post.slug}`}>
+      <Button 
+        href={`/blog/${post.slug}`}
+        event={{
+          category: "Blog",
+          action: "Card Click",
+          name: post.title,
+          value: featured ? 2 : 1,
+          goalId: 1
+        }}
+        className="block w-full text-left"
+      >
         <div className={`relative w-full ${featured ? 'h-64 md:h-80' : 'h-48'} overflow-hidden`}>
           <Image
             src={post.image}
@@ -55,7 +65,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
             </svg>
           </div>
         </div>
-      </Link>
+      </Button>
     </article>
   );
 }

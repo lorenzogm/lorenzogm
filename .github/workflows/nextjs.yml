@@ -74,6 +74,10 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
+        env:
+          NEXT_PUBLIC_PIWIK_PRO_CONTAINER_URL: https://lorenzogm.containers.piwik.pro
+          NEXT_PUBLIC_PIWIK_PRO_CONTAINER_ID: 2f838906-bc3f-479b-815b-ea0852900468
+          NEXT_PUBLIC_ANALYTICS_ENABLED: true
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

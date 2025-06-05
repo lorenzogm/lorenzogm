@@ -2,12 +2,10 @@ import { getAllPosts, BlogPostMetadata } from '@/lib/blog';
 import { BlogCard } from '@/components/BlogCard';
 
 export default async function Home() {
-  console.log('Home component is being rendered');
   let posts: BlogPostMetadata[] = [];
   
   try {
     posts = await getAllPosts();
-    console.log('Posts loaded successfully:', posts.length);
   } catch (error) {
     console.error('Error loading posts:', error);
   }
@@ -35,9 +33,7 @@ export default async function Home() {
         <div className="space-y-12">
           {/* Featured Post - Full Width */}
           {posts.length > 0 && (
-            <div className="w-full">
-              <BlogCard key={posts[0].slug} post={posts[0]} featured={true} />
-            </div>
+            <BlogCard key={posts[0].slug} post={posts[0]} featured={true} />
           )}
           
           {/* Remaining Posts - Grid Layout */}
