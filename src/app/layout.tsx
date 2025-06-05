@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import PiwikProProvider from '@piwikpro/next-piwik-pro';
 import { AnalyticsProvider } from '@/components/Analytics';
 import { Container } from '@/components/elements/Container';
+import { Link } from '@/components/elements/Link';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -87,7 +87,16 @@ export default function RootLayout({
       {/* Header */}
       <Container as="header" className="bg-white py-12" fullWidth>
         <div className="text-center">
-          <Link href="/" className="inline-block hover:opacity-80 transition-opacity duration-200">
+          <Link 
+            href="/" 
+            unstyled 
+            className="inline-block hover:opacity-80 transition-opacity duration-200"
+            event={{
+              category: "Navigation",
+              action: "Logo Click",
+              name: "Header Logo"
+            }}
+          >
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-3">
               Lorenzo<span className="text-red-600"> GM</span>
             </h1>
