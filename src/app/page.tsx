@@ -1,13 +1,27 @@
 import { getAllPosts, BlogPostMetadata } from '@/lib/blog';
 import { BlogCard } from '@/components/patterns/BlogCard';
+import { ErrorPage } from '@/components/pages/ErrorPage';
 
 export default async function Home() {
   let posts: BlogPostMetadata[] = [];
+  let hasError = false;
   
   try {
     posts = await getAllPosts();
   } catch (error) {
     console.error('Error loading posts:', error);
+    hasError = true;
+  }
+
+  // Show error page if posts failed to load
+  if (hasError) {
+    return (
+      <ErrorPage 
+        title="Failed to Load Blog Posts"
+        message="We're having trouble loading the blog posts right now. Please try again in a few moments."
+        showRetryButton={true}
+      />
+    );
   }
 
   return (
