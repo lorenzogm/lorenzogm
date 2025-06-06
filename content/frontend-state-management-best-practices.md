@@ -3,6 +3,7 @@ title: Frontend State Management Best Practices
 date: 2025-06-06
 tag: Front-End, State Management, Best Practices
 description: Personal thoughts on effective frontend state management strategies - prioritizing URL state, cookies, and minimizing React state
+excerpt: Personal thoughts on effective frontend state management strategies - prioritizing URL state, cookies, and minimizing React state
 image: https://blog.openreplay.com/images/react-state-management-with-easy-peasy/images/hero.png
 ---
 

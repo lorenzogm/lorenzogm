@@ -44,6 +44,20 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     alternates: {
       canonical: postUrl,
     },
+    other: {
+      'og:url': postUrl,
+      'og:type': 'article',
+      'og:title': post.title,
+      'og:description': post.excerpt,
+      'og:image': post.image,
+      'og:image:width': '1200',
+      'og:image:height': '630',
+      'og:image:alt': post.title,
+      'og:site_name': 'Lorenzo GM - Tech Blog',
+      'article:published_time': post.date,
+      'article:author': post.author,
+      'article:tag': post.tags.join(','),
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
