@@ -3,6 +3,7 @@ title: "Monorepo UI Organization: Choosing Between Collocated and Workspace Patt
 date: "2025-06-24"
 description: "Navigating architectural decisions in monorepos with multiple workspaces: when to colocate UI components in your web app versus separating them into dedicated UI libraries."
 tags: ["frontend", "architecture", "monorepo", "ui", "patterns", "storybook", "workspaces"]
+image: "https://miro.medium.com/v2/resize:fit:1200/1*e_Aq_GnUvYTFhel0tDT_OQ.jpeg"
 ---
 
 # Monorepo UI Organization: Choosing Between Collocated and Workspace Patterns
@@ -120,3 +121,7 @@ In monorepo environments, the presence of multiple workspaces (web app, UI libra
 Remember, Storybook should be treated as documentation and shouldn't drive your main application's architecture unless it provides clear business value or is explicitly required by your client.
 
 The key is to be intentional about your choice and understand the trade-offs you're making. Both patterns have their place in monorepo architectures, and the best decision depends on your specific context and constraints.
+
+---
+
+*Cover image credits: [Creating a Design System with Monorepo](https://medium.com/loftbr/creating-a-design-system-with-monorepo-bc18e055fb3c)*
