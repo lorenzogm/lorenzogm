@@ -34,7 +34,7 @@ Let's start by defining interfaces for each data source. The key is to use descr
 
 ### CMS Product Interface
 
-```typescript
+```ts
 // interfaces/cms.ts
 interface CmsProduct {
   id: string;
@@ -57,7 +57,7 @@ interface CmsImage {
 
 ### Commerce Product Interface
 
-```typescript
+```ts
 // interfaces/commerce.ts
 interface CommerceProduct {
   id: string;
@@ -88,7 +88,7 @@ interface CommerceVariant {
 
 ### PIM Product Interface
 
-```typescript
+```ts
 // interfaces/pim.ts
 interface PimProduct {
   id: string;
@@ -119,7 +119,7 @@ interface PimSpecification {
 
 ### Search Product Interface
 
-```typescript
+```ts
 // interfaces/search.ts
 interface SearchProduct {
   id: string;
@@ -142,7 +142,7 @@ Now that we have system-specific interfaces, we need to create UI-focused interf
 
 The most important interface is the main `Product` interface that your UI components will use. This interface is designed purely for UI needs and has no direct dependency on service interfaces:
 
-```typescript
+```ts
 // interfaces/ui/product.ts
 // Note: No imports from service interfaces - UI is independent
 
@@ -252,7 +252,7 @@ interface ProductSearchMetadata {
 
 For pages that need to work with data from multiple services, we use an adapter pattern to transform service data into UI-friendly interfaces:
 
-```typescript
+```ts
 // interfaces/ui/product-detail.ts
 import { Product } from './product';
 
@@ -268,7 +268,7 @@ interface ProductDetailPageData {
 
 The adapter layer is responsible for fetching data from multiple services and transforming it into the UI's expected format. This creates a clean separation between service contracts and UI contracts:
 
-```typescript
+```ts
 // adapters/product-adapter.ts
 import { CmsProduct } from '../interfaces/cms';
 import { CommerceProduct } from '../interfaces/commerce';
@@ -414,7 +414,7 @@ The examples above use generic prefixes (`Cms`, `Commerce`, `Pim`, `Search`), bu
 
 ### Real-World Service Examples
 
-```typescript
+```ts
 // For Contentful CMS
 interface ContentfulProduct {
   // ... your Contentful-specific fields
@@ -449,7 +449,7 @@ interface RecommendationServiceProduct {
 
 ### 1. Use Descriptive Naming
 
-```typescript
+```ts
 // Good: Clear service prefix
 interface StripePayment {
   // ...
@@ -465,7 +465,7 @@ interface Payment {
 
 Each interface should represent data from a single source and serve a specific purpose.
 
-```typescript
+```ts
 // Good: Single responsibility
 interface HubspotContact {
   email: string;
@@ -484,7 +484,7 @@ interface ContactWithPricing {
 
 ### 3. Use Optional Properties Wisely
 
-```typescript
+```ts
 interface SalesforceAccount {
   id: string;
   name: string;
@@ -495,7 +495,7 @@ interface SalesforceAccount {
 
 ### 4. Leverage Union Types for Enums
 
-```typescript
+```ts
 interface ZendeskTicket {
   status: 'new' | 'open' | 'pending' | 'solved' | 'closed';
   priority: 'low' | 'normal' | 'high' | 'urgent';
