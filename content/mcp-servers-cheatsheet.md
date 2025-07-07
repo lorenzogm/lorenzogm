@@ -15,18 +15,27 @@ This article serves as a comprehensive cheatsheet for setting up Model Context P
 
 ## Summary of Available MCP Servers
 
+### Basic MCP Servers
+Essential development utilities that provide core functionality for most projects.
+
+| Server | Category | Description |
+|--------|----------|-------------|
+| **Fetch** | Development Utilities | HTTP requests and web scraping |
+| **Filesystem** | Development Utilities | File system operations for specific directories |
+| **Git** | Development Utilities | Git repository operations and version control |
+| **Memory** | AI & Memory | Persistent memory and knowledge graph |
+| **Sequential Thinking** | AI & Memory | Advanced reasoning and problem-solving |
+
+### Specific MCP Servers
+Specialized integrations for particular tools, platforms, and use cases.
+
 | Server | Category | Description |
 |--------|----------|-------------|
 | **Figma** | Design & Prototyping | Access Figma files, components, and design tokens |
 | **Playwright** | Browser Automation | Browser automation and testing capabilities |
 | **Lighthouse** | Performance Audits | Web performance and quality audits |
 | **Atlassian** | Project Management | Jira and Confluence integration |
-| **Fetch** | Development Utilities | HTTP requests and web scraping |
 | **Firecrawl** | Development Utilities | Advanced web scraping and content extraction |
-| **Filesystem** | Development Utilities | File system operations for specific directories |
-| **Git** | Development Utilities | Git repository operations and version control |
-| **Memory** | AI & Memory | Persistent memory and knowledge graph |
-| **Sequential Thinking** | AI & Memory | Advanced reasoning and problem-solving |
 | **Terraform** | Infrastructure | Infrastructure as Code management |
 
 ## Benefits of MCP Servers
