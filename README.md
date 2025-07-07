@@ -1,3 +1,3 @@
 # Hi, I'm Lorenzo 👋
 
-[lorenzogm.com](lorenzogm.com)
+[lorenzogm.com](https://lorenzogm.com)
