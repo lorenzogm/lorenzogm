@@ -38,7 +38,7 @@ Specialized integrations for particular tools, platforms, and use cases.
 | **Firecrawl** | Development Utilities | Advanced web scraping and content extraction |
 | **Terraform** | Infrastructure | Infrastructure as Code management |
 
-> **Quick Setup**: For a ready-to-use configuration file, check out [.vscode/mcp.json](https://github.com/lorenzogm/lorenzogm/blob/main/.vscode/mcp.json) from the official MCP servers repository.
+> **Quick Setup**: For a ready-to-use configuration file, check out [.vscode/mcp.json](https://github.com/lorenzogm/lorenzogm/blob/main/.vscode/mcp.json).
 
 ## Benefits of MCP Servers
 
