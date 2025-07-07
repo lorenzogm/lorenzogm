@@ -18,10 +18,8 @@ This guide provides a comprehensive reference for designing a flexible Contentfu
 ### ✅ Pros
 
 - **Very Flexible Content Model**: The modular architecture allows for infinite combinations of content layouts and presentations
-- **Minimal Content Types**: Uses only 10 content types to support complex website functionality, leaving room for custom content
+- **Minimal Content Types**: Uses only 10 content types to support complex website functionality, works within Contentful's free plan (25 content types) and leaves plenty of room for custom content. Even on Contentful Pro (50 content types), you have 40 content types available for project-specific needs
 - **Content-Driven (Not UI-Driven)**: Content structure is independent of presentation, allowing for multiple UI implementations
-- **Cost-Effective**: Works within Contentful's free plan (25 content types) and leaves plenty of room for custom content types
-- **Scalable for Pro Plans**: Even on Contentful Pro (50 content types), you have 40 content types available for project-specific needs
 - **E-commerce Ready**: Supports complex websites including product detail pages, product listing pages, and dynamic content areas
 - **Multi-language Support**: Built-in localization for international websites
 - **SEO Optimized**: Comprehensive SEO controls at both global and page levels
