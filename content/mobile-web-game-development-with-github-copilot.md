@@ -11,7 +11,7 @@ image: "https://github.githubassets.com/assets/copilot-chat-ee053e45453d.png"
 
 ## A Personal Discovery: When Limitations Spark Innovation
 
-After four weeks of vacation without bringing my laptop - a decision I initially regretted - I found myself in an unexpected situation. Some friends and I started discussing an exciting Steam game project, brainstorming ideas that had us genuinely excited about the potential. But there was a problem: I still had a week of vacation left, and I was itching to start experimenting with the concepts we'd discussed.
+After four weeks of vacation without bringing my laptop - a decision that turned out great - I found myself in an unexpected situation. Some friends and I started discussing an exciting Steam game project, brainstorming ideas that had us genuinely excited about the potential. I still had a week of vacation left, which was wonderful, but I was itching to start experimenting with the concepts we'd discussed.
 
 That's when I decided to try something I'd never done before: serious programming from my mobile phone. What started as a desperate attempt to satisfy my coding urge turned into a revelation. Not only did mobile development work surprisingly well, but it also opened up entirely new workflows that have since become integral to how I approach both web and game development.
 
