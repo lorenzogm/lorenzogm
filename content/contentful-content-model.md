@@ -1,7 +1,7 @@
 ---
 title: "Building a Flexible Contentful Content Model: A Complete Guide"
 slug: "contentful-content-model"
-date: "2025-08-04"
+date: "2025-07-07
 tags: ["contentful", "cms", "content-modeling", "headless-cms", "content-architecture"]
 excerpt: "Learn how to design a modular and flexible Contentful content model that supports complex websites while keeping content types minimal and scalable."
 image: "https://images.ctfassets.net/fo9twyrwpveg/HgNQRXmn2a670TRvz8rPd/3eeefeed0bf70c11ad628e14aeb081e6/March_Launch_Press_Release_Newsroom_1800x945.png?fm=jpg&w=666&q=90"
