@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// import { Geist, Geist_Mono } from "next/font/google";
 import PiwikProProvider from '@piwikpro/next-piwik-pro';
 import { AnalyticsProvider } from '@/components/Analytics';
 import { Container } from '@/components/elements/Container';
 import { Link } from '@/components/elements/Link';
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: {
@@ -131,7 +131,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#dc2626" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className="antialiased font-sans"
       >
         {process.env.NEXT_PUBLIC_PIWIK_PRO_CONTAINER_URL && process.env.NEXT_PUBLIC_PIWIK_PRO_CONTAINER_ID ? (
           <PiwikProProvider
