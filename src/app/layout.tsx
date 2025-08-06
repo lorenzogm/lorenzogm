@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// import { Geist, Geist_Mono } from "next/font/google";
 import PiwikProProvider from '@piwikpro/next-piwik-pro';
 import { AnalyticsProvider } from '@/components/Analytics';
 import { Container } from '@/components/elements/Container';
-import { Link } from '@/components/elements/Link';
+import { LanguageAwareHeader } from '@/components/elements/LanguageAwareHeader';
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: {
@@ -34,6 +34,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://lorenzogm.com"),
   alternates: {
     canonical: "/",
+    languages: {
+      'en': '/',
+      'es': '/es',
+    },
   },
   openGraph: {
     type: "website",
@@ -86,26 +90,7 @@ export default function RootLayout({
     <div className="min-h-screen flex flex-col">
       {/* Header */}
       <Container as="header" className="bg-white py-12" fullWidth>
-        <div className="text-center">
-          <Link 
-            href="/" 
-            unstyled 
-            className="inline-block hover:opacity-80 transition-opacity duration-200"
-            event={{
-              category: "Navigation",
-              action: "Logo Click",
-              name: "Header Logo"
-            }}
-          >
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-3">
-              Lorenzo<span className="text-red-600"> GM</span>
-            </h1>
-          </Link>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Insights on web development, software engineering, and modern tech practices
-          </p>
-          <div className="mt-6 w-20 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto rounded-full"></div>
-        </div>
+        <LanguageAwareHeader />
       </Container>
       
       <Container as="main" className="flex-1 bg-white py-16" fullWidth>
@@ -131,7 +116,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#dc2626" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className="antialiased font-sans"
       >
         {process.env.NEXT_PUBLIC_PIWIK_PRO_CONTAINER_URL && process.env.NEXT_PUBLIC_PIWIK_PRO_CONTAINER_ID ? (
           <PiwikProProvider

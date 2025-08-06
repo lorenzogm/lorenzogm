@@ -2,31 +2,31 @@ import { notFound } from 'next/navigation';
 import { getPostBySlug, getAllPostSlugs } from '@/lib/blog';
 import { ArticleDetailPage } from '@/components/pages/ArticleDetailPage';
 
-interface BlogPostPageProps {
+interface SpanishBlogPostPageProps {
   params: Promise<{
     slug: string;
   }>;
 }
 
 export async function generateStaticParams() {
-  const slugs = getAllPostSlugs('en'); // Default to English
+  const slugs = getAllPostSlugs('es'); // Spanish posts
   return slugs.map((slug) => ({
     slug,
   }));
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps) {
+export async function generateMetadata({ params }: SpanishBlogPostPageProps) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug, 'en'); // Default to English
+  const post = await getPostBySlug(slug, 'es'); // Spanish post
   
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: 'Artículo No Encontrado',
     };
   }
 
   const baseUrl = 'https://lorenzogm.com';
-  const postUrl = `${baseUrl}/blog/${slug}`;
+  const postUrl = `${baseUrl}/es/blog/${slug}`;
 
   return {
     title: post.title,
@@ -43,6 +43,10 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     metadataBase: new URL(baseUrl),
     alternates: {
       canonical: postUrl,
+      languages: {
+        'en': `${baseUrl}/blog/${slug}`,
+        'es': postUrl,
+      },
     },
     other: {
       'og:url': postUrl,
@@ -53,7 +57,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       'og:image:width': '1200',
       'og:image:height': '630',
       'og:image:alt': post.title,
-      'og:site_name': 'Lorenzo GM - Tech Blog',
+      'og:site_name': 'Lorenzo GM - Blog de Tecnología',
       'article:published_time': post.date,
       'article:author': post.author,
       'article:tag': post.tags.join(','),
@@ -62,7 +66,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       title: post.title,
       description: post.excerpt,
       url: postUrl,
-      siteName: 'Lorenzo GM - Tech Blog',
+      siteName: 'Lorenzo GM - Blog de Tecnología',
       images: [
         {
           url: post.image,
@@ -71,7 +75,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
           alt: post.title,
         },
       ],
-      locale: 'en_US',
+      locale: 'es_ES',
       type: 'article',
       publishedTime: post.date,
       authors: [post.author],
@@ -81,7 +85,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      creator: '@lorenzogm', // Update this to your actual Twitter handle
+      creator: '@lorenzogm',
       images: [post.image],
     },
     robots: {
@@ -98,9 +102,9 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   };
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function SpanishBlogPostPage({ params }: SpanishBlogPostPageProps) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug, 'en'); // Default to English
+  const post = await getPostBySlug(slug, 'es'); // Spanish post
 
   if (!post) {
     notFound();

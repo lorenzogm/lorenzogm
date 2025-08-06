@@ -9,10 +9,13 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ post, featured = false }: BlogCardProps) {
+  const blogUrl = post.lang === 'es' ? `/es/blog/${post.slug}` : `/blog/${post.slug}`;
+  const readMoreText = post.lang === 'es' ? 'Leer más' : 'Read more';
+  
   return (
     <article className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-red-100/50">
       <Button 
-        href={`/blog/${post.slug}`}
+        href={blogUrl}
         event={{
           category: "Blog",
           action: "Card Click",
@@ -59,7 +62,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
           </div>
           
           <div className="flex items-center text-red-600 font-semibold text-sm hover:text-red-700 transition-colors duration-200 group">
-            Read more 
+            {readMoreText}
             <svg className="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
