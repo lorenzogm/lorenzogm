@@ -7,7 +7,7 @@ export default async function Home() {
   let hasError = false;
   
   try {
-    posts = await getAllPosts();
+    posts = await getAllPosts('en'); // Default to English
   } catch (error) {
     console.error('Error loading posts:', error);
     hasError = true;

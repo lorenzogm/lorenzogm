@@ -16,6 +16,7 @@ export interface BlogPost {
   author: string;
   tags: string[];
   content: string;
+  lang: string;
 }
 
 export interface BlogPostMetadata {
@@ -26,15 +27,16 @@ export interface BlogPostMetadata {
   image: string;
   author: string;
   tags: string[];
+  lang: string;
 }
 
-export async function getAllPosts(): Promise<BlogPostMetadata[]> {
+export async function getAllPosts(lang: string = 'en'): Promise<BlogPostMetadata[]> {
   try {
     const fileNames = fs.readdirSync(postsDirectory);
     const allPostsData = fileNames
-      .filter((fileName) => fileName.endsWith('.md'))
+      .filter((fileName) => fileName.endsWith(`.${lang}.md`))
       .map((fileName) => {
-        const slug = fileName.replace(/\.md$/, '');
+        const slug = fileName.replace(`.${lang}.md`, '');
         const fullPath = path.join(postsDirectory, fileName);
         const fileContents = fs.readFileSync(fullPath, 'utf8');
         const matterResult = matter(fileContents);
@@ -52,6 +54,7 @@ export async function getAllPosts(): Promise<BlogPostMetadata[]> {
           image: matterResult.data.image || '/placeholder-image.jpg',
           author: matterResult.data.author || 'Lorenzo GM',
           tags: matterResult.data.tag ? matterResult.data.tag.split(', ') : (matterResult.data.tags || []),
+          lang,
         };
       });
 
@@ -67,9 +70,9 @@ export async function getAllPosts(): Promise<BlogPostMetadata[]> {
   }
 }
 
-export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+export async function getPostBySlug(slug: string, lang: string = 'en'): Promise<BlogPost | null> {
   try {
-    const fullPath = path.join(postsDirectory, `${slug}.md`);
+    const fullPath = path.join(postsDirectory, `${slug}.${lang}.md`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const matterResult = matter(fileContents);
 
@@ -95,6 +98,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       author: matterResult.data.author || 'Lorenzo GM',
       tags: matterResult.data.tag ? matterResult.data.tag.split(', ') : (matterResult.data.tags || []),
       content: contentHtml,
+      lang,
     };
   } catch (error) {
     console.error(`Error reading post ${slug}:`, error);
@@ -102,9 +106,9 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   }
 }
 
-export function getAllPostSlugs(): string[] {
+export function getAllPostSlugs(lang: string = 'en'): string[] {
   const fileNames = fs.readdirSync(postsDirectory);
   return fileNames
-    .filter((fileName) => fileName.endsWith('.md'))
-    .map((fileName) => fileName.replace(/\.md$/, ''));
+    .filter((fileName) => fileName.endsWith(`.${lang}.md`))
+    .map((fileName) => fileName.replace(`.${lang}.md`, ''));
 }
