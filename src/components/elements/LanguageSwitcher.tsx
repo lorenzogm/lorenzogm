@@ -37,12 +37,29 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
   };
 
   const alternativeUrl = getAlternativeUrl();
+  const isEnglish = currentLang === 'en';
 
   return (
-    <Link href={alternativeUrl} unstyled>
-      <span className="px-3 py-2 bg-red-600 text-white rounded text-sm font-medium hover:bg-red-700 transition-colors duration-200 cursor-pointer">
-        {currentLang.toUpperCase()}
+    <div className="flex items-center space-x-2 text-sm">
+      <span className={`px-2 py-1 rounded ${isEnglish ? 'bg-red-600 text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+        {isEnglish ? (
+          'English'
+        ) : (
+          <Link href={alternativeUrl} unstyled>
+            English
+          </Link>
+        )}
       </span>
-    </Link>
+      <span className="text-gray-400">|</span>
+      <span className={`px-2 py-1 rounded ${!isEnglish ? 'bg-red-600 text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+        {!isEnglish ? (
+          'Spanish'
+        ) : (
+          <Link href={alternativeUrl} unstyled>
+            Spanish
+          </Link>
+        )}
+      </span>
+    </div>
   );
 }
