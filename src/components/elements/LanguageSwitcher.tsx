@@ -43,20 +43,20 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
     <div className="flex items-center space-x-2 text-sm">
       <span className={`px-2 py-1 rounded ${isEnglish ? 'bg-red-600 text-white' : 'text-gray-600 hover:text-gray-900'}`}>
         {isEnglish ? (
-          'EN'
+          'English'
         ) : (
           <Link href={alternativeUrl} unstyled>
-            EN
+            English
           </Link>
         )}
       </span>
       <span className="text-gray-400">|</span>
       <span className={`px-2 py-1 rounded ${!isEnglish ? 'bg-red-600 text-white' : 'text-gray-600 hover:text-gray-900'}`}>
         {!isEnglish ? (
-          'ES'
+          'Spanish'
         ) : (
           <Link href={alternativeUrl} unstyled>
-            ES
+            Spanish
           </Link>
         )}
       </span>

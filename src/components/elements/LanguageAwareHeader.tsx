@@ -15,28 +15,35 @@ export function LanguageAwareHeader() {
     : 'Insights on web development, software engineering, and modern tech practices';
 
   return (
-    <div className="text-center relative">
-      <div className="absolute top-0 right-0">
+    <div className="text-center">
+      <div className="relative">
+        {/* Desktop language switcher - positioned at top right */}
+        <div className="hidden md:block absolute top-0 right-0">
+          <LanguageSwitcher currentLang={currentLang} />
+        </div>
+        <Link 
+          href={homeUrl} 
+          unstyled 
+          className="inline-block hover:opacity-80 transition-opacity duration-200"
+          event={{
+            category: "Navigation",
+            action: "Logo Click",
+            name: `Header Logo ${currentLang.toUpperCase()}`
+          }}
+        >
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-3">
+            Lorenzo<span className="text-red-600"> GM</span>
+          </h1>
+        </Link>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          {subtitle}
+        </p>
+        <div className="mt-6 w-20 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto rounded-full"></div>
+      </div>
+      {/* Mobile language switcher - positioned below the red line */}
+      <div className="md:hidden mt-4 flex justify-center">
         <LanguageSwitcher currentLang={currentLang} />
       </div>
-      <Link 
-        href={homeUrl} 
-        unstyled 
-        className="inline-block hover:opacity-80 transition-opacity duration-200"
-        event={{
-          category: "Navigation",
-          action: "Logo Click",
-          name: `Header Logo ${currentLang.toUpperCase()}`
-        }}
-      >
-        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-3">
-          Lorenzo<span className="text-red-600"> GM</span>
-        </h1>
-      </Link>
-      <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-        {subtitle}
-      </p>
-      <div className="mt-6 w-20 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto rounded-full"></div>
     </div>
   );
 }
