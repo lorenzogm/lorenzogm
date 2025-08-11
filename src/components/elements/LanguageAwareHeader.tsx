@@ -16,7 +16,7 @@ export function LanguageAwareHeader() {
 
   return (
     <div className="text-center relative">
-      <div className="absolute top-0 right-0">
+      <div className="absolute top-8 right-2 md:top-0 md:right-0">
         <LanguageSwitcher currentLang={currentLang} />
       </div>
       <Link 
