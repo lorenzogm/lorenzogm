@@ -1,6 +1,6 @@
 ---
 title: Vibe coding versus coding with AI
-date: 2024-12-19
+date: 2025-08-11
 tag: IA, Desarrollo, Programación
 description: Explorando las diferencias entre vibe coding para proyectos simples y coding with AI para sistemas empresariales complejos
 image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80
