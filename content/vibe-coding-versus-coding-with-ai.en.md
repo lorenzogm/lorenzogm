@@ -12,7 +12,7 @@ In today's rapidly evolving development landscape, I've discovered two distinct 
 
 ## Vibe Coding: Simplicity in Action
 
-I use vibe coding for small private projects like [lorenzogm.com](https://lorenzogm.com), [livingmuseum.es](https://livingmuseum.es), and [ópticasuárezjaen.es](https://ópticasuárezjaen.es). This approach requires basic technical knowledge, but my role is essentially describing what I want to an AI agent.
+I use vibe coding for small private projects like [lorenzogm.com](https://lorenzogm.com), [livingmuseum.es](https://livingmuseum.es), and [ópticasuárezjaen.es](https://opticasuarezjaen.es). This approach requires basic technical knowledge, but my role is essentially describing what I want to an AI agent.
 
 Vibe coding excels in simple projects. For example, with Óptica Suárez, the business owner writes the functionality they need, and my role is ensuring the AI agent implements it correctly. I focus on implementing quality checks to ensure the project works as intended.
 
