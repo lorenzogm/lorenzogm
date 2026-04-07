@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { formatDate } from '@/lib/utils'
+import { ArticleContent } from '@/components/elements/ArticleContent'
 
 interface BlogPost {
   title: string
@@ -65,10 +66,7 @@ export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
         )}
 
         <article className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-8 md:p-16 border border-red-100/50">
-          <div 
-            className="prose prose-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+          <ArticleContent content={post.content} />
         </article>
     </>
   )
