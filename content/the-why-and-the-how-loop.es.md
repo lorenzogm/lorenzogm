@@ -1,6 +1,6 @@
 ---
 title: "El Loop del Por Qué y el Cómo: Método BMAD + Loop de Ralph"
-date: "2025-10-01"
+date: "2026-04-07"
 tag: IA, Desarrollo, BMAD, Metodología
 description: Cómo el método BMAD destaca en las primeras tres fases del desarrollo de software — análisis, planificación y solución — y cómo combinarlo con el loop de Ralph para implementación, revisión de código y aseguramiento de calidad crea un flujo de trabajo integral y poderoso.
 image: https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80
@@ -18,47 +18,71 @@ El loop que quiero compartir en este artículo cierra ambas brechas. Combina el 
 
 ### ¿Qué es el Método BMAD?
 
-**BMAD** (Business, Mission, Architecture, Design) es una metodología de desarrollo asistida por IA que estructura las primeras fases de un proyecto a través de conversaciones con agentes de IA especializados. Cada agente juega un rol claramente definido:
+**BMAD** ("Build More Architect Dreams") es un framework de desarrollo ágil impulsado por IA, de código abierto, construido sobre agentes de IA especializados y flujos de trabajo guiados por habilidades (skills). Es adaptable por escala y dominio: la misma metodología funciona para una corrección rápida de errores y para una plataforma de escala empresarial, ajustando automáticamente la profundidad de planificación en función de la complejidad del proyecto.
 
-- **Business Analyst (Analista de Negocio)**: Captura requisitos, identifica stakeholders y define criterios de éxito.
-- **Product Manager / Mission Owner**: Traduce las necesidades del negocio en objetivos accionables y prioriza el alcance.
-- **Architect (Arquitecto)**: Diseña la solución técnica, evalúa trade-offs y define la estructura del sistema.
-- **Developer (Desarrollador inicial)**: Desglosa la arquitectura en historias concretas, tareas y criterios de aceptación.
+BMAD organiza el desarrollo en cuatro fases. Cada fase es impulsada por un agente específico que se invoca mediante una **skill** — un comando con nombre (por ejemplo, `bmad-create-prd`) que tu IDE de IA reconoce y ejecuta como un flujo de trabajo estructurado. Los agentes clave son:
 
-La clave del método BMAD es que **hacer las preguntas correctas es la parte más difícil del desarrollo de software**, y los agentes de IA son notablemente buenos para ayudarte a hacer esas preguntas de forma sistemática.
+- **Analyst** (`bmad-agent-analyst`): Lidera el brainstorming, la investigación y el descubrimiento temprano.
+- **Product Manager** (`bmad-agent-pm`): Traduce las necesidades del negocio en un PRD estructurado y luego lo desglosa en épicas.
+- **UX Designer** (`bmad-agent-ux-designer`): Diseña la experiencia de usuario y los flujos de interacción para proyectos con interfaz de usuario.
+- **Architect** (`bmad-agent-architect`): Diseña la solución técnica y valida la preparación para la implementación.
+- **Developer** (`bmad-agent-dev`): Implementa historias, ejecuta revisiones de código y gestiona el seguimiento de sprints.
 
-### Fase 1 — Análisis
+En cualquier momento puedes ejecutar `bmad-help` — una guía inteligente que inspecciona tu proyecto, detecta lo que se ha completado y recomienda exactamente qué hacer a continuación.
 
-La fase de análisis consiste en comprender el problema en profundidad antes de proponer ninguna solución. Con BMAD, un agente de Business Analyst lidera sesiones de descubrimiento estructuradas:
+### Fase 1 — Análisis _(Opcional)_
+
+La fase de análisis consiste en comprender el problema en profundidad antes de proponer ninguna solución. Todos los flujos de trabajo en esta fase son opcionales — úsalos cuando tu idea necesita forma antes de comprometerte con un plan.
+
+Skills disponibles en esta fase:
+
+| Skill | Agente | Propósito |
+|---|---|---|
+| `bmad-brainstorming` | Analyst | Ideación guiada para explorar y refinar la idea |
+| `bmad-market-research` | Analyst | Panorama del mercado y análisis competitivo |
+| `bmad-domain-research` | Analyst | Inmersión profunda en el dominio del problema |
+| `bmad-technical-research` | Analyst | Viabilidad técnica y evaluación del stack |
+| `bmad-product-brief` | Analyst | Documento de base recomendado cuando el concepto está claro |
+| `bmad-prfaq` | Analyst | Desafío Working Backwards para poner a prueba el concepto del producto |
+
+Un conjunto típico de preguntas que trabaja el agente Analyst:
 
 - ¿Qué problema estamos resolviendo y para quién?
 - ¿Cuáles son las restricciones — tiempo, presupuesto, regulación, sistemas existentes?
 - ¿Cómo se ve "terminado" desde la perspectiva del negocio?
 - ¿Cuáles son los riesgos si no hacemos nada?
 
-Esta fase produce un **Documento de Declaración del Problema** al que todo el equipo, incluidos los agentes de IA en fases posteriores, puede hacer referencia. Saltarse este paso es la causa más común de esfuerzo de desarrollo desperdiciado.
+### Fase 2 — Planificación _(Obligatoria)_
 
-### Fase 2 — Planificación
+Una vez que el concepto está claro, el agente PM transforma el análisis en un **Documento de Requisitos del Producto (PRD)** estructurado:
 
-Una vez que comprendemos el problema, el agente de Product Manager ayuda a traducir ese entendimiento en una hoja de ruta:
+| Skill | Agente | Salida |
+|---|---|---|
+| `bmad-create-prd` | PM | `PRD.md` — requisitos, funcionalidades, criterios de aceptación |
 
-- ¿Cuál es el alcance mínimo necesario para resolver el problema central?
-- ¿Cómo secuenciamos el trabajo para entregar valor tempranamente?
-- ¿Qué dependencias existen entre diferentes partes de la solución?
-- ¿Cómo medimos el éxito?
+El PRD es el documento más importante en el flujo de trabajo de BMAD. Define el alcance, las historias de usuario a alto nivel, las métricas de éxito y los límites de lo que se construirá y lo que no.
 
-El resultado de esta fase es un **Plan de Producto** — una lista priorizada de funcionalidades con objetivos claros, no solo un backlog de tareas. El enfoque BMAD fomenta conversaciones de planificación en lenguaje natural, dejando que la IA ayude a refinar ideas vagas en hitos estructurados.
+**Diseño UX _(Opcional)_**
 
-### Fase 3 — Solución
+Si el proyecto tiene una interfaz de usuario, este es el momento de ejecutar el flujo de trabajo de diseño UX antes de pasar a la arquitectura. El agente UX Designer trabaja a partir del PRD para definir patrones de interacción, flujos de usuario y especificaciones de interfaz:
 
-Con un plan claro, el agente de Arquitecto toma el liderazgo para diseñar la solución técnica:
+| Skill | Agente | Salida |
+|---|---|---|
+| `bmad-create-ux-design` | UX Designer | `ux-design-specification.md` — flujos de usuario, especificaciones de wireframes, diseño de interacción |
 
-- ¿Qué arquitectura se adapta mejor a los requisitos y restricciones?
-- ¿Qué tecnologías, patrones e integraciones son apropiados?
-- ¿Dónde están los riesgos técnicos y cómo los mitigamos?
-- ¿Cómo aseguramos que el sistema sea mantenible y escalable?
+Este paso es considerado opcional por el propio BMAD, pero omitirlo para proyectos con interfaces de usuario complejas casi siempre genera retrabajo durante la implementación.
 
-El agente de Arquitecto produce un **Architecture Decision Record (ADR)** y un conjunto de historias técnicas que alimentan directamente la implementación. De forma fundamental, esto ocurre **antes** de que se escriba cualquier código, lo que significa que la fase de implementación comienza con un entendimiento compartido en lugar de suposiciones.
+### Fase 3 — Solución _(BMAD Method / Enterprise)_
+
+Con un plan claro y la especificación UX opcional en mano, el agente Architect diseña la solución técnica:
+
+| Skill | Agente | Salida |
+|---|---|---|
+| `bmad-create-architecture` | Architect | `architecture.md` — stack tecnológico, diseño de componentes, flujos de datos, ADRs |
+| `bmad-create-epics-and-stories` | PM | `epics/` — archivos de historias individuales derivados del PRD + arquitectura |
+| `bmad-check-implementation-readiness` | Architect | Informe de validación que verifica la cohesión entre todos los documentos de planificación |
+
+Un punto clave en BMAD v6 es que las épicas y las historias se crean **después** de la arquitectura, no antes. Esto importa porque las decisiones de arquitectura — elección de base de datos, patrones de API, topología de despliegue — afectan directamente cómo debe desglosarse el trabajo. Las historias creadas antes de la arquitectura tienden a ser vagas; las historias creadas después son concretas e implementables.
 
 ### Por Qué BMAD Funciona para Estas Tres Fases
 
@@ -70,6 +94,26 @@ Las primeras tres fases son fundamentalmente sobre **pensamiento estructurado y 
 - Generar alternativas y análisis de trade-offs rápidamente.
 
 BMAD convierte lo que a menudo es un proceso informal, apresurado y propenso a errores en un diálogo disciplinado. El resultado no son planes perfectos — los planes siempre cambian — sino una **base compartida** que hace que cada decisión posterior sea más rápida y confiada.
+
+### Archivos de Salida Creados por BMAD
+
+Tras completar las tres fases de planificación, tu proyecto tiene un conjunto bien estructurado de artefactos:
+
+```
+tu-proyecto/
+├── _bmad/                          # Agentes, flujos de trabajo y configuración BMAD
+└── _bmad-output/
+    ├── planning-artifacts/
+    │   ├── PRD.md                  # Documento de Requisitos del Producto
+    │   ├── ux-design-specification.md  # Diseño UX (si aplica)
+    │   ├── architecture.md         # Decisiones de arquitectura y diseño técnico
+    │   └── epics/                  # Archivos de historias individuales (epic-XX-story-YY.md)
+    ├── implementation-artifacts/
+    │   └── sprint-status.yaml      # Seguimiento de sprints en todas las épicas e historias
+    └── project-context.md          # Reglas y convenciones de implementación (opcional)
+```
+
+Estos archivos no son documentos desechables. Sirven como especificación viva que todos los agentes de IA referencian durante la implementación, asegurando que cada historia permanezca alineada con los requisitos originales y la arquitectura.
 
 ---
 
