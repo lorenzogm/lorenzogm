@@ -1,33 +1,31 @@
-// Example: How to use Piwik PRO analytics in your components
+// Example: How to use Umami analytics in your components
 
 'use client';
 
 import { useAnalytics } from '@/components/Analytics';
 
 export function ExampleComponent() {
-  const { trackEvent, trackGoal, trackSiteSearch, trackPageView } = useAnalytics();
+  const { trackEvent } = useAnalytics();
 
   // Example: Track button clicks
   const handleDownload = () => {
-    trackEvent('Download', 'PDF', 'React Guide', 1);
-    // This will track: Category="Download", Action="PDF", Name="React Guide", Value=1
+    trackEvent('Download: PDF', { name: 'React Guide', value: 1 });
+    // This will track the event name "Download: PDF" with additional data
   };
 
-  // Example: Track newsletter signup (goal conversion)
+  // Example: Track newsletter signup
   const handleNewsletterSignup = () => {
-    trackGoal(1); // Goal ID 1 should be configured in Piwik PRO dashboard
-    trackEvent('Newsletter', 'Signup', 'Footer Form');
+    trackEvent('Newsletter: Signup', { form: 'Footer Form' });
   };
 
   // Example: Track search functionality
   const handleSearch = (query: string, resultsCount: number) => {
-    trackSiteSearch(query, 'blog', resultsCount);
-    // This tracks internal site searches
+    trackEvent('Search', { query, resultsCount });
   };
 
-  // Example: Manual page view tracking (usually not needed as it's automatic)
+  // Example: Manual page view tracking
   const handleCustomPageView = () => {
-    trackPageView('Custom Page Title');
+    trackEvent('Page View', { title: 'Custom Page Title' });
   };
 
   return (
@@ -43,7 +41,7 @@ export function ExampleComponent() {
         onClick={handleNewsletterSignup}
         className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
       >
-        Subscribe Newsletter (Goal + Event)
+        Subscribe Newsletter (Event)
       </button>
       
       <button 
@@ -72,7 +70,7 @@ export function ExternalLink({ href, children, category = 'External Link' }: {
   const { trackEvent } = useAnalytics();
 
   const handleClick = () => {
-    trackEvent(category, 'Click', href);
+    trackEvent(`${category}: Click`, { href });
   };
 
   return (
@@ -90,16 +88,13 @@ export function ExternalLink({ href, children, category = 'External Link' }: {
 
 // Example: Track form submissions
 export function ContactForm() {
-  const { trackEvent, trackGoal } = useAnalytics();
+  const { trackEvent } = useAnalytics();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Track form submission event
-    trackEvent('Form', 'Submit', 'Contact Form');
-    
-    // Track conversion goal (if contact form submission is a goal)
-    trackGoal(2); // Goal ID 2 for contact form submissions
+    trackEvent('Form: Submit', { form: 'Contact Form' });
     
     // Your form submission logic here
     console.log('Form submitted and tracked');

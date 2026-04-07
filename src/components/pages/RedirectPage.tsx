@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { Link } from '@/components/elements/Link';
 
 interface RedirectPageProps {
   redirectTo: string;
@@ -33,7 +33,7 @@ export default function RedirectPage({
           If you are not redirected automatically,{' '}
           <Link 
             href={redirectTo}
-            className="text-blue-600 hover:text-blue-800 underline"
+            event={{ category: 'Redirect', action: 'Manual Click', name: redirectTo }}
           >
             click here
           </Link>
