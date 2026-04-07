@@ -58,8 +58,13 @@ export async function getAllPosts(lang: string = 'en'): Promise<BlogPostMetadata
         };
       });
 
+    // Filter out posts with future dates (scheduled posts)
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    const publishedPosts = allPostsData.filter((post) => new Date(post.date) <= now);
+
     // Sort posts by date (newest first) - convert to Date objects for proper comparison
-    return allPostsData.sort((a, b) => {
+    return publishedPosts.sort((a, b) => {
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);
       return dateB.getTime() - dateA.getTime();
@@ -89,10 +94,19 @@ export async function getPostBySlug(slug: string, lang: string = 'en'): Promise<
       matterResult.data.description || 
       matterResult.content.substring(0, 150) + '...';
 
+    const postDate = matterResult.data.date || new Date().toISOString().split('T')[0];
+
+    // Do not return posts with future dates (scheduled posts)
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    if (new Date(postDate) > now) {
+      return null;
+    }
+
     return {
       slug,
       title: matterResult.data.title || 'Untitled',
-      date: matterResult.data.date || new Date().toISOString().split('T')[0],
+      date: postDate,
       excerpt,
       image: matterResult.data.image || '/placeholder-image.jpg',
       author: matterResult.data.author || 'Lorenzo GM',
