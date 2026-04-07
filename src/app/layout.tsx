@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
-import PiwikProProvider from '@piwikpro/next-piwik-pro';
-import { AnalyticsProvider } from '@/components/Analytics';
+import Script from 'next/script';
 import { Container } from '@/components/elements/Container';
 import { LanguageAwareHeader } from '@/components/elements/LanguageAwareHeader';
 import "./globals.css";
@@ -86,6 +85,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
+  const umamiUrl = process.env.NEXT_PUBLIC_UMAMI_URL;
+
   const renderContent = (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
@@ -118,18 +120,14 @@ export default function RootLayout({
       <body
         className="antialiased font-sans"
       >
-        {process.env.NEXT_PUBLIC_PIWIK_PRO_CONTAINER_URL && process.env.NEXT_PUBLIC_PIWIK_PRO_CONTAINER_ID ? (
-          <PiwikProProvider
-            containerUrl={process.env.NEXT_PUBLIC_PIWIK_PRO_CONTAINER_URL}
-            containerId={process.env.NEXT_PUBLIC_PIWIK_PRO_CONTAINER_ID}
-          >
-            <AnalyticsProvider>
-              {renderContent}
-            </AnalyticsProvider>
-          </PiwikProProvider>
-        ) : (
-          renderContent
+        {umamiWebsiteId && umamiUrl && (
+          <Script
+            src={umamiUrl}
+            data-website-id={umamiWebsiteId}
+            strategy="afterInteractive"
+          />
         )}
+        {renderContent}
       </body>
     </html>
   );
