@@ -45,7 +45,7 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
         {isEnglish ? (
           'English'
         ) : (
-          <Link href={alternativeUrl} unstyled>
+          <Link href={alternativeUrl} unstyled event={{ category: 'Navigation', action: 'Language Switch', name: 'English' }}>
             English
           </Link>
         )}
@@ -55,7 +55,7 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
         {!isEnglish ? (
           'Spanish'
         ) : (
-          <Link href={alternativeUrl} unstyled>
+          <Link href={alternativeUrl} unstyled event={{ category: 'Navigation', action: 'Language Switch', name: 'Spanish' }}>
             Spanish
           </Link>
         )}

@@ -2,12 +2,12 @@
 'use client'
 import { ReactNode } from 'react';
 import NextLink from 'next/link';
+import { useAnalytics } from '@/components/Analytics';
 
 interface AnalyticsEvent {
   category: string;
   action: string;
   name?: string;
-  value?: number;
 }
 
 interface LinkProps {
@@ -30,21 +30,12 @@ export function Link({
   rel,
   ...props 
 }: LinkProps) {
+  const { trackEvent } = useAnalytics();
+
   const handleClick = () => {
-    if (event && typeof window !== 'undefined') {
-      // Track analytics event if available
-      if (window.gtag) {
-        window.gtag('event', event.action, {
-          event_category: event.category,
-          event_label: event.name,
-          value: event.value,
-        });
-      }
-      
-      // Track with PiwikPro if available
-      if (window._paq) {
-        window._paq.push(['trackEvent', event.category, event.action, event.name, event.value]);
-      }
+    if (event) {
+      const eventName = `${event.category}: ${event.action}`;
+      trackEvent(eventName, event.name ? { name: event.name } : undefined);
     }
   };
 
@@ -68,12 +59,4 @@ export function Link({
       {children}
     </NextLink>
   );
-}
-
-// Extend Window interface for TypeScript
-declare global {
-  interface Window {
-    gtag?: (command: string, action: string, parameters?: Record<string, unknown>) => void;
-    _paq?: Array<Array<string | number | undefined>>;
-  }
 }

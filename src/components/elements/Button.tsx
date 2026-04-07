@@ -22,8 +22,6 @@ interface ButtonProps {
     action?: string;
     name?: string;
     value?: number;
-    goalId?: number;
-    goalRevenue?: number;
   };
 }
 
@@ -40,19 +38,20 @@ export function Button({
   event,
   ...props
 }: ButtonProps) {
-  const { trackEvent, trackGoal } = useAnalytics();
+  const { trackEvent } = useAnalytics();
 
   const handleClick = () => {
     // Track analytics if provided
-    if (event?.category && event?.action) {
-      trackEvent(event.category, event.action, event.name, event.value);
+    if (event?.action) {
+      const eventName = event.category
+        ? `${event.category}: ${event.action}`
+        : event.action;
+      const data: Record<string, unknown> = {};
+      if (event.name) data.name = event.name;
+      if (event.value !== undefined) data.value = event.value;
+      trackEvent(eventName, Object.keys(data).length > 0 ? data : undefined);
     }
-    
-    // Track goal if provided
-    if (event?.goalId) {
-      trackGoal(event.goalId, event.goalRevenue);
-    }
-    
+
     // Call original onClick
     if (onClick) {
       onClick();

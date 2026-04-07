@@ -21,7 +21,6 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
           action: "Card Click",
           name: post.title,
           value: featured ? 2 : 1,
-          goalId: 1
         }}
         className="block w-full text-left"
       >

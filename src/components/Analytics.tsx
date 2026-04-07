@@ -9,13 +9,13 @@ declare global {
 }
 
 export function useAnalytics() {
-  return {
-    trackEvent: (eventName: string, data?: Record<string, unknown>) => {
-      try {
-        window.umami?.track(eventName, data);
-      } catch (error) {
-        console.warn('Analytics trackEvent error:', error);
-      }
-    },
+  const trackEvent = (eventName: string, data?: Record<string, unknown>) => {
+    try {
+      window.umami?.track(eventName, data);
+    } catch (error) {
+      console.warn('Analytics trackEvent error:', error);
+    }
   };
+
+  return { trackEvent };
 }
