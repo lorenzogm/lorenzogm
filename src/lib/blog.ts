@@ -49,10 +49,18 @@ export interface BlogPostMetadata {
   lang: string;
 }
 
+function normalizeDate(rawDate: unknown): string {
+  if (!rawDate) return new Date().toISOString().split('T')[0];
+  if (rawDate instanceof Date) return rawDate.toISOString().split('T')[0];
+  return String(rawDate);
+}
+
 export function getAllPosts(lang: string = 'en'): BlogPostMetadata[] {
-  try {
-    const files = getFilesForLang(lang);
-    const allPostsData = Object.entries(files).map(([filePath, content]) => {
+  const files = getFilesForLang(lang);
+  const allPostsData: BlogPostMetadata[] = [];
+
+  for (const [filePath, content] of Object.entries(files)) {
+    try {
       const slug = slugFromPath(filePath, lang);
       const matterResult = matter(content);
 
@@ -62,11 +70,10 @@ export function getAllPosts(lang: string = 'en'): BlogPostMetadata[] {
         matterResult.data.description ||
         matterResult.content.substring(0, 150) + '...';
 
-      return {
+      allPostsData.push({
         slug,
         title: matterResult.data.title || 'Untitled',
-        date:
-          matterResult.data.date || new Date().toISOString().split('T')[0],
+        date: normalizeDate(matterResult.data.date),
         excerpt,
         image: matterResult.data.image || '/placeholder-image.jpg',
         author: matterResult.data.author || 'Lorenzo GM',
@@ -74,26 +81,25 @@ export function getAllPosts(lang: string = 'en'): BlogPostMetadata[] {
           ? matterResult.data.tag.split(', ')
           : matterResult.data.tags || [],
         lang,
-      };
-    });
-
-    // Filter out posts with future dates (scheduled posts)
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    const publishedPosts = allPostsData.filter(
-      (post) => new Date(post.date) <= now,
-    );
-
-    // Sort posts by date (newest first)
-    return publishedPosts.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateB.getTime() - dateA.getTime();
-    });
-  } catch (error) {
-    console.error('Error loading posts:', error);
-    return [];
+      });
+    } catch (error) {
+      console.error(`Error parsing post ${filePath}:`, error);
+    }
   }
+
+  // Filter out posts with future dates (scheduled posts)
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const publishedPosts = allPostsData.filter(
+    (post) => new Date(post.date) <= now,
+  );
+
+  // Sort posts by date (newest first)
+  return publishedPosts.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateB.getTime() - dateA.getTime();
+  });
 }
 
 export async function getPostBySlug(
@@ -123,8 +129,7 @@ export async function getPostBySlug(
       matterResult.data.description ||
       matterResult.content.substring(0, 150) + '...';
 
-    const postDate =
-      matterResult.data.date || new Date().toISOString().split('T')[0];
+    const postDate = normalizeDate(matterResult.data.date);
 
     // Do not return posts with future dates (scheduled posts)
     const now = new Date();
