@@ -16,17 +16,18 @@ export default function Icon() {
     (
       <div
         style={{
-          fontSize: 20,
-          background: '#dc2626',
+          fontSize: 22,
+          background: 'linear-gradient(135deg, #dc2626, #991b1b)',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: '#ffffff',
-          fontWeight: 'bold',
-          fontFamily: 'system-ui, -apple-system, sans-serif',
+          fontWeight: '800',
+          fontFamily: 'Georgia, serif',
           borderRadius: '6px',
+          letterSpacing: '-1px',
         }}
       >
         L

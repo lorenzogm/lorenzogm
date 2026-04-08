@@ -16,17 +16,18 @@ export default function AppleIcon() {
     (
       <div
         style={{
-          fontSize: 72,
-          background: '#1f2937',
+          fontSize: 100,
+          background: 'linear-gradient(135deg, #dc2626, #991b1b)',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#f3f4f6',
-          fontWeight: 'bold',
-          fontFamily: 'system-ui, -apple-system, sans-serif',
-          borderRadius: '20px',
+          color: '#ffffff',
+          fontWeight: '800',
+          fontFamily: 'Georgia, serif',
+          borderRadius: '36px',
+          letterSpacing: '-2px',
         }}
       >
         L
