@@ -1,0 +1,33 @@
+name: Post to LinkedIn
+
+# Runs every Tuesday at 09:00 CET (= 08:00 UTC).
+# Can also be triggered manually via workflow_dispatch to post the latest article immediately.
+on:
+  schedule:
+    - cron: '0 8 * * 2'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  post-to-linkedin:
+    runs-on: ubuntu-latest
+    name: Post latest article to LinkedIn
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Post latest article to LinkedIn
+        env:
+          # OAuth 2.0 access token for lorenzogm with the w_member_social scope.
+          # Generate once via the LinkedIn OAuth flow and store as a repository secret.
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          WEBSITE_URL: https://lorenzogm.com
+        run: node .github/scripts/post-to-linkedin.js
