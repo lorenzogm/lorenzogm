@@ -16,7 +16,7 @@ on:
 
 permissions:
   contents: write
-  variables: write
+  actions: write
 
 jobs:
   check-changes:
