@@ -1,8 +1,12 @@
+import { Buffer } from 'buffer'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 import './globals.css'
+
+// Polyfill Node.js Buffer for gray-matter in the browser
+globalThis.Buffer = Buffer
 
 const router = createRouter({ routeTree })
 
