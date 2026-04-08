@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: write
+  variables: write
 
 jobs:
   check-changes:
@@ -164,6 +165,8 @@ jobs:
       - name: Export Terraform Outputs
         id: export-outputs
         working-directory: infra/vercel/web/src
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           PROJECT_ID=$(terraform output -raw LORENZOGM_WEB_VERCEL_PROJECT_ID)
           ENVIRONMENT="${{ needs.check-changes.outputs.environment }}"
@@ -174,6 +177,7 @@ jobs:
           fi
           echo "Vercel Project ID: $PROJECT_ID"
           echo "project-id=$PROJECT_ID" >> $GITHUB_OUTPUT
+          gh variable set "$VAR_NAME" --body "$PROJECT_ID" --repo "${{ github.repository }}"
           echo "Set ${VAR_NAME} repository variable to: $PROJECT_ID"
 
       - name: Encrypt Terraform State
