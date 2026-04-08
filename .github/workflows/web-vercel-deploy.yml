@@ -166,9 +166,15 @@ jobs:
         working-directory: infra/vercel/web/src
         run: |
           PROJECT_ID=$(terraform output -raw LORENZOGM_WEB_VERCEL_PROJECT_ID)
+          ENVIRONMENT="${{ needs.check-changes.outputs.environment }}"
+          if [ "$ENVIRONMENT" = "production" ]; then
+            VAR_NAME="LORENZOGM_WEB_VERCEL_PROJECT_ID_PROD"
+          else
+            VAR_NAME="LORENZOGM_WEB_VERCEL_PROJECT_ID_DEV"
+          fi
           echo "Vercel Project ID: $PROJECT_ID"
           echo "project-id=$PROJECT_ID" >> $GITHUB_OUTPUT
-          echo "Set LORENZOGM_WEB_VERCEL_PROJECT_ID variable manually to: $PROJECT_ID"
+          echo "Set ${VAR_NAME} repository variable to: $PROJECT_ID"
 
       - name: Encrypt Terraform State
         working-directory: infra/vercel/web/src
@@ -221,13 +227,24 @@ jobs:
     outputs:
       preview-url: ${{ steps.preview-deploy.outputs.preview-url }}
     env:
-      VERCEL_PROJECT_ID: ${{ needs.infra-deploy.outputs.project-id || vars.LORENZOGM_WEB_VERCEL_PROJECT_ID }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Resolve Vercel Project ID
+        run: |
+          PROJECT_ID="${{ needs.infra-deploy.outputs.project-id }}"
+          if [ -z "$PROJECT_ID" ]; then
+            if [ "${{ needs.check-changes.outputs.environment }}" = "production" ]; then
+              PROJECT_ID="${{ vars.LORENZOGM_WEB_VERCEL_PROJECT_ID_PROD }}"
+            else
+              PROJECT_ID="${{ vars.LORENZOGM_WEB_VERCEL_PROJECT_ID_DEV }}"
+            fi
+          fi
+          echo "VERCEL_PROJECT_ID=$PROJECT_ID" >> $GITHUB_ENV
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -292,13 +309,24 @@ jobs:
     name: Deploy Production
     environment: ${{ needs.check-changes.outputs.environment }}
     env:
-      VERCEL_PROJECT_ID: ${{ needs.infra-deploy.outputs.project-id || vars.LORENZOGM_WEB_VERCEL_PROJECT_ID }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Resolve Vercel Project ID
+        run: |
+          PROJECT_ID="${{ needs.infra-deploy.outputs.project-id }}"
+          if [ -z "$PROJECT_ID" ]; then
+            if [ "${{ needs.check-changes.outputs.environment }}" = "production" ]; then
+              PROJECT_ID="${{ vars.LORENZOGM_WEB_VERCEL_PROJECT_ID_PROD }}"
+            else
+              PROJECT_ID="${{ vars.LORENZOGM_WEB_VERCEL_PROJECT_ID_DEV }}"
+            fi
+          fi
+          echo "VERCEL_PROJECT_ID=$PROJECT_ID" >> $GITHUB_ENV
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
