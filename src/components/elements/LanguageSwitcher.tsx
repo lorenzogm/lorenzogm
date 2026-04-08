@@ -1,6 +1,4 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
+import { useLocation } from '@tanstack/react-router';
 import { Link } from '@/components/elements/Link';
 
 interface LanguageSwitcherProps {
@@ -8,7 +6,8 @@ interface LanguageSwitcherProps {
 }
 
 export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
-  const pathname = usePathname();
+  const location = useLocation();
+  const pathname = location.pathname;
   
   // Generate the alternative URL for the other language
   const getAlternativeUrl = () => {

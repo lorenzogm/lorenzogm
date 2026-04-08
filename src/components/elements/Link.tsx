@@ -1,7 +1,5 @@
-
-'use client'
 import { ReactNode } from 'react';
-import NextLink from 'next/link';
+import { Link as RouterLink } from '@tanstack/react-router';
 import { useAnalytics } from '@/components/Analytics';
 
 interface AnalyticsEvent {
@@ -47,9 +45,25 @@ export function Link({
     ? className 
     : `${defaultStyles} ${className}`.trim();
 
+  // External links
+  if (href.startsWith('http') || href.startsWith('mailto:')) {
+    return (
+      <a
+        href={href}
+        className={combinedClassName}
+        onClick={handleClick}
+        target={target || '_blank'}
+        rel={rel || 'noopener noreferrer'}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <NextLink 
-      href={href} 
+    <RouterLink
+      to={href}
       className={combinedClassName}
       onClick={handleClick}
       target={target}
@@ -57,6 +71,6 @@ export function Link({
       {...props}
     >
       {children}
-    </NextLink>
+    </RouterLink>
   );
 }

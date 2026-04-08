@@ -1,7 +1,5 @@
-'use client';
-
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from '@tanstack/react-router';
 import { Link } from '@/components/elements/Link';
 
 interface RedirectPageProps {
@@ -15,12 +13,12 @@ export default function RedirectPage({
   title = "Redirecting...",
   message = "You are being redirected to the updated article."
 }: RedirectPageProps) {
-  const router = useRouter();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Redirect to the new URL
-    router.replace(redirectTo);
-  }, [router, redirectTo]);
+    navigate({ to: redirectTo, replace: true });
+  }, [navigate, redirectTo]);
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
