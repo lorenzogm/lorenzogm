@@ -199,4 +199,4 @@ If you are building complex software and you are not yet combining structured up
 
 ---
 
-*Interested in going deeper? Check out my articles on [GitHub Copilot instructions](/en/blog/my-github-copilot-instructions) and [QA automation](/en/blog/qa-automation) for more on the tools that power this workflow.*
+*Interested in going deeper? Check out my articles on [GitHub Copilot instructions](/blog/my-github-copilot-instructions) and [QA automation](/blog/qa-automation) for more on the tools that power this workflow.*

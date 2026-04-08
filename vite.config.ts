@@ -1,16 +1,25 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
+import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
   plugins: [
-    TanStackRouterVite({
-      routesDirectory: './src/routes',
-      generatedRouteTree: './src/routeTree.gen.ts',
+    tanstackStart({
+      pages: [{ path: '/' }, { path: '/es/' }],
+      prerender: {
+        enabled: true,
+        crawlLinks: true,
+        failOnError: false,
+      },
+      router: {
+        routesDirectory: 'routes',
+        generatedRouteTree: 'routeTree.gen.ts',
+      },
+      client: {
+        entry: './src/main.tsx',
+      },
     }),
-    react(),
     tailwindcss(),
   ],
   resolve: {
@@ -18,4 +27,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  envPrefix: ['VITE_', 'UMAMI_'],
 })
