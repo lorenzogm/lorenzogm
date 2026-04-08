@@ -1,0 +1,322 @@
+name: Web [Vercel] Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        type: choice
+        options:
+          - development
+          - production
+        default: development
+
+permissions:
+  contents: write
+
+jobs:
+  check-changes:
+    runs-on: ubuntu-latest
+    name: Check for changes
+    outputs:
+      infra-changed: ${{ steps.check.outputs.infra-changed }}
+      app-changed: ${{ steps.check.outputs.app-changed }}
+      environment: ${{ steps.resolve-env.outputs.environment }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Resolve environment
+        id: resolve-env
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "environment=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+            echo "Environment: ${{ github.event.inputs.environment }}"
+          else
+            echo "environment=development" >> $GITHUB_OUTPUT
+            echo "Environment: development (push trigger)"
+          fi
+
+      - name: Check for changes
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "infra-changed=true" >> $GITHUB_OUTPUT
+            echo "app-changed=true" >> $GITHUB_OUTPUT
+            echo "Manual trigger — deploying everything"
+            exit 0
+          fi
+
+          if git diff --name-only HEAD~1 -- infra/vercel/web/ | grep -q .; then
+            echo "infra-changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in infra/vercel/web/"
+          else
+            echo "infra-changed=false" >> $GITHUB_OUTPUT
+            echo "No changes in infra/vercel/web/"
+          fi
+
+          if git diff --name-only HEAD~1 -- src/ e2e/ content/ public/ package.json package-lock.json vite.config.ts playwright.config.ts vercel.json | grep -q .; then
+            echo "app-changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in app files"
+          else
+            echo "app-changed=false" >> $GITHUB_OUTPUT
+            echo "No changes in app files"
+          fi
+
+  infra-deploy:
+    needs: check-changes
+    if: needs.check-changes.outputs.infra-changed == 'true'
+    runs-on: ubuntu-latest
+    name: Infrastructure Deploy
+    environment: ${{ needs.check-changes.outputs.environment }}
+    outputs:
+      project-id: ${{ steps.export-outputs.outputs.project-id }}
+    env:
+      TF_VAR_ENVIRONMENT: ${{ needs.check-changes.outputs.environment }}
+      TF_VAR_VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      TF_VAR_VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      TERRAFORM_STATE_ENCRYPT_KEY: ${{ secrets.TERRAFORM_STATE_ENCRYPT_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch Terraform State from state branch
+        working-directory: infra/vercel/web/src
+        run: |
+          STATE_FILE="terraform-${{ env.TF_VAR_ENVIRONMENT }}.tfstate.enc"
+          if git fetch origin terraform-state 2>/dev/null; then
+            if git show "origin/terraform-state:infra/vercel/web/src/${STATE_FILE}" > "$STATE_FILE" 2>/dev/null && [ -s "$STATE_FILE" ]; then
+              echo "State file fetched from terraform-state branch"
+            else
+              rm -f "$STATE_FILE"
+              echo "State file not found on terraform-state branch"
+            fi
+          else
+            echo "terraform-state branch does not exist yet"
+          fi
+
+      - name: Decrypt Terraform State
+        working-directory: infra/vercel/web/src
+        run: |
+          STATE_FILE="terraform-${{ env.TF_VAR_ENVIRONMENT }}.tfstate.enc"
+          if [ -s "$STATE_FILE" ]; then
+            if echo "$TERRAFORM_STATE_ENCRYPT_KEY" | openssl enc -aes-256-cbc -d -in "$STATE_FILE" -out "terraform.tfstate" -pass stdin 2>/dev/null; then
+              echo "State file decrypted"
+            else
+              echo "::warning::Failed to decrypt state file — proceeding without existing state"
+              rm -f terraform.tfstate
+            fi
+          else
+            echo "No existing state file found"
+          fi
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.10.5"
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        working-directory: infra/vercel/web/src
+        run: terraform init
+
+      - name: Import existing project if state is missing
+        working-directory: infra/vercel/web/src
+        continue-on-error: true
+        run: |
+          if [ ! -f "terraform.tfstate" ] || [ "$(jq '.resources | length' terraform.tfstate 2>/dev/null)" = "0" ]; then
+            ENVIRONMENT="${{ needs.check-changes.outputs.environment }}"
+            case "$ENVIRONMENT" in
+              development) ENV_SHORT="dev" ;;
+              production)  ENV_SHORT="prod" ;;
+              *)           ENV_SHORT="${ENVIRONMENT:0:3}" ;;
+            esac
+            PROJECT_NAME="lorenzogm-web-${ENV_SHORT}"
+            echo "No state found. Checking for existing project: $PROJECT_NAME"
+            TEAM_PARAM=""
+            if [ -n "${TF_VAR_VERCEL_ORG_ID}" ]; then
+              TEAM_PARAM="?teamId=${TF_VAR_VERCEL_ORG_ID}"
+            fi
+            PROJECT_ID=$(curl -sf -H "Authorization: Bearer ${TF_VAR_VERCEL_TOKEN}" "https://api.vercel.com/v9/projects/${PROJECT_NAME}${TEAM_PARAM}" | jq -r '.id // empty')
+            if [ -n "$PROJECT_ID" ]; then
+              echo "Found existing project $PROJECT_ID — importing into state"
+              terraform import -var-file="config.${ENVIRONMENT}.json" vercel_project.main "$PROJECT_ID"
+            else
+              echo "No existing project found, proceeding with fresh creation"
+            fi
+          fi
+
+      - name: Terraform Plan
+        working-directory: infra/vercel/web/src
+        run: terraform plan -var-file="config.${{ env.TF_VAR_ENVIRONMENT }}.json" -out=tfplan
+
+      - name: Terraform Apply
+        working-directory: infra/vercel/web/src
+        run: terraform apply -auto-approve tfplan
+
+      - name: Export Terraform Outputs
+        id: export-outputs
+        working-directory: infra/vercel/web/src
+        run: |
+          PROJECT_ID=$(terraform output -raw LORENZOGM_WEB_VERCEL_PROJECT_ID)
+          echo "Vercel Project ID: $PROJECT_ID"
+          echo "project-id=$PROJECT_ID" >> $GITHUB_OUTPUT
+          echo "Set LORENZOGM_WEB_VERCEL_PROJECT_ID variable manually to: $PROJECT_ID"
+
+      - name: Encrypt Terraform State
+        working-directory: infra/vercel/web/src
+        run: |
+          if [ -f "terraform.tfstate" ]; then
+            echo "$TERRAFORM_STATE_ENCRYPT_KEY" | openssl enc -aes-256-cbc -in "terraform.tfstate" -out "terraform-${{ env.TF_VAR_ENVIRONMENT }}.tfstate.enc" -pass stdin
+            rm -f terraform.tfstate
+            echo "State file encrypted successfully"
+          else
+            echo "Error: No terraform.tfstate file found to encrypt"
+            exit 1
+          fi
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit Encrypted State to state branch
+        working-directory: infra/vercel/web/src
+        run: |
+          STATE_FILE="terraform-${{ env.TF_VAR_ENVIRONMENT }}.tfstate.enc"
+          cp "$STATE_FILE" "/tmp/$STATE_FILE"
+
+          cd ${{ github.workspace }}
+          if git fetch origin terraform-state 2>/dev/null; then
+            git checkout terraform-state
+          else
+            git checkout --orphan terraform-state
+            git rm -rf . 2>/dev/null || true
+          fi
+
+          mkdir -p infra/vercel/web/src
+          cp "/tmp/$STATE_FILE" "infra/vercel/web/src/$STATE_FILE"
+          git add "infra/vercel/web/src/$STATE_FILE"
+          git diff --staged --quiet && echo "No changes to state file" && exit 0
+          git commit -m "chore: update terraform state for ${{ env.TF_VAR_ENVIRONMENT }} environment"
+          git push origin terraform-state
+          echo "State file committed to terraform-state branch"
+
+  deploy-preview:
+    needs: [check-changes, infra-deploy]
+    if: |
+      always() &&
+      needs.infra-deploy.result != 'failure' &&
+      (needs.check-changes.outputs.app-changed == 'true' || needs.check-changes.outputs.infra-changed == 'true')
+    runs-on: ubuntu-latest
+    name: Deploy Preview
+    environment: ${{ needs.check-changes.outputs.environment }}
+    outputs:
+      preview-url: ${{ steps.preview-deploy.outputs.preview-url }}
+    env:
+      VERCEL_PROJECT_ID: ${{ needs.infra-deploy.outputs.project-id || vars.LORENZOGM_WEB_VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Pull Vercel Preview Environment
+        run: vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
+
+      - name: Build Preview Artifacts
+        run: vercel build --token=$VERCEL_TOKEN
+
+      - name: Deploy to Vercel Preview
+        id: preview-deploy
+        run: |
+          PREVIEW_URL=$(vercel deploy --prebuilt --token=$VERCEL_TOKEN)
+          echo "preview-url=$PREVIEW_URL" >> $GITHUB_OUTPUT
+          echo "Preview URL: $PREVIEW_URL"
+
+  e2e-tests:
+    needs: [deploy-preview]
+    if: always() && needs.deploy-preview.result == 'success'
+    runs-on: ubuntu-latest
+    name: E2E Tests
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run E2E Tests
+        run: npm run test:e2e
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ needs.deploy-preview.outputs.preview-url }}
+          CI: true
+
+  deploy-production:
+    needs: [check-changes, infra-deploy, deploy-preview, e2e-tests]
+    if: |
+      always() &&
+      needs.deploy-preview.result == 'success' &&
+      needs.infra-deploy.result != 'failure'
+    runs-on: ubuntu-latest
+    name: Deploy Production
+    environment: ${{ needs.check-changes.outputs.environment }}
+    env:
+      VERCEL_PROJECT_ID: ${{ needs.infra-deploy.outputs.project-id || vars.LORENZOGM_WEB_VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Pull Vercel Production Environment
+        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+
+      - name: Build Production Artifacts
+        run: vercel build --prod --token=$VERCEL_TOKEN
+
+      - name: Deploy to Vercel Production
+        run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
