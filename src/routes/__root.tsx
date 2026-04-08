@@ -1,21 +1,8 @@
 import { createRootRoute, Outlet, Link } from '@tanstack/react-router'
-import { useEffect } from 'react'
 import { Container } from '@/components/elements/Container'
 import { LanguageAwareHeader } from '@/components/elements/LanguageAwareHeader'
 
 function RootComponent() {
-  useEffect(() => {
-    const websiteId = import.meta.env.VITE_UMAMI_WEBSITE_ID
-    const scriptUrl = import.meta.env.VITE_UMAMI_URL
-    if (websiteId && scriptUrl) {
-      const script = document.createElement('script')
-      script.src = scriptUrl
-      script.defer = true
-      script.dataset.websiteId = websiteId
-      document.head.appendChild(script)
-    }
-  }, [])
-
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
