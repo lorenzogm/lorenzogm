@@ -16,12 +16,12 @@ Then edit `.env.local` and add your Umami details:
 
 ```env
 # Your Umami website ID (UUID format, found in Umami dashboard under Settings → Websites)
-VITE_UMAMI_WEBSITE_ID=your-website-id-here
+UMAMI_WEBSITE_ID=your-website-id-here
 
 # Your Umami script URL
 # For Umami Cloud use: https://cloud.umami.is/script.js
 # For self-hosted use: https://your-umami-instance.com/script.js
-VITE_UMAMI_URL=https://cloud.umami.is/script.js
+UMAMI_SCRIPT_SRC=https://cloud.umami.is/script.js
 ```
 
 ### 2. Umami Account Setup
@@ -34,7 +34,7 @@ If you don't have an Umami account yet:
 
 ### 3. How It Works
 
-The Umami script is injected into the `<head>` of every page via the root route (`src/routes/__root.tsx`). It uses the `VITE_UMAMI_WEBSITE_ID` and `VITE_UMAMI_URL` environment variables set at build time.
+The Umami script is injected into the `<head>` of every page via the root route (`src/routes/__root.tsx`). It uses the `UMAMI_WEBSITE_ID` and `UMAMI_SCRIPT_SRC` environment variables set at build time.
 
 - **Automatic page view tracking**: Umami automatically tracks page views, including SPA navigation
 - **Event tracking**: Use the `useAnalytics` hook from `@/components/Analytics` to track custom events
@@ -67,6 +67,6 @@ Umami is privacy-focused by default:
 
 ## Troubleshooting
 
-1. **No data in dashboard**: Ensure `VITE_UMAMI_WEBSITE_ID` is set correctly and matches the ID in your Umami dashboard
-2. **Script not loading**: Check that `VITE_UMAMI_URL` points to the correct Umami instance
+1. **No data in dashboard**: Ensure `UMAMI_WEBSITE_ID` is set correctly and matches the ID in your Umami dashboard
+2. **Script not loading**: Check that `UMAMI_SCRIPT_SRC` points to the correct Umami instance
 3. **Events not tracking**: Verify `window.umami` is available before calling track methods

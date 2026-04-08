@@ -11,7 +11,7 @@ import { LanguageAwareHeader } from '@/components/elements/LanguageAwareHeader'
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   const analyticsEnabled =
-    !!import.meta.env.VITE_UMAMI_URL && !!import.meta.env.VITE_UMAMI_WEBSITE_ID
+    !!import.meta.env.UMAMI_SCRIPT_SRC && !!import.meta.env.UMAMI_WEBSITE_ID
   return (
     <html lang="en">
       <head>
@@ -19,8 +19,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         {analyticsEnabled && (
           <script
             defer
-            src={import.meta.env.VITE_UMAMI_URL}
-            data-website-id={import.meta.env.VITE_UMAMI_WEBSITE_ID}
+            src={import.meta.env.UMAMI_SCRIPT_SRC}
+            data-website-id={import.meta.env.UMAMI_WEBSITE_ID}
           />
         )}
       </head>
