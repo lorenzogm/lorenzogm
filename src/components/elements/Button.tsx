@@ -1,7 +1,5 @@
-'use client';
-
 import React from 'react';
-import Link from 'next/link';
+import { Link as RouterLink } from '@tanstack/react-router';
 import { useAnalytics } from '@/components/Analytics';
 
 interface ButtonProps {
@@ -76,16 +74,16 @@ export function Button({
       );
     }
 
-    // Internal link using Next.js Link
+    // Internal link using TanStack Router Link
     return (
-      <Link
-        href={href}
+      <RouterLink
+        to={href}
         onClick={handleClick}
         className={className}
         {...props}
       >
         {children}
-      </Link>
+      </RouterLink>
     );
   }
 
@@ -102,3 +100,4 @@ export function Button({
     </button>
   );
 }
+

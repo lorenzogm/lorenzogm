@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { BlogPostMetadata } from '@/lib/blog';
 import { formatDate } from '@/lib/utils';
 import { Button } from '@/components/elements/Button';
@@ -25,12 +24,10 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
         className="block w-full text-left"
       >
         <div className={`relative w-full ${featured ? 'h-64 md:h-80' : 'h-48'} overflow-hidden`}>
-          <Image
+          <img
             src={post.image}
             alt={post.title}
-            fill
-            className="object-cover transition-transform duration-300 hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
         </div>
@@ -71,3 +68,4 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
     </article>
   );
 }
+

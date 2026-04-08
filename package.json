@@ -2,20 +2,19 @@
   "name": "lorenzogm",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "export": "next build",
-    "deploy": "npm run export && gh-pages -d out"
+    "dev": "vite",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@piwikpro/next-piwik-pro": "^3.4.0",
     "@tailwindcss/typography": "^0.5.16",
+    "@tanstack/react-router": "^1",
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
-    "next": "15.4.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "remark": "^15.0.1",
@@ -23,16 +22,20 @@
     "remark-html": "^16.0.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@eslint/js": "^9.39.4",
+    "@tailwindcss/vite": "^4",
+    "@tanstack/router-plugin": "^1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^4",
     "eslint": "^9",
-    "eslint-config-next": "15.3.2",
-    "gh-pages": "^6.3.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "typescript-eslint": "^8.58.1",
+    "vite": "^6"
   },
   "packageManager": "pnpm@8.15.4+sha512.0bd3a9be9eb0e9a692676deec00a303ba218ba279d99241475616b398dbaeedd11146f92c2843458f557b1d127e09d4c171e105bdcd6b61002b39685a8016b9e"
 }

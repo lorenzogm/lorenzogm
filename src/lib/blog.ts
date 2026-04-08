@@ -1,11 +1,30 @@
-import fs from 'fs';
-import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
 
-const postsDirectory = path.join(process.cwd(), 'content');
+// Import all markdown files at build time using Vite's import.meta.glob
+const enMarkdownFiles = import.meta.glob('/content/*.en.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
+
+const esMarkdownFiles = import.meta.glob('/content/*.es.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
+
+function getFilesForLang(lang: string): Record<string, string> {
+  return lang === 'es' ? esMarkdownFiles : enMarkdownFiles;
+}
+
+function slugFromPath(filePath: string, lang: string): string {
+  return filePath
+    .replace(/^\/content\//, '')
+    .replace(`.${lang}.md`, '');
+}
 
 export interface BlogPost {
   slug: string;
@@ -30,40 +49,42 @@ export interface BlogPostMetadata {
   lang: string;
 }
 
-export async function getAllPosts(lang: string = 'en'): Promise<BlogPostMetadata[]> {
+export function getAllPosts(lang: string = 'en'): BlogPostMetadata[] {
   try {
-    const fileNames = fs.readdirSync(postsDirectory);
-    const allPostsData = fileNames
-      .filter((fileName) => fileName.endsWith(`.${lang}.md`))
-      .map((fileName) => {
-        const slug = fileName.replace(`.${lang}.md`, '');
-        const fullPath = path.join(postsDirectory, fileName);
-        const fileContents = fs.readFileSync(fullPath, 'utf8');
-        const matterResult = matter(fileContents);
+    const files = getFilesForLang(lang);
+    const allPostsData = Object.entries(files).map(([filePath, content]) => {
+      const slug = slugFromPath(filePath, lang);
+      const matterResult = matter(content);
 
-        // Generate excerpt from content if not provided
-        const excerpt = matterResult.data.excerpt || 
-          matterResult.data.description || 
-          matterResult.content.substring(0, 150) + '...';
+      // Generate excerpt from content if not provided
+      const excerpt =
+        matterResult.data.excerpt ||
+        matterResult.data.description ||
+        matterResult.content.substring(0, 150) + '...';
 
-        return {
-          slug,
-          title: matterResult.data.title || 'Untitled',
-          date: matterResult.data.date || new Date().toISOString().split('T')[0],
-          excerpt,
-          image: matterResult.data.image || '/placeholder-image.jpg',
-          author: matterResult.data.author || 'Lorenzo GM',
-          tags: matterResult.data.tag ? matterResult.data.tag.split(', ') : (matterResult.data.tags || []),
-          lang,
-        };
-      });
+      return {
+        slug,
+        title: matterResult.data.title || 'Untitled',
+        date:
+          matterResult.data.date || new Date().toISOString().split('T')[0],
+        excerpt,
+        image: matterResult.data.image || '/placeholder-image.jpg',
+        author: matterResult.data.author || 'Lorenzo GM',
+        tags: matterResult.data.tag
+          ? matterResult.data.tag.split(', ')
+          : matterResult.data.tags || [],
+        lang,
+      };
+    });
 
     // Filter out posts with future dates (scheduled posts)
     const now = new Date();
     now.setHours(0, 0, 0, 0);
-    const publishedPosts = allPostsData.filter((post) => new Date(post.date) <= now);
+    const publishedPosts = allPostsData.filter(
+      (post) => new Date(post.date) <= now,
+    );
 
-    // Sort posts by date (newest first) - convert to Date objects for proper comparison
+    // Sort posts by date (newest first)
     return publishedPosts.sort((a, b) => {
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);
@@ -75,26 +96,35 @@ export async function getAllPosts(lang: string = 'en'): Promise<BlogPostMetadata
   }
 }
 
-export async function getPostBySlug(slug: string, lang: string = 'en'): Promise<BlogPost | null> {
+export async function getPostBySlug(
+  slug: string,
+  lang: string = 'en',
+): Promise<BlogPost | null> {
   try {
-    const fullPath = path.join(postsDirectory, `${slug}.${lang}.md`);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const matterResult = matter(fileContents);
+    const files = getFilesForLang(lang);
+    const filePath = `/content/${slug}.${lang}.md`;
+    const content = files[filePath];
+
+    if (!content) return null;
+
+    const matterResult = matter(content);
 
     // Convert markdown to HTML
     const processedContent = await remark()
       .use(remarkGfm)
       .use(html, { sanitize: false })
       .process(matterResult.content);
-    
+
     const contentHtml = processedContent.toString();
 
     // Generate excerpt from content if not provided
-    const excerpt = matterResult.data.excerpt || 
-      matterResult.data.description || 
+    const excerpt =
+      matterResult.data.excerpt ||
+      matterResult.data.description ||
       matterResult.content.substring(0, 150) + '...';
 
-    const postDate = matterResult.data.date || new Date().toISOString().split('T')[0];
+    const postDate =
+      matterResult.data.date || new Date().toISOString().split('T')[0];
 
     // Do not return posts with future dates (scheduled posts)
     const now = new Date();
@@ -110,7 +140,9 @@ export async function getPostBySlug(slug: string, lang: string = 'en'): Promise<
       excerpt,
       image: matterResult.data.image || '/placeholder-image.jpg',
       author: matterResult.data.author || 'Lorenzo GM',
-      tags: matterResult.data.tag ? matterResult.data.tag.split(', ') : (matterResult.data.tags || []),
+      tags: matterResult.data.tag
+        ? matterResult.data.tag.split(', ')
+        : matterResult.data.tags || [],
       content: contentHtml,
       lang,
     };
@@ -121,8 +153,6 @@ export async function getPostBySlug(slug: string, lang: string = 'en'): Promise<
 }
 
 export function getAllPostSlugs(lang: string = 'en'): string[] {
-  const fileNames = fs.readdirSync(postsDirectory);
-  return fileNames
-    .filter((fileName) => fileName.endsWith(`.${lang}.md`))
-    .map((fileName) => fileName.replace(`.${lang}.md`, ''));
+  const files = getFilesForLang(lang);
+  return Object.keys(files).map((filePath) => slugFromPath(filePath, lang));
 }

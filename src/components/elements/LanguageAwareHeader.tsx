@@ -1,12 +1,10 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
+import { useLocation } from '@tanstack/react-router';
 import { Link } from '@/components/elements/Link';
 import { LanguageSwitcher } from '@/components/elements/LanguageSwitcher';
 
 export function LanguageAwareHeader() {
-  const pathname = usePathname();
-  const isSpanish = pathname.startsWith('/es');
+  const location = useLocation();
+  const isSpanish = location.pathname.startsWith('/es');
   const currentLang = isSpanish ? 'es' : 'en';
   
   const homeUrl = isSpanish ? '/es' : '/';

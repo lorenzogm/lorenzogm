@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { formatDate } from '@/lib/utils'
 import { ArticleContent } from '@/components/elements/ArticleContent'
 
@@ -53,13 +52,10 @@ export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
         
         {post.image && (
           <div className="relative h-72 md:h-96 w-full rounded-2xl overflow-hidden shadow-2xl mb-16">
-            <Image
+            <img
               src={post.image}
               alt={post.title}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+              className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
           </div>
