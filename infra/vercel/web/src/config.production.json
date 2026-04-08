@@ -1,0 +1,20 @@
+{
+  "environment_variables": {},
+  "vercel": {
+    "project_domains": [
+      { "domain": "lorenzogm.com" },
+      { "domain": "www.lorenzogm.com", "redirect": "lorenzogm.com" }
+    ],
+    "project": {
+      "name": "lorenzogm-web",
+      "build_command": "npm run build",
+      "output_directory": "dist",
+      "framework": null,
+      "public_source": false,
+      "auto_assign_custom_domains": true,
+      "vercel_authentication": {
+        "deployment_type": "none"
+      }
+    }
+  }
+}
