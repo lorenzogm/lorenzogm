@@ -46,6 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     name: GitHub Infra Deploy
     env:
+      TF_VAR_ENVIRONMENT: production
       TF_VAR_GITHUB_OWNER: ${{ github.repository_owner }}
       TF_VAR_GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
 

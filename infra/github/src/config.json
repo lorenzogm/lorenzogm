@@ -21,6 +21,7 @@
     {
       "branch_name": "main",
       "require_status_checks": true,
+      "require_status_checks_strict": false,
       "require_code_owner_reviews": false,
       "require_pull_request_reviews": true,
       "dismiss_stale_reviews": true,

@@ -49,7 +49,7 @@ resource "github_branch_protection" "main" {
 
   # Status checks
   required_status_checks {
-    strict   = each.value.require_status_checks
+    strict   = lookup(each.value, "require_status_checks_strict", false)
     contexts = local.is_production ? [
       "PR Checks"
     ] : []
