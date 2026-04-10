@@ -23,13 +23,16 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
   const alternativeUrl = getAlternativeUrl();
   const isEnglish = currentLang === "en";
 
+  const englishLabel = isEnglish ? "English" : "Inglés";
+  const spanishLabel = isEnglish ? "Spanish" : "Español";
+
   return (
     <div className="flex items-center space-x-2 text-sm">
       <span
         className={`rounded px-2 py-1 ${isEnglish ? "bg-red-600 text-white" : "text-gray-600 hover:text-gray-900"}`}
       >
         {isEnglish ? (
-          "English"
+          englishLabel
         ) : (
           <Link
             event={{
@@ -40,7 +43,7 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
             href={alternativeUrl}
             unstyled
           >
-            English
+            {englishLabel}
           </Link>
         )}
       </span>
@@ -58,10 +61,10 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
             href={alternativeUrl}
             unstyled
           >
-            Spanish
+            {spanishLabel}
           </Link>
         ) : (
-          "Spanish"
+          spanishLabel
         )}
       </span>
     </div>
