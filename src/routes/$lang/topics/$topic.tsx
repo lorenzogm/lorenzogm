@@ -1,16 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BlogCard } from "@/components/patterns/blog-card";
 import { getPostsByTopic } from "@/lib/blog";
+import { type Lang, t } from "@/lib/i18n";
 
 function TopicPage() {
-  const { topic, posts } = Route.useLoaderData();
+  const { topic, posts, lang } = Route.useLoaderData();
 
   return (
     <>
       <div className="mb-8">
         <Link
           className="mb-4 inline-flex items-center text-red-600 text-sm transition-colors hover:text-red-700"
-          to="/es"
+          params={{ lang }}
+          to="/$lang"
         >
           <svg
             className="mr-1 h-4 w-4"
@@ -18,7 +20,7 @@ function TopicPage() {
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <title>Flecha atrás</title>
+            <title>{t(lang, "backArrow")}</title>
             <path
               d="M15 19l-7-7 7-7"
               strokeLinecap="round"
@@ -26,13 +28,16 @@ function TopicPage() {
               strokeWidth={2}
             />
           </svg>
-          Todos los artículos
+          {t(lang, "allPosts")}
         </Link>
         <h1 className="font-bold text-3xl text-gray-900">
-          Artículos sobre &ldquo;{topic}&rdquo;
+          {t(lang, "postsAbout")} &ldquo;{topic}&rdquo;
         </h1>
         <p className="mt-2 text-gray-500">
-          {posts.length} {posts.length === 1 ? "artículo" : "artículos"}
+          {posts.length}{" "}
+          {posts.length === 1
+            ? t(lang, "articleFound")
+            : t(lang, "articlesFound")}
         </p>
       </div>
 
@@ -45,11 +50,12 @@ function TopicPage() {
   );
 }
 
-export const Route = createFileRoute("/es/topics/$topic")({
+export const Route = createFileRoute("/$lang/topics/$topic")({
   loader: ({ params }) => {
+    const lang = params.lang as Lang;
     const topic = decodeURIComponent(params.topic);
-    const posts = getPostsByTopic(topic, "es");
-    return { topic, posts };
+    const posts = getPostsByTopic(topic, lang);
+    return { topic, posts, lang };
   },
   component: TopicPage,
 });

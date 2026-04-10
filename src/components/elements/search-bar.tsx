@@ -5,6 +5,7 @@ export function SearchBar() {
   const location = useLocation();
   const navigate = useNavigate();
   const isSpanish = location.pathname.startsWith("/es");
+  const currentLang = isSpanish ? "es" : "en";
   const [query, setQuery] = useState("");
 
   const placeholder = isSpanish ? "Buscar artículos..." : "Search articles...";
@@ -13,7 +14,8 @@ export function SearchBar() {
     e.preventDefault();
     const trimmed = query.trim();
     navigate({
-      to: isSpanish ? "/es/search" : "/search",
+      to: "/$lang/search",
+      params: { lang: currentLang },
       search: trimmed ? { q: trimmed } : {},
     });
   }
@@ -21,7 +23,8 @@ export function SearchBar() {
   function handleClear() {
     setQuery("");
     navigate({
-      to: isSpanish ? "/es/search" : "/search",
+      to: "/$lang/search",
+      params: { lang: currentLang },
       search: {},
     });
   }

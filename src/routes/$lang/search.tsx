@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BlogCard } from "@/components/patterns/blog-card";
 import { getAllPosts, searchPosts } from "@/lib/blog";
+import { type Lang, t } from "@/lib/i18n";
 
 interface SearchParams {
   q?: string;
@@ -8,14 +9,15 @@ interface SearchParams {
 }
 
 function SearchPage() {
-  const { q, topic, posts, topics } = Route.useLoaderData();
+  const { q, topic, posts, topics, lang } = Route.useLoaderData();
 
   return (
     <>
       <div className="mb-8">
         <Link
           className="mb-4 inline-flex items-center text-red-600 text-sm transition-colors hover:text-red-700"
-          to="/"
+          params={{ lang }}
+          to="/$lang"
         >
           <svg
             className="mr-1 h-4 w-4"
@@ -23,7 +25,7 @@ function SearchPage() {
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <title>Back arrow</title>
+            <title>{t(lang, "backArrow")}</title>
             <path
               d="M15 19l-7-7 7-7"
               strokeLinecap="round"
@@ -31,14 +33,20 @@ function SearchPage() {
               strokeWidth={2}
             />
           </svg>
-          All posts
+          {t(lang, "allPosts")}
         </Link>
         <h1 className="font-bold text-3xl text-gray-900">
-          {q ? `Search results for "${q}"` : "Search results"}
+          {q
+            ? `${t(lang, "searchResultsFor")} "${q}"`
+            : t(lang, "searchResults")}
         </h1>
         <p className="mt-2 text-gray-500">
-          {posts.length} {posts.length === 1 ? "article" : "articles"} found
-          {topic ? ` in "${topic}"` : ""}
+          {posts.length}{" "}
+          {posts.length === 1
+            ? t(lang, "articleFound")
+            : t(lang, "articlesFound")}{" "}
+          {t(lang, "found")}
+          {topic ? ` ${t(lang, "in")} "${topic}"` : ""}
         </p>
       </div>
 
@@ -47,11 +55,12 @@ function SearchPage() {
           <aside className="order-first w-full shrink-0 md:w-56 lg:w-64">
             <div className="sticky top-8 rounded-xl border border-gray-100 bg-gray-50 p-5">
               <h2 className="mb-4 font-semibold text-gray-900 text-sm uppercase tracking-wide">
-                Filter by topic
+                {t(lang, "filterByTopic")}
               </h2>
               <div className="flex flex-wrap gap-1.5 md:flex-col">
-                {topics.map(({ topic: t, count }) => {
-                  const isActive = t.toLowerCase() === topic.toLowerCase();
+                {topics.map(({ topic: topicName, count }) => {
+                  const isActive =
+                    topicName.toLowerCase() === topic.toLowerCase();
                   return (
                     <Link
                       className={`flex items-center justify-between rounded-lg px-3 py-2 font-medium text-sm transition-colors duration-200 ${
@@ -59,14 +68,15 @@ function SearchPage() {
                           ? "bg-red-600 text-white"
                           : "text-gray-700 hover:bg-red-50 hover:text-red-700"
                       }`}
-                      key={t}
+                      key={topicName}
+                      params={{ lang }}
                       search={(prev) => ({
                         ...prev,
-                        topic: isActive ? undefined : t,
+                        topic: isActive ? undefined : topicName,
                       })}
-                      to="/search"
+                      to="/$lang/search"
                     >
-                      <span>{t}</span>
+                      <span>{topicName}</span>
                       <span
                         className={`rounded-full px-2 py-0.5 text-xs ${
                           isActive
@@ -94,7 +104,7 @@ function SearchPage() {
           ) : (
             <div className="py-16 text-center">
               <p className="text-gray-500 text-lg">
-                No articles found. Try a different search term.
+                {t(lang, "noArticlesFound")}
               </p>
             </div>
           )}
@@ -104,33 +114,33 @@ function SearchPage() {
   );
 }
 
-export const Route = createFileRoute("/search")({
+export const Route = createFileRoute("/$lang/search")({
   validateSearch: (search: Record<string, unknown>): SearchParams => ({
     q: typeof search.q === "string" ? search.q : undefined,
     topic: typeof search.topic === "string" ? search.topic : undefined,
   }),
   loaderDeps: ({ search }) => ({ q: search.q, topic: search.topic }),
-  loader: ({ deps: { q, topic } }) => {
-    let posts = q ? searchPosts(q, "en") : getAllPosts("en");
+  loader: ({ deps: { q, topic }, params }) => {
+    const lang = params.lang as Lang;
+    let posts = q ? searchPosts(q, lang) : getAllPosts(lang);
     if (topic) {
       posts = posts.filter((p) =>
-        p.tags.some((t) => t.toLowerCase() === topic.toLowerCase())
+        p.tags.some((tag) => tag.toLowerCase() === topic.toLowerCase())
       );
     }
 
-    // Build topic counts from search results for facets
     const topicMap = new Map<string, number>();
-    const allResults = q ? searchPosts(q, "en") : getAllPosts("en");
+    const allResults = q ? searchPosts(q, lang) : getAllPosts(lang);
     for (const post of allResults) {
       for (const tag of post.tags) {
         topicMap.set(tag, (topicMap.get(tag) || 0) + 1);
       }
     }
     const topics = Array.from(topicMap.entries())
-      .map(([t, count]) => ({ topic: t, count }))
+      .map(([topicName, count]) => ({ topic: topicName, count }))
       .sort((a, b) => b.count - a.count);
 
-    return { q: q || "", topic: topic || "", posts, topics };
+    return { q: q || "", topic: topic || "", posts, topics, lang };
   },
   component: SearchPage,
 });

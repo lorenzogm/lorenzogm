@@ -19,8 +19,8 @@ export function TopicCloud({ topics, lang = "en", limit }: TopicCloudProps) {
         <Link
           className="inline-flex items-center gap-1.5 rounded-full border border-red-200/50 bg-red-50 px-4 py-2 font-semibold text-red-700 text-sm transition-colors duration-200 hover:bg-red-100"
           key={topic}
-          params={{ topic: topic.toLowerCase() }}
-          to={lang === "es" ? "/es/topics/$topic" : "/topics/$topic"}
+          params={{ lang, topic: topic.toLowerCase() }}
+          to="/$lang/topics/$topic"
         >
           {topic}
           <span className="rounded-full bg-red-200/60 px-1.5 py-0.5 text-red-800 text-xs">
@@ -31,7 +31,8 @@ export function TopicCloud({ topics, lang = "en", limit }: TopicCloudProps) {
       {hasMore && (
         <Link
           className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-4 py-2 font-semibold text-gray-600 text-sm transition-colors duration-200 hover:bg-gray-100"
-          to={lang === "es" ? "/es/topics" : "/topics"}
+          params={{ lang }}
+          to="/$lang/topics"
         >
           {lang === "es" ? "Ver todos" : "Show all"}
         </Link>

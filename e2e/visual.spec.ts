@@ -38,7 +38,7 @@ test.describe("No console errors", () => {
 
   test("blog post page has no console errors", async ({ page }) => {
     const errors = collectConsoleErrors(page);
-    await page.goto("/blog/a-better-react-folder-structure", {
+    await page.goto("/en/blog/a-better-react-folder-structure", {
       waitUntil: "domcontentloaded",
     });
     await expect(page.locator("article").first()).toBeVisible({
@@ -93,7 +93,7 @@ test.describe("Styles are loaded", () => {
   test("blog post page has stylesheets and styled content", async ({
     page,
   }) => {
-    await page.goto("/blog/a-better-react-folder-structure", {
+    await page.goto("/en/blog/a-better-react-folder-structure", {
       waitUntil: "domcontentloaded",
     });
     await expect(page.locator("article").first()).toBeVisible({
@@ -171,7 +171,7 @@ test.describe("Meta tags and SEO", () => {
   });
 
   test("blog post has proper title", async ({ page }) => {
-    await page.goto("/blog/a-better-react-folder-structure", {
+    await page.goto("/en/blog/a-better-react-folder-structure", {
       waitUntil: "domcontentloaded",
     });
     await expect(page).toHaveTitle(BLOG_TITLE_REGEX);

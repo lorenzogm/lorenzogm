@@ -55,8 +55,8 @@ export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
               <Link
                 className="inline-block rounded-full border border-red-200/50 bg-red-50 px-4 py-2 font-semibold text-red-700 text-sm transition-colors hover:bg-red-100"
                 key={tag}
-                params={{ topic: tag.toLowerCase() }}
-                to={post.lang === "es" ? "/es/topics/$topic" : "/topics/$topic"}
+                params={{ lang, topic: tag.toLowerCase() }}
+                to="/$lang/topics/$topic"
               >
                 {tag}
               </Link>

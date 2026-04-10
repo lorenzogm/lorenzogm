@@ -7,7 +7,7 @@ export function LanguageAwareHeader() {
   const isSpanish = location.pathname.startsWith("/es");
   const currentLang = isSpanish ? "es" : "en";
 
-  const homeUrl = isSpanish ? "/es" : "/";
+  const homeUrl = `/${currentLang}`;
   const subtitle = isSpanish
     ? "Reflexiones sobre desarrollo web, ingeniería de software y prácticas tecnológicas modernas"
     : "Insights on web development, software engineering, and modern tech practices";

@@ -2,18 +2,21 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BlogCard } from "@/components/patterns/blog-card";
 import { TopicCloud } from "@/components/patterns/topic-cloud";
 import { getAllPosts, getTopicCounts } from "@/lib/blog";
+import { type Lang, t } from "@/lib/i18n";
 
-function SpanishHome() {
-  const { posts, topics } = Route.useLoaderData();
+function Home() {
+  const { posts, topics, lang } = Route.useLoaderData();
 
   return (
     <>
       <h2 className="mb-4 font-bold text-2xl text-gray-900">
-        Buscar blog por tema
+        {t(lang, "searchBlogByTopic")}
       </h2>
-      <TopicCloud lang="es" limit={8} topics={topics} />
+      <TopicCloud lang={lang} limit={8} topics={topics} />
 
-      <h2 className="mb-8 font-bold text-2xl text-gray-900">Artículos</h2>
+      <h2 className="mb-8 font-bold text-2xl text-gray-900">
+        {t(lang, "articles")}
+      </h2>
       <div className="space-y-12">
         {posts.length > 0 && (
           <BlogCard featured={true} key={posts[0].slug} post={posts[0]} />
@@ -37,7 +40,7 @@ function SpanishHome() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <title>No posts icon</title>
+              <title>{t(lang, "noPostsIcon")}</title>
               <path
                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 strokeLinecap="round"
@@ -46,16 +49,21 @@ function SpanishHome() {
               />
             </svg>
           </div>
-          <p className="text-gray-500 text-lg">
-            No se encontraron artículos del blog.
-          </p>
+          <p className="text-gray-500 text-lg">{t(lang, "noPosts")}</p>
         </div>
       )}
     </>
   );
 }
 
-export const Route = createFileRoute("/es/")({
-  loader: () => ({ posts: getAllPosts("es"), topics: getTopicCounts("es") }),
-  component: SpanishHome,
+export const Route = createFileRoute("/$lang/")({
+  loader: ({ params }) => {
+    const lang = params.lang as Lang;
+    return {
+      posts: getAllPosts(lang),
+      topics: getTopicCounts(lang),
+      lang,
+    };
+  },
+  component: Home,
 });

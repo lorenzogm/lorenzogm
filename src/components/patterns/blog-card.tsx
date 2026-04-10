@@ -8,8 +8,7 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ post, featured = false }: BlogCardProps) {
-  const blogUrl =
-    post.lang === "es" ? `/es/blog/${post.slug}` : `/blog/${post.slug}`;
+  const blogUrl = `/${post.lang || "en"}/blog/${post.slug}`;
   const readMoreText = post.lang === "es" ? "Leer más" : "Read more";
 
   return (

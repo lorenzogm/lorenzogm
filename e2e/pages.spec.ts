@@ -1,10 +1,12 @@
 import { expect, test } from "@playwright/test";
 
 const BLOG_TITLE_REGEX = /Lorenzo GM/;
+const EN_URL_REGEX = /\/en/;
 
 test.describe("Home page", () => {
-  test("loads and shows blog posts", async ({ page }) => {
+  test("redirects / to /en and shows blog posts", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
+    await expect(page).toHaveURL(EN_URL_REGEX);
     await expect(page).toHaveTitle(BLOG_TITLE_REGEX);
     // At least one article card should be visible after React hydrates
     await expect(page.locator("article").first()).toBeVisible({
@@ -15,7 +17,7 @@ test.describe("Home page", () => {
 
 test.describe("English blog post pages", () => {
   test("loads a-better-react-folder-structure directly", async ({ page }) => {
-    await page.goto("/blog/a-better-react-folder-structure", {
+    await page.goto("/en/blog/a-better-react-folder-structure", {
       waitUntil: "domcontentloaded",
     });
     await expect(page).toHaveTitle(BLOG_TITLE_REGEX);
@@ -30,7 +32,7 @@ test.describe("English blog post pages", () => {
   });
 
   test("loads array-types-in-typescript directly", async ({ page }) => {
-    await page.goto("/blog/array-types-in-typescript", {
+    await page.goto("/en/blog/array-types-in-typescript", {
       waitUntil: "domcontentloaded",
     });
     await expect(page).toHaveTitle(BLOG_TITLE_REGEX);
@@ -40,7 +42,7 @@ test.describe("English blog post pages", () => {
   });
 
   test("shows 404 for unknown slug", async ({ page }) => {
-    await page.goto("/blog/this-slug-does-not-exist", {
+    await page.goto("/en/blog/this-slug-does-not-exist", {
       waitUntil: "domcontentloaded",
     });
     await expect(page.locator("text=Post Not Found").first()).toBeVisible({
@@ -94,6 +96,6 @@ test.describe("Client-side navigation", () => {
     });
     // Go back
     await page.goBack();
-    await expect(page).toHaveURL("/");
+    await expect(page).toHaveURL(EN_URL_REGEX);
   });
 });

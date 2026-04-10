@@ -6,7 +6,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [
     tanstackStart({
-      pages: [{ path: "/" }, { path: "/es/" }],
+      pages: [{ path: "/" }, { path: "/en/" }, { path: "/es/" }],
       prerender: {
         enabled: true,
         crawlLinks: true,

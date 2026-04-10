@@ -9,20 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SearchRouteImport } from './routes/search'
+import { Route as LangRouteImport } from './routes/$lang'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as TopicsIndexRouteImport } from './routes/topics/index'
-import { Route as EsIndexRouteImport } from './routes/es/index'
-import { Route as TopicsTopicRouteImport } from './routes/topics/$topic'
-import { Route as EsSearchRouteImport } from './routes/es/search'
-import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
-import { Route as EsTopicsIndexRouteImport } from './routes/es/topics/index'
-import { Route as EsTopicsTopicRouteImport } from './routes/es/topics/$topic'
-import { Route as EsBlogSlugRouteImport } from './routes/es/blog/$slug'
+import { Route as LangIndexRouteImport } from './routes/$lang/index'
+import { Route as LangSearchRouteImport } from './routes/$lang/search'
+import { Route as LangTopicsIndexRouteImport } from './routes/$lang/topics/index'
+import { Route as LangTopicsTopicRouteImport } from './routes/$lang/topics/$topic'
+import { Route as LangBlogSlugRouteImport } from './routes/$lang/blog/$slug'
 
-const SearchRoute = SearchRouteImport.update({
-  id: '/search',
-  path: '/search',
+const LangRoute = LangRouteImport.update({
+  id: '/$lang',
+  path: '/$lang',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -30,143 +27,100 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TopicsIndexRoute = TopicsIndexRouteImport.update({
+const LangIndexRoute = LangIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangSearchRoute = LangSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangTopicsIndexRoute = LangTopicsIndexRouteImport.update({
   id: '/topics/',
   path: '/topics/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LangRoute,
 } as any)
-const EsIndexRoute = EsIndexRouteImport.update({
-  id: '/es/',
-  path: '/es/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TopicsTopicRoute = TopicsTopicRouteImport.update({
+const LangTopicsTopicRoute = LangTopicsTopicRouteImport.update({
   id: '/topics/$topic',
   path: '/topics/$topic',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LangRoute,
 } as any)
-const EsSearchRoute = EsSearchRouteImport.update({
-  id: '/es/search',
-  path: '/es/search',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
+const LangBlogSlugRoute = LangBlogSlugRouteImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EsTopicsIndexRoute = EsTopicsIndexRouteImport.update({
-  id: '/es/topics/',
-  path: '/es/topics/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EsTopicsTopicRoute = EsTopicsTopicRouteImport.update({
-  id: '/es/topics/$topic',
-  path: '/es/topics/$topic',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EsBlogSlugRoute = EsBlogSlugRouteImport.update({
-  id: '/es/blog/$slug',
-  path: '/es/blog/$slug',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LangRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/search': typeof SearchRoute
-  '/blog/$slug': typeof BlogSlugRoute
-  '/es/search': typeof EsSearchRoute
-  '/topics/$topic': typeof TopicsTopicRoute
-  '/es/': typeof EsIndexRoute
-  '/topics/': typeof TopicsIndexRoute
-  '/es/blog/$slug': typeof EsBlogSlugRoute
-  '/es/topics/$topic': typeof EsTopicsTopicRoute
-  '/es/topics/': typeof EsTopicsIndexRoute
+  '/$lang': typeof LangRouteWithChildren
+  '/$lang/search': typeof LangSearchRoute
+  '/$lang/': typeof LangIndexRoute
+  '/$lang/blog/$slug': typeof LangBlogSlugRoute
+  '/$lang/topics/$topic': typeof LangTopicsTopicRoute
+  '/$lang/topics/': typeof LangTopicsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/search': typeof SearchRoute
-  '/blog/$slug': typeof BlogSlugRoute
-  '/es/search': typeof EsSearchRoute
-  '/topics/$topic': typeof TopicsTopicRoute
-  '/es': typeof EsIndexRoute
-  '/topics': typeof TopicsIndexRoute
-  '/es/blog/$slug': typeof EsBlogSlugRoute
-  '/es/topics/$topic': typeof EsTopicsTopicRoute
-  '/es/topics': typeof EsTopicsIndexRoute
+  '/$lang/search': typeof LangSearchRoute
+  '/$lang': typeof LangIndexRoute
+  '/$lang/blog/$slug': typeof LangBlogSlugRoute
+  '/$lang/topics/$topic': typeof LangTopicsTopicRoute
+  '/$lang/topics': typeof LangTopicsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/search': typeof SearchRoute
-  '/blog/$slug': typeof BlogSlugRoute
-  '/es/search': typeof EsSearchRoute
-  '/topics/$topic': typeof TopicsTopicRoute
-  '/es/': typeof EsIndexRoute
-  '/topics/': typeof TopicsIndexRoute
-  '/es/blog/$slug': typeof EsBlogSlugRoute
-  '/es/topics/$topic': typeof EsTopicsTopicRoute
-  '/es/topics/': typeof EsTopicsIndexRoute
+  '/$lang': typeof LangRouteWithChildren
+  '/$lang/search': typeof LangSearchRoute
+  '/$lang/': typeof LangIndexRoute
+  '/$lang/blog/$slug': typeof LangBlogSlugRoute
+  '/$lang/topics/$topic': typeof LangTopicsTopicRoute
+  '/$lang/topics/': typeof LangTopicsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/search'
-    | '/blog/$slug'
-    | '/es/search'
-    | '/topics/$topic'
-    | '/es/'
-    | '/topics/'
-    | '/es/blog/$slug'
-    | '/es/topics/$topic'
-    | '/es/topics/'
+    | '/$lang'
+    | '/$lang/search'
+    | '/$lang/'
+    | '/$lang/blog/$slug'
+    | '/$lang/topics/$topic'
+    | '/$lang/topics/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/search'
-    | '/blog/$slug'
-    | '/es/search'
-    | '/topics/$topic'
-    | '/es'
-    | '/topics'
-    | '/es/blog/$slug'
-    | '/es/topics/$topic'
-    | '/es/topics'
+    | '/$lang/search'
+    | '/$lang'
+    | '/$lang/blog/$slug'
+    | '/$lang/topics/$topic'
+    | '/$lang/topics'
   id:
     | '__root__'
     | '/'
-    | '/search'
-    | '/blog/$slug'
-    | '/es/search'
-    | '/topics/$topic'
-    | '/es/'
-    | '/topics/'
-    | '/es/blog/$slug'
-    | '/es/topics/$topic'
-    | '/es/topics/'
+    | '/$lang'
+    | '/$lang/search'
+    | '/$lang/'
+    | '/$lang/blog/$slug'
+    | '/$lang/topics/$topic'
+    | '/$lang/topics/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  SearchRoute: typeof SearchRoute
-  BlogSlugRoute: typeof BlogSlugRoute
-  EsSearchRoute: typeof EsSearchRoute
-  TopicsTopicRoute: typeof TopicsTopicRoute
-  EsIndexRoute: typeof EsIndexRoute
-  TopicsIndexRoute: typeof TopicsIndexRoute
-  EsBlogSlugRoute: typeof EsBlogSlugRoute
-  EsTopicsTopicRoute: typeof EsTopicsTopicRoute
-  EsTopicsIndexRoute: typeof EsTopicsIndexRoute
+  LangRoute: typeof LangRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/search': {
-      id: '/search'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof SearchRouteImport
+    '/$lang': {
+      id: '/$lang'
+      path: '/$lang'
+      fullPath: '/$lang'
+      preLoaderRoute: typeof LangRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -176,76 +130,65 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/topics/': {
-      id: '/topics/'
+    '/$lang/': {
+      id: '/$lang/'
+      path: '/'
+      fullPath: '/$lang/'
+      preLoaderRoute: typeof LangIndexRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/search': {
+      id: '/$lang/search'
+      path: '/search'
+      fullPath: '/$lang/search'
+      preLoaderRoute: typeof LangSearchRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/topics/': {
+      id: '/$lang/topics/'
       path: '/topics'
-      fullPath: '/topics/'
-      preLoaderRoute: typeof TopicsIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/$lang/topics/'
+      preLoaderRoute: typeof LangTopicsIndexRouteImport
+      parentRoute: typeof LangRoute
     }
-    '/es/': {
-      id: '/es/'
-      path: '/es'
-      fullPath: '/es/'
-      preLoaderRoute: typeof EsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/topics/$topic': {
-      id: '/topics/$topic'
+    '/$lang/topics/$topic': {
+      id: '/$lang/topics/$topic'
       path: '/topics/$topic'
-      fullPath: '/topics/$topic'
-      preLoaderRoute: typeof TopicsTopicRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/$lang/topics/$topic'
+      preLoaderRoute: typeof LangTopicsTopicRouteImport
+      parentRoute: typeof LangRoute
     }
-    '/es/search': {
-      id: '/es/search'
-      path: '/es/search'
-      fullPath: '/es/search'
-      preLoaderRoute: typeof EsSearchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog/$slug': {
-      id: '/blog/$slug'
+    '/$lang/blog/$slug': {
+      id: '/$lang/blog/$slug'
       path: '/blog/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/es/topics/': {
-      id: '/es/topics/'
-      path: '/es/topics'
-      fullPath: '/es/topics/'
-      preLoaderRoute: typeof EsTopicsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/es/topics/$topic': {
-      id: '/es/topics/$topic'
-      path: '/es/topics/$topic'
-      fullPath: '/es/topics/$topic'
-      preLoaderRoute: typeof EsTopicsTopicRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/es/blog/$slug': {
-      id: '/es/blog/$slug'
-      path: '/es/blog/$slug'
-      fullPath: '/es/blog/$slug'
-      preLoaderRoute: typeof EsBlogSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/$lang/blog/$slug'
+      preLoaderRoute: typeof LangBlogSlugRouteImport
+      parentRoute: typeof LangRoute
     }
   }
 }
 
+interface LangRouteChildren {
+  LangSearchRoute: typeof LangSearchRoute
+  LangIndexRoute: typeof LangIndexRoute
+  LangBlogSlugRoute: typeof LangBlogSlugRoute
+  LangTopicsTopicRoute: typeof LangTopicsTopicRoute
+  LangTopicsIndexRoute: typeof LangTopicsIndexRoute
+}
+
+const LangRouteChildren: LangRouteChildren = {
+  LangSearchRoute: LangSearchRoute,
+  LangIndexRoute: LangIndexRoute,
+  LangBlogSlugRoute: LangBlogSlugRoute,
+  LangTopicsTopicRoute: LangTopicsTopicRoute,
+  LangTopicsIndexRoute: LangTopicsIndexRoute,
+}
+
+const LangRouteWithChildren = LangRoute._addFileChildren(LangRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  SearchRoute: SearchRoute,
-  BlogSlugRoute: BlogSlugRoute,
-  EsSearchRoute: EsSearchRoute,
-  TopicsTopicRoute: TopicsTopicRoute,
-  EsIndexRoute: EsIndexRoute,
-  TopicsIndexRoute: TopicsIndexRoute,
-  EsBlogSlugRoute: EsBlogSlugRoute,
-  EsTopicsTopicRoute: EsTopicsTopicRoute,
-  EsTopicsIndexRoute: EsTopicsIndexRoute,
+  LangRoute: LangRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -5,6 +5,7 @@ import {
   Link,
   Outlet,
   Scripts,
+  useLocation,
 } from "@tanstack/react-router";
 import { Container } from "@/components/elements/container";
 import { LanguageAwareHeader } from "@/components/elements/language-aware-header";
@@ -12,10 +13,12 @@ import { SearchBar } from "@/components/elements/search-bar";
 import globalsCss from "../globals.css?url";
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  const lang = location.pathname.startsWith("/es") ? "es" : "en";
   const analyticsEnabled =
     !!import.meta.env.UMAMI_SCRIPT_SRC && !!import.meta.env.UMAMI_WEBSITE_ID;
   return (
-    <html lang="en">
+    <html lang={lang}>
       <head>
         <HeadContent />
         {analyticsEnabled && (
@@ -83,7 +86,7 @@ function NotFoundComponent() {
           <div className="space-y-4">
             <Link
               className="inline-block rounded-lg bg-blue-500 px-6 py-3 text-white transition-colors hover:bg-blue-600"
-              to="/"
+              to="/en"
             >
               Go Home
             </Link>

@@ -5,6 +5,9 @@ interface LanguageSwitcherProps {
   currentLang: "en" | "es";
 }
 
+const EN_PREFIX = /^\/en/;
+const ES_PREFIX = /^\/es/;
+
 export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
   const location = useLocation();
   const pathname = location.pathname;
@@ -12,26 +15,9 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
   // Generate the alternative URL for the other language
   const getAlternativeUrl = () => {
     if (currentLang === "en") {
-      // Switch to Spanish
-      if (pathname === "/") {
-        return "/es";
-      }
-      if (pathname.startsWith("/blog/")) {
-        return `/es${pathname}`;
-      }
-      return `/es${pathname}`;
+      return pathname.replace(EN_PREFIX, "/es");
     }
-    // Switch to English
-    if (pathname === "/es") {
-      return "/";
-    }
-    if (pathname.startsWith("/es/blog/")) {
-      return pathname.replace("/es", "");
-    }
-    if (pathname.startsWith("/es/")) {
-      return pathname.replace("/es", "");
-    }
-    return pathname.replace("/es", "");
+    return pathname.replace(ES_PREFIX, "/en");
   };
 
   const alternativeUrl = getAlternativeUrl();
