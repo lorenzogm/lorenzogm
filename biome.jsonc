@@ -10,9 +10,7 @@
   "linter": {
     "rules": {
       "suspicious": {},
-      "a11y": {
-        "useKeyWithClickEvents": "off"
-      },
+      "a11y": {},
       "performance": {
         "noNamespaceImport": "off",
         "useTopLevelRegex": "off",
