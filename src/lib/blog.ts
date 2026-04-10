@@ -1,29 +1,27 @@
-import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
-import remarkGfm from 'remark-gfm';
+import matter from "gray-matter";
+import { remark } from "remark";
+import remarkGfm from "remark-gfm";
+import html from "remark-html";
 
 // Import all markdown files at build time using Vite's import.meta.glob
-const enMarkdownFiles = import.meta.glob('/content/*.en.md', {
-  query: '?raw',
-  import: 'default',
+const enMarkdownFiles = import.meta.glob("/content/*.en.md", {
+  query: "?raw",
+  import: "default",
   eager: true,
 }) as Record<string, string>;
 
-const esMarkdownFiles = import.meta.glob('/content/*.es.md', {
-  query: '?raw',
-  import: 'default',
+const esMarkdownFiles = import.meta.glob("/content/*.es.md", {
+  query: "?raw",
+  import: "default",
   eager: true,
 }) as Record<string, string>;
 
 function getFilesForLang(lang: string): Record<string, string> {
-  return lang === 'es' ? esMarkdownFiles : enMarkdownFiles;
+  return lang === "es" ? esMarkdownFiles : enMarkdownFiles;
 }
 
 function slugFromPath(filePath: string, lang: string): string {
-  return filePath
-    .replace(/^\/content\//, '')
-    .replace(`.${lang}.md`, '');
+  return filePath.replace(/^\/content\//, "").replace(`.${lang}.md`, "");
 }
 
 export interface BlogPost {
@@ -50,12 +48,12 @@ export interface BlogPostMetadata {
 }
 
 function normalizeDate(rawDate: unknown): string {
-  if (!rawDate) return new Date().toISOString().split('T')[0];
-  if (rawDate instanceof Date) return rawDate.toISOString().split('T')[0];
+  if (!rawDate) return new Date().toISOString().split("T")[0];
+  if (rawDate instanceof Date) return rawDate.toISOString().split("T")[0];
   return String(rawDate);
 }
 
-export function getAllPosts(lang: string = 'en'): BlogPostMetadata[] {
+export function getAllPosts(lang = "en"): BlogPostMetadata[] {
   const files = getFilesForLang(lang);
   const allPostsData: BlogPostMetadata[] = [];
 
@@ -68,17 +66,17 @@ export function getAllPosts(lang: string = 'en'): BlogPostMetadata[] {
       const excerpt =
         matterResult.data.excerpt ||
         matterResult.data.description ||
-        matterResult.content.substring(0, 150) + '...';
+        `${matterResult.content.substring(0, 150)}...`;
 
       allPostsData.push({
         slug,
-        title: matterResult.data.title || 'Untitled',
+        title: matterResult.data.title || "Untitled",
         date: normalizeDate(matterResult.data.date),
         excerpt,
-        image: matterResult.data.image || '/placeholder-image.jpg',
-        author: matterResult.data.author || 'Lorenzo GM',
+        image: matterResult.data.image || "/placeholder-image.jpg",
+        author: matterResult.data.author || "Lorenzo GM",
         tags: matterResult.data.tag
-          ? matterResult.data.tag.split(', ')
+          ? matterResult.data.tag.split(", ")
           : matterResult.data.tags || [],
         lang,
       });
@@ -91,7 +89,7 @@ export function getAllPosts(lang: string = 'en'): BlogPostMetadata[] {
   const now = new Date();
   now.setHours(0, 0, 0, 0);
   const publishedPosts = allPostsData.filter(
-    (post) => new Date(post.date) <= now,
+    (post) => new Date(post.date) <= now
   );
 
   // Sort posts by date (newest first)
@@ -104,7 +102,7 @@ export function getAllPosts(lang: string = 'en'): BlogPostMetadata[] {
 
 export async function getPostBySlug(
   slug: string,
-  lang: string = 'en',
+  lang = "en"
 ): Promise<BlogPost | null> {
   try {
     const files = getFilesForLang(lang);
@@ -127,7 +125,7 @@ export async function getPostBySlug(
     const excerpt =
       matterResult.data.excerpt ||
       matterResult.data.description ||
-      matterResult.content.substring(0, 150) + '...';
+      `${matterResult.content.substring(0, 150)}...`;
 
     const postDate = normalizeDate(matterResult.data.date);
 
@@ -140,13 +138,13 @@ export async function getPostBySlug(
 
     return {
       slug,
-      title: matterResult.data.title || 'Untitled',
+      title: matterResult.data.title || "Untitled",
       date: postDate,
       excerpt,
-      image: matterResult.data.image || '/placeholder-image.jpg',
-      author: matterResult.data.author || 'Lorenzo GM',
+      image: matterResult.data.image || "/placeholder-image.jpg",
+      author: matterResult.data.author || "Lorenzo GM",
       tags: matterResult.data.tag
-        ? matterResult.data.tag.split(', ')
+        ? matterResult.data.tag.split(", ")
         : matterResult.data.tags || [],
       content: contentHtml,
       lang,
@@ -157,7 +155,7 @@ export async function getPostBySlug(
   }
 }
 
-export function getAllPostSlugs(lang: string = 'en'): string[] {
+export function getAllPostSlugs(lang = "en"): string[] {
   const files = getFilesForLang(lang);
   return Object.keys(files).map((filePath) => slugFromPath(filePath, lang));
 }

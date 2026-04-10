@@ -1,59 +1,59 @@
 // Example: How to use Umami analytics in your components
 
-'use client';
+"use client";
 
-import { useAnalytics } from '@/components/Analytics';
+import { useAnalytics } from "@/components/analytics";
 
 export function ExampleComponent() {
   const { trackEvent } = useAnalytics();
 
   // Example: Track button clicks
   const handleDownload = () => {
-    trackEvent('Download: PDF', { name: 'React Guide', value: 1 });
+    trackEvent("Download: PDF", { name: "React Guide", value: 1 });
     // This will track the event name "Download: PDF" with additional data
   };
 
   // Example: Track newsletter signup
   const handleNewsletterSignup = () => {
-    trackEvent('Newsletter: Signup', { form: 'Footer Form' });
+    trackEvent("Newsletter: Signup", { form: "Footer Form" });
   };
 
   // Example: Track search functionality
   const handleSearch = (query: string, resultsCount: number) => {
-    trackEvent('Search', { query, resultsCount });
+    trackEvent("Search", { query, resultsCount });
   };
 
   // Example: Manual page view tracking
   const handleCustomPageView = () => {
-    trackEvent('Page View', { title: 'Custom Page Title' });
+    trackEvent("Page View", { title: "Custom Page Title" });
   };
 
   return (
     <div className="space-y-4">
-      <button 
+      <button
+        className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
         onClick={handleDownload}
-        className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
       >
         Download PDF (Tracked)
       </button>
-      
-      <button 
+
+      <button
+        className="rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700"
         onClick={handleNewsletterSignup}
-        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
       >
         Subscribe Newsletter (Event)
       </button>
-      
-      <button 
-        onClick={() => handleSearch('next.js tutorial', 5)}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+
+      <button
+        className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+        onClick={() => handleSearch("next.js tutorial", 5)}
       >
         Simulate Search (5 results)
       </button>
-      
-      <button 
+
+      <button
+        className="rounded bg-purple-600 px-4 py-2 text-white hover:bg-purple-700"
         onClick={handleCustomPageView}
-        className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
       >
         Track Custom Page View
       </button>
@@ -62,7 +62,11 @@ export function ExampleComponent() {
 }
 
 // Example: Track external link clicks
-export function ExternalLink({ href, children, category = 'External Link' }: {
+export function ExternalLink({
+  href,
+  children,
+  category = "External Link",
+}: {
   href: string;
   children: React.ReactNode;
   category?: string;
@@ -74,12 +78,12 @@ export function ExternalLink({ href, children, category = 'External Link' }: {
   };
 
   return (
-    <a 
-      href={href} 
+    <a
+      className="text-red-600 underline hover:text-red-800"
+      href={href}
       onClick={handleClick}
-      target="_blank" 
       rel="noopener noreferrer"
-      className="text-red-600 hover:text-red-800 underline"
+      target="_blank"
     >
       {children}
     </a>
@@ -92,30 +96,30 @@ export function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Track form submission event
-    trackEvent('Form: Submit', { form: 'Contact Form' });
-    
+    trackEvent("Form: Submit", { form: "Contact Form" });
+
     // Your form submission logic here
-    console.log('Form submitted and tracked');
+    console.log("Form submitted and tracked");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input 
-        type="email" 
+    <form className="space-y-4" onSubmit={handleSubmit}>
+      <input
+        className="w-full rounded border p-2"
         placeholder="Email"
-        className="w-full p-2 border rounded"
         required
+        type="email"
       />
-      <textarea 
+      <textarea
+        className="w-full rounded border p-2"
         placeholder="Message"
-        className="w-full p-2 border rounded"
         required
       />
-      <button 
+      <button
+        className="rounded bg-red-600 px-6 py-2 text-white hover:bg-red-700"
         type="submit"
-        className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700"
       >
         Send Message (Tracked)
       </button>

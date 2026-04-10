@@ -1,42 +1,40 @@
 import {
   createRootRoute,
   HeadContent,
+  Link,
   Outlet,
   Scripts,
-  ScrollRestoration,
-  Link,
-} from '@tanstack/react-router'
-import { Container } from '@/components/elements/Container'
-import { LanguageAwareHeader } from '@/components/elements/LanguageAwareHeader'
+} from "@tanstack/react-router";
+import { Container } from "@/components/elements/container";
+import { LanguageAwareHeader } from "@/components/elements/language-aware-header";
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   const analyticsEnabled =
-    !!import.meta.env.UMAMI_SCRIPT_SRC && !!import.meta.env.UMAMI_WEBSITE_ID
+    !!import.meta.env.UMAMI_SCRIPT_SRC && !!import.meta.env.UMAMI_WEBSITE_ID;
   return (
     <html lang="en">
       <head>
         <HeadContent />
         {analyticsEnabled && (
           <script
+            data-website-id={import.meta.env.UMAMI_WEBSITE_ID}
             defer
             src={import.meta.env.UMAMI_SCRIPT_SRC}
-            data-website-id={import.meta.env.UMAMI_WEBSITE_ID}
           />
         )}
       </head>
       <body>
         {children}
-        <ScrollRestoration />
         <Scripts />
       </body>
     </html>
-  )
+  );
 }
 
 function RootComponent() {
   return (
     <RootDocument>
-      <div className="min-h-screen flex flex-col">
+      <div className="flex min-h-screen flex-col">
         {/* Header */}
         <Container as="header" className="bg-white py-12" fullWidth>
           <LanguageAwareHeader />
@@ -48,7 +46,7 @@ function RootComponent() {
 
         <Container
           as="footer"
-          className="bg-white border-t border-gray-200 mt-auto py-6 text-center"
+          className="mt-auto border-gray-200 border-t bg-white py-6 text-center"
           fullWidth
         >
           <p className="text-gray-600">
@@ -57,25 +55,27 @@ function RootComponent() {
         </Container>
       </div>
     </RootDocument>
-  )
+  );
 }
 
 function NotFoundComponent() {
   return (
     <RootDocument>
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-8 text-center">
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg">
           <div className="mb-6">
-            <h1 className="text-6xl font-bold text-gray-300 mb-2">404</h1>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Page Not Found</h2>
-            <p className="text-gray-600 mb-6">
+            <h1 className="mb-2 font-bold text-6xl text-gray-300">404</h1>
+            <h2 className="mb-4 font-bold text-2xl text-gray-900">
+              Page Not Found
+            </h2>
+            <p className="mb-6 text-gray-600">
               Sorry, we couldn&apos;t find the page you&apos;re looking for.
             </p>
           </div>
           <div className="space-y-4">
             <Link
+              className="inline-block rounded-lg bg-blue-500 px-6 py-3 text-white transition-colors hover:bg-blue-600"
               to="/"
-              className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors"
             >
               Go Home
             </Link>
@@ -83,19 +83,19 @@ function NotFoundComponent() {
         </div>
       </div>
     </RootDocument>
-  )
+  );
 }
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-      { name: 'theme-color', content: '#dc2626' },
-      { title: 'Lorenzo GM' },
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1.0" },
+      { name: "theme-color", content: "#dc2626" },
+      { title: "Lorenzo GM" },
     ],
-    links: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+    links: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
   }),
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
-})
+});

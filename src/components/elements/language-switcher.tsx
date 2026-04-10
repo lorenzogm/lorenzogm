@@ -1,0 +1,83 @@
+import { useLocation } from "@tanstack/react-router";
+import { Link } from "@/components/elements/link";
+
+interface LanguageSwitcherProps {
+  currentLang: "en" | "es";
+}
+
+export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
+  const location = useLocation();
+  const pathname = location.pathname;
+
+  // Generate the alternative URL for the other language
+  const getAlternativeUrl = () => {
+    if (currentLang === "en") {
+      // Switch to Spanish
+      if (pathname === "/") {
+        return "/es";
+      }
+      if (pathname.startsWith("/blog/")) {
+        return `/es${pathname}`;
+      }
+      return `/es${pathname}`;
+    }
+    // Switch to English
+    if (pathname === "/es") {
+      return "/";
+    }
+    if (pathname.startsWith("/es/blog/")) {
+      return pathname.replace("/es", "");
+    }
+    if (pathname.startsWith("/es/")) {
+      return pathname.replace("/es", "");
+    }
+    return pathname.replace("/es", "");
+  };
+
+  const alternativeUrl = getAlternativeUrl();
+  const isEnglish = currentLang === "en";
+
+  return (
+    <div className="flex items-center space-x-2 text-sm">
+      <span
+        className={`rounded px-2 py-1 ${isEnglish ? "bg-red-600 text-white" : "text-gray-600 hover:text-gray-900"}`}
+      >
+        {isEnglish ? (
+          "English"
+        ) : (
+          <Link
+            event={{
+              category: "Navigation",
+              action: "Language Switch",
+              name: "English",
+            }}
+            href={alternativeUrl}
+            unstyled
+          >
+            English
+          </Link>
+        )}
+      </span>
+      <span className="text-gray-400">|</span>
+      <span
+        className={`rounded px-2 py-1 ${isEnglish ? "text-gray-600 hover:text-gray-900" : "bg-red-600 text-white"}`}
+      >
+        {isEnglish ? (
+          <Link
+            event={{
+              category: "Navigation",
+              action: "Language Switch",
+              name: "Spanish",
+            }}
+            href={alternativeUrl}
+            unstyled
+          >
+            Spanish
+          </Link>
+        ) : (
+          "Spanish"
+        )}
+      </span>
+    </div>
+  );
+}

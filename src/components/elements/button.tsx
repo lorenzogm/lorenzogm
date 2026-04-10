@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link as RouterLink } from '@tanstack/react-router';
-import { useAnalytics } from '@/components/Analytics';
+import { Link as RouterLink } from "@tanstack/react-router";
+import type React from "react";
+import { useAnalytics } from "@/components/analytics";
 
 interface ButtonProps {
   children: React.ReactNode;
   className?: string;
   disabled?: boolean;
   // Button-specific props
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
   // Link-specific props (if href is provided, renders as link)
   href?: string;
@@ -25,9 +25,9 @@ interface ButtonProps {
 
 export function Button({
   children,
-  className = '',
+  className = "",
   disabled = false,
-  type = 'button',
+  type = "button",
   onClick,
   href,
   external = false,
@@ -59,14 +59,14 @@ export function Button({
   // Render as link if href is provided
   if (href) {
     // External link
-    if (external || href.startsWith('http') || href.startsWith('mailto:')) {
+    if (external || href.startsWith("http") || href.startsWith("mailto:")) {
       return (
         <a
+          className={className}
           href={href}
           onClick={handleClick}
-          target={target || '_blank'}
-          rel={rel || 'noopener noreferrer'}
-          className={className}
+          rel={rel || "noopener noreferrer"}
+          target={target || "_blank"}
           {...props}
         >
           {children}
@@ -77,9 +77,9 @@ export function Button({
     // Internal link using TanStack Router Link
     return (
       <RouterLink
-        to={href}
-        onClick={handleClick}
         className={className}
+        onClick={handleClick}
+        to={href}
         {...props}
       >
         {children}
@@ -90,14 +90,13 @@ export function Button({
   // Render as button
   return (
     <button
-      type={type}
-      onClick={handleClick}
-      disabled={disabled}
       className={className}
+      disabled={disabled}
+      onClick={handleClick}
+      type={type}
       {...props}
     >
       {children}
     </button>
   );
 }
-

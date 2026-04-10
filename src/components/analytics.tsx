@@ -11,7 +11,7 @@ export function useAnalytics() {
     try {
       window.umami?.track(eventName, data);
     } catch (error) {
-      console.warn('Analytics trackEvent error:', error);
+      console.warn("Analytics trackEvent error:", error);
     }
   };
 

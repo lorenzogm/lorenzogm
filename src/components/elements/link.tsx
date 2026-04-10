@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import { Link as RouterLink } from '@tanstack/react-router';
-import { useAnalytics } from '@/components/Analytics';
+import { Link as RouterLink } from "@tanstack/react-router";
+import type { ReactNode } from "react";
+import { useAnalytics } from "@/components/analytics";
 
 interface AnalyticsEvent {
   category: string;
@@ -18,15 +18,15 @@ interface LinkProps {
   rel?: string;
 }
 
-export function Link({ 
-  href, 
-  children, 
-  className = '', 
+export function Link({
+  href,
+  children,
+  className = "",
   unstyled = false,
   event,
   target,
   rel,
-  ...props 
+  ...props
 }: LinkProps) {
   const { trackEvent } = useAnalytics();
 
@@ -37,23 +37,23 @@ export function Link({
     }
   };
 
-  const defaultStyles = unstyled 
-    ? '' 
-    : 'text-blue-600 hover:text-blue-800 underline transition-colors duration-200';
+  const defaultStyles = unstyled
+    ? ""
+    : "text-blue-600 hover:text-blue-800 underline transition-colors duration-200";
 
-  const combinedClassName = unstyled 
-    ? className 
+  const combinedClassName = unstyled
+    ? className
     : `${defaultStyles} ${className}`.trim();
 
   // External links
-  if (href.startsWith('http') || href.startsWith('mailto:')) {
+  if (href.startsWith("http") || href.startsWith("mailto:")) {
     return (
       <a
-        href={href}
         className={combinedClassName}
+        href={href}
         onClick={handleClick}
-        target={target || '_blank'}
-        rel={rel || 'noopener noreferrer'}
+        rel={rel || "noopener noreferrer"}
+        target={target || "_blank"}
         {...props}
       >
         {children}
@@ -63,11 +63,11 @@ export function Link({
 
   return (
     <RouterLink
-      to={href}
       className={combinedClassName}
       onClick={handleClick}
-      target={target}
       rel={rel}
+      target={target}
+      to={href}
       {...props}
     >
       {children}
