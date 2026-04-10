@@ -57,28 +57,25 @@ resource "github_branch_protection" "main" {
 
   # Pull request reviews
   required_pull_request_reviews {
-    dismiss_stale_reviews           = each.value.dismiss_stale_reviews
     require_code_owner_reviews      = each.value.require_code_owner_reviews
     required_approving_review_count = each.value.required_review_count
   }
 
   # Require linear history (prevent merge commits)
-  require_linear_history = each.value.require_linear_history
+  required_linear_history = each.value.require_linear_history
 
   # Enforce admins (rules apply to admins too)
   enforce_admins = true
 
   # Allow force pushes and deletions
-  allow_force_pushes       = false
-  allow_deletions          = false
-  restrict_who_can_push    = each.value.restrict_who_can_push
-  dismiss_stale_reviews    = each.value.dismiss_stale_reviews
+  allows_force_pushes       = false
+  allows_deletions          = false
   require_conversation_resolution = true
 }
 
 # GitHub Actions Secrets
 resource "github_actions_secret" "secrets" {
-  for_each = var.secrets
+  for_each = nonsensitive(var.secrets)
 
   repository       = var.repository.name
   secret_name      = each.key
@@ -108,27 +105,6 @@ resource "github_issue_label" "labels" {
 resource "github_repository_topics" "main" {
   repository = var.repository.name
   topics     = var.topics
-}
-
-# Security settings
-resource "github_repository_security_and_analysis" "main" {
-  repository = var.repository.name
-
-  secret_scanning {
-    status = var.enable_security_and_analysis.enable_secret_scanning ? "enabled" : "disabled"
-  }
-
-  secret_scanning_push_protection {
-    status = var.enable_security_and_analysis.enable_secret_scanning_push_protection ? "enabled" : "disabled"
-  }
-
-  dependabot_alerts {
-    status = var.enable_security_and_analysis.enable_dependabot_alerts ? "enabled" : "disabled"
-  }
-
-  dependabot_security_updates {
-    status = var.enable_security_and_analysis.enable_dependabot_security_updates ? "enabled" : "disabled"
-  }
 }
 
 # Outputs
