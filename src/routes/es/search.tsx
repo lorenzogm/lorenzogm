@@ -43,31 +43,14 @@ function SpanishSearchPage() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-8 lg:flex-row">
-        <div className="flex-1">
-          {posts.length > 0 ? (
-            <div className="grid gap-8 md:grid-cols-2">
-              {posts.map((post) => (
-                <BlogCard key={post.slug} post={post} />
-              ))}
-            </div>
-          ) : (
-            <div className="py-16 text-center">
-              <p className="text-gray-500 text-lg">
-                No se encontraron artículos. Intenta con otro término de
-                búsqueda.
-              </p>
-            </div>
-          )}
-        </div>
-
+      <div className="flex flex-col gap-8 md:flex-row">
         {topics.length > 0 && (
-          <aside className="w-full shrink-0 lg:w-64">
+          <aside className="order-first w-full shrink-0 md:w-56 lg:w-64">
             <div className="sticky top-8 rounded-xl border border-gray-100 bg-gray-50 p-5">
               <h2 className="mb-4 font-semibold text-gray-900 text-sm uppercase tracking-wide">
                 Filtrar por tema
               </h2>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-wrap gap-1.5 md:flex-col">
                 {topics.map(({ topic: t, count }) => {
                   const isActive = t.toLowerCase() === topic.toLowerCase();
                   return (
@@ -101,6 +84,23 @@ function SpanishSearchPage() {
             </div>
           </aside>
         )}
+
+        <div className="min-w-0 flex-1">
+          {posts.length > 0 ? (
+            <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-2">
+              {posts.map((post) => (
+                <BlogCard key={post.slug} post={post} />
+              ))}
+            </div>
+          ) : (
+            <div className="py-16 text-center">
+              <p className="text-gray-500 text-lg">
+                No se encontraron artículos. Intenta con otro término de
+                búsqueda.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
