@@ -112,12 +112,7 @@ jobs:
             jq -n \
               --arg websiteId "$UMAMI_WEBSITE_ID" \
               --arg scriptSrc "$UMAMI_SCRIPT_SRC" \
-              '{
-                environment_variables: {
-                  UMAMI_WEBSITE_ID: $websiteId,
-                  UMAMI_SCRIPT_SRC: $scriptSrc
-                }
-              }' > infra/vercel/web/src/config.runtime.auto.tfvars.json
+              "{\"environment_variables\":{\"UMAMI_WEBSITE_ID\":\$websiteId,\"UMAMI_SCRIPT_SRC\":\$scriptSrc}}" > infra/vercel/web/src/config.runtime.auto.tfvars.json
           '
 
           echo "Generated infra/vercel/web/src/config.runtime.auto.tfvars.json from $ENV_FILE"
