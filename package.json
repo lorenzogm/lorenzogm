@@ -3,13 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "22"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "test:e2e": "playwright test",
-    "lint": "eslint ."
+    "check": "pnpm build && pnpm check:linter && pnpm check:types",
+    "check:linter": "ultracite check",
+    "check:types": "pnpm typecheck",
+    "fix": "ultracite fix"
   },
   "dependencies": {
     "@tailwindcss/typography": "0.5.19",
@@ -25,22 +31,18 @@
     "remark-html": "16.0.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.2.7",
     "@dotenvx/dotenvx": "1.61.0",
-    "@eslint/js": "10.0.1",
     "@playwright/test": "1.59.1",
     "@tailwindcss/vite": "4.2.2",
     "@tanstack/router-plugin": "1.167.12",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.1",
-    "eslint": "10.2.0",
-    "eslint-plugin-react-hooks": "7.0.1",
-    "eslint-plugin-react-refresh": "0.5.2",
-    "globals": "17.4.0",
     "tailwindcss": "4.2.2",
     "typescript": "6.0.2",
-    "typescript-eslint": "8.58.1",
+    "ultracite": "5.6.4",
     "vite": "8.0.8"
   },
-  "packageManager": "pnpm@8.15.4+sha512.0bd3a9be9eb0e9a692676deec00a303ba218ba279d99241475616b398dbaeedd11146f92c2843458f557b1d127e09d4c171e105bdcd6b61002b39685a8016b9e"
+  "packageManager": "pnpm@10.5.0"
 }
