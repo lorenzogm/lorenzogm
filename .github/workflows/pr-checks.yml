@@ -7,7 +7,7 @@ on:
 jobs:
   pr-checks:
     runs-on: ubuntu-latest
-    name: Code Quality Checks
+    name: PR Checks
     permissions:
       contents: read
 
