@@ -312,8 +312,27 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
+      - name: Wait for Preview URL readiness
+        run: |
+          PREVIEW_URL="${{ needs.deploy-preview.outputs.preview-url }}"
+          echo "Waiting for preview deployment: ${PREVIEW_URL}"
+
+          for attempt in {1..30}; do
+            HTTP_STATUS=$(curl -s -L -o /dev/null -w "%{http_code}" "${PREVIEW_URL}")
+            if [ "${HTTP_STATUS}" -ge 200 ] && [ "${HTTP_STATUS}" -lt 400 ]; then
+              echo "Preview is ready (HTTP ${HTTP_STATUS})"
+              exit 0
+            fi
+
+            echo "Attempt ${attempt}/30: preview not ready yet (HTTP ${HTTP_STATUS})"
+            sleep 10
+          done
+
+          echo "::error::Preview deployment did not become ready in time"
+          exit 1
+
       - name: Run E2E Tests
-        run: npm run test:e2e
+        run: pnpm run test:e2e
         env:
           PLAYWRIGHT_BASE_URL: ${{ needs.deploy-preview.outputs.preview-url }}
           CI: true
