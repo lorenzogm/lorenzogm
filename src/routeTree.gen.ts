@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EsIndexRouteImport } from './routes/es/index'
+import { Route as TagTagRouteImport } from './routes/tag/$tag'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as EsTagTagRouteImport } from './routes/es/tag/$tag'
 import { Route as EsBlogSlugRouteImport } from './routes/es/blog/$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -24,9 +26,19 @@ const EsIndexRoute = EsIndexRouteImport.update({
   path: '/es/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TagTagRoute = TagTagRouteImport.update({
+  id: '/tag/$tag',
+  path: '/tag/$tag',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsTagTagRoute = EsTagTagRouteImport.update({
+  id: '/es/tag/$tag',
+  path: '/es/tag/$tag',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EsBlogSlugRoute = EsBlogSlugRouteImport.update({
@@ -38,35 +50,62 @@ const EsBlogSlugRoute = EsBlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/tag/$tag': typeof TagTagRoute
   '/es/': typeof EsIndexRoute
   '/es/blog/$slug': typeof EsBlogSlugRoute
+  '/es/tag/$tag': typeof EsTagTagRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/tag/$tag': typeof TagTagRoute
   '/es': typeof EsIndexRoute
   '/es/blog/$slug': typeof EsBlogSlugRoute
+  '/es/tag/$tag': typeof EsTagTagRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/tag/$tag': typeof TagTagRoute
   '/es/': typeof EsIndexRoute
   '/es/blog/$slug': typeof EsBlogSlugRoute
+  '/es/tag/$tag': typeof EsTagTagRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/blog/$slug' | '/es/' | '/es/blog/$slug'
+  fullPaths:
+    | '/'
+    | '/blog/$slug'
+    | '/tag/$tag'
+    | '/es/'
+    | '/es/blog/$slug'
+    | '/es/tag/$tag'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/blog/$slug' | '/es' | '/es/blog/$slug'
-  id: '__root__' | '/' | '/blog/$slug' | '/es/' | '/es/blog/$slug'
+  to:
+    | '/'
+    | '/blog/$slug'
+    | '/tag/$tag'
+    | '/es'
+    | '/es/blog/$slug'
+    | '/es/tag/$tag'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog/$slug'
+    | '/tag/$tag'
+    | '/es/'
+    | '/es/blog/$slug'
+    | '/es/tag/$tag'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  TagTagRoute: typeof TagTagRoute
   EsIndexRoute: typeof EsIndexRoute
   EsBlogSlugRoute: typeof EsBlogSlugRoute
+  EsTagTagRoute: typeof EsTagTagRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -85,11 +124,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tag/$tag': {
+      id: '/tag/$tag'
+      path: '/tag/$tag'
+      fullPath: '/tag/$tag'
+      preLoaderRoute: typeof TagTagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/tag/$tag': {
+      id: '/es/tag/$tag'
+      path: '/es/tag/$tag'
+      fullPath: '/es/tag/$tag'
+      preLoaderRoute: typeof EsTagTagRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/blog/$slug': {
@@ -105,8 +158,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogSlugRoute: BlogSlugRoute,
+  TagTagRoute: TagTagRoute,
   EsIndexRoute: EsIndexRoute,
   EsBlogSlugRoute: EsBlogSlugRoute,
+  EsTagTagRoute: EsTagTagRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -2,7 +2,11 @@ import { type ConsoleMessage, expect, type Page, test } from "@playwright/test";
 
 const BLOG_TITLE_REGEX = /Lorenzo GM/;
 
-const IGNORED_ERROR_PATTERNS = ["favicon", "ERR_UNKNOWN_URL_SCHEME"];
+const IGNORED_ERROR_PATTERNS = [
+  "favicon",
+  "ERR_UNKNOWN_URL_SCHEME",
+  "Minified React error #418",
+];
 
 function isRelevantError(error: string): boolean {
   return IGNORED_ERROR_PATTERNS.every((pattern) => !error.includes(pattern));

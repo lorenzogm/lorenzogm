@@ -1,12 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BlogCard } from "@/components/patterns/blog-card";
-import { getAllPosts } from "@/lib/blog";
+import { TagCloud } from "@/components/patterns/tag-cloud";
+import { getAllPosts, getTagCounts } from "@/lib/blog";
 
 function Home() {
-  const posts = Route.useLoaderData();
+  const { posts, tags } = Route.useLoaderData();
 
   return (
     <>
+      <TagCloud tags={tags} />
+
       <div className="space-y-12">
         {posts.length > 0 && (
           <BlogCard featured={true} key={posts[0].slug} post={posts[0]} />
@@ -47,6 +50,6 @@ function Home() {
 }
 
 export const Route = createFileRoute("/")({
-  loader: () => getAllPosts("en"),
+  loader: () => ({ posts: getAllPosts("en"), tags: getTagCounts("en") }),
   component: Home,
 });

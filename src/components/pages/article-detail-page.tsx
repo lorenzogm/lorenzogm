@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ArticleContent } from "@/components/elements/article-content";
 import { formatDate } from "@/lib/utils";
 
@@ -7,6 +8,7 @@ interface BlogPost {
   date: string;
   excerpt?: string;
   image?: string;
+  lang?: string;
   tags?: string[];
   title: string;
 }
@@ -41,12 +43,14 @@ export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
         {post.tags && post.tags.length > 0 && (
           <div className="mb-8 flex flex-wrap gap-3">
             {post.tags.map((tag) => (
-              <span
-                className="inline-block rounded-full border border-red-200/50 bg-red-50 px-4 py-2 font-semibold text-red-700 text-sm"
+              <Link
+                className="inline-block rounded-full border border-red-200/50 bg-red-50 px-4 py-2 font-semibold text-red-700 text-sm transition-colors hover:bg-red-100"
                 key={tag}
+                params={{ tag: tag.toLowerCase() }}
+                to={post.lang === "es" ? "/es/tag/$tag" : "/tag/$tag"}
               >
                 {tag}
-              </span>
+              </Link>
             ))}
           </div>
         )}

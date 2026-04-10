@@ -162,6 +162,32 @@ export async function getPostBySlug(
   }
 }
 
+export interface TagCount {
+  count: number;
+  tag: string;
+}
+
+export function getTagCounts(lang = "en"): TagCount[] {
+  const posts = getAllPosts(lang);
+  const tagMap = new Map<string, number>();
+
+  for (const post of posts) {
+    for (const tag of post.tags) {
+      tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
+    }
+  }
+
+  return Array.from(tagMap.entries())
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+export function getPostsByTag(tag: string, lang = "en"): BlogPostMetadata[] {
+  return getAllPosts(lang).filter((post) =>
+    post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
+  );
+}
+
 export function getAllPostSlugs(lang = "en"): string[] {
   const files = getFilesForLang(lang);
   return Object.keys(files).map((filePath) => slugFromPath(filePath, lang));
