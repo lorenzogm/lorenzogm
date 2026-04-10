@@ -168,9 +168,21 @@ export interface TopicCount {
 }
 
 export function getTopicCounts(lang = "en"): TopicCount[] {
+  // Gather all unique topics from both languages
+  const allTopics = new Set<string>();
+  for (const post of getAllPosts("en")) {
+    for (const tag of post.tags) allTopics.add(tag);
+  }
+  for (const post of getAllPosts("es")) {
+    for (const tag of post.tags) allTopics.add(tag);
+  }
+
+  // Count only posts in the requested language
   const posts = getAllPosts(lang);
   const topicMap = new Map<string, number>();
-
+  for (const topic of allTopics) {
+    topicMap.set(topic, 0);
+  }
   for (const post of posts) {
     for (const tag of post.tags) {
       topicMap.set(tag, (topicMap.get(tag) || 0) + 1);
