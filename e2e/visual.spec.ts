@@ -1,4 +1,4 @@
-import { type ConsoleMessage, type Page, expect, test } from "@playwright/test";
+import { type ConsoleMessage, expect, type Page, test } from "@playwright/test";
 
 const BLOG_TITLE_REGEX = /Lorenzo GM/;
 
@@ -144,7 +144,7 @@ test.describe("Meta tags and SEO", () => {
 
     // Check essential meta tags exist
     const charset = await page.evaluate(
-      () => !!document.querySelector('meta[charset]')
+      () => !!document.querySelector("meta[charset]")
     );
     expect(charset).toBe(true);
 
