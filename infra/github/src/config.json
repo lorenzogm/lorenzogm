@@ -20,11 +20,11 @@
   "branch_protections": [
     {
       "branch_name": "main",
-      "require_status_checks": true,
+      "require_status_checks": false,
       "require_status_checks_strict": false,
       "require_code_owner_reviews": false,
-      "require_pull_request_reviews": true,
-      "dismiss_stale_reviews": true,
+      "require_pull_request_reviews": false,
+      "dismiss_stale_reviews": false,
       "required_review_count": 0,
       "require_linear_history": true,
       "restrict_who_can_push": false

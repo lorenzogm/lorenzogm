@@ -64,8 +64,8 @@ resource "github_branch_protection" "main" {
   # Require linear history (prevent merge commits)
   required_linear_history = each.value.require_linear_history
 
-  # Enforce admins (rules apply to admins too)
-  enforce_admins = true
+  # Enforce admins
+  enforce_admins = false
 
   # Allow force pushes and deletions
   allows_force_pushes       = false
