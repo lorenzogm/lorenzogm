@@ -1,5 +1,4 @@
 @import "tailwindcss";
-/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind CSS v4 directive */
 @plugin "@tailwindcss/typography";
 
 :root {
@@ -21,30 +20,30 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: system-ui, -apple-system, sans-serif;
-  line-height: 1.6;
   font-feature-settings:
     "rlig" 1,
     "calt" 1;
+  line-height: 1.6;
+  color: var(--foreground);
+  background: var(--background);
 }
 
 /* Ensure readable prose for markdown content */
 .prose {
-  color: #1f2937;
   max-width: 100%;
   font-size: 1.125rem;
   line-height: 1.75;
+  color: #1f2937;
 }
 
 /* Links */
 .prose a {
+  font-weight: 500;
   color: var(--primary-red);
   text-decoration: none;
-  font-weight: 500;
-  transition: all 0.2s ease;
   border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
 }
 .prose a:hover {
   color: var(--primary-red-hover);
@@ -54,8 +53,8 @@ body {
 /* Lists */
 .prose ul,
 .prose ol {
-  margin: 1.75em 0;
   padding-left: 1.75em;
+  margin: 1.75em 0;
 }
 .prose ul {
   list-style-type: disc;
@@ -64,16 +63,16 @@ body {
   list-style-type: decimal;
 }
 .prose p {
-  color: #374151;
+  margin-bottom: 1.5em;
   font-size: 1.125rem;
   line-height: 1.75;
-  margin-bottom: 1.5em;
+  color: #374151;
 }
 .prose li {
   margin: 0.75em 0;
-  color: #374151;
   font-size: 1.125rem;
   line-height: 1.75;
+  color: #374151;
 }
 .prose li p {
   margin: 0.5em 0;
@@ -92,55 +91,55 @@ body {
   color: var(--primary-red);
 }
 .prose ol > li::marker {
-  color: var(--primary-red);
   font-weight: 600;
+  color: var(--primary-red);
 }
 
 /* Blockquotes */
 .prose blockquote {
-  border-left: 4px solid var(--primary-red);
+  position: relative;
+  padding: 1.5em;
   margin: 2em 0;
   font-style: italic;
   color: #6b7280;
   background: var(--red-50);
-  padding: 1.5em;
+  border-left: 4px solid var(--primary-red);
   border-radius: 0.5em;
-  position: relative;
 }
 
 .prose blockquote:before {
-  content: '"';
-  font-size: 4em;
-  color: var(--primary-red);
   position: absolute;
   top: -0.2em;
   left: 0.3em;
-  opacity: 0.3;
   font-family: Georgia, serif;
+  font-size: 4em;
+  color: var(--primary-red);
+  content: '"';
+  opacity: 0.3;
 }
 
 /* Tables */
 .prose table {
   width: 100%;
   margin: 2em 0;
+  overflow: hidden;
   border-collapse: collapse;
   border-radius: 0.75em;
-  overflow: hidden;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 .prose th,
 .prose td {
-  border: 1px solid #e5e7eb;
   padding: 1em 1.25em;
   text-align: left;
+  border: 1px solid #e5e7eb;
 }
 .prose th {
-  background-color: var(--red-50);
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--primary-red);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-size: 0.875rem;
+  background-color: var(--red-50);
 }
 .prose td {
   background-color: #ffffff;
@@ -160,27 +159,27 @@ body {
 
 /* Horizontal rules */
 .prose hr {
+  position: relative;
+  margin: 3em 0;
   border: none;
   border-top: 2px solid var(--red-100);
-  margin: 3em 0;
-  position: relative;
 }
 
 .prose hr:after {
-  content: "";
   position: absolute;
   top: -1px;
   left: 50%;
-  transform: translateX(-50%);
   width: 50px;
   height: 2px;
+  content: "";
   background: var(--primary-red);
+  transform: translateX(-50%);
 }
 
 /* Strong text */
 .prose strong {
-  color: #111827;
   font-weight: 700;
+  color: #111827;
 }
 
 /* Emphasis */
@@ -191,48 +190,48 @@ body {
 
 /* Headings */
 .prose h1 {
-  color: #0f172a;
+  margin-bottom: 1em;
   font-size: 2.75rem;
   font-weight: 800;
-  margin-bottom: 1em;
   line-height: 1.1;
+  color: #0f172a;
   letter-spacing: -0.025em;
 }
 .prose h2 {
-  color: #1e293b;
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin-top: 2.5em;
-  margin-bottom: 1em;
-  line-height: 1.2;
   position: relative;
   padding-bottom: 0.5em;
+  margin-top: 2.5em;
+  margin-bottom: 1em;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1e293b;
 }
 .prose h2:after {
-  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 50px;
   height: 3px;
+  content: "";
   background: var(--primary-red);
   border-radius: 2px;
 }
 .prose h3 {
-  color: #334155;
-  font-size: 1.75rem;
-  font-weight: 600;
   margin-top: 2em;
   margin-bottom: 0.75em;
+  font-size: 1.75rem;
+  font-weight: 600;
   line-height: 1.3;
+  color: #334155;
 }
 .prose h4,
 .prose h5,
 .prose h6 {
-  color: #475569;
-  font-weight: 600;
   margin-top: 1.5em;
   margin-bottom: 0.75em;
+  font-weight: 600;
+  color: #475569;
 }
 .prose h4 {
   font-size: 1.375rem;
@@ -245,31 +244,31 @@ body {
 }
 /* Inline code */
 .prose code {
-  background: var(--red-50);
-  color: var(--primary-red);
   padding: 0.25em 0.5em;
-  border-radius: 0.375em;
-  font-size: 0.875em;
-  font-weight: 600;
-  border: 1px solid var(--red-100);
   font-family:
     var(--font-mono), "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
     Consolas, "Courier New", monospace;
+  font-size: 0.875em;
+  font-weight: 600;
+  color: var(--primary-red);
+  background: var(--red-50);
+  border: 1px solid var(--red-100);
+  border-radius: 0.375em;
 }
 
 /* Code blocks */
 .prose pre {
-  background: #0f172a;
-  color: #e2e8f0;
-  border-radius: 1em;
+  position: relative;
   padding: 2em;
-  overflow-x: auto;
   margin: 2.5em 0;
+  overflow-x: auto;
+  color: #e2e8f0;
+  background: #0f172a;
   border: 1px solid #1e293b;
+  border-radius: 1em;
   box-shadow:
     0 8px 25px -5px rgba(0, 0, 0, 0.1),
     0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  position: relative;
   transition: all 0.3s ease;
 }
 
@@ -281,32 +280,32 @@ body {
 }
 
 .prose pre code {
-  background: transparent;
-  color: inherit;
   padding: 0;
-  border-radius: 0;
   font-size: 0.875em;
-  border: none;
-  box-shadow: none;
   font-weight: 400;
+  color: inherit;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* Language label for code blocks */
 .prose pre[data-language]:before {
-  content: attr(data-language);
   position: absolute;
   top: 1em;
   right: 1.5em;
+  z-index: 1;
+  padding: 0.25em 0.75em;
   font-size: 0.75em;
+  font-weight: 700;
   color: #94a3b8;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-weight: 700;
-  z-index: 1;
+  content: attr(data-language);
   background: #1e293b;
-  padding: 0.25em 0.75em;
-  border-radius: 0.375em;
   border: 1px solid #334155;
+  border-radius: 0.375em;
 }
 
 .prose pre {
@@ -325,8 +324,8 @@ body {
 
 .prose pre::-webkit-scrollbar-thumb {
   background: var(--primary-red);
-  border-radius: 6px;
   border: 2px solid #1e293b;
+  border-radius: 6px;
 }
 
 .prose pre::-webkit-scrollbar-thumb:hover {
@@ -335,13 +334,13 @@ body {
 
 /* Syntax highlighting enhancement */
 .prose pre .token.comment {
-  color: #64748b;
   font-style: italic;
+  color: #64748b;
 }
 
 .prose pre .token.keyword {
-  color: #f59e0b;
   font-weight: 600;
+  color: #f59e0b;
 }
 
 .prose pre .token.string {
@@ -386,16 +385,16 @@ body {
 /* Glass morphism effect */
 .glass {
   background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .glass-dark {
   background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 /* Smooth animations */
@@ -463,13 +462,13 @@ body {
 
 /* Selection styling */
 ::selection {
-  background: var(--red-100);
   color: var(--primary-red);
+  background: var(--red-100);
 }
 
 ::-moz-selection {
-  background: var(--red-100);
   color: var(--primary-red);
+  background: var(--red-100);
 }
 
 /* Focus styles */
@@ -484,19 +483,19 @@ body {
 }
 
 .hover-lift:hover {
-  transform: translateY(-2px);
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 /* Text gradients */
 .text-gradient-red {
+  -webkit-text-fill-color: transparent;
   background: linear-gradient(
     135deg,
     var(--primary-red) 0%,
     var(--accent-red) 100%
   );
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
@@ -507,33 +506,33 @@ body {
 
 /* Line clamp utilities */
 .line-clamp-1 {
-  overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  overflow: hidden;
   -webkit-line-clamp: 1;
   line-clamp: 1;
 }
 
 .line-clamp-2 {
-  overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  overflow: hidden;
   -webkit-line-clamp: 2;
   line-clamp: 2;
 }
 
 .line-clamp-3 {
-  overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  overflow: hidden;
   -webkit-line-clamp: 3;
   line-clamp: 3;
 }
 
 .line-clamp-4 {
-  overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  overflow: hidden;
   -webkit-line-clamp: 4;
   line-clamp: 4;
 }

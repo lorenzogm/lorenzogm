@@ -3,19 +3,19 @@ import type { ReactNode } from "react";
 import { useAnalytics } from "@/components/analytics";
 
 interface AnalyticsEvent {
-  category: string;
   action: string;
+  category: string;
   name?: string;
 }
 
 interface LinkProps {
-  href: string;
   children: ReactNode;
   className?: string;
-  unstyled?: boolean;
   event?: AnalyticsEvent;
-  target?: string;
+  href: string;
   rel?: string;
+  target?: string;
+  unstyled?: boolean;
 }
 
 export function Link({

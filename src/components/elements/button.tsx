@@ -6,14 +6,6 @@ interface ButtonProps {
   children: React.ReactNode;
   className?: string;
   disabled?: boolean;
-  // Button-specific props
-  type?: "button" | "submit" | "reset";
-  onClick?: () => void;
-  // Link-specific props (if href is provided, renders as link)
-  href?: string;
-  external?: boolean;
-  target?: string;
-  rel?: string;
   // Analytics and tracking
   event?: {
     category?: string;
@@ -21,6 +13,14 @@ interface ButtonProps {
     name?: string;
     value?: number;
   };
+  external?: boolean;
+  // Link-specific props (if href is provided, renders as link)
+  href?: string;
+  onClick?: () => void;
+  rel?: string;
+  target?: string;
+  // Button-specific props
+  type?: "button" | "submit" | "reset";
 }
 
 export function Button({

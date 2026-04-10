@@ -25,26 +25,26 @@ function slugFromPath(filePath: string, lang: string): string {
 }
 
 export interface BlogPost {
-  slug: string;
-  title: string;
+  author: string;
+  content: string;
   date: string;
   excerpt: string;
   image: string;
-  author: string;
-  tags: string[];
-  content: string;
   lang: string;
+  slug: string;
+  tags: string[];
+  title: string;
 }
 
 export interface BlogPostMetadata {
-  slug: string;
-  title: string;
+  author: string;
   date: string;
   excerpt: string;
   image: string;
-  author: string;
-  tags: string[];
   lang: string;
+  slug: string;
+  tags: string[];
+  title: string;
 }
 
 function normalizeDate(rawDate: unknown): string {
@@ -66,7 +66,7 @@ export function getAllPosts(lang = "en"): BlogPostMetadata[] {
       const excerpt =
         matterResult.data.excerpt ||
         matterResult.data.description ||
-        `${matterResult.content.substring(0, 150)}...`;
+        `${matterResult.content.slice(0, 150)}...`;
 
       allPostsData.push({
         slug,
@@ -125,7 +125,7 @@ export async function getPostBySlug(
     const excerpt =
       matterResult.data.excerpt ||
       matterResult.data.description ||
-      `${matterResult.content.substring(0, 150)}...`;
+      `${matterResult.content.slice(0, 150)}...`;
 
     const postDate = normalizeDate(matterResult.data.date);
 

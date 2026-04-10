@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { Link } from "@/components/elements/link";
 
 interface RedirectPageProps {
+  message?: string;
   redirectTo: string;
   title?: string;
-  message?: string;
 }
 
 export default function RedirectPage({

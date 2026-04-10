@@ -1,11 +1,11 @@
 import type { ElementType, ReactNode } from "react";
 
 interface ContainerProps {
+  as?: ElementType;
   children: ReactNode;
   className?: string;
-  size?: "default" | "wide" | "narrow";
-  as?: ElementType;
   fullWidth?: boolean;
+  size?: "default" | "wide" | "narrow";
 }
 
 export function Container({
