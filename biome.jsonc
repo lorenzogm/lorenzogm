@@ -11,7 +11,6 @@
     "rules": {
       "suspicious": {},
       "a11y": {
-        "noSvgWithoutTitle": "off",
         "useButtonType": "off",
         "useSemanticElements": "off",
         "noStaticElementInteractions": "off",
