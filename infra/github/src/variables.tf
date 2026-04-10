@@ -81,10 +81,11 @@ variable "topics" {
 
 variable "enable_security_and_analysis" {
   type = object({
-    enable_secret_scanning       = optional(bool, true)
+    enable_secret_scanning                 = optional(bool, true)
     enable_secret_scanning_push_protection = optional(bool, true)
-    enable_dependabot_alerts     = optional(bool, true)
-    enable_dependabot_security_updates = optional(bool, true)
+    enable_dependabot_alerts               = optional(bool, true)
+    enable_dependabot_security_updates     = optional(bool, true)
+    enable_private_vulnerability_reporting = optional(bool, true)
   })
   default = {}
   description = "Security and dependency analysis settings"
