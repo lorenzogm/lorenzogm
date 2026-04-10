@@ -1,7 +1,7 @@
 ---
 title: Componente React
 date: 2022-01-22
-tag: Fundamentos del Proyecto, Front-End, React
+tag: Project Structure, Frontend, React
 description: Definiendo un componente React
 image: https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80
 ---

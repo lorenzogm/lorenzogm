@@ -1,7 +1,7 @@
 ---
 title: MCP Servers Cheatsheet
 date: 2025-06-04
-tag: Development Tools, Configuration
+tag: MCP, Tooling
 description: Complete guide and cheatsheet for setting up Model Context Protocol (MCP) servers in VS Code with detailed configuration examples
 image: https://miro.medium.com/v2/resize:fit:1400/format:webp/1*RyV23VMOd1BpympBxpsvjg.png
 author: Lorenzo GM

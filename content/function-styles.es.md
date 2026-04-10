@@ -1,7 +1,7 @@
 ---
 title: Estilos de Funciones
 date: 2025-01-10
-tag: Front-End, Fundamentos del Proyecto
+tag: Frontend, Project Structure
 description: Una función puede ser definida con la palabra clave "function" (declaración de función o funciones regulares) o como una variable (expresión de función o arrow functions)
 image: https://eslint.org/og?title=func-style&summary=A%20pluggable%20and%20configurable%20linter%20tool%20for%20identifying%20and%20reporting%20on%20patterns%20in%20JavaScript.%20Maintain%20your%20code%20quality%20with%20ease.%0A&is_rule=true&recommended=false&fixable=&suggestions=
 ---

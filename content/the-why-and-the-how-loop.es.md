@@ -1,7 +1,7 @@
 ---
 title: "El Loop del Por Qué y el Cómo: Método BMAD + Loop de Ralph"
 date: "2026-04-07"
-tag: IA, Desarrollo, BMAD, Metodología
+tag: AI, Development, BMAD, Methodology
 description: Cómo el método BMAD destaca en las primeras tres fases del desarrollo de software — análisis, planificación y solución — y cómo combinarlo con el loop de Ralph para implementación, revisión de código y aseguramiento de calidad crea un flujo de trabajo integral y poderoso.
 image: https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80
 ---

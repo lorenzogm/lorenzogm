@@ -1,7 +1,7 @@
 ---
 title: 4 Puntos de dolor para hacer tu proyecto más mantenible
 date: 2020-10-07
-tag: Fundamentos del Proyecto
+tag: Project Structure
 description: Herramientas de desarrollo imprescindibles
 image: https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80
 ---

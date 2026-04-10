@@ -1,7 +1,7 @@
 ---
 title: Mejores Prácticas de Gestión de Estado Frontend
 date: 2025-06-06
-tag: Front-End, State Management, Best Practices
+tag: Frontend, State Management, Best Practices
 description: Pensamientos personales sobre estrategias efectivas de gestión de estado frontend - priorizando estado URL, cookies y minimizando el estado de React
 excerpt: Pensamientos personales sobre estrategias efectivas de gestión de estado frontend - priorizando estado URL, cookies y minimizando el estado de React
 image: https://blog.openreplay.com/images/react-state-management-with-easy-peasy/images/hero.png

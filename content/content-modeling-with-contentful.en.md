@@ -1,7 +1,7 @@
 ---
 title: "Content Modeling with Contentful: Building Scalable Digital Experiences"
 date: "2025-06-05"
-tag: "CMS"
+tag: CMS, Contentful
 description: "Learn how to design effective content models in Contentful by examining real-world patterns and best practices from a production content management system."
 image: "https://images.ctfassets.net/fo9twyrwpveg/HgNQRXmn2a670TRvz8rPd/3eeefeed0bf70c11ad628e14aeb081e6/March_Launch_Press_Release_Newsroom_1800x945.png?fm=jpg&w=666&q=90"
 author: "Lorenzo GM"

@@ -2,7 +2,7 @@
 title: Estrategia de Branching
 date: 2022-02-05
 description: 'Detalles para un flujo de trabajo con git: Branching, commits, Pull Requests y Versionado'
-tag: Fundamentos del Proyecto, Git
+tag: Project Structure, Git
 image: https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1476&q=80
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Una Mejor Estructura de Carpetas para React
 date: 2021-11-30
-tag: Front-End, Fundamentos del Proyecto, React
+tag: Frontend, Project Structure, React
 description: Beneficios de invertir tiempo para identificar la mejor estructura de carpetas que funcione para ti
 image: https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1634&q=80
 ---
