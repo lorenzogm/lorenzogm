@@ -10,7 +10,6 @@
   "linter": {
     "rules": {
       "suspicious": {
-        "noEvolvingTypes": "off",
         "noGlobalIsNan": "off",
         "noAlert": "off"
       },

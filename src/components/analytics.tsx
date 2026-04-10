@@ -10,8 +10,8 @@ export function useAnalytics() {
   const trackEvent = (eventName: string, data?: Record<string, unknown>) => {
     try {
       window.umami?.track(eventName, data);
-    } catch (error) {
-      console.warn("Analytics trackEvent error:", error);
+    } catch {
+      // noop
     }
   };
 

@@ -80,8 +80,8 @@ export function getAllPosts(lang = "en"): BlogPostMetadata[] {
           : matterResult.data.tags || [],
         lang,
       });
-    } catch (error) {
-      console.error(`Error parsing post ${filePath}:`, error);
+    } catch {
+      // Skip malformed markdown files.
     }
   }
 
@@ -149,8 +149,7 @@ export async function getPostBySlug(
       content: contentHtml,
       lang,
     };
-  } catch (error) {
-    console.error(`Error reading post ${slug}:`, error);
+  } catch {
     return null;
   }
 }

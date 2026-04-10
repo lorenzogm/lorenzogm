@@ -18,8 +18,7 @@ export function formatDate(dateInput: string | Date): string {
     }
 
     return format(date, "MMMM d, yyyy");
-  } catch (error) {
-    console.error("Error formatting date:", error, "Input:", dateInput);
+  } catch {
     return "Invalid Date";
   }
 }
@@ -41,8 +40,7 @@ export function formatDateShort(dateInput: string | Date): string {
     }
 
     return format(date, "MMM d, yyyy");
-  } catch (error) {
-    console.error("Error formatting date:", error, "Input:", dateInput);
+  } catch {
     return "Invalid Date";
   }
 }

@@ -101,7 +101,6 @@ export function ContactForm() {
     trackEvent("Form: Submit", { form: "Contact Form" });
 
     // Your form submission logic here
-    console.log("Form submitted and tracked");
   };
 
   return (
