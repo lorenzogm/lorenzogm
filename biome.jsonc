@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["ultracite"],
+  "extends": ["ultracite/core"],
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -35,9 +35,7 @@
         "noUnusedFunctionParameters": "off"
       },
       "nursery": {
-        "useConsistentTypeDefinitions": "off",
         "noShadow": "off",
-        "useImageSize": "off"
       }
     }
   }
