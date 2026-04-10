@@ -1,9 +1,11 @@
 import { expect, test } from "@playwright/test";
 
+const BLOG_TITLE_REGEX = /Lorenzo GM/;
+
 test.describe("Home page", () => {
   test("loads and shows blog posts", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Lorenzo GM/);
+    await expect(page).toHaveTitle(BLOG_TITLE_REGEX);
     // At least one article card should be visible after React hydrates
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
@@ -14,7 +16,7 @@ test.describe("Home page", () => {
 test.describe("English blog post pages", () => {
   test("loads a-better-react-folder-structure directly", async ({ page }) => {
     await page.goto("/blog/a-better-react-folder-structure");
-    await expect(page).toHaveTitle(/Lorenzo GM/);
+    await expect(page).toHaveTitle(BLOG_TITLE_REGEX);
     // The article element contains the rendered markdown content
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
@@ -27,7 +29,7 @@ test.describe("English blog post pages", () => {
 
   test("loads array-types-in-typescript directly", async ({ page }) => {
     await page.goto("/blog/array-types-in-typescript");
-    await expect(page).toHaveTitle(/Lorenzo GM/);
+    await expect(page).toHaveTitle(BLOG_TITLE_REGEX);
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
     });
@@ -44,7 +46,7 @@ test.describe("English blog post pages", () => {
 test.describe("Spanish home page", () => {
   test("loads /es/ directly", async ({ page }) => {
     await page.goto("/es/");
-    await expect(page).toHaveTitle(/Lorenzo GM/);
+    await expect(page).toHaveTitle(BLOG_TITLE_REGEX);
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
     });
@@ -56,7 +58,7 @@ test.describe("Spanish blog post pages", () => {
     page,
   }) => {
     await page.goto("/es/blog/a-better-react-folder-structure");
-    await expect(page).toHaveTitle(/Lorenzo GM/);
+    await expect(page).toHaveTitle(BLOG_TITLE_REGEX);
     await expect(page.locator("h1").first()).toBeVisible({ timeout: 15_000 });
     await expect(page.locator("h1").first()).not.toHaveText(
       "Artículo No Encontrado"

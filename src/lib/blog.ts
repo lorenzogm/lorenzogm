@@ -16,12 +16,14 @@ const esMarkdownFiles = import.meta.glob("/content/*.es.md", {
   eager: true,
 }) as Record<string, string>;
 
+const CONTENT_PREFIX_REGEX = /^\/content\//;
+
 function getFilesForLang(lang: string): Record<string, string> {
   return lang === "es" ? esMarkdownFiles : enMarkdownFiles;
 }
 
 function slugFromPath(filePath: string, lang: string): string {
-  return filePath.replace(/^\/content\//, "").replace(`.${lang}.md`, "");
+  return filePath.replace(CONTENT_PREFIX_REGEX, "").replace(`.${lang}.md`, "");
 }
 
 export interface BlogPost {
