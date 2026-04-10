@@ -10,7 +10,6 @@
   "linter": {
     "rules": {
       "suspicious": {
-        "noGlobalIsNan": "off",
         "noAlert": "off"
       },
       "a11y": {
