@@ -44,6 +44,7 @@ jobs:
     env:
       TF_VAR_ENVIRONMENT: production
       TF_VAR_GITHUB_OWNER: ${{ github.repository_owner }}
+      DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
 
     steps:
       - name: Checkout
@@ -58,16 +59,9 @@ jobs:
           node-version: "22"
           cache: "pnpm"
 
-      - name: Parse dotenvx private keys
-        run: |
-          IFS=',' read -ra KEYS <<< "${{ secrets.DOTENV_PRIVATE_KEY }}"
-          echo "DOTENV_PRIVATE_KEY_PRODUCTION=${KEYS[0]}" >> $GITHUB_ENV
-          echo "DOTENV_PRIVATE_KEY_DEVELOPMENT=${KEYS[1]}" >> $GITHUB_ENV
-          echo "DOTENV_PRIVATE_KEY=${KEYS[2]}" >> $GITHUB_ENV
-
       - name: Load secrets from encrypted .env
         run: |
-          pnpm dlx @dotenvx/dotenvx run --env-file=infra/github/.env -- sh -c '
+          pnpm dlx @dotenvx/dotenvx run -- sh -c '
             echo "TF_VAR_GITHUB_TOKEN=$GH_PAT_TOKEN" >> "$GITHUB_ENV"
           '
 
