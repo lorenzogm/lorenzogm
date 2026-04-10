@@ -36,6 +36,7 @@ resource "github_repository" "main" {
       # Ignore changes to these fields to avoid fights with direct GitHub edits
       archived,
       topics,
+      pages,
     ]
   }
 }
