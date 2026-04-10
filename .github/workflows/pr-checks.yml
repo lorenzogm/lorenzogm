@@ -32,3 +32,19 @@ jobs:
 
       - name: Build application
         run: pnpm build
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run E2E Tests (including visual regression)
+        run: pnpm run test:e2e
+
+      - name: Upload visual test artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-test-results
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7

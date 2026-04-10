@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import {
   createRootRoute,
   HeadContent,
@@ -7,6 +8,7 @@ import {
 } from "@tanstack/react-router";
 import { Container } from "@/components/elements/container";
 import { LanguageAwareHeader } from "@/components/elements/language-aware-header";
+import globalsCss from "../globals.css?url";
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   const analyticsEnabled =
@@ -94,7 +96,10 @@ export const Route = createRootRoute({
       { name: "theme-color", content: "#dc2626" },
       { title: "Lorenzo GM" },
     ],
-    links: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
+    links: [
+      { rel: "stylesheet", href: globalsCss },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+    ],
   }),
   component: RootComponent,
   notFoundComponent: NotFoundComponent,

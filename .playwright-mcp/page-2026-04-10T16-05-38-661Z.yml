@@ -1,0 +1,441 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e8]:
+          - text: English|
+          - link "Spanish" [ref=e10] [cursor=pointer]:
+            - /url: /es
+        - link "Lorenzo GM" [ref=e11] [cursor=pointer]:
+          - /url: /
+          - heading "Lorenzo GM" [level=1] [ref=e12]
+        - paragraph [ref=e13]: Insights on web development, software engineering, and modern tech practices
+      - generic [ref=e15]:
+        - text: English|
+        - link "Spanish" [ref=e17] [cursor=pointer]:
+          - /url: /es
+  - main [ref=e18]:
+    - generic [ref=e20]:
+      - article [ref=e21]:
+        - 'link "The Why and the How Loop: BMAD Method + Ralph Loop April 7, 2026•Lorenzo GM The Why and the How Loop: BMAD Method + Ralph Loop How the BMAD method excels at the first three phases of software development — analysis, planning, and solutioning — and how combining it with the Ralph loop for implementation, code review, and quality assurance creates a powerful end-to-end workflow. AIDevelopmentBMADMethodology Read moreRead more arrow" [ref=e22] [cursor=pointer]':
+          - /url: /blog/the-why-and-the-how-loop
+          - 'img "The Why and the How Loop: BMAD Method + Ralph Loop" [ref=e24]'
+          - generic [ref=e25]:
+            - generic [ref=e26]:
+              - time [ref=e27]: April 7, 2026
+              - text: •Lorenzo GM
+            - 'heading "The Why and the How Loop: BMAD Method + Ralph Loop" [level=2] [ref=e28]'
+            - paragraph [ref=e29]: How the BMAD method excels at the first three phases of software development — analysis, planning, and solutioning — and how combining it with the Ralph loop for implementation, code review, and quality assurance creates a powerful end-to-end workflow.
+            - generic [ref=e30]: AIDevelopmentBMADMethodology
+            - generic [ref=e31]:
+              - text: Read more
+              - img "Read more arrow" [ref=e32]
+      - generic [ref=e34]:
+        - article [ref=e35]:
+          - link "Vibe coding versus coding with AI August 11, 2025•Lorenzo GM Vibe coding versus coding with AI Exploring the differences between vibe coding for simple projects and coding with AI for complex enterprise systems AIDevelopmentCoding Read moreRead more arrow" [ref=e36] [cursor=pointer]:
+            - /url: /blog/vibe-coding-versus-coding-with-ai
+            - img "Vibe coding versus coding with AI" [ref=e38]
+            - generic [ref=e39]:
+              - generic [ref=e40]:
+                - time [ref=e41]: August 11, 2025
+                - text: •Lorenzo GM
+              - heading "Vibe coding versus coding with AI" [level=2] [ref=e42]
+              - paragraph [ref=e43]: Exploring the differences between vibe coding for simple projects and coding with AI for complex enterprise systems
+              - generic [ref=e44]: AIDevelopmentCoding
+              - generic [ref=e45]:
+                - text: Read more
+                - img "Read more arrow" [ref=e46]
+        - article [ref=e48]:
+          - link "Mobile Web and Game Development with GitHub Copilot August 4, 2025•Lorenzo GM Mobile Web and Game Development with GitHub Copilot How a laptop-free vacation led to discovering the power of mobile development with GitHub Copilot. From voice dictation to AI-assisted coding, learn how constraints sparked innovation in my development workflow. GitHub CopilotMobile DevelopmentAIAutomationWeb DevelopmentGame Development Read moreRead more arrow" [ref=e49] [cursor=pointer]:
+            - /url: /blog/mobile-web-game-development-with-github-copilot
+            - img "Mobile Web and Game Development with GitHub Copilot" [ref=e51]
+            - generic [ref=e52]:
+              - generic [ref=e53]:
+                - time [ref=e54]: August 4, 2025
+                - text: •Lorenzo GM
+              - heading "Mobile Web and Game Development with GitHub Copilot" [level=2] [ref=e55]
+              - paragraph [ref=e56]: How a laptop-free vacation led to discovering the power of mobile development with GitHub Copilot. From voice dictation to AI-assisted coding, learn how constraints sparked innovation in my development workflow.
+              - generic [ref=e57]: GitHub CopilotMobile DevelopmentAIAutomationWeb DevelopmentGame Development
+              - generic [ref=e58]:
+                - text: Read more
+                - img "Read more arrow" [ref=e59]
+        - article [ref=e61]:
+          - 'link "Building a Flexible Contentful Content Model: A Complete Guide July 7, 2025•Lorenzo GM Building a Flexible Contentful Content Model: A Complete Guide Learn how to design a modular and flexible Contentful content model that supports complex websites while keeping content types minimal and scalable. contentfulcmscontent-modelingheadless-cmscontent-architecture Read moreRead more arrow" [ref=e62] [cursor=pointer]':
+            - /url: /blog/contentful-content-model
+            - 'img "Building a Flexible Contentful Content Model: A Complete Guide" [ref=e64]'
+            - generic [ref=e65]:
+              - generic [ref=e66]:
+                - time [ref=e67]: July 7, 2025
+                - text: •Lorenzo GM
+              - 'heading "Building a Flexible Contentful Content Model: A Complete Guide" [level=2] [ref=e68]'
+              - paragraph [ref=e69]: Learn how to design a modular and flexible Contentful content model that supports complex websites while keeping content types minimal and scalable.
+              - generic [ref=e70]: contentfulcmscontent-modelingheadless-cmscontent-architecture
+              - generic [ref=e71]:
+                - text: Read more
+                - img "Read more arrow" [ref=e72]
+        - article [ref=e74]:
+          - link "Building Azure Monitoring Dashboards with MCP and Terraform June 25, 2025•Lorenzo GM Building Azure Monitoring Dashboards with MCP and Terraform Learn how to create comprehensive Azure monitoring dashboards using Infrastructure as Code with Terraform, enhanced by the Model Context Protocol (MCP) for real-time Azure provider documentation access. azureterraformmonitoringmcpinfrastructure-as-codedashboardscontainer-apps Read moreRead more arrow" [ref=e75] [cursor=pointer]:
+            - /url: /blog/azure-mcp-terraform-dashboards-guide
+            - img "Building Azure Monitoring Dashboards with MCP and Terraform" [ref=e77]
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - time [ref=e80]: June 25, 2025
+                - text: •Lorenzo GM
+              - heading "Building Azure Monitoring Dashboards with MCP and Terraform" [level=2] [ref=e81]
+              - paragraph [ref=e82]: Learn how to create comprehensive Azure monitoring dashboards using Infrastructure as Code with Terraform, enhanced by the Model Context Protocol (MCP) for real-time Azure provider documentation access.
+              - generic [ref=e83]: azureterraformmonitoringmcpinfrastructure-as-codedashboardscontainer-apps
+              - generic [ref=e84]:
+                - text: Read more
+                - img "Read more arrow" [ref=e85]
+        - article [ref=e87]:
+          - 'link "Monorepo UI Organization: Choosing Between Collocated and Workspace Patterns June 24, 2025•Lorenzo GM Monorepo UI Organization: Choosing Between Collocated and Workspace Patterns Navigating architectural decisions in monorepos with multiple workspaces: when to colocate UI components in your web app versus separating them into dedicated UI libraries. frontendarchitecturemonorepouipatternsstorybookworkspaces Read moreRead more arrow" [ref=e88] [cursor=pointer]':
+            - /url: /blog/frontend-architecture-ui-organization-patterns
+            - 'img "Monorepo UI Organization: Choosing Between Collocated and Workspace Patterns" [ref=e90]'
+            - generic [ref=e91]:
+              - generic [ref=e92]:
+                - time [ref=e93]: June 24, 2025
+                - text: •Lorenzo GM
+              - 'heading "Monorepo UI Organization: Choosing Between Collocated and Workspace Patterns" [level=2] [ref=e94]'
+              - paragraph [ref=e95]: "Navigating architectural decisions in monorepos with multiple workspaces: when to colocate UI components in your web app versus separating them into dedicated UI libraries."
+              - generic [ref=e96]: frontendarchitecturemonorepouipatternsstorybookworkspaces
+              - generic [ref=e97]:
+                - text: Read more
+                - img "Read more arrow" [ref=e98]
+        - article [ref=e100]:
+          - 'link "TypeScript Interfaces for APIs and UI: Building Type-Safe Frontend Applications June 24, 2025•Lorenzo GM TypeScript Interfaces for APIs and UI: Building Type-Safe Frontend Applications Learn how to create robust TypeScript interfaces for different data sources in your frontend application, ensuring type safety across CMS, Commerce, PIM, and Search systems. typescriptinterfacesfrontendapitype-safetyarchitecture Read moreRead more arrow" [ref=e101] [cursor=pointer]':
+            - /url: /blog/typescript-interfaces-for-apis-and-ui
+            - 'img "TypeScript Interfaces for APIs and UI: Building Type-Safe Frontend Applications" [ref=e103]'
+            - generic [ref=e104]:
+              - generic [ref=e105]:
+                - time [ref=e106]: June 24, 2025
+                - text: •Lorenzo GM
+              - 'heading "TypeScript Interfaces for APIs and UI: Building Type-Safe Frontend Applications" [level=2] [ref=e107]'
+              - paragraph [ref=e108]: Learn how to create robust TypeScript interfaces for different data sources in your frontend application, ensuring type safety across CMS, Commerce, PIM, and Search systems.
+              - generic [ref=e109]: typescriptinterfacesfrontendapitype-safetyarchitecture
+              - generic [ref=e110]:
+                - text: Read more
+                - img "Read more arrow" [ref=e111]
+        - article [ref=e113]:
+          - link "AI-Powered Error Fixing with Datadog and SonarQube MCP Servers June 17, 2025•Lorenzo GM AI-Powered Error Fixing with Datadog and SonarQube MCP Servers Learn how AI agents can automatically detect, analyze, and fix errors using Datadog and SonarQube MCP servers, revolutionizing development workflows AIDevelopment ToolsError HandlingMCP Read moreRead more arrow" [ref=e114] [cursor=pointer]:
+            - /url: /blog/ai-powered-error-fixing-with-datadog-sonarqube-mcp
+            - img "AI-Powered Error Fixing with Datadog and SonarQube MCP Servers" [ref=e116]
+            - generic [ref=e117]:
+              - generic [ref=e118]:
+                - time [ref=e119]: June 17, 2025
+                - text: •Lorenzo GM
+              - heading "AI-Powered Error Fixing with Datadog and SonarQube MCP Servers" [level=2] [ref=e120]
+              - paragraph [ref=e121]: Learn how AI agents can automatically detect, analyze, and fix errors using Datadog and SonarQube MCP servers, revolutionizing development workflows
+              - generic [ref=e122]: AIDevelopment ToolsError HandlingMCP
+              - generic [ref=e123]:
+                - text: Read more
+                - img "Read more arrow" [ref=e124]
+        - article [ref=e126]:
+          - link "Frontend State Management Best Practices June 6, 2025•Lorenzo GM Frontend State Management Best Practices Personal thoughts on effective frontend state management strategies - prioritizing URL state, cookies, and minimizing React state Front-EndState ManagementBest Practices Read moreRead more arrow" [ref=e127] [cursor=pointer]:
+            - /url: /blog/frontend-state-management-best-practices
+            - img "Frontend State Management Best Practices" [ref=e129]
+            - generic [ref=e130]:
+              - generic [ref=e131]:
+                - time [ref=e132]: June 6, 2025
+                - text: •Lorenzo GM
+              - heading "Frontend State Management Best Practices" [level=2] [ref=e133]
+              - paragraph [ref=e134]: Personal thoughts on effective frontend state management strategies - prioritizing URL state, cookies, and minimizing React state
+              - generic [ref=e135]: Front-EndState ManagementBest Practices
+              - generic [ref=e136]:
+                - text: Read more
+                - img "Read more arrow" [ref=e137]
+        - article [ref=e139]:
+          - link "My GitHub Copilot Instructions June 6, 2025•Lorenzo GM My GitHub Copilot Instructions Essential guidelines and project structure insights for AI assistants working with my codebase. Learn about my coding preferences, architecture patterns, and development workflow to provide better assistance. AIGitHub CopilotDevelopmentProject StructureBest Practices Read moreRead more arrow" [ref=e140] [cursor=pointer]:
+            - /url: /blog/my-github-copilot-instructions
+            - img "My GitHub Copilot Instructions" [ref=e142]
+            - generic [ref=e143]:
+              - generic [ref=e144]:
+                - time [ref=e145]: June 6, 2025
+                - text: •Lorenzo GM
+              - heading "My GitHub Copilot Instructions" [level=2] [ref=e146]
+              - paragraph [ref=e147]: Essential guidelines and project structure insights for AI assistants working with my codebase. Learn about my coding preferences, architecture patterns, and development workflow to provide better assistance.
+              - generic [ref=e148]: AIGitHub CopilotDevelopmentProject StructureBest Practices
+              - generic [ref=e149]:
+                - text: Read more
+                - img "Read more arrow" [ref=e150]
+        - article [ref=e152]:
+          - 'link "Content Modeling with Contentful: Building Scalable Digital Experiences June 5, 2025•Lorenzo GM Content Modeling with Contentful: Building Scalable Digital Experiences Discover the principles of content modeling in Contentful through practical examples, from basic content types to complex relationships and modular design patterns. CMS Read moreRead more arrow" [ref=e153] [cursor=pointer]':
+            - /url: /blog/content-modeling-with-contentful
+            - 'img "Content Modeling with Contentful: Building Scalable Digital Experiences" [ref=e155]'
+            - generic [ref=e156]:
+              - generic [ref=e157]:
+                - time [ref=e158]: June 5, 2025
+                - text: •Lorenzo GM
+              - 'heading "Content Modeling with Contentful: Building Scalable Digital Experiences" [level=2] [ref=e159]'
+              - paragraph [ref=e160]: Discover the principles of content modeling in Contentful through practical examples, from basic content types to complex relationships and modular design patterns.
+              - generic [ref=e161]: CMS
+              - generic [ref=e162]:
+                - text: Read more
+                - img "Read more arrow" [ref=e163]
+        - article [ref=e165]:
+          - link "MCP Servers Cheatsheet June 4, 2025•Lorenzo GM MCP Servers Cheatsheet Complete guide and cheatsheet for setting up Model Context Protocol (MCP) servers in VS Code with detailed configuration examples Development ToolsConfiguration Read moreRead more arrow" [ref=e166] [cursor=pointer]:
+            - /url: /blog/mcp-servers-cheatsheet
+            - img "MCP Servers Cheatsheet" [ref=e168]
+            - generic [ref=e169]:
+              - generic [ref=e170]:
+                - time [ref=e171]: June 4, 2025
+                - text: •Lorenzo GM
+              - heading "MCP Servers Cheatsheet" [level=2] [ref=e172]
+              - paragraph [ref=e173]: Complete guide and cheatsheet for setting up Model Context Protocol (MCP) servers in VS Code with detailed configuration examples
+              - generic [ref=e174]: Development ToolsConfiguration
+              - generic [ref=e175]:
+                - text: Read more
+                - img "Read more arrow" [ref=e176]
+        - article [ref=e178]:
+          - link "Next.js Architecture - API SDK + UI Separation June 4, 2025•Lorenzo GM Next.js Architecture - API SDK + UI Separation A clean architecture pattern for separating API/SDK logic from UI components using TypeScript interfaces and adapters Next.jsArchitectureTypeScript Read moreRead more arrow" [ref=e179] [cursor=pointer]:
+            - /url: /blog/nextjs-architecture-api-sdk-ui-separation
+            - img "Next.js Architecture - API SDK + UI Separation" [ref=e181]
+            - generic [ref=e182]:
+              - generic [ref=e183]:
+                - time [ref=e184]: June 4, 2025
+                - text: •Lorenzo GM
+              - heading "Next.js Architecture - API SDK + UI Separation" [level=2] [ref=e185]
+              - paragraph [ref=e186]: A clean architecture pattern for separating API/SDK logic from UI components using TypeScript interfaces and adapters
+              - generic [ref=e187]: Next.jsArchitectureTypeScript
+              - generic [ref=e188]:
+                - text: Read more
+                - img "Read more arrow" [ref=e189]
+        - article [ref=e191]:
+          - link "Website Replatforming with AI - A Three-Flow Approach June 4, 2025•Lorenzo GM Website Replatforming with AI - A Three-Flow Approach Streamlining website migration using AI-powered tools and MCP servers for UI design, content modeling, and content migration AIReplatformingMCP ServersFigmaContentful Read moreRead more arrow" [ref=e192] [cursor=pointer]:
+            - /url: /blog/website-replatforming-with-ai
+            - img "Website Replatforming with AI - A Three-Flow Approach" [ref=e194]
+            - generic [ref=e195]:
+              - generic [ref=e196]:
+                - time [ref=e197]: June 4, 2025
+                - text: •Lorenzo GM
+              - heading "Website Replatforming with AI - A Three-Flow Approach" [level=2] [ref=e198]
+              - paragraph [ref=e199]: Streamlining website migration using AI-powered tools and MCP servers for UI design, content modeling, and content migration
+              - generic [ref=e200]: AIReplatformingMCP ServersFigmaContentful
+              - generic [ref=e201]:
+                - text: Read more
+                - img "Read more arrow" [ref=e202]
+        - article [ref=e204]:
+          - link "Function Styles January 10, 2025•Lorenzo GM Function Styles A function can be defined with the keyword \"function\" (function declaration or regular functions) or as a variable (function expression or arrow functions) Front-EndProject Foundation Read moreRead more arrow" [ref=e205] [cursor=pointer]:
+            - /url: /blog/function-styles
+            - img "Function Styles" [ref=e207]
+            - generic [ref=e208]:
+              - generic [ref=e209]:
+                - time [ref=e210]: January 10, 2025
+                - text: •Lorenzo GM
+              - heading "Function Styles" [level=2] [ref=e211]
+              - paragraph [ref=e212]: A function can be defined with the keyword "function" (function declaration or regular functions) or as a variable (function expression or arrow functions)
+              - generic [ref=e213]: Front-EndProject Foundation
+              - generic [ref=e214]:
+                - text: Read more
+                - img "Read more arrow" [ref=e215]
+        - article [ref=e217]:
+          - link "Object destructuring January 10, 2025•Lorenzo GM Object destructuring Understanding object destructuring in JavaScript and React Front-EndProject FoundationReact Read moreRead more arrow" [ref=e218] [cursor=pointer]:
+            - /url: /blog/object-destructuring
+            - img "Object destructuring" [ref=e220]
+            - generic [ref=e221]:
+              - generic [ref=e222]:
+                - time [ref=e223]: January 10, 2025
+                - text: •Lorenzo GM
+              - heading "Object destructuring" [level=2] [ref=e224]
+              - paragraph [ref=e225]: Understanding object destructuring in JavaScript and React
+              - generic [ref=e226]: Front-EndProject FoundationReact
+              - generic [ref=e227]:
+                - text: Read more
+                - img "Read more arrow" [ref=e228]
+        - article [ref=e230]:
+          - link "QA Automation March 2, 2024•Lorenzo GM QA Automation Best practices and strategies for quality assurance automation Project Foundation Read moreRead more arrow" [ref=e231] [cursor=pointer]:
+            - /url: /blog/qa-automation
+            - img "QA Automation" [ref=e233]
+            - generic [ref=e234]:
+              - generic [ref=e235]:
+                - time [ref=e236]: March 2, 2024
+                - text: •Lorenzo GM
+              - heading "QA Automation" [level=2] [ref=e237]
+              - paragraph [ref=e238]: Best practices and strategies for quality assurance automation
+              - generic [ref=e239]: Project Foundation
+              - generic [ref=e240]:
+                - text: Read more
+                - img "Read more arrow" [ref=e241]
+        - article [ref=e243]:
+          - link "Building a library of components August 2, 2022•Lorenzo GM Building a library of components Building your own library of components it's something that many engineers and companies have thought about at some point in time. In our team, we have gone through that process and the aim of this document is to share our experience. Front-EndDesign SystemUI Library Read moreRead more arrow" [ref=e244] [cursor=pointer]:
+            - /url: /blog/bulding-a-library-of-components
+            - img "Building a library of components" [ref=e246]
+            - generic [ref=e247]:
+              - generic [ref=e248]:
+                - time [ref=e249]: August 2, 2022
+                - text: •Lorenzo GM
+              - heading "Building a library of components" [level=2] [ref=e250]
+              - paragraph [ref=e251]: Building your own library of components it's something that many engineers and companies have thought about at some point in time. In our team, we have gone through that process and the aim of this document is to share our experience.
+              - generic [ref=e252]: Front-EndDesign SystemUI Library
+              - generic [ref=e253]:
+                - text: Read more
+                - img "Read more arrow" [ref=e254]
+        - article [ref=e256]:
+          - link "Project Structure May 29, 2022•Lorenzo GM Project Structure This project structure could be shared across disciplines to facilitate the communication in the team. Project Foundation Read moreRead more arrow" [ref=e257] [cursor=pointer]:
+            - /url: /blog/project-structure
+            - img "Project Structure" [ref=e259]
+            - generic [ref=e260]:
+              - generic [ref=e261]:
+                - time [ref=e262]: May 29, 2022
+                - text: •Lorenzo GM
+              - heading "Project Structure" [level=2] [ref=e263]
+              - paragraph [ref=e264]: This project structure could be shared across disciplines to facilitate the communication in the team.
+              - generic [ref=e265]: Project Foundation
+              - generic [ref=e266]:
+                - text: Read more
+                - img "Read more arrow" [ref=e267]
+        - article [ref=e269]:
+          - link "Why don't we use Styled Components? March 7, 2022•Lorenzo GM Why don't we use Styled Components? Exploring alternatives to styled-components and CSS-in-JS solutions Project FoundationFront-EndStyling Read moreRead more arrow" [ref=e270] [cursor=pointer]:
+            - /url: /blog/why-do-not-we-use-styled-components
+            - img "Why don't we use Styled Components?" [ref=e272]
+            - generic [ref=e273]:
+              - generic [ref=e274]:
+                - time [ref=e275]: March 7, 2022
+                - text: •Lorenzo GM
+              - heading "Why don't we use Styled Components?" [level=2] [ref=e276]
+              - paragraph [ref=e277]: Exploring alternatives to styled-components and CSS-in-JS solutions
+              - generic [ref=e278]: Project FoundationFront-EndStyling
+              - generic [ref=e279]:
+                - text: Read more
+                - img "Read more arrow" [ref=e280]
+        - article [ref=e282]:
+          - link "Testing Automation in the Front-End February 7, 2022•Lorenzo GM Testing Automation in the Front-End Strategy to write automated tests Project FoundationFront-EndTesting Read moreRead more arrow" [ref=e283] [cursor=pointer]:
+            - /url: /blog/test-automation-in-the-front-end
+            - img "Testing Automation in the Front-End" [ref=e285]
+            - generic [ref=e286]:
+              - generic [ref=e287]:
+                - time [ref=e288]: February 7, 2022
+                - text: •Lorenzo GM
+              - heading "Testing Automation in the Front-End" [level=2] [ref=e289]
+              - paragraph [ref=e290]: Strategy to write automated tests
+              - generic [ref=e291]: Project FoundationFront-EndTesting
+              - generic [ref=e292]:
+                - text: Read more
+                - img "Read more arrow" [ref=e293]
+        - article [ref=e295]:
+          - link "TypeScript Interface vs Type Alias February 7, 2022•Lorenzo GM TypeScript Interface vs Type Alias Understanding the differences between interfaces and type aliases in TypeScript Project FoundationFront-EndTypeScript Read moreRead more arrow" [ref=e296] [cursor=pointer]:
+            - /url: /blog/typescript-interface-vs-type-alias
+            - img "TypeScript Interface vs Type Alias" [ref=e298]
+            - generic [ref=e299]:
+              - generic [ref=e300]:
+                - time [ref=e301]: February 7, 2022
+                - text: •Lorenzo GM
+              - heading "TypeScript Interface vs Type Alias" [level=2] [ref=e302]
+              - paragraph [ref=e303]: Understanding the differences between interfaces and type aliases in TypeScript
+              - generic [ref=e304]: Project FoundationFront-EndTypeScript
+              - generic [ref=e305]:
+                - text: Read more
+                - img "Read more arrow" [ref=e306]
+        - article [ref=e308]:
+          - 'link "Branching Strategy February 5, 2022•Lorenzo GM Branching Strategy Details for a git workflow: Branching, commiting, Pull Requests and Versioning Project FoundationGit Read moreRead more arrow" [ref=e309] [cursor=pointer]':
+            - /url: /blog/branching-strategy
+            - img "Branching Strategy" [ref=e311]
+            - generic [ref=e312]:
+              - generic [ref=e313]:
+                - time [ref=e314]: February 5, 2022
+                - text: •Lorenzo GM
+              - heading "Branching Strategy" [level=2] [ref=e315]
+              - paragraph [ref=e316]: "Details for a git workflow: Branching, commiting, Pull Requests and Versioning"
+              - generic [ref=e317]: Project FoundationGit
+              - generic [ref=e318]:
+                - text: Read more
+                - img "Read more arrow" [ref=e319]
+        - article [ref=e321]:
+          - link "React Component January 22, 2022•Lorenzo GM React Component Defining a React component Project FoundationFront-EndReact Read moreRead more arrow" [ref=e322] [cursor=pointer]:
+            - /url: /blog/react-component
+            - img "React Component" [ref=e324]
+            - generic [ref=e325]:
+              - generic [ref=e326]:
+                - time [ref=e327]: January 22, 2022
+                - text: •Lorenzo GM
+              - heading "React Component" [level=2] [ref=e328]
+              - paragraph [ref=e329]: Defining a React component
+              - generic [ref=e330]: Project FoundationFront-EndReact
+              - generic [ref=e331]:
+                - text: Read more
+                - img "Read more arrow" [ref=e332]
+        - article [ref=e334]:
+          - link "Dev Tools January 10, 2022•Lorenzo GM Dev Tools Must have dev tools Front-EndProject Foundation Read moreRead more arrow" [ref=e335] [cursor=pointer]:
+            - /url: /blog/dev-tools-summary
+            - img "Dev Tools" [ref=e337]
+            - generic [ref=e338]:
+              - generic [ref=e339]:
+                - time [ref=e340]: January 10, 2022
+                - text: •Lorenzo GM
+              - heading "Dev Tools" [level=2] [ref=e341]
+              - paragraph [ref=e342]: Must have dev tools
+              - generic [ref=e343]: Front-EndProject Foundation
+              - generic [ref=e344]:
+                - text: Read more
+                - img "Read more arrow" [ref=e345]
+        - article [ref=e347]:
+          - link "A Better React Folder Structure November 30, 2021•Lorenzo GM A Better React Folder Structure Benefits investing some time to identify the best folder structure which works for you Front-EndProject FoundationReact Read moreRead more arrow" [ref=e348] [cursor=pointer]:
+            - /url: /blog/a-better-react-folder-structure
+            - img "A Better React Folder Structure" [ref=e350]
+            - generic [ref=e351]:
+              - generic [ref=e352]:
+                - time [ref=e353]: November 30, 2021
+                - text: •Lorenzo GM
+              - heading "A Better React Folder Structure" [level=2] [ref=e354]
+              - paragraph [ref=e355]: Benefits investing some time to identify the best folder structure which works for you
+              - generic [ref=e356]: Front-EndProject FoundationReact
+              - generic [ref=e357]:
+                - text: Read more
+                - img "Read more arrow" [ref=e358]
+        - article [ref=e360]:
+          - link "Array types in TypeScript November 30, 2021•Lorenzo GM Array types in TypeScript Which type of array notation shall we use in TypeScript? Front-EndProject FoundationTypeScript Read moreRead more arrow" [ref=e361] [cursor=pointer]:
+            - /url: /blog/array-types-in-typescript
+            - img "Array types in TypeScript" [ref=e363]
+            - generic [ref=e364]:
+              - generic [ref=e365]:
+                - time [ref=e366]: November 30, 2021
+                - text: •Lorenzo GM
+              - heading "Array types in TypeScript" [level=2] [ref=e367]
+              - paragraph [ref=e368]: Which type of array notation shall we use in TypeScript?
+              - generic [ref=e369]: Front-EndProject FoundationTypeScript
+              - generic [ref=e370]:
+                - text: Read more
+                - img "Read more arrow" [ref=e371]
+        - article [ref=e373]:
+          - link "Blog with Next.js and Contentful November 2, 2020•Lorenzo GM Blog with Next.js and Contentful Building a blog with Next.js, Tailwind CSS and Contentful as headless CMS BlogNext.jsContentfulTailwind CSS Read moreRead more arrow" [ref=e374] [cursor=pointer]:
+            - /url: /blog/blog-with-nextjs-and-contentful
+            - img "Blog with Next.js and Contentful" [ref=e376]
+            - generic [ref=e377]:
+              - generic [ref=e378]:
+                - time [ref=e379]: November 2, 2020
+                - text: •Lorenzo GM
+              - heading "Blog with Next.js and Contentful" [level=2] [ref=e380]
+              - paragraph [ref=e381]: Building a blog with Next.js, Tailwind CSS and Contentful as headless CMS
+              - generic [ref=e382]: BlogNext.jsContentfulTailwind CSS
+              - generic [ref=e383]:
+                - text: Read more
+                - img "Read more arrow" [ref=e384]
+        - article [ref=e386]:
+          - link "Rendering on the web October 22, 2020•Lorenzo GM Rendering on the web Comparison between rendering on the client, server and static-site generation Web FoundationRendering Read moreRead more arrow" [ref=e387] [cursor=pointer]:
+            - /url: /blog/rendering-on-the-web
+            - img "Rendering on the web" [ref=e389]
+            - generic [ref=e390]:
+              - generic [ref=e391]:
+                - time [ref=e392]: October 22, 2020
+                - text: •Lorenzo GM
+              - heading "Rendering on the web" [level=2] [ref=e393]
+              - paragraph [ref=e394]: Comparison between rendering on the client, server and static-site generation
+              - generic [ref=e395]: Web FoundationRendering
+              - generic [ref=e396]:
+                - text: Read more
+                - img "Read more arrow" [ref=e397]
+        - article [ref=e399]:
+          - link "4 Pain-points to make your project more maintainable October 7, 2020•Lorenzo GM 4 Pain-points to make your project more maintainable Must have dev tools Project Foundation Read moreRead more arrow" [ref=e400] [cursor=pointer]:
+            - /url: /blog/4-pain-points-to-make-your-project-more-maintainable
+            - img "4 Pain-points to make your project more maintainable" [ref=e402]
+            - generic [ref=e403]:
+              - generic [ref=e404]:
+                - time [ref=e405]: October 7, 2020
+                - text: •Lorenzo GM
+              - heading "4 Pain-points to make your project more maintainable" [level=2] [ref=e406]
+              - paragraph [ref=e407]: Must have dev tools
+              - generic [ref=e408]: Project Foundation
+              - generic [ref=e409]:
+                - text: Read more
+                - img "Read more arrow" [ref=e410]
+  - contentinfo [ref=e412]:
+    - paragraph [ref=e414]: © 2026 Lorenzo GM.
