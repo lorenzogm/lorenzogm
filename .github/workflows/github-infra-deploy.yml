@@ -46,7 +46,8 @@ jobs:
     runs-on: ubuntu-latest
     name: GitHub Infra Deploy
     env:
-      DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
+      TF_VAR_GITHUB_OWNER: ${{ github.repository_owner }}
+      TF_VAR_GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
 
     steps:
       - name: Checkout
@@ -58,26 +59,13 @@ jobs:
           node-version: "20"
           cache: "npm"
 
-      - name: Decrypt .env file with dotenvx
-        working-directory: infra/github
+      - name: Validate required token
         run: |
-          if [ -z "$DOTENV_PRIVATE_KEY" ]; then
-            echo "::error::DOTENV_PRIVATE_KEY secret is not set in GitHub Actions"
+          if [ -z "$TF_VAR_GITHUB_TOKEN" ]; then
+            echo "::error::GH_PAT_TOKEN secret is not set in GitHub Actions"
             exit 1
           fi
-          echo "DOTENV_PRIVATE_KEY=$DOTENV_PRIVATE_KEY" > .env.keys
-          npm ls -g @dotenvx/dotenvx >/dev/null 2>&1 || npm install -g @dotenvx/dotenvx
-
-          # Decrypt and export vars for Terraform
-          eval "$(dotenvx run --env-file=.env --quiet -- printenv | grep -E '^(GITHUB_OWNER|GITHUB_TOKEN|GH_PAT_TOKEN)=' || true)"
-          TF_TOKEN="${GH_PAT_TOKEN:-$GITHUB_TOKEN}"
-          if [ -z "$TF_TOKEN" ]; then
-            echo "::error::Missing GH_PAT_TOKEN or GITHUB_TOKEN in infra/github/.env"
-            exit 1
-          fi
-          echo "TF_VAR_GITHUB_TOKEN=$TF_TOKEN" >> $GITHUB_ENV
-          echo "TF_VAR_GITHUB_OWNER=$GITHUB_OWNER" >> $GITHUB_ENV
-          echo "✓ Environment decrypted and Terraform variables exported"
+          echo "✓ GH_PAT_TOKEN secret available"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -88,35 +76,29 @@ jobs:
       - name: Terraform Init
         working-directory: infra/github/src
         run: |
-          cd ..
-          dotenvx run -- bash -c 'cd src && terraform init'
+          terraform init
 
       - name: Terraform Plan
         working-directory: infra/github/src
         id: plan
         run: |
-          cd ..
-          dotenvx run -- bash -c "cd src && terraform plan -var-file='config.json' -out=tfplan"
+          terraform plan -var-file='config.json' -out=tfplan
 
       - name: Terraform Apply
         working-directory: infra/github/src
         run: |
-          cd ..
-          dotenvx run -- bash -c "cd src && terraform apply -auto-approve tfplan"
+          terraform apply -auto-approve tfplan
 
       - name: Export Results
         id: deployment-results
         working-directory: infra/github/src
         run: |
-          cd ..
-          dotenvx run -- bash -c '
-            REPO_ID=$(terraform output -raw GITHUB_REPOSITORY_ID)
-            REPO_URL=$(terraform output -raw GITHUB_REPOSITORY_URL)
-            echo "repository-id=$REPO_ID" >> $GITHUB_OUTPUT
-            echo "repository-url=$REPO_URL" >> $GITHUB_OUTPUT
-            echo "✓ Repository ID: $REPO_ID"
-            echo "✓ Repository URL: $REPO_URL"
-          '
+          REPO_ID=$(terraform output -raw GITHUB_REPOSITORY_ID)
+          REPO_URL=$(terraform output -raw GITHUB_REPOSITORY_URL)
+          echo "repository-id=$REPO_ID" >> $GITHUB_OUTPUT
+          echo "repository-url=$REPO_URL" >> $GITHUB_OUTPUT
+          echo "✓ Repository ID: $REPO_ID"
+          echo "✓ Repository URL: $REPO_URL"
 
       - name: Post Deployment Summary
         run: |
