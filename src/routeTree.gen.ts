@@ -9,15 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TopicsIndexRouteImport } from './routes/topics/index'
 import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as TopicsTopicRouteImport } from './routes/topics/$topic'
+import { Route as EsSearchRouteImport } from './routes/es/search'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as EsTopicsIndexRouteImport } from './routes/es/topics/index'
 import { Route as EsTopicsTopicRouteImport } from './routes/es/topics/$topic'
 import { Route as EsBlogSlugRouteImport } from './routes/es/blog/$slug'
 
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -36,6 +43,11 @@ const EsIndexRoute = EsIndexRouteImport.update({
 const TopicsTopicRoute = TopicsTopicRouteImport.update({
   id: '/topics/$topic',
   path: '/topics/$topic',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsSearchRoute = EsSearchRouteImport.update({
+  id: '/es/search',
+  path: '/es/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
@@ -61,7 +73,9 @@ const EsBlogSlugRoute = EsBlogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/search': typeof SearchRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/es/search': typeof EsSearchRoute
   '/topics/$topic': typeof TopicsTopicRoute
   '/es/': typeof EsIndexRoute
   '/topics/': typeof TopicsIndexRoute
@@ -71,7 +85,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/search': typeof SearchRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/es/search': typeof EsSearchRoute
   '/topics/$topic': typeof TopicsTopicRoute
   '/es': typeof EsIndexRoute
   '/topics': typeof TopicsIndexRoute
@@ -82,7 +98,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/search': typeof SearchRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/es/search': typeof EsSearchRoute
   '/topics/$topic': typeof TopicsTopicRoute
   '/es/': typeof EsIndexRoute
   '/topics/': typeof TopicsIndexRoute
@@ -94,7 +112,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/search'
     | '/blog/$slug'
+    | '/es/search'
     | '/topics/$topic'
     | '/es/'
     | '/topics/'
@@ -104,7 +124,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/search'
     | '/blog/$slug'
+    | '/es/search'
     | '/topics/$topic'
     | '/es'
     | '/topics'
@@ -114,7 +136,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/search'
     | '/blog/$slug'
+    | '/es/search'
     | '/topics/$topic'
     | '/es/'
     | '/topics/'
@@ -125,7 +149,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SearchRoute: typeof SearchRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  EsSearchRoute: typeof EsSearchRoute
   TopicsTopicRoute: typeof TopicsTopicRoute
   EsIndexRoute: typeof EsIndexRoute
   TopicsIndexRoute: typeof TopicsIndexRoute
@@ -136,6 +162,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -162,6 +195,13 @@ declare module '@tanstack/react-router' {
       path: '/topics/$topic'
       fullPath: '/topics/$topic'
       preLoaderRoute: typeof TopicsTopicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/search': {
+      id: '/es/search'
+      path: '/es/search'
+      fullPath: '/es/search'
+      preLoaderRoute: typeof EsSearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -197,7 +237,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SearchRoute: SearchRoute,
   BlogSlugRoute: BlogSlugRoute,
+  EsSearchRoute: EsSearchRoute,
   TopicsTopicRoute: TopicsTopicRoute,
   EsIndexRoute: EsIndexRoute,
   TopicsIndexRoute: TopicsIndexRoute,

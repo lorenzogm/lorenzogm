@@ -8,7 +8,9 @@ function Home() {
 
   return (
     <>
-      <h2 className="mb-4 font-bold text-2xl text-gray-900">Search blog by topic</h2>
+      <h2 className="mb-4 font-bold text-2xl text-gray-900">
+        Search blog by topic
+      </h2>
       <TopicCloud limit={8} topics={topics} />
 
       <h2 className="mb-8 font-bold text-2xl text-gray-900">Articles</h2>

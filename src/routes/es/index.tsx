@@ -8,7 +8,9 @@ function SpanishHome() {
 
   return (
     <>
-      <h2 className="mb-4 font-bold text-2xl text-gray-900">Buscar blog por tema</h2>
+      <h2 className="mb-4 font-bold text-2xl text-gray-900">
+        Buscar blog por tema
+      </h2>
       <TopicCloud lang="es" limit={8} topics={topics} />
 
       <h2 className="mb-8 font-bold text-2xl text-gray-900">Artículos</h2>

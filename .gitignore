@@ -44,3 +44,4 @@ yarn-error.log*
 
 private
 build_output.log
+build_output.txt

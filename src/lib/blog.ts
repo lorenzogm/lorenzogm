@@ -212,3 +212,13 @@ export function getAllPostSlugs(lang = "en"): string[] {
   const files = getFilesForLang(lang);
   return Object.keys(files).map((filePath) => slugFromPath(filePath, lang));
 }
+
+export function searchPosts(query: string, lang = "en"): BlogPostMetadata[] {
+  const q = query.toLowerCase();
+  return getAllPosts(lang).filter(
+    (post) =>
+      post.title.toLowerCase().includes(q) ||
+      post.excerpt.toLowerCase().includes(q) ||
+      post.tags.some((t) => t.toLowerCase().includes(q))
+  );
+}
