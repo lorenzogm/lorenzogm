@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BlogCard } from "@/components/patterns/blog-card";
-import { searchPosts } from "@/lib/blog";
+import { getAllPosts, searchPosts } from "@/lib/blog";
 
 interface SearchParams {
   q?: string;
@@ -113,7 +113,7 @@ export const Route = createFileRoute("/es/search")({
   }),
   loaderDeps: ({ search }) => ({ q: search.q, topic: search.topic }),
   loader: ({ deps: { q, topic } }) => {
-    let posts = q ? searchPosts(q, "es") : [];
+    let posts = q ? searchPosts(q, "es") : getAllPosts("es");
     if (topic) {
       posts = posts.filter((p) =>
         p.tags.some((t) => t.toLowerCase() === topic.toLowerCase())
@@ -121,7 +121,7 @@ export const Route = createFileRoute("/es/search")({
     }
 
     const topicMap = new Map<string, number>();
-    const allResults = q ? searchPosts(q, "es") : [];
+    const allResults = q ? searchPosts(q, "es") : getAllPosts("es");
     for (const post of allResults) {
       for (const tag of post.tags) {
         topicMap.set(tag, (topicMap.get(tag) || 0) + 1);
