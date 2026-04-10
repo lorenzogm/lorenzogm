@@ -32,3 +32,6 @@ This is a React blog website project with the following characteristics:
 
 ## Git Guidelines
 - Always commit and push changes to the `main` branch.
+- After every `git push`, check the CI pipeline status using `gh run list --limit 1` and `gh run view <run_id>`.
+- Wait for the pipeline to finish. If it fails, diagnose and fix the issue in the same session before moving on.
+- Never leave the session with a broken pipeline.
