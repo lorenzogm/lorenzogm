@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BlogCard } from "@/components/patterns/blog-card";
-import { type BlogPostMetadata, getAllPosts } from "@/lib/blog";
+import { getAllPosts } from "@/lib/blog";
 
 function Home() {
-  const posts: BlogPostMetadata[] = getAllPosts("en");
+  const posts = Route.useLoaderData();
 
   return (
     <>
@@ -47,5 +47,6 @@ function Home() {
 }
 
 export const Route = createFileRoute("/")({
+  loader: () => getAllPosts("en"),
   component: Home,
 });

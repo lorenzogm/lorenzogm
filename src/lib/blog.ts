@@ -1,7 +1,13 @@
+import { Buffer } from "buffer";
 import matter from "gray-matter";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import html from "remark-html";
+
+// Polyfill Buffer for gray-matter in the browser
+if (typeof globalThis.Buffer === "undefined") {
+  (globalThis as typeof globalThis & { Buffer: typeof Buffer }).Buffer = Buffer;
+}
 
 // Import all markdown files at build time using Vite's import.meta.glob
 const enMarkdownFiles = import.meta.glob("/content/*.en.md", {
