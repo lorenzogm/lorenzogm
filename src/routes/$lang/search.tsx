@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BlogCard } from "@/components/patterns/blog-card";
+import { TopicFilter } from "@/components/patterns/topic-filter";
 import { getAllPosts, searchPosts } from "@/lib/blog";
 import { type Lang, t } from "@/lib/i18n";
 
@@ -51,48 +52,18 @@ function SearchPage() {
       </div>
 
       <div className="flex flex-col gap-8 md:flex-row">
-        {topics.length > 0 && (
-          <aside className="order-first w-full shrink-0 md:w-56 lg:w-64">
-            <div className="sticky top-8 rounded-xl border border-gray-100 bg-gray-50 p-5">
-              <h2 className="mb-4 font-semibold text-gray-900 text-sm uppercase tracking-wide">
-                {t(lang, "filterByTopic")}
-              </h2>
-              <div className="flex flex-wrap gap-1.5 md:flex-col">
-                {topics.map(({ topic: topicName, count }) => {
-                  const isActive =
-                    topicName.toLowerCase() === topic.toLowerCase();
-                  return (
-                    <Link
-                      className={`flex items-center justify-between rounded-lg px-3 py-2 font-medium text-sm transition-colors duration-200 ${
-                        isActive
-                          ? "bg-red-600 text-white"
-                          : "text-gray-700 hover:bg-red-50 hover:text-red-700"
-                      }`}
-                      key={topicName}
-                      params={{ lang }}
-                      search={(prev) => ({
-                        ...prev,
-                        topic: isActive ? undefined : topicName,
-                      })}
-                      to="/$lang/search"
-                    >
-                      <span>{topicName}</span>
-                      <span
-                        className={`rounded-full px-2 py-0.5 text-xs ${
-                          isActive
-                            ? "bg-red-500 text-white"
-                            : "bg-red-100 text-red-700"
-                        }`}
-                      >
-                        {count}
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          </aside>
-        )}
+        <TopicFilter
+          activeTopic={topic}
+          labels={{
+            filterByTopic: t(lang, "filterByTopic"),
+            filters: t(lang, "filters"),
+            apply: t(lang, "apply"),
+            clearAll: t(lang, "clearAll"),
+          }}
+          params={{ lang }}
+          searchRoute="/$lang/search"
+          topics={topics}
+        />
 
         <div className="min-w-0 flex-1">
           {posts.length > 0 ? (
