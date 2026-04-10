@@ -2,13 +2,13 @@
 
 <!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
 
-This is a Next.js blog website project with the following characteristics:
+This is a React blog website project with the following characteristics:
 
 ## Project Structure
-- Built with Next.js 15 and TypeScript
-- Uses App Router for routing
-- Styled with Tailwind CSS
-- Blog content stored as Markdown files
+- Built with Vite, React 19, and TypeScript
+- Uses TanStack Router for routing
+- Styled with Tailwind CSS v4
+- Blog content stored as Markdown files in `content/`
 
 ## Key Features
 - Blog post listing on the home page
@@ -22,5 +22,13 @@ This is a Next.js blog website project with the following characteristics:
 - Use Tailwind CSS for styling
 - Implement proper SEO meta tags
 - Ensure responsive design
-- Use Next.js App Router conventions
+- Use TanStack Router conventions
 - Keep components clean and reusable
+
+## Documentation Guidelines
+- Create project documentation in the `docs/` folder only.
+- Use kebab-case filenames (example: `deployment-checklist.md`).
+- Keep docs short and practical. Prefer quick guides and checklists over long summaries.
+
+## Git Guidelines
+- Always commit and push changes to the `main` branch.

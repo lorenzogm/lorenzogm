@@ -1,0 +1,131 @@
+name: Github Infrastructure Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'infra/github/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-changes:
+    runs-on: ubuntu-latest
+    name: Check for infra changes
+    outputs:
+      github-infra-changed: ${{ steps.check.outputs.github-infra-changed }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check for changes in GitHub infra
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "github-infra-changed=true" >> $GITHUB_OUTPUT
+            echo "Manual trigger — deploying GitHub infrastructure"
+            exit 0
+          fi
+
+          if git diff --name-only HEAD~1 -- infra/github/src/ | grep -q .; then
+            echo "github-infra-changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in GitHub repo infrastructure"
+          else
+            echo "github-infra-changed=false" >> $GITHUB_OUTPUT
+            echo "No changes in GitHub repo infrastructure"
+          fi
+
+  github-infra-deploy:
+    needs: check-changes
+    if: needs.check-changes.outputs.github-infra-changed == 'true'
+    runs-on: ubuntu-latest
+    name: GitHub Infra Deploy
+    env:
+      DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Decrypt .env file with dotenvx
+        working-directory: infra/github
+        run: |
+          if [ -z "$DOTENV_PRIVATE_KEY" ]; then
+            echo "::error::DOTENV_PRIVATE_KEY secret is not set in GitHub Actions"
+            exit 1
+          fi
+          echo "$DOTENV_PRIVATE_KEY" > .env.keys
+          npm ls -g @dotenvx/dotenvx >/dev/null 2>&1 || npm install -g @dotenvx/dotenvx
+
+          # Decrypt and export vars for Terraform
+          eval "$(dotenvx run --env-file=.env --quiet -- printenv | grep -E '^(GITHUB_OWNER|GITHUB_TOKEN|GH_PAT_TOKEN)=' || true)"
+          TF_TOKEN="${GH_PAT_TOKEN:-$GITHUB_TOKEN}"
+          if [ -z "$TF_TOKEN" ]; then
+            echo "::error::Missing GH_PAT_TOKEN or GITHUB_TOKEN in infra/github/.env"
+            exit 1
+          fi
+          echo "TF_VAR_GITHUB_TOKEN=$TF_TOKEN" >> $GITHUB_ENV
+          echo "TF_VAR_GITHUB_OWNER=$GITHUB_OWNER" >> $GITHUB_ENV
+          echo "✓ Environment decrypted and Terraform variables exported"
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.10.5"
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        working-directory: infra/github/src
+        run: |
+          cd ..
+          dotenvx run -- bash -c 'cd src && terraform init'
+
+      - name: Terraform Plan
+        working-directory: infra/github/src
+        id: plan
+        run: |
+          cd ..
+          dotenvx run -- bash -c "cd src && terraform plan -var-file='config.json' -out=tfplan"
+
+      - name: Terraform Apply
+        working-directory: infra/github/src
+        run: |
+          cd ..
+          dotenvx run -- bash -c "cd src && terraform apply -auto-approve tfplan"
+
+      - name: Export Results
+        id: deployment-results
+        working-directory: infra/github/src
+        run: |
+          cd ..
+          dotenvx run -- bash -c '
+            REPO_ID=$(terraform output -raw GITHUB_REPOSITORY_ID)
+            REPO_URL=$(terraform output -raw GITHUB_REPOSITORY_URL)
+            echo "repository-id=$REPO_ID" >> $GITHUB_OUTPUT
+            echo "repository-url=$REPO_URL" >> $GITHUB_OUTPUT
+            echo "✓ Repository ID: $REPO_ID"
+            echo "✓ Repository URL: $REPO_URL"
+          '
+
+      - name: Post Deployment Summary
+        run: |
+          echo "### ✅ GitHub Infrastructure Deployed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Repository:** ${{ steps.deployment-results.outputs.repository-url }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Configuration Applied:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Branch protection rules" >> $GITHUB_STEP_SUMMARY
+          echo "- Repository settings" >> $GITHUB_STEP_SUMMARY
+          echo "- Issue labels" >> $GITHUB_STEP_SUMMARY
+          echo "- Security and analysis features" >> $GITHUB_STEP_SUMMARY

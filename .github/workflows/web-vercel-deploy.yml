@@ -80,13 +80,28 @@ jobs:
       project-id: ${{ steps.export-outputs.outputs.project-id }}
     env:
       TF_VAR_ENVIRONMENT: ${{ needs.check-changes.outputs.environment }}
-      TF_VAR_VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      TF_VAR_VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       TERRAFORM_STATE_ENCRYPT_KEY: ${{ secrets.TERRAFORM_STATE_ENCRYPT_KEY }}
+      DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Decrypt .env file with dotenvx
+        working-directory: infra/vercel/web
+        run: |
+          if [ -z "$DOTENV_PRIVATE_KEY" ]; then
+            echo "::error::DOTENV_PRIVATE_KEY secret is not set in GitHub Actions"
+            exit 1
+          fi
+          echo "$DOTENV_PRIVATE_KEY" > .env.keys
+          npm ls -g @dotenvx/dotenvx >/dev/null 2>&1 || npm install -g @dotenvx/dotenvx
+          
+          # Decrypt and export variables
+          eval "$(dotenvx run --env-file=.env --quiet -- printenv | grep -E '^(VERCEL_|UMAMI_)' || true)"
+          echo "TF_VAR_VERCEL_ORG_ID=$VERCEL_ORG_ID" >> $GITHUB_ENV
+          echo "TF_VAR_VERCEL_TOKEN=$VERCEL_TOKEN" >> $GITHUB_ENV
+          echo "✓ Environment variables decrypted and exported"
 
       - name: Fetch Terraform State from state branch
         working-directory: infra/vercel/web/src
