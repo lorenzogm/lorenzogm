@@ -167,6 +167,17 @@ jobs:
             PROJECT_ID=$(curl -sf -H "Authorization: Bearer ${TF_VAR_VERCEL_TOKEN}" "https://api.vercel.com/v9/projects/${PROJECT_NAME}${TEAM_PARAM}" | jq -r '.id // empty')
             if [ -n "$PROJECT_ID" ]; then
               terraform import -var-file="config.${ENVIRONMENT}.json" vercel_project.main "$PROJECT_ID"
+
+              # Import existing domain resources
+              DOMAINS=$(jq -r '.vercel.project_domains[]?.domain // empty' "config.${ENVIRONMENT}.json" 2>/dev/null)
+              for DOMAIN in $DOMAINS; do
+                REDIRECT=$(jq -r --arg d "$DOMAIN" '.vercel.project_domains[] | select(.domain == $d) | .redirect // empty' "config.${ENVIRONMENT}.json" 2>/dev/null)
+                if [ -z "$REDIRECT" ]; then
+                  terraform import -var-file="config.${ENVIRONMENT}.json" "vercel_project_domain.primary[\"${DOMAIN}\"]" "${PROJECT_ID}/${DOMAIN}" || true
+                else
+                  terraform import -var-file="config.${ENVIRONMENT}.json" "vercel_project_domain.redirect[\"${DOMAIN}\"]" "${PROJECT_ID}/${DOMAIN}" || true
+                fi
+              done
             fi
           fi
 
