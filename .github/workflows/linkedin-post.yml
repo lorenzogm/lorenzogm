@@ -30,8 +30,8 @@ jobs:
 
       - name: Post latest article to LinkedIn
         env:
-          # OAuth 2.0 access token for lorenzogm with the w_member_social scope.
-          # Generate once via the LinkedIn OAuth flow and store as a repository secret.
-          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_ACCESS_TOKEN: "disabled"
           WEBSITE_URL: https://lorenzogm.com
-        run: node .github/scripts/post-to-linkedin.js
+        run: |
+          echo "LinkedIn posting is currently disabled"
+          # node .github/scripts/post-to-linkedin.js

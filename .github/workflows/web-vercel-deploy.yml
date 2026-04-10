@@ -53,10 +53,8 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "environment=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
-            echo "Environment: ${{ github.event.inputs.environment }}"
           else
             echo "environment=development" >> $GITHUB_OUTPUT
-            echo "Environment: development (push trigger)"
           fi
 
       - name: Check for changes
@@ -65,24 +63,17 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "infra-changed=true" >> $GITHUB_OUTPUT
             echo "app-changed=true" >> $GITHUB_OUTPUT
-            echo "Manual trigger — deploying everything"
             exit 0
           fi
-
           if git diff --name-only HEAD~1 -- infra/vercel/web/ | grep -q .; then
             echo "infra-changed=true" >> $GITHUB_OUTPUT
-            echo "Changes detected in infra/vercel/web/"
           else
             echo "infra-changed=false" >> $GITHUB_OUTPUT
-            echo "No changes in infra/vercel/web/"
           fi
-
-          if git diff --name-only HEAD~1 -- src/ e2e/ content/ public/ package.json package-lock.json vite.config.ts playwright.config.ts vercel.json | grep -q .; then
+          if git diff --name-only HEAD~1 -- src/ e2e/ content/ public/ package.json pnpm-lock.yaml vite.config.ts playwright.config.ts vercel.json | grep -q .; then
             echo "app-changed=true" >> $GITHUB_OUTPUT
-            echo "Changes detected in app files"
           else
             echo "app-changed=false" >> $GITHUB_OUTPUT
-            echo "No changes in app files"
           fi
 
   infra-deploy:
@@ -90,14 +81,11 @@ jobs:
     if: needs.check-changes.outputs.infra-changed == 'true'
     runs-on: ubuntu-latest
     name: Infrastructure Deploy
-    environment: ${{ needs.check-changes.outputs.environment }}
     outputs:
       project-id: ${{ steps.export-outputs.outputs.project-id }}
     env:
       TF_VAR_ENVIRONMENT: ${{ needs.check-changes.outputs.environment }}
-      TERRAFORM_STATE_ENCRYPT_KEY: ${{ secrets.TERRAFORM_STATE_ENCRYPT_KEY }}
-      TF_VAR_VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      TF_VAR_VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
 
     steps:
       - name: Checkout
@@ -112,37 +100,19 @@ jobs:
           node-version: "22"
           cache: "pnpm"
 
-      - name: Build Terraform runtime vars from .env with dotenvx
+      - name: Load secrets from encrypted .env
         run: |
           ENV_FILE="infra/vercel/web/.env.${{ env.TF_VAR_ENVIRONMENT }}"
-          if [ ! -f "$ENV_FILE" ]; then
-            echo "::error::Missing env file: $ENV_FILE"
-            exit 1
-          fi
-
           pnpm dlx @dotenvx/dotenvx run --env-file="$ENV_FILE" -- sh -c '
-            : "${UMAMI_WEBSITE_ID:?Missing UMAMI_WEBSITE_ID in env file}"
-            : "${UMAMI_SCRIPT_SRC:?Missing UMAMI_SCRIPT_SRC in env file}"
-
+            echo "TF_VAR_VERCEL_TOKEN=$VERCEL_TOKEN" >> "$GITHUB_ENV"
+            echo "TF_VAR_VERCEL_ORG_ID=$VERCEL_ORG_ID" >> "$GITHUB_ENV"
+            echo "TERRAFORM_STATE_ENCRYPT_KEY=$TERRAFORM_STATE_ENCRYPT_KEY" >> "$GITHUB_ENV"
             jq -n \
-              --arg websiteId "$UMAMI_WEBSITE_ID" \
-              --arg scriptSrc "$UMAMI_SCRIPT_SRC" \
-              "{\"environment_variables\":{\"UMAMI_WEBSITE_ID\":\$websiteId,\"UMAMI_SCRIPT_SRC\":\$scriptSrc}}" > infra/vercel/web/src/config.runtime.auto.tfvars.json
+              --arg wid "$UMAMI_WEBSITE_ID" \
+              --arg src "$UMAMI_SCRIPT_SRC" \
+              "{\"environment_variables\":{\"UMAMI_WEBSITE_ID\":\$wid,\"UMAMI_SCRIPT_SRC\":\$src}}" \
+              > infra/vercel/web/src/config.runtime.auto.tfvars.json
           '
-
-          echo "Generated infra/vercel/web/src/config.runtime.auto.tfvars.json from $ENV_FILE"
-
-      - name: Validate required secrets
-        run: |
-          if [ -z "$TF_VAR_VERCEL_TOKEN" ]; then
-            echo "::error::VERCEL_TOKEN secret is not set in GitHub Actions environment"
-            exit 1
-          fi
-          if [ -z "$TF_VAR_VERCEL_ORG_ID" ]; then
-            echo "::error::VERCEL_ORG_ID secret is not set in GitHub Actions environment"
-            exit 1
-          fi
-          echo "✓ Environment secrets loaded for Terraform"
 
       - name: Fetch Terraform State from state branch
         working-directory: infra/vercel/web/src
@@ -150,13 +120,10 @@ jobs:
           STATE_FILE="terraform-${{ env.TF_VAR_ENVIRONMENT }}.tfstate.enc"
           if git fetch origin terraform-state 2>/dev/null; then
             if git show "origin/terraform-state:infra/vercel/web/src/${STATE_FILE}" > "$STATE_FILE" 2>/dev/null && [ -s "$STATE_FILE" ]; then
-              echo "State file fetched from terraform-state branch"
+              echo "State file fetched"
             else
               rm -f "$STATE_FILE"
-              echo "State file not found on terraform-state branch"
             fi
-          else
-            echo "terraform-state branch does not exist yet"
           fi
 
       - name: Decrypt Terraform State
@@ -167,11 +134,9 @@ jobs:
             if echo "$TERRAFORM_STATE_ENCRYPT_KEY" | openssl enc -aes-256-cbc -d -in "$STATE_FILE" -out "terraform.tfstate" -pass stdin 2>/dev/null; then
               echo "State file decrypted"
             else
-              echo "::warning::Failed to decrypt state file — proceeding without existing state"
+              echo "::warning::Failed to decrypt state — proceeding without existing state"
               rm -f terraform.tfstate
             fi
-          else
-            echo "No existing state file found"
           fi
 
       - name: Setup Terraform
@@ -196,17 +161,13 @@ jobs:
               *)           ENV_SHORT="${ENVIRONMENT:0:3}" ;;
             esac
             PROJECT_NAME="lorenzogm-web-${ENV_SHORT}"
-            echo "No state found. Checking for existing project: $PROJECT_NAME"
             TEAM_PARAM=""
             if [ -n "${TF_VAR_VERCEL_ORG_ID}" ]; then
               TEAM_PARAM="?teamId=${TF_VAR_VERCEL_ORG_ID}"
             fi
             PROJECT_ID=$(curl -sf -H "Authorization: Bearer ${TF_VAR_VERCEL_TOKEN}" "https://api.vercel.com/v9/projects/${PROJECT_NAME}${TEAM_PARAM}" | jq -r '.id // empty')
             if [ -n "$PROJECT_ID" ]; then
-              echo "Found existing project $PROJECT_ID — importing into state"
               terraform import -var-file="config.${ENVIRONMENT}.json" vercel_project.main "$PROJECT_ID"
-            else
-              echo "No existing project found, proceeding with fresh creation"
             fi
           fi
 
@@ -221,20 +182,9 @@ jobs:
       - name: Export Terraform Outputs
         id: export-outputs
         working-directory: infra/vercel/web/src
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           PROJECT_ID=$(terraform output -raw LORENZOGM_WEB_VERCEL_PROJECT_ID)
-          ENVIRONMENT="${{ needs.check-changes.outputs.environment }}"
-          if [ "$ENVIRONMENT" = "production" ]; then
-            VAR_NAME="LORENZOGM_WEB_VERCEL_PROJECT_ID_PROD"
-          else
-            VAR_NAME="LORENZOGM_WEB_VERCEL_PROJECT_ID_DEV"
-          fi
-          echo "Vercel Project ID: $PROJECT_ID"
           echo "project-id=$PROJECT_ID" >> $GITHUB_OUTPUT
-          gh variable set "$VAR_NAME" --body "$PROJECT_ID" --repo "${{ github.repository }}"
-          echo "Set ${VAR_NAME} repository variable to: $PROJECT_ID"
 
       - name: Encrypt Terraform State
         working-directory: infra/vercel/web/src
@@ -242,9 +192,8 @@ jobs:
           if [ -f "terraform.tfstate" ]; then
             echo "$TERRAFORM_STATE_ENCRYPT_KEY" | openssl enc -aes-256-cbc -in "terraform.tfstate" -out "terraform-${{ env.TF_VAR_ENVIRONMENT }}.tfstate.enc" -pass stdin
             rm -f terraform.tfstate
-            echo "State file encrypted successfully"
           else
-            echo "Error: No terraform.tfstate file found to encrypt"
+            echo "::error::No terraform.tfstate found"
             exit 1
           fi
 
@@ -258,7 +207,6 @@ jobs:
         run: |
           STATE_FILE="terraform-${{ env.TF_VAR_ENVIRONMENT }}.tfstate.enc"
           cp "$STATE_FILE" "/tmp/$STATE_FILE"
-
           cd ${{ github.workspace }}
           if git fetch origin terraform-state 2>/dev/null; then
             git checkout terraform-state
@@ -266,14 +214,12 @@ jobs:
             git checkout --orphan terraform-state
             git rm -rf . 2>/dev/null || true
           fi
-
           mkdir -p infra/vercel/web/src
           cp "/tmp/$STATE_FILE" "infra/vercel/web/src/$STATE_FILE"
           git add "infra/vercel/web/src/$STATE_FILE"
-          git diff --staged --quiet && echo "No changes to state file" && exit 0
-          git commit -m "chore: update terraform state for ${{ env.TF_VAR_ENVIRONMENT }} environment"
+          git diff --staged --quiet && echo "No state changes" && exit 0
+          git commit -m "chore: update terraform state for ${{ env.TF_VAR_ENVIRONMENT }}"
           git push origin terraform-state
-          echo "State file committed to terraform-state branch"
 
   deploy-preview:
     needs: [check-changes, infra-deploy]
@@ -283,28 +229,14 @@ jobs:
       (needs.check-changes.outputs.app-changed == 'true' || needs.check-changes.outputs.infra-changed == 'true')
     runs-on: ubuntu-latest
     name: Deploy Preview
-    environment: ${{ needs.check-changes.outputs.environment }}
     outputs:
       preview-url: ${{ steps.preview-deploy.outputs.preview-url }}
     env:
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Resolve Vercel Project ID
-        run: |
-          PROJECT_ID="${{ needs.infra-deploy.outputs.project-id }}"
-          if [ -z "$PROJECT_ID" ]; then
-            if [ "${{ needs.check-changes.outputs.environment }}" = "production" ]; then
-              PROJECT_ID="${{ vars.LORENZOGM_WEB_VERCEL_PROJECT_ID_PROD }}"
-            else
-              PROJECT_ID="${{ vars.LORENZOGM_WEB_VERCEL_PROJECT_ID_DEV }}"
-            fi
-          fi
-          echo "VERCEL_PROJECT_ID=$PROJECT_ID" >> $GITHUB_ENV
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -314,6 +246,30 @@ jobs:
         with:
           node-version: "22"
           cache: "pnpm"
+
+      - name: Load Vercel credentials from encrypted .env
+        run: |
+          ENV_FILE="infra/vercel/web/.env.${{ needs.check-changes.outputs.environment }}"
+          pnpm dlx @dotenvx/dotenvx run --env-file="$ENV_FILE" -- sh -c '
+            echo "VERCEL_TOKEN=$VERCEL_TOKEN" >> "$GITHUB_ENV"
+            echo "VERCEL_ORG_ID=$VERCEL_ORG_ID" >> "$GITHUB_ENV"
+          '
+
+      - name: Resolve Vercel Project ID
+        run: |
+          PROJECT_ID="${{ needs.infra-deploy.outputs.project-id }}"
+          if [ -z "$PROJECT_ID" ]; then
+            ENVIRONMENT="${{ needs.check-changes.outputs.environment }}"
+            case "$ENVIRONMENT" in
+              production) ENV_SHORT="prod" ;;
+              *)          ENV_SHORT="dev" ;;
+            esac
+            PROJECT_NAME="lorenzogm-web-${ENV_SHORT}"
+            TEAM_PARAM=""
+            if [ -n "${VERCEL_ORG_ID}" ]; then TEAM_PARAM="?teamId=${VERCEL_ORG_ID}"; fi
+            PROJECT_ID=$(curl -sf -H "Authorization: Bearer ${VERCEL_TOKEN}" "https://api.vercel.com/v9/projects/${PROJECT_NAME}${TEAM_PARAM}" | jq -r '.id // empty')
+          fi
+          echo "VERCEL_PROJECT_ID=$PROJECT_ID" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: pnpm install
@@ -332,7 +288,6 @@ jobs:
         run: |
           PREVIEW_URL=$(vercel deploy --prebuilt --token=$VERCEL_TOKEN)
           echo "preview-url=$PREVIEW_URL" >> $GITHUB_OUTPUT
-          echo "Preview URL: $PREVIEW_URL"
 
   e2e-tests:
     needs: [deploy-preview]
@@ -374,26 +329,12 @@ jobs:
       needs.infra-deploy.result != 'failure'
     runs-on: ubuntu-latest
     name: Deploy Production
-    environment: ${{ needs.check-changes.outputs.environment }}
     env:
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Resolve Vercel Project ID
-        run: |
-          PROJECT_ID="${{ needs.infra-deploy.outputs.project-id }}"
-          if [ -z "$PROJECT_ID" ]; then
-            if [ "${{ needs.check-changes.outputs.environment }}" = "production" ]; then
-              PROJECT_ID="${{ vars.LORENZOGM_WEB_VERCEL_PROJECT_ID_PROD }}"
-            else
-              PROJECT_ID="${{ vars.LORENZOGM_WEB_VERCEL_PROJECT_ID_DEV }}"
-            fi
-          fi
-          echo "VERCEL_PROJECT_ID=$PROJECT_ID" >> $GITHUB_ENV
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -403,6 +344,30 @@ jobs:
         with:
           node-version: "22"
           cache: "pnpm"
+
+      - name: Load Vercel credentials from encrypted .env
+        run: |
+          ENV_FILE="infra/vercel/web/.env.${{ needs.check-changes.outputs.environment }}"
+          pnpm dlx @dotenvx/dotenvx run --env-file="$ENV_FILE" -- sh -c '
+            echo "VERCEL_TOKEN=$VERCEL_TOKEN" >> "$GITHUB_ENV"
+            echo "VERCEL_ORG_ID=$VERCEL_ORG_ID" >> "$GITHUB_ENV"
+          '
+
+      - name: Resolve Vercel Project ID
+        run: |
+          PROJECT_ID="${{ needs.infra-deploy.outputs.project-id }}"
+          if [ -z "$PROJECT_ID" ]; then
+            ENVIRONMENT="${{ needs.check-changes.outputs.environment }}"
+            case "$ENVIRONMENT" in
+              production) ENV_SHORT="prod" ;;
+              *)          ENV_SHORT="dev" ;;
+            esac
+            PROJECT_NAME="lorenzogm-web-${ENV_SHORT}"
+            TEAM_PARAM=""
+            if [ -n "${VERCEL_ORG_ID}" ]; then TEAM_PARAM="?teamId=${VERCEL_ORG_ID}"; fi
+            PROJECT_ID=$(curl -sf -H "Authorization: Bearer ${VERCEL_TOKEN}" "https://api.vercel.com/v9/projects/${PROJECT_NAME}${TEAM_PARAM}" | jq -r '.id // empty')
+          fi
+          echo "VERCEL_PROJECT_ID=$PROJECT_ID" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: pnpm install
