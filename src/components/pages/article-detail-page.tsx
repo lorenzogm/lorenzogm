@@ -22,9 +22,10 @@ interface ArticleDetailPageProps {
 
 export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
   const lang = post.lang || "en";
-  const relatedPosts = post.slug && post.tags?.length
-    ? getRelatedPosts(post.slug, post.tags, lang)
-    : [];
+  const relatedPosts =
+    post.slug && post.tags?.length
+      ? getRelatedPosts(post.slug, post.tags, lang)
+      : [];
 
   return (
     <>

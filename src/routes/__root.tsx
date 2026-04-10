@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-router";
 import { Container } from "@/components/elements/container";
 import { LanguageAwareHeader } from "@/components/elements/language-aware-header";
+import { SearchBar } from "@/components/elements/search-bar";
 import globalsCss from "../globals.css?url";
 
 function RootDocument({ children }: { children: React.ReactNode }) {
@@ -40,6 +41,11 @@ function RootComponent() {
         {/* Header */}
         <Container as="header" className="bg-white py-12" fullWidth>
           <LanguageAwareHeader />
+        </Container>
+
+        {/* Search */}
+        <Container className="bg-white pb-8" fullWidth>
+          <SearchBar />
         </Container>
 
         <Container as="main" className="flex-1 bg-white py-16" fullWidth>

@@ -8,8 +8,10 @@ function SpanishHome() {
 
   return (
     <>
+      <h2 className="mb-4 font-bold text-2xl text-gray-900">Buscar blog por tema</h2>
       <TopicCloud lang="es" limit={8} topics={topics} />
 
+      <h2 className="mb-8 font-bold text-2xl text-gray-900">Artículos</h2>
       <div className="space-y-12">
         {posts.length > 0 && (
           <BlogCard featured={true} key={posts[0].slug} post={posts[0]} />

@@ -195,12 +195,12 @@ export function getRelatedPosts(
   slug: string,
   tags: string[],
   lang = "en",
-  count = 3,
+  count = 3
 ): BlogPostMetadata[] {
   const posts = getAllPosts(lang).filter((p) => p.slug !== slug);
   const scored = posts.map((post) => {
     const shared = post.tags.filter((t) =>
-      tags.some((tag) => tag.toLowerCase() === t.toLowerCase()),
+      tags.some((tag) => tag.toLowerCase() === t.toLowerCase())
     ).length;
     return { post, shared };
   });
