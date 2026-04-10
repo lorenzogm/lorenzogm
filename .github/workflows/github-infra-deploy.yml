@@ -82,6 +82,30 @@ jobs:
         run: |
           terraform init
 
+      - name: Bootstrap Terraform state from existing GitHub resources
+        working-directory: infra/github/src
+        run: |
+          # If state already exists, skip imports.
+          if terraform state list >/dev/null 2>&1 && [ -n "$(terraform state list)" ]; then
+            echo "Terraform state already populated; skipping bootstrap imports."
+            exit 0
+          fi
+
+          REPO_NAME=$(jq -r '.repository.name' config.json)
+          if [ -z "$REPO_NAME" ] || [ "$REPO_NAME" = "null" ]; then
+            echo "::error::Could not resolve repository.name from config.json"
+            exit 1
+          fi
+
+          echo "Importing existing repository: $REPO_NAME"
+          terraform import github_repository.main "$REPO_NAME" || true
+
+          echo "Importing existing labels from config.json"
+          jq -r '.labels[].name' config.json | while read -r label; do
+            [ -z "$label" ] && continue
+            terraform import "github_issue_label.labels[\"$label\"]" "$REPO_NAME:$label" || true
+          done
+
       - name: Terraform Plan
         working-directory: infra/github/src
         id: plan
