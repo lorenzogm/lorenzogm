@@ -57,7 +57,7 @@ function getLatestPublishedArticle() {
     if (!fm) continue;
 
     const date = new Date(fm.date);
-    if (isNaN(date.getTime())) continue;
+    if (Number.isNaN(date.getTime())) continue;
     if (date > today) continue; // skip scheduled/future posts
 
     const excerpt = fm.description || fm.excerpt || "";

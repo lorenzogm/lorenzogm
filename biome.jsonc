@@ -9,9 +9,7 @@
   },
   "linter": {
     "rules": {
-      "suspicious": {
-        "noAlert": "off"
-      },
+      "suspicious": {},
       "a11y": {
         "noSvgWithoutTitle": "off",
         "useButtonType": "off",
