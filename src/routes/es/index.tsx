@@ -7,14 +7,11 @@ function SpanishHome() {
 
   return (
     <>
-      {/* Blog Posts */}
       <div className="space-y-12">
-        {/* Featured Post - Full Width */}
         {posts.length > 0 && (
           <BlogCard featured={true} key={posts[0].slug} post={posts[0]} />
         )}
 
-        {/* Remaining Posts - Grid Layout */}
         {posts.length > 1 && (
           <div className="grid gap-8 md:grid-cols-2">
             {posts.slice(1).map((post) => (
@@ -33,6 +30,7 @@ function SpanishHome() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
+              <title>No posts icon</title>
               <path
                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 strokeLinecap="round"

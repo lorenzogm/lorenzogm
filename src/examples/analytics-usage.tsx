@@ -7,23 +7,18 @@ import { useAnalytics } from "@/components/analytics";
 export function ExampleComponent() {
   const { trackEvent } = useAnalytics();
 
-  // Example: Track button clicks
   const handleDownload = () => {
     trackEvent("Download: PDF", { name: "React Guide", value: 1 });
-    // This will track the event name "Download: PDF" with additional data
   };
 
-  // Example: Track newsletter signup
   const handleNewsletterSignup = () => {
     trackEvent("Newsletter: Signup", { form: "Footer Form" });
   };
 
-  // Example: Track search functionality
   const handleSearch = (query: string, resultsCount: number) => {
     trackEvent("Search", { query, resultsCount });
   };
 
-  // Example: Manual page view tracking
   const handleCustomPageView = () => {
     trackEvent("Page View", { title: "Custom Page Title" });
   };
@@ -33,6 +28,7 @@ export function ExampleComponent() {
       <button
         className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
         onClick={handleDownload}
+        type="button"
       >
         Download PDF (Tracked)
       </button>
@@ -40,6 +36,7 @@ export function ExampleComponent() {
       <button
         className="rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700"
         onClick={handleNewsletterSignup}
+        type="button"
       >
         Subscribe Newsletter (Event)
       </button>
@@ -47,6 +44,7 @@ export function ExampleComponent() {
       <button
         className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
         onClick={() => handleSearch("next.js tutorial", 5)}
+        type="button"
       >
         Simulate Search (5 results)
       </button>
@@ -54,6 +52,7 @@ export function ExampleComponent() {
       <button
         className="rounded bg-purple-600 px-4 py-2 text-white hover:bg-purple-700"
         onClick={handleCustomPageView}
+        type="button"
       >
         Track Custom Page View
       </button>
@@ -61,7 +60,6 @@ export function ExampleComponent() {
   );
 }
 
-// Example: Track external link clicks
 export function ExternalLink({
   href,
   children,
@@ -90,17 +88,12 @@ export function ExternalLink({
   );
 }
 
-// Example: Track form submissions
 export function ContactForm() {
   const { trackEvent } = useAnalytics();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Track form submission event
     trackEvent("Form: Submit", { form: "Contact Form" });
-
-    // Your form submission logic here
   };
 
   return (
