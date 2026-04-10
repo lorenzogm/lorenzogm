@@ -25,7 +25,7 @@ function collectConsoleErrors(page: Page): string[] {
 test.describe("No console errors", () => {
   test("home page has no console errors", async ({ page }) => {
     const errors = collectConsoleErrors(page);
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
     });
@@ -34,7 +34,9 @@ test.describe("No console errors", () => {
 
   test("blog post page has no console errors", async ({ page }) => {
     const errors = collectConsoleErrors(page);
-    await page.goto("/blog/a-better-react-folder-structure");
+    await page.goto("/blog/a-better-react-folder-structure", {
+      waitUntil: "domcontentloaded",
+    });
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
     });
@@ -43,7 +45,7 @@ test.describe("No console errors", () => {
 
   test("client-side navigation has no console errors", async ({ page }) => {
     const errors = collectConsoleErrors(page);
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
     });
@@ -57,7 +59,7 @@ test.describe("No console errors", () => {
 
 test.describe("Styles are loaded", () => {
   test("home page has stylesheets and styled content", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
     });
@@ -87,7 +89,9 @@ test.describe("Styles are loaded", () => {
   test("blog post page has stylesheets and styled content", async ({
     page,
   }) => {
-    await page.goto("/blog/a-better-react-folder-structure");
+    await page.goto("/blog/a-better-react-folder-structure", {
+      waitUntil: "domcontentloaded",
+    });
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
     });
@@ -115,7 +119,7 @@ test.describe("No broken resources", () => {
       failedRequests.push(`${req.failure()?.errorText}: ${url}`);
     });
 
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
     });
@@ -123,7 +127,7 @@ test.describe("No broken resources", () => {
   });
 
   test("no broken internal links on home page", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
     });
@@ -145,7 +149,7 @@ test.describe("No broken resources", () => {
 
 test.describe("Meta tags and SEO", () => {
   test("home page has required meta tags", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "domcontentloaded" });
 
     // Check essential meta tags exist
     const charset = await page.evaluate(
@@ -163,7 +167,9 @@ test.describe("Meta tags and SEO", () => {
   });
 
   test("blog post has proper title", async ({ page }) => {
-    await page.goto("/blog/a-better-react-folder-structure");
+    await page.goto("/blog/a-better-react-folder-structure", {
+      waitUntil: "domcontentloaded",
+    });
     await expect(page).toHaveTitle(BLOG_TITLE_REGEX);
   });
 });
