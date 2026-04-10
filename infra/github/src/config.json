@@ -11,8 +11,8 @@
     "default_branch": "main",
     "allow_auto_merge": true,
     "delete_branch_on_merge": true,
-    "squash_merge_commit_title": "COMMIT_MESSAGE",
-    "squash_merge_commit_message": "COMMIT_BODY",
+    "squash_merge_commit_title": "PR_TITLE",
+    "squash_merge_commit_message": "COMMIT_MESSAGES",
     "allow_squash_merge": true,
     "allow_merge_commit": false,
     "allow_rebase_merge": false
@@ -20,22 +20,13 @@
   "branch_protections": [
     {
       "branch_name": "main",
-      "require_status_checks": true,
-      "require_code_owner_reviews": false,
-      "require_pull_request_reviews": true,
-      "dismiss_stale_reviews": true,
-      "required_review_count": 0,
-      "require_linear_history": true,
-      "restrict_who_can_push": false
-    },
-    {
-      "branch_name": "terraform-state",
       "require_status_checks": false,
+      "require_status_checks_strict": false,
       "require_code_owner_reviews": false,
       "require_pull_request_reviews": false,
       "dismiss_stale_reviews": false,
       "required_review_count": 0,
-      "require_linear_history": false,
+      "require_linear_history": true,
       "restrict_who_can_push": false
     }
   ],

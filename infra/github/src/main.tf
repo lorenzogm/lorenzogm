@@ -36,6 +36,7 @@ resource "github_repository" "main" {
       # Ignore changes to these fields to avoid fights with direct GitHub edits
       archived,
       topics,
+      pages,
     ]
   }
 }
@@ -49,7 +50,7 @@ resource "github_branch_protection" "main" {
 
   # Status checks
   required_status_checks {
-    strict   = each.value.require_status_checks
+    strict   = lookup(each.value, "require_status_checks_strict", false)
     contexts = local.is_production ? [
       "PR Checks"
     ] : []
@@ -64,8 +65,8 @@ resource "github_branch_protection" "main" {
   # Require linear history (prevent merge commits)
   required_linear_history = each.value.require_linear_history
 
-  # Enforce admins (rules apply to admins too)
-  enforce_admins = true
+  # Enforce admins
+  enforce_admins = false
 
   # Allow force pushes and deletions
   allows_force_pushes       = false

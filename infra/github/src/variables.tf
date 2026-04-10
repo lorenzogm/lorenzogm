@@ -36,9 +36,10 @@ variable "repository" {
 
 variable "branch_protections" {
   type = list(object({
-    branch_name                = string
-    require_status_checks      = optional(bool, true)
-    require_code_owner_reviews = optional(bool, true)
+    branch_name                  = string
+    require_status_checks        = optional(bool, true)
+    require_status_checks_strict = optional(bool, false)
+    require_code_owner_reviews   = optional(bool, true)
     require_pull_request_reviews = optional(bool, true)
     dismiss_stale_reviews      = optional(bool, true)
     required_review_count      = optional(number, 1)

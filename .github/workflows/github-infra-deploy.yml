@@ -28,16 +28,12 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "github-infra-changed=true" >> $GITHUB_OUTPUT
-            echo "Manual trigger — deploying GitHub infrastructure"
             exit 0
           fi
-
           if git diff --name-only HEAD~1 -- infra/github/src/ | grep -q .; then
             echo "github-infra-changed=true" >> $GITHUB_OUTPUT
-            echo "Changes detected in GitHub repo infrastructure"
           else
             echo "github-infra-changed=false" >> $GITHUB_OUTPUT
-            echo "No changes in GitHub repo infrastructure"
           fi
 
   github-infra-deploy:
@@ -46,8 +42,9 @@ jobs:
     runs-on: ubuntu-latest
     name: GitHub Infra Deploy
     env:
+      TF_VAR_ENVIRONMENT: production
       TF_VAR_GITHUB_OWNER: ${{ github.repository_owner }}
-      TF_VAR_GITHUB_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
+      DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
 
     steps:
       - name: Checkout
@@ -62,13 +59,11 @@ jobs:
           node-version: "22"
           cache: "pnpm"
 
-      - name: Validate required token
+      - name: Load secrets from encrypted .env
         run: |
-          if [ -z "$TF_VAR_GITHUB_TOKEN" ]; then
-            echo "::error::GH_PAT_TOKEN secret is not set in GitHub Actions"
-            exit 1
-          fi
-          echo "✓ GH_PAT_TOKEN secret available"
+          pnpm dlx @dotenvx/dotenvx run -- sh -c '
+            echo "TF_VAR_GITHUB_TOKEN=$GH_PAT_TOKEN" >> "$GITHUB_ENV"
+          '
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -78,39 +73,39 @@ jobs:
 
       - name: Terraform Init
         working-directory: infra/github/src
+        run: terraform init
+
+      - name: Bootstrap Terraform state from existing GitHub resources
+        working-directory: infra/github/src
         run: |
-          terraform init
+          REPO_NAME=$(jq -r '.repository.name' config.json)
+          if [ -z "$REPO_NAME" ] || [ "$REPO_NAME" = "null" ]; then
+            echo "::error::Could not resolve repository.name from config.json"
+            exit 1
+          fi
+          terraform import -var-file='config.json' github_repository.main "$REPO_NAME" || true
+          terraform import -var-file='config.json' 'github_branch_protection.main["main"]' "$REPO_NAME:main" || true
+          terraform import -var-file='config.json' 'github_branch_protection.main["terraform-state"]' "$REPO_NAME:terraform-state" || true
+          jq -r '.labels[].name' config.json | while read -r label; do
+            [ -z "$label" ] && continue
+            terraform import -var-file='config.json' "github_issue_label.labels[\"$label\"]" "$REPO_NAME:$label" || true
+          done
 
       - name: Terraform Plan
         working-directory: infra/github/src
-        id: plan
-        run: |
-          terraform plan -var-file='config.json' -out=tfplan
+        run: terraform plan -var-file='config.json' -out=tfplan
 
       - name: Terraform Apply
         working-directory: infra/github/src
-        run: |
-          terraform apply -auto-approve tfplan
+        run: terraform apply -auto-approve tfplan
 
       - name: Export Results
-        id: deployment-results
         working-directory: infra/github/src
         run: |
-          REPO_ID=$(terraform output -raw GITHUB_REPOSITORY_ID)
-          REPO_URL=$(terraform output -raw GITHUB_REPOSITORY_URL)
-          echo "repository-id=$REPO_ID" >> $GITHUB_OUTPUT
-          echo "repository-url=$REPO_URL" >> $GITHUB_OUTPUT
-          echo "✓ Repository ID: $REPO_ID"
-          echo "✓ Repository URL: $REPO_URL"
+          echo "Repository ID: $(terraform output -raw GITHUB_REPOSITORY_ID)"
+          echo "Repository URL: $(terraform output -raw GITHUB_REPOSITORY_URL)"
 
       - name: Post Deployment Summary
         run: |
-          echo "### ✅ GitHub Infrastructure Deployed" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Repository:** ${{ steps.deployment-results.outputs.repository-url }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Configuration Applied:**" >> $GITHUB_STEP_SUMMARY
-          echo "- Branch protection rules" >> $GITHUB_STEP_SUMMARY
-          echo "- Repository settings" >> $GITHUB_STEP_SUMMARY
-          echo "- Issue labels" >> $GITHUB_STEP_SUMMARY
-          echo "- Security and analysis features" >> $GITHUB_STEP_SUMMARY
+          echo "### GitHub Infrastructure Deployed" >> $GITHUB_STEP_SUMMARY
+          echo "Branch protection and repository settings applied." >> $GITHUB_STEP_SUMMARY

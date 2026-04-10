@@ -14,14 +14,17 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const FRONTMATTER_BLOCK_REGEX = /^---\r?\n([\s\S]*?)\r?\n---/;
+const FRONTMATTER_LINE_SPLIT_REGEX = /\r?\n/;
+const TRAILING_SLASH_REGEX = /\/$/;
 
 /** Parse the YAML front-matter block at the top of a markdown file. */
 function parseFrontmatter(content) {
-  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  const match = content.match(FRONTMATTER_BLOCK_REGEX);
   if (!match) return null;
 
   const data = {};
-  for (const line of match[1].split(/\r?\n/)) {
+  for (const line of match[1].split(FRONTMATTER_LINE_SPLIT_REGEX)) {
     const colonIdx = line.indexOf(":");
     if (colonIdx === -1) continue;
 
@@ -117,7 +120,7 @@ async function postToLinkedIn(article) {
 
   const websiteUrl = (
     process.env.WEBSITE_URL || "https://lorenzogm.com"
-  ).replace(/\/$/, "");
+  ).replace(TRAILING_SLASH_REGEX, "");
   const articleUrl = `${websiteUrl}/blog/${article.slug}`;
 
   const postText = `${article.excerpt}\n\n${articleUrl}`;

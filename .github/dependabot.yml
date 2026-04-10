@@ -9,7 +9,6 @@ updates:
     open-pull-requests-limit: 20
     labels:
       - "dependencies"
-      - "dependabot"
     commit-message:
       prefix: "chore(deps)"
     versioning-strategy: increase-if-necessary
@@ -23,7 +22,6 @@ updates:
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
-      - "dependabot"
     commit-message:
       prefix: "chore(deps)"
     versioning-strategy: increase-if-necessary
@@ -37,7 +35,6 @@ updates:
       timezone: "UTC"
     labels:
       - "dependencies"
-      - "dependabot"
     commit-message:
       prefix: "chore(ci)"
 
@@ -50,7 +47,6 @@ updates:
       timezone: "UTC"
     labels:
       - "dependencies"
-      - "dependabot"
     commit-message:
       prefix: "chore(tf)"
 
@@ -63,6 +59,5 @@ updates:
       timezone: "UTC"
     labels:
       - "dependencies"
-      - "dependabot"
     commit-message:
       prefix: "chore(tf)"
