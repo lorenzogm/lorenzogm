@@ -12,6 +12,8 @@
       "suspicious": {},
       "a11y": {},
       "performance": {
+        "useTopLevelRegex": "off",
+        "noImgElement": "off"
       },
       "security": {
         "noDangerouslySetInnerHtml": "off"
