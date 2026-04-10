@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BlogCard } from "@/components/patterns/blog-card";
-import { TagCloud } from "@/components/patterns/tag-cloud";
-import { getAllPosts, getTagCounts } from "@/lib/blog";
+import { TopicCloud } from "@/components/patterns/topic-cloud";
+import { getAllPosts, getTopicCounts } from "@/lib/blog";
 
 function SpanishHome() {
-  const { posts, tags } = Route.useLoaderData();
+  const { posts, topics } = Route.useLoaderData();
 
   return (
     <>
-      <TagCloud lang="es" tags={tags} />
+      <TopicCloud lang="es" limit={8} topics={topics} />
 
       <div className="space-y-12">
         {posts.length > 0 && (
@@ -52,6 +52,6 @@ function SpanishHome() {
 }
 
 export const Route = createFileRoute("/es/")({
-  loader: () => ({ posts: getAllPosts("es"), tags: getTagCounts("es") }),
+  loader: () => ({ posts: getAllPosts("es"), topics: getTopicCounts("es") }),
   component: SpanishHome,
 });

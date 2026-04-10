@@ -10,10 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TopicsIndexRouteImport } from './routes/topics/index'
 import { Route as EsIndexRouteImport } from './routes/es/index'
-import { Route as TagTagRouteImport } from './routes/tag/$tag'
+import { Route as TopicsTopicRouteImport } from './routes/topics/$topic'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
-import { Route as EsTagTagRouteImport } from './routes/es/tag/$tag'
+import { Route as EsTopicsIndexRouteImport } from './routes/es/topics/index'
+import { Route as EsTopicsTopicRouteImport } from './routes/es/topics/$topic'
 import { Route as EsBlogSlugRouteImport } from './routes/es/blog/$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -21,14 +23,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TopicsIndexRoute = TopicsIndexRouteImport.update({
+  id: '/topics/',
+  path: '/topics/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EsIndexRoute = EsIndexRouteImport.update({
   id: '/es/',
   path: '/es/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TagTagRoute = TagTagRouteImport.update({
-  id: '/tag/$tag',
-  path: '/tag/$tag',
+const TopicsTopicRoute = TopicsTopicRouteImport.update({
+  id: '/topics/$topic',
+  path: '/topics/$topic',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
@@ -36,9 +43,14 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EsTagTagRoute = EsTagTagRouteImport.update({
-  id: '/es/tag/$tag',
-  path: '/es/tag/$tag',
+const EsTopicsIndexRoute = EsTopicsIndexRouteImport.update({
+  id: '/es/topics/',
+  path: '/es/topics/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsTopicsTopicRoute = EsTopicsTopicRouteImport.update({
+  id: '/es/topics/$topic',
+  path: '/es/topics/$topic',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EsBlogSlugRoute = EsBlogSlugRouteImport.update({
@@ -50,62 +62,76 @@ const EsBlogSlugRoute = EsBlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/tag/$tag': typeof TagTagRoute
+  '/topics/$topic': typeof TopicsTopicRoute
   '/es/': typeof EsIndexRoute
+  '/topics/': typeof TopicsIndexRoute
   '/es/blog/$slug': typeof EsBlogSlugRoute
-  '/es/tag/$tag': typeof EsTagTagRoute
+  '/es/topics/$topic': typeof EsTopicsTopicRoute
+  '/es/topics/': typeof EsTopicsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/tag/$tag': typeof TagTagRoute
+  '/topics/$topic': typeof TopicsTopicRoute
   '/es': typeof EsIndexRoute
+  '/topics': typeof TopicsIndexRoute
   '/es/blog/$slug': typeof EsBlogSlugRoute
-  '/es/tag/$tag': typeof EsTagTagRoute
+  '/es/topics/$topic': typeof EsTopicsTopicRoute
+  '/es/topics': typeof EsTopicsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/tag/$tag': typeof TagTagRoute
+  '/topics/$topic': typeof TopicsTopicRoute
   '/es/': typeof EsIndexRoute
+  '/topics/': typeof TopicsIndexRoute
   '/es/blog/$slug': typeof EsBlogSlugRoute
-  '/es/tag/$tag': typeof EsTagTagRoute
+  '/es/topics/$topic': typeof EsTopicsTopicRoute
+  '/es/topics/': typeof EsTopicsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/blog/$slug'
-    | '/tag/$tag'
+    | '/topics/$topic'
     | '/es/'
+    | '/topics/'
     | '/es/blog/$slug'
-    | '/es/tag/$tag'
+    | '/es/topics/$topic'
+    | '/es/topics/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/blog/$slug'
-    | '/tag/$tag'
+    | '/topics/$topic'
     | '/es'
+    | '/topics'
     | '/es/blog/$slug'
-    | '/es/tag/$tag'
+    | '/es/topics/$topic'
+    | '/es/topics'
   id:
     | '__root__'
     | '/'
     | '/blog/$slug'
-    | '/tag/$tag'
+    | '/topics/$topic'
     | '/es/'
+    | '/topics/'
     | '/es/blog/$slug'
-    | '/es/tag/$tag'
+    | '/es/topics/$topic'
+    | '/es/topics/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogSlugRoute: typeof BlogSlugRoute
-  TagTagRoute: typeof TagTagRoute
+  TopicsTopicRoute: typeof TopicsTopicRoute
   EsIndexRoute: typeof EsIndexRoute
+  TopicsIndexRoute: typeof TopicsIndexRoute
   EsBlogSlugRoute: typeof EsBlogSlugRoute
-  EsTagTagRoute: typeof EsTagTagRoute
+  EsTopicsTopicRoute: typeof EsTopicsTopicRoute
+  EsTopicsIndexRoute: typeof EsTopicsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -117,6 +143,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/topics/': {
+      id: '/topics/'
+      path: '/topics'
+      fullPath: '/topics/'
+      preLoaderRoute: typeof TopicsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/es/': {
       id: '/es/'
       path: '/es'
@@ -124,11 +157,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tag/$tag': {
-      id: '/tag/$tag'
-      path: '/tag/$tag'
-      fullPath: '/tag/$tag'
-      preLoaderRoute: typeof TagTagRouteImport
+    '/topics/$topic': {
+      id: '/topics/$topic'
+      path: '/topics/$topic'
+      fullPath: '/topics/$topic'
+      preLoaderRoute: typeof TopicsTopicRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -138,11 +171,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/es/tag/$tag': {
-      id: '/es/tag/$tag'
-      path: '/es/tag/$tag'
-      fullPath: '/es/tag/$tag'
-      preLoaderRoute: typeof EsTagTagRouteImport
+    '/es/topics/': {
+      id: '/es/topics/'
+      path: '/es/topics'
+      fullPath: '/es/topics/'
+      preLoaderRoute: typeof EsTopicsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/topics/$topic': {
+      id: '/es/topics/$topic'
+      path: '/es/topics/$topic'
+      fullPath: '/es/topics/$topic'
+      preLoaderRoute: typeof EsTopicsTopicRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/blog/$slug': {
@@ -158,10 +198,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogSlugRoute: BlogSlugRoute,
-  TagTagRoute: TagTagRoute,
+  TopicsTopicRoute: TopicsTopicRoute,
   EsIndexRoute: EsIndexRoute,
+  TopicsIndexRoute: TopicsIndexRoute,
   EsBlogSlugRoute: EsBlogSlugRoute,
-  EsTagTagRoute: EsTagTagRoute,
+  EsTopicsTopicRoute: EsTopicsTopicRoute,
+  EsTopicsIndexRoute: EsTopicsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

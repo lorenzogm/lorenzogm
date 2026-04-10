@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BlogCard } from "@/components/patterns/blog-card";
-import { TagCloud } from "@/components/patterns/tag-cloud";
-import { getAllPosts, getTagCounts } from "@/lib/blog";
+import { TopicCloud } from "@/components/patterns/topic-cloud";
+import { getAllPosts, getTopicCounts } from "@/lib/blog";
 
 function Home() {
-  const { posts, tags } = Route.useLoaderData();
+  const { posts, topics } = Route.useLoaderData();
 
   return (
     <>
-      <TagCloud tags={tags} />
+      <TopicCloud limit={8} topics={topics} />
 
       <div className="space-y-12">
         {posts.length > 0 && (
@@ -50,6 +50,6 @@ function Home() {
 }
 
 export const Route = createFileRoute("/")({
-  loader: () => ({ posts: getAllPosts("en"), tags: getTagCounts("en") }),
+  loader: () => ({ posts: getAllPosts("en"), topics: getTopicCounts("en") }),
   component: Home,
 });

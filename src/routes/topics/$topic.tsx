@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BlogCard } from "@/components/patterns/blog-card";
-import { TagCloud } from "@/components/patterns/tag-cloud";
-import { getPostsByTag, getTagCounts } from "@/lib/blog";
+import { getPostsByTopic } from "@/lib/blog";
 
-function TagPage() {
-  const { tag, posts, allTags } = Route.useLoaderData();
+function TopicPage() {
+  const { topic, posts } = Route.useLoaderData();
 
   return (
     <>
@@ -30,14 +29,12 @@ function TagPage() {
           All posts
         </Link>
         <h1 className="font-bold text-3xl text-gray-900">
-          Posts tagged with &ldquo;{tag}&rdquo;
+          Posts about &ldquo;{topic}&rdquo;
         </h1>
         <p className="mt-2 text-gray-500">
           {posts.length} {posts.length === 1 ? "article" : "articles"}
         </p>
       </div>
-
-      <TagCloud tags={allTags} />
 
       <div className="grid gap-8 md:grid-cols-2">
         {posts.map((post) => (
@@ -48,12 +45,11 @@ function TagPage() {
   );
 }
 
-export const Route = createFileRoute("/tag/$tag")({
+export const Route = createFileRoute("/topics/$topic")({
   loader: ({ params }) => {
-    const tag = decodeURIComponent(params.tag);
-    const posts = getPostsByTag(tag, "en");
-    const allTags = getTagCounts("en");
-    return { tag, posts, allTags };
+    const topic = decodeURIComponent(params.topic);
+    const posts = getPostsByTopic(topic, "en");
+    return { topic, posts };
   },
-  component: TagPage,
+  component: TopicPage,
 });

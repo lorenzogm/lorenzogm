@@ -162,29 +162,32 @@ export async function getPostBySlug(
   }
 }
 
-export interface TagCount {
+export interface TopicCount {
   count: number;
-  tag: string;
+  topic: string;
 }
 
-export function getTagCounts(lang = "en"): TagCount[] {
+export function getTopicCounts(lang = "en"): TopicCount[] {
   const posts = getAllPosts(lang);
-  const tagMap = new Map<string, number>();
+  const topicMap = new Map<string, number>();
 
   for (const post of posts) {
     for (const tag of post.tags) {
-      tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
+      topicMap.set(tag, (topicMap.get(tag) || 0) + 1);
     }
   }
 
-  return Array.from(tagMap.entries())
-    .map(([tag, count]) => ({ tag, count }))
+  return Array.from(topicMap.entries())
+    .map(([topic, count]) => ({ topic, count }))
     .sort((a, b) => b.count - a.count);
 }
 
-export function getPostsByTag(tag: string, lang = "en"): BlogPostMetadata[] {
+export function getPostsByTopic(
+  topic: string,
+  lang = "en"
+): BlogPostMetadata[] {
   return getAllPosts(lang).filter((post) =>
-    post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
+    post.tags.some((t) => t.toLowerCase() === topic.toLowerCase())
   );
 }
 
