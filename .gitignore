@@ -43,3 +43,4 @@ yarn-error.log*
 *.tsbuildinfo
 
 private
+build_output.log

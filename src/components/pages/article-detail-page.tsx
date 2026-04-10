@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArticleContent } from "@/components/elements/article-content";
+import { RelatedArticles } from "@/components/patterns/related-articles";
+import { getRelatedPosts } from "@/lib/blog";
 import { formatDate } from "@/lib/utils";
 
 interface BlogPost {
@@ -9,6 +11,7 @@ interface BlogPost {
   excerpt?: string;
   image?: string;
   lang?: string;
+  slug?: string;
   tags?: string[];
   title: string;
 }
@@ -18,6 +21,11 @@ interface ArticleDetailPageProps {
 }
 
 export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
+  const lang = post.lang || "en";
+  const relatedPosts = post.slug && post.tags?.length
+    ? getRelatedPosts(post.slug, post.tags, lang)
+    : [];
+
   return (
     <>
       {/* Article Meta and Title */}
@@ -72,6 +80,8 @@ export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
       <article className="rounded-2xl border border-red-100/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm md:p-16">
         <ArticleContent content={post.content} />
       </article>
+
+      <RelatedArticles lang={lang} posts={relatedPosts} />
     </>
   );
 }

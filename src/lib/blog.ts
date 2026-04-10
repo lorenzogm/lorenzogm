@@ -191,6 +191,23 @@ export function getPostsByTopic(
   );
 }
 
+export function getRelatedPosts(
+  slug: string,
+  tags: string[],
+  lang = "en",
+  count = 3,
+): BlogPostMetadata[] {
+  const posts = getAllPosts(lang).filter((p) => p.slug !== slug);
+  const scored = posts.map((post) => {
+    const shared = post.tags.filter((t) =>
+      tags.some((tag) => tag.toLowerCase() === t.toLowerCase()),
+    ).length;
+    return { post, shared };
+  });
+  scored.sort((a, b) => b.shared - a.shared);
+  return scored.slice(0, count).map((s) => s.post);
+}
+
 export function getAllPostSlugs(lang = "en"): string[] {
   const files = getFilesForLang(lang);
   return Object.keys(files).map((filePath) => slugFromPath(filePath, lang));
