@@ -1,10 +1,10 @@
 import { Button } from "@/components/elements/button";
 
 interface ErrorPageProps {
-  title?: string;
   message?: string;
-  showRetryButton?: boolean;
   onRetry?: () => void;
+  showRetryButton?: boolean;
+  title?: string;
 }
 
 export function ErrorPage({
@@ -47,7 +47,7 @@ export function ErrorPage({
 
       <div className="flex flex-col justify-center gap-4 sm:flex-row">
         <Button
-          className="hover:-translate-y-0.5 inline-flex transform items-center rounded-xl bg-gradient-to-r from-red-600 to-red-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:from-red-700 hover:to-red-800 hover:shadow-xl"
+          className="inline-flex transform items-center rounded-xl bg-gradient-to-r from-red-600 to-red-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:from-red-700 hover:to-red-800 hover:shadow-xl"
           event={{ category: "Error Page", action: "Go Home" }}
           href="/"
         >
@@ -70,7 +70,7 @@ export function ErrorPage({
 
         {showRetryButton && (
           <Button
-            className="hover:-translate-y-0.5 inline-flex transform items-center rounded-xl border-2 border-red-200 bg-white px-6 py-3 font-semibold text-red-600 shadow-lg transition-all duration-200 hover:border-red-300 hover:bg-red-50 hover:shadow-xl"
+            className="inline-flex transform items-center rounded-xl border-2 border-red-200 bg-white px-6 py-3 font-semibold text-red-600 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:border-red-300 hover:bg-red-50 hover:shadow-xl"
             event={{ category: "Error Page", action: "Try Again" }}
             onClick={handleRetry}
           >

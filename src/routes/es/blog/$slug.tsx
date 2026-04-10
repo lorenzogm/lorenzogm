@@ -2,16 +2,18 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { ArticleDetailPage } from "@/components/pages/article-detail-page";
 import { getPostBySlug } from "@/lib/blog";
 
+function EsBlogPostPage() {
+  const post = Route.useLoaderData();
+  return <ArticleDetailPage post={post} />;
+}
+
 export const Route = createFileRoute("/es/blog/$slug")({
   loader: async ({ params }) => {
     const post = await getPostBySlug(params.slug, "es");
     if (!post) throw notFound();
     return post;
   },
-  component() {
-    const post = Route.useLoaderData();
-    return <ArticleDetailPage post={post} />;
-  },
+  component: EsBlogPostPage,
   notFoundComponent() {
     return (
       <div className="py-16 text-center">

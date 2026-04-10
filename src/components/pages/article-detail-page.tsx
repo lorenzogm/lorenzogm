@@ -2,13 +2,13 @@ import { ArticleContent } from "@/components/elements/article-content";
 import { formatDate } from "@/lib/utils";
 
 interface BlogPost {
-  title: string;
-  date: string;
   author: string;
-  excerpt?: string;
   content: string;
+  date: string;
+  excerpt?: string;
   image?: string;
   tags?: string[];
+  title: string;
 }
 
 interface ArticleDetailPageProps {
@@ -57,7 +57,9 @@ export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
           <img
             alt={post.title}
             className="absolute inset-0 h-full w-full object-cover"
+            height={768}
             src={post.image}
+            width={1365}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
         </div>

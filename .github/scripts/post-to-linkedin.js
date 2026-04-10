@@ -28,8 +28,8 @@ function parseFrontmatter(content) {
     const colonIdx = line.indexOf(":");
     if (colonIdx === -1) continue;
 
-    const key = line.substring(0, colonIdx).trim();
-    let value = line.substring(colonIdx + 1).trim();
+    const key = line.slice(0, colonIdx).trim();
+    let value = line.slice(colonIdx + 1).trim();
 
     // Strip surrounding quotes
     if (

@@ -3,8 +3,8 @@ import type { BlogPostMetadata } from "@/lib/blog";
 import { formatDate } from "@/lib/utils";
 
 interface BlogCardProps {
-  post: BlogPostMetadata;
   featured?: boolean;
+  post: BlogPostMetadata;
 }
 
 export function BlogCard({ post, featured = false }: BlogCardProps) {
@@ -13,7 +13,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
   const readMoreText = post.lang === "es" ? "Leer más" : "Read more";
 
   return (
-    <article className="hover:-translate-y-1 overflow-hidden rounded-xl border border-red-100/50 bg-white shadow-sm transition-all duration-300 hover:shadow-xl">
+    <article className="overflow-hidden rounded-xl border border-red-100/50 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       <Button
         className="block w-full text-left"
         event={{
@@ -30,7 +30,9 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
           <img
             alt={post.title}
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+            height={768}
             src={post.image}
+            width={1365}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
         </div>
