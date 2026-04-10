@@ -104,10 +104,15 @@ test.describe("No broken resources", () => {
     const failedRequests: string[] = [];
     page.on("requestfailed", (req) => {
       const url = req.url();
-      // Ignore encrypted: scheme URLs (analytics)
-      if (!url.startsWith("encrypted:")) {
-        failedRequests.push(`${req.failure()?.errorText}: ${url}`);
+      // Ignore non-app requests: encrypted: scheme (analytics), Vercel internals, aborted navigations
+      if (
+        url.startsWith("encrypted:") ||
+        url.includes("/.well-known/") ||
+        req.failure()?.errorText === "net::ERR_ABORTED"
+      ) {
+        return;
       }
+      failedRequests.push(`${req.failure()?.errorText}: ${url}`);
     });
 
     await page.goto("/");
