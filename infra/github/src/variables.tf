@@ -35,7 +35,7 @@ variable "repository" {
 }
 
 variable "branch_protections" {
-  type = optional(list(object({
+  type = list(object({
     branch_name                = string
     require_status_checks      = optional(bool, true)
     require_code_owner_reviews = optional(bool, true)
@@ -44,7 +44,8 @@ variable "branch_protections" {
     required_review_count      = optional(number, 1)
     require_linear_history     = optional(bool, true)
     restrict_who_can_push      = optional(bool, false)
-  })), [])
+  }))
+  default = []
   description = "Branch protection rules"
 }
 
@@ -62,11 +63,12 @@ variable "variables" {
 }
 
 variable "labels" {
-  type = optional(list(object({
+  type = list(object({
     name        = string
     description = optional(string)
     color       = optional(string, "0366d6")
-  })), [])
+  }))
+  default = []
   description = "Issue labels"
 }
 
@@ -77,11 +79,12 @@ variable "topics" {
 }
 
 variable "enable_security_and_analysis" {
-  type = optional(object({
+  type = object({
     enable_secret_scanning       = optional(bool, true)
     enable_secret_scanning_push_protection = optional(bool, true)
     enable_dependabot_alerts     = optional(bool, true)
     enable_dependabot_security_updates = optional(bool, true)
-  }), {})
+  })
+  default = {}
   description = "Security and dependency analysis settings"
 }
