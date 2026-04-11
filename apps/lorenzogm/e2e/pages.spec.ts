@@ -101,7 +101,7 @@ test.describe("Client-side navigation", () => {
       timeout: 15_000,
     });
     // Go back
-    await page.goBack();
+    await page.goBack({ waitUntil: "domcontentloaded" });
     await expect(page).toHaveURL(EN_URL_REGEX, { timeout: 15_000 });
   });
 });
