@@ -6,6 +6,9 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [
     tanstackStart({
+      spa: {
+        enabled: true,
+      },
       pages: [{ path: "/" }, { path: "/en/" }, { path: "/es/" }],
       prerender: {
         enabled: true,
