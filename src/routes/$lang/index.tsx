@@ -65,5 +65,38 @@ export const Route = createFileRoute("/$lang/")({
       lang,
     };
   },
+  head: ({ loaderData }) => {
+    const { lang } = loaderData;
+    const isEs = lang === "es";
+    const title = isEs
+      ? "Lorenzo GM – Blog sobre Desarrollo Web e Ingeniería de Software"
+      : "Lorenzo GM – Blog on Web Development & Software Engineering";
+    const description = isEs
+      ? "Artículos sobre desarrollo web, arquitectura frontend, React, TypeScript y prácticas modernas de ingeniería de software por Lorenzo GM."
+      : "Insights on web development, frontend architecture, React, TypeScript, and modern software engineering practices by Lorenzo GM.";
+    const url = `https://lorenzogm.com/${lang}/`;
+    const altLang = isEs ? "en" : "es";
+    const altUrl = `https://lorenzogm.com/${altLang}/`;
+
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:url", content: url },
+        { property: "og:type", content: "website" },
+        { property: "og:locale", content: isEs ? "es_ES" : "en_US" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+      ],
+      links: [
+        { rel: "canonical", href: url },
+        { rel: "alternate", hrefLang: lang, href: url },
+        { rel: "alternate", hrefLang: altLang, href: altUrl },
+        { rel: "alternate", hrefLang: "x-default", href: "https://lorenzogm.com/en/" },
+      ],
+    };
+  },
   component: Home,
 });

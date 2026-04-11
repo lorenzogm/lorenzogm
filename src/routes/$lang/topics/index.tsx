@@ -27,5 +27,27 @@ export const Route = createFileRoute("/$lang/topics/")({
     const lang = params.lang as Lang;
     return { topics: getTopicCounts(lang), lang };
   },
+  head: ({ loaderData }) => {
+    const { lang, topics } = loaderData;
+    const isEs = lang === "es";
+    const title = isEs
+      ? `Temas (${topics.length}) – Lorenzo GM`
+      : `Topics (${topics.length}) – Lorenzo GM`;
+    const description = isEs
+      ? "Explora todos los temas del blog: frontend, TypeScript, React, arquitectura y más."
+      : "Browse all blog topics: frontend, TypeScript, React, architecture and more.";
+    const url = `https://lorenzogm.com/${lang}/topics/`;
+
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+    };
+  },
   component: TopicsPage,
 });

@@ -104,7 +104,18 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1.0" },
       { name: "theme-color", content: "#dc2626" },
-      { title: "Lorenzo GM" },
+      { title: "Lorenzo GM – Blog on Web Development & Software Engineering" },
+      {
+        name: "description",
+        content:
+          "Insights on web development, frontend architecture, React, TypeScript, and modern software engineering practices by Lorenzo GM.",
+      },
+      { name: "author", content: "Lorenzo GM" },
+      { property: "og:site_name", content: "Lorenzo GM" },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:creator", content: "@lorenzogm" },
     ],
     links: [
       { rel: "stylesheet", href: globalsCss },

@@ -113,5 +113,27 @@ export const Route = createFileRoute("/$lang/search")({
 
     return { q: q || "", topic: topic || "", posts, topics, lang };
   },
+  head: ({ loaderData }) => {
+    const { q, lang, posts } = loaderData;
+    const isEs = lang === "es";
+    const title = q
+      ? `${isEs ? "Resultados para" : "Results for"} "${q}" – Lorenzo GM`
+      : `${isEs ? "Buscar artículos" : "Search articles"} – Lorenzo GM`;
+    const description = q
+      ? `${posts.length} ${isEs ? "artículos encontrados para" : "articles found for"} "${q}"`
+      : isEs
+        ? "Busca en todos los artículos del blog de Lorenzo GM."
+        : "Search through all blog articles by Lorenzo GM.";
+
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { name: "robots", content: "noindex, follow" },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+      ],
+    };
+  },
   component: SearchPage,
 });

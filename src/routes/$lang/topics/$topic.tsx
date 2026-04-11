@@ -57,5 +57,27 @@ export const Route = createFileRoute("/$lang/topics/$topic")({
     const posts = getPostsByTopic(topic, lang);
     return { topic, posts, lang };
   },
+  head: ({ loaderData }) => {
+    const { topic, posts, lang } = loaderData;
+    const isEs = lang === "es";
+    const title = isEs
+      ? `Artículos sobre ${topic} (${posts.length}) – Lorenzo GM`
+      : `Articles about ${topic} (${posts.length}) – Lorenzo GM`;
+    const description = isEs
+      ? `${posts.length} artículos sobre ${topic} en el blog de Lorenzo GM.`
+      : `${posts.length} articles about ${topic} on Lorenzo GM's blog.`;
+    const url = `https://lorenzogm.com/${lang}/topics/${encodeURIComponent(topic)}`;
+
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+    };
+  },
   component: TopicPage,
 });

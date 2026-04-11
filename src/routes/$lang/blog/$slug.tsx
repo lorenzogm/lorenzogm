@@ -34,6 +34,37 @@ export const Route = createFileRoute("/$lang/blog/$slug")({
     if (!post) throw notFound();
     return post;
   },
+  head: ({ loaderData }) => {
+    const post = loaderData;
+    const isEs = post.lang === "es";
+    const url = `https://lorenzogm.com/${post.lang}/blog/${post.slug}`;
+    const altLang = isEs ? "en" : "es";
+    const altUrl = `https://lorenzogm.com/${altLang}/blog/${post.slug}`;
+
+    return {
+      meta: [
+        { title: `${post.title} – Lorenzo GM` },
+        { name: "description", content: post.excerpt },
+        { name: "author", content: post.author },
+        { property: "og:title", content: post.title },
+        { property: "og:description", content: post.excerpt },
+        { property: "og:url", content: url },
+        { property: "og:type", content: "article" },
+        { property: "og:image", content: post.image },
+        { property: "og:locale", content: isEs ? "es_ES" : "en_US" },
+        { property: "article:published_time", content: post.date },
+        { property: "article:author", content: post.author },
+        { name: "twitter:title", content: post.title },
+        { name: "twitter:description", content: post.excerpt },
+        { name: "twitter:image", content: post.image },
+      ],
+      links: [
+        { rel: "canonical", href: url },
+        { rel: "alternate", hrefLang: post.lang, href: url },
+        { rel: "alternate", hrefLang: altLang, href: altUrl },
+      ],
+    };
+  },
   component: BlogPostPage,
   notFoundComponent: NotFoundComponent,
 });

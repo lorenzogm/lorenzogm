@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsx scripts/generate-sitemap.ts && vite build",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "test:e2e": "playwright test",
@@ -41,6 +41,7 @@
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.1",
     "tailwindcss": "4.2.2",
+    "tsx": "4.21.0",
     "typescript": "6.0.2",
     "ultracite": "7.4.4",
     "vite": "8.0.8"
