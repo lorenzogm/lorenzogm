@@ -257,11 +257,13 @@ jobs:
           node-version: "22"
           cache: "pnpm"
 
-      - name: Load Vercel credentials from encrypted .env
+      - name: Load secrets from encrypted .env
         run: |
           pnpm dlx @dotenvx/dotenvx run -- sh -c '
             echo "VERCEL_TOKEN=$VERCEL_TOKEN" >> "$GITHUB_ENV"
             echo "VERCEL_ORG_ID=$VERCEL_ORG_ID" >> "$GITHUB_ENV"
+            echo "UMAMI_WEBSITE_ID=$UMAMI_WEBSITE_ID" >> "$GITHUB_ENV"
+            echo "UMAMI_SCRIPT_SRC=$UMAMI_SCRIPT_SRC" >> "$GITHUB_ENV"
           '
 
       - name: Resolve Vercel Project ID
@@ -383,11 +385,13 @@ jobs:
           node-version: "22"
           cache: "pnpm"
 
-      - name: Load Vercel credentials from encrypted .env
+      - name: Load secrets from encrypted .env
         run: |
           pnpm dlx @dotenvx/dotenvx run -- sh -c '
             echo "VERCEL_TOKEN=$VERCEL_TOKEN" >> "$GITHUB_ENV"
             echo "VERCEL_ORG_ID=$VERCEL_ORG_ID" >> "$GITHUB_ENV"
+            echo "UMAMI_WEBSITE_ID=$UMAMI_WEBSITE_ID" >> "$GITHUB_ENV"
+            echo "UMAMI_SCRIPT_SRC=$UMAMI_SCRIPT_SRC" >> "$GITHUB_ENV"
           '
 
       - name: Resolve Vercel Project ID
