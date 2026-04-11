@@ -86,8 +86,8 @@ function NotFoundComponent() {
           <div className="space-y-4">
             <Link
               className="inline-block rounded-lg bg-blue-500 px-6 py-3 text-white transition-colors hover:bg-blue-600"
-              to="/$lang"
               params={{ lang: "en" }}
+              to="/$lang"
             >
               Go Home
             </Link>
