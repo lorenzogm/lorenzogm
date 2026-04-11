@@ -1,7 +1,7 @@
 ---
 title: Corrección de Errores con IA usando Servidores MCP de Datadog y SonarQube
 date: 2025-06-17
-tag: AI, Tooling, Error Handling, MCP
+tag: AI, Tooling, MCP
 description: Aprende cómo los agentes de IA pueden detectar, analizar y corregir errores automáticamente usando servidores MCP de Datadog y SonarQube, revolucionando los flujos de trabajo de desarrollo
 image: https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80
 author: Lorenzo GM

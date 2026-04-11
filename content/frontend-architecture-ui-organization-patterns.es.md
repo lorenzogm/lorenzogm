@@ -2,7 +2,7 @@
 title: "Organización UI en Monorepo: Eligiendo Entre Patrones de Colocalización y Workspace"
 date: "2025-06-24"
 description: "Navegando decisiones arquitectónicas en monorepos con múltiples workspaces: cuándo colocar componentes UI en tu aplicación web versus separarlos en librerías UI dedicadas."
-tags: ["Frontend", "Architecture", "Monorepo", "UI", "Storybook"]
+tags: ["Frontend", "Architecture", "UI", "Storybook"]
 image: "https://miro.medium.com/v2/resize:fit:1200/1*e_Aq_GnUvYTFhel0tDT_OQ.jpeg"
 ---
 

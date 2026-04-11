@@ -2,7 +2,7 @@
 title: "Construyendo un Modelo de Contenido Flexible en Contentful: Guía Completa"
 slug: "contentful-content-model"
 date: "2025-07-07"
-tags: ["Contentful", "CMS", "Content Modeling"]
+tags: ["Contentful", "CMS"]
 excerpt: "Aprende a diseñar un modelo de contenido modular y flexible en Contentful que soporte sitios web complejos manteniendo los tipos de contenido mínimos y escalables."
 image: "https://images.ctfassets.net/fo9twyrwpveg/HgNQRXmn2a670TRvz8rPd/3eeefeed0bf70c11ad628e14aeb081e6/March_Launch_Press_Release_Newsroom_1800x945.png?fm=jpg&w=666&q=90"
 ---

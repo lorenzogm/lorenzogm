@@ -2,7 +2,7 @@
 title: "Creación de Dashboards de Monitorización en Azure con MCP y Terraform"
 date: "2025-06-25"
 description: "Aprende a crear dashboards de monitorización completos en Azure usando Infraestructura como Código con Terraform, potenciados por el Model Context Protocol (MCP) para acceso en tiempo real a la documentación del proveedor de Azure."
-tags: ["Azure", "Terraform", "Monitoring", "MCP", "Infrastructure as Code", "Dashboards", "Container Apps"]
+tags: ["Azure", "Terraform", "MCP"]
 image: "https://www.digitalclassworld.com/blog/wp-content/uploads/2023/02/What-is-Terraform-.png"
 ---
 

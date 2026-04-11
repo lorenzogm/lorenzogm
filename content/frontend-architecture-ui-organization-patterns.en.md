@@ -2,7 +2,7 @@
 title: "Monorepo UI Organization: Choosing Between Collocated and Workspace Patterns"
 date: "2025-06-24"
 description: "Navigating architectural decisions in monorepos with multiple workspaces: when to colocate UI components in your web app versus separating them into dedicated UI libraries."
-tags: ["Frontend", "Architecture", "Monorepo", "UI", "Storybook"]
+tags: ["Frontend", "Architecture", "UI", "Storybook"]
 image: "https://miro.medium.com/v2/resize:fit:1200/1*e_Aq_GnUvYTFhel0tDT_OQ.jpeg"
 ---
 

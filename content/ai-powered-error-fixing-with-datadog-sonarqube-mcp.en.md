@@ -1,7 +1,7 @@
 ---
 title: AI-Powered Error Fixing with Datadog and SonarQube MCP Servers
 date: 2025-06-17
-tag: AI, Tooling, Error Handling, MCP
+tag: AI, Tooling, MCP
 description: Learn how AI agents can automatically detect, analyze, and fix errors using Datadog and SonarQube MCP servers, revolutionizing development workflows
 image: https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80
 author: Lorenzo GM

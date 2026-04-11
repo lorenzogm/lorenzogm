@@ -3,7 +3,7 @@ title: "Desarrollo Web Móvil y de Juegos con GitHub Copilot"
 date: "2025-08-04"
 excerpt: "Cómo unas vacaciones sin laptop me llevó a descubrir el poder del desarrollo móvil con GitHub Copilot. Desde dictado por voz hasta codificación asistida por IA, aprende cómo las limitaciones despertaron la innovación en mi flujo de desarrollo."
 author: "Lorenzo GM"
-tags: ["GitHub Copilot", "Mobile Development", "AI", "Automation", "Frontend", "Game Development"]
+tags: ["GitHub Copilot", "Mobile Development", "AI", "Automation", "Frontend"]
 image: "https://github.githubassets.com/assets/copilot-chat-ee053e45453d.png"
 ---
 

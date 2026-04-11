@@ -1,7 +1,7 @@
 ---
 title: Why don't we use Styled Components?
 date: 2022-03-07
-tag: Project Structure, Frontend, Styling
+tag: Project Structure, Frontend
 description: Exploring alternatives to styled-components and CSS-in-JS solutions
 image: https://miro.medium.com/v2/resize:fit:652/1*N0XV3gco7Ed4brMoxwdjVg.png
 ---

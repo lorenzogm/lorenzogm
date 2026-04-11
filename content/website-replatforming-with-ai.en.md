@@ -1,7 +1,7 @@
 ---
 title: Website Replatforming with AI - A Three-Flow Approach
 date: 2025-06-04
-tag: AI, Replatforming, MCP, Figma, Contentful
+tag: AI, MCP, Contentful
 description: Streamlining website migration using AI-powered tools and MCP servers for UI design, content modeling, and content migration
 image: https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80
 ---

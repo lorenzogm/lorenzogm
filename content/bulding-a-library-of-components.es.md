@@ -1,7 +1,7 @@
 ---
 title: Construyendo una librería de componentes
 date: 2022-08-02
-tag: Frontend, Design System, UI
+tag: Frontend, UI
 description: Construir tu propia librería de componentes es algo en lo que muchos ingenieros y empresas han pensado en algún momento. En nuestro equipo, hemos pasado por ese proceso y el objetivo de este documento es compartir nuestra experiencia.
 image: https://images.unsplash.com/photo-1618477388954-7852f32655ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1484&q=80
 ---

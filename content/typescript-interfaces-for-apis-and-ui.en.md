@@ -2,7 +2,7 @@
 title: "TypeScript Interfaces for APIs and UI: Building Type-Safe Frontend Applications"
 date: "2025-06-24"
 description: "Learn how to create robust TypeScript interfaces for different data sources in your frontend application, ensuring type safety across CMS, Commerce, PIM, and Search systems."
-tags: ["TypeScript", "Frontend", "API", "Type Safety", "Architecture"]
+tags: ["TypeScript", "Frontend", "API", "Architecture"]
 image: "https://miro.medium.com/v2/resize:fit:1024/1*ud0sEpluCXzmf9Jr7x37UA.png"
 ---
 

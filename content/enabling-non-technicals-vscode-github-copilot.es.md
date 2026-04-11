@@ -1,7 +1,7 @@
 ---
 title: "Capacitando a Perfiles No Técnicos con VSCode y GitHub Copilot"
 date: "2026-04-14"
-tag: AI, GitHub Copilot, Collaboration, Design, Development
+tag: AI, GitHub Copilot, Design, Development
 description: Cómo un diseñador construyó un prototipo B2B completo con datos simulados aprovechando VSCode y el modo agente de GitHub Copilot, sin necesidad de un perfil técnico avanzado.
 image: https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80
 author: Lorenzo GM
