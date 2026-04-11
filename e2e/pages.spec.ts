@@ -81,7 +81,7 @@ test.describe("Spanish blog post pages", () => {
 
 test.describe("Client-side navigation", () => {
   test("navigates from home to an article and back", async ({ page }) => {
-    await page.goto("/", { waitUntil: "domcontentloaded" });
+    await page.goto("/en", { waitUntil: "domcontentloaded" });
     // Wait for blog cards to render
     await expect(page.locator("article").first()).toBeVisible({
       timeout: 15_000,
