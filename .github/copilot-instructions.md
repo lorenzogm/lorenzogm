@@ -5,10 +5,12 @@
 This is a React blog website project with the following characteristics:
 
 ## Project Structure
+- Monorepo managed with Turborepo and pnpm workspaces
+- Web app lives in `apps/lorenzogm/`
 - Built with Vite, React 19, and TypeScript
 - Uses TanStack Router for routing
 - Styled with Tailwind CSS v4
-- Blog content stored as Markdown files in `content/`
+- Blog content stored as Markdown files in `apps/lorenzogm/content/`
 
 ## Key Features
 - Blog post listing on the home page

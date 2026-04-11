@@ -70,7 +70,7 @@ jobs:
           else
             echo "infra-changed=false" >> $GITHUB_OUTPUT
           fi
-          if git diff --name-only HEAD~1 -- src/ e2e/ content/ public/ package.json pnpm-lock.yaml vite.config.ts playwright.config.ts vercel.json | grep -q .; then
+          if git diff --name-only HEAD~1 -- apps/lorenzogm/ package.json pnpm-lock.yaml | grep -q .; then
             echo "app-changed=true" >> $GITHUB_OUTPUT
           else
             echo "app-changed=false" >> $GITHUB_OUTPUT
@@ -262,8 +262,8 @@ jobs:
           pnpm dlx @dotenvx/dotenvx run -- sh -c '
             echo "VERCEL_TOKEN=$VERCEL_TOKEN" >> "$GITHUB_ENV"
             echo "VERCEL_ORG_ID=$VERCEL_ORG_ID" >> "$GITHUB_ENV"
-            echo "UMAMI_WEBSITE_ID=$UMAMI_WEBSITE_ID" >> .env.local
-            echo "UMAMI_SCRIPT_SRC=$UMAMI_SCRIPT_SRC" >> .env.local
+            echo "UMAMI_WEBSITE_ID=$UMAMI_WEBSITE_ID" >> apps/lorenzogm/.env.local
+            echo "UMAMI_SCRIPT_SRC=$UMAMI_SCRIPT_SRC" >> apps/lorenzogm/.env.local
           '
 
       - name: Resolve Vercel Project ID
@@ -323,7 +323,7 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium
+        run: pnpm --filter lorenzogm-web exec playwright install --with-deps chromium
 
       - name: Wait for Preview URL readiness
         run: |
@@ -345,7 +345,7 @@ jobs:
           exit 1
 
       - name: Run E2E Tests
-        run: pnpm run test:e2e
+        run: pnpm --filter lorenzogm-web run test:e2e
         env:
           PLAYWRIGHT_BASE_URL: ${{ needs.deploy-preview.outputs.preview-url }}
           CI: true
@@ -356,8 +356,8 @@ jobs:
         with:
           name: visual-test-results
           path: |
-            test-results/
-            playwright-report/
+            apps/lorenzogm/test-results/
+            apps/lorenzogm/playwright-report/
           retention-days: 7
 
   deploy-production:
@@ -390,8 +390,8 @@ jobs:
           pnpm dlx @dotenvx/dotenvx run -- sh -c '
             echo "VERCEL_TOKEN=$VERCEL_TOKEN" >> "$GITHUB_ENV"
             echo "VERCEL_ORG_ID=$VERCEL_ORG_ID" >> "$GITHUB_ENV"
-            echo "UMAMI_WEBSITE_ID=$UMAMI_WEBSITE_ID" >> .env.local
-            echo "UMAMI_SCRIPT_SRC=$UMAMI_SCRIPT_SRC" >> .env.local
+            echo "UMAMI_WEBSITE_ID=$UMAMI_WEBSITE_ID" >> apps/lorenzogm/.env.local
+            echo "UMAMI_SCRIPT_SRC=$UMAMI_SCRIPT_SRC" >> apps/lorenzogm/.env.local
           '
 
       - name: Resolve Vercel Project ID

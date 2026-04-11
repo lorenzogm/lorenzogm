@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/turbo/schema.json",
+  "ui": "stream",
+  "tasks": {
+    "dev": {
+      "dependsOn": ["^build"],
+      "persistent": true,
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"],
+      "outputLogs": "new-only"
+    },
+    "//#check:linter": {
+      "dependsOn": ["^build"],
+      "outputLogs": "new-only"
+    },
+    "check:types": {
+      "dependsOn": ["^build"],
+      "outputLogs": "new-only"
+    },
+    "//#fix": {
+      "cache": false
+    }
+  }
+}

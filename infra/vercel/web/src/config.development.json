@@ -4,6 +4,7 @@
     "project_domains": [],
     "project": {
       "name": "lorenzogm-web",
+      "root_directory": "apps/lorenzogm",
       "build_command": "npm run build",
       "output_directory": "dist",
       "framework": null,

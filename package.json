@@ -2,49 +2,21 @@
   "name": "lorenzogm",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "engines": {
     "node": "24"
   },
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "dev": "vite",
-    "build": "tsx scripts/generate-sitemap.ts && vite build",
-    "typecheck": "tsc --noEmit",
-    "preview": "vite preview",
-    "test:e2e": "playwright test",
-    "check": "pnpm build && pnpm check:linter && pnpm check:types",
+    "dev": "turbo run dev",
+    "build": "turbo run build --continue",
+    "check": "turbo run build check:linter check:types --continue",
     "check:linter": "ultracite check",
-    "check:types": "pnpm typecheck",
+    "check:types": "turbo run check:types --continue",
     "fix": "ultracite fix"
-  },
-  "dependencies": {
-    "@tailwindcss/typography": "0.5.19",
-    "@tanstack/react-router": "1.168.10",
-    "@tanstack/react-start": "1.167.16",
-    "buffer": "6.0.3",
-    "date-fns": "4.1.0",
-    "gray-matter": "4.0.3",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
-    "remark": "15.0.1",
-    "remark-gfm": "4.0.1",
-    "remark-html": "16.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.11",
-    "@dotenvx/dotenvx": "1.61.0",
-    "@playwright/test": "1.59.1",
-    "@tailwindcss/vite": "4.2.2",
-    "@tanstack/router-plugin": "1.167.12",
-    "@types/node": "25.6.0",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "6.0.1",
-    "tailwindcss": "4.2.2",
-    "tsx": "4.21.0",
-    "typescript": "6.0.2",
-    "ultracite": "7.4.4",
-    "vite": "8.0.8"
-  },
-  "packageManager": "pnpm@10.33.0"
+    "turbo": "2.5.6",
+    "ultracite": "7.4.4"
+  }
 }
