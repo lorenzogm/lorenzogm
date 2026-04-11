@@ -46,6 +46,7 @@ function TopicList({
             key={t}
             onClick={onSelect}
             params={params}
+            resetScroll={false}
             search={(prev) => ({
               ...prev,
               topic: isActive ? undefined : t,
