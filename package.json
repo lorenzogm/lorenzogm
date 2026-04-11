@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "22"
+    "node": "24"
   },
   "scripts": {
     "dev": "vite",
@@ -45,5 +45,5 @@
     "ultracite": "7.4.4",
     "vite": "8.0.8"
   },
-  "packageManager": "pnpm@10.5.0"
+  "packageManager": "pnpm@10.33.0"
 }
