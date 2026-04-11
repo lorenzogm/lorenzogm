@@ -66,6 +66,7 @@ export const Route = createFileRoute("/$lang/")({
     };
   },
   head: ({ loaderData }) => {
+    if (!loaderData) return {};
     const { lang } = loaderData;
     const isEs = lang === "es";
     const title = isEs
@@ -94,7 +95,11 @@ export const Route = createFileRoute("/$lang/")({
         { rel: "canonical", href: url },
         { rel: "alternate", hrefLang: lang, href: url },
         { rel: "alternate", hrefLang: altLang, href: altUrl },
-        { rel: "alternate", hrefLang: "x-default", href: "https://lorenzogm.com/en/" },
+        {
+          rel: "alternate",
+          hrefLang: "x-default",
+          href: "https://lorenzogm.com/en/",
+        },
       ],
     };
   },

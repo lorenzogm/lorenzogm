@@ -35,6 +35,7 @@ export const Route = createFileRoute("/$lang/blog/$slug")({
     return post;
   },
   head: ({ loaderData }) => {
+    if (!loaderData) return {};
     const post = loaderData;
     const isEs = post.lang === "es";
     const url = `https://lorenzogm.com/${post.lang}/blog/${post.slug}`;

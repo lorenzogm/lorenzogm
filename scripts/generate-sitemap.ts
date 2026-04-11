@@ -62,7 +62,7 @@ function buildSitemap(): string {
     <loc>${loc}</loc>
     <lastmod>${lastmod}</lastmod>
     <priority>${priority}</priority>
-  </url>`,
+  </url>`
     )
     .join("\n");
 

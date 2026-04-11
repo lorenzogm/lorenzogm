@@ -58,6 +58,7 @@ export const Route = createFileRoute("/$lang/topics/$topic")({
     return { topic, posts, lang };
   },
   head: ({ loaderData }) => {
+    if (!loaderData) return {};
     const { topic, posts, lang } = loaderData;
     const isEs = lang === "es";
     const title = isEs

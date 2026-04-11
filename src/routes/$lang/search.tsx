@@ -114,6 +114,7 @@ export const Route = createFileRoute("/$lang/search")({
     return { q: q || "", topic: topic || "", posts, topics, lang };
   },
   head: ({ loaderData }) => {
+    if (!loaderData) return {};
     const { q, lang, posts } = loaderData;
     const isEs = lang === "es";
     const title = q
