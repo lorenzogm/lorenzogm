@@ -2,21 +2,21 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 
 interface TopicItem {
-  topic: string;
   count: number;
+  topic: string;
 }
 
 interface TopicFilterProps {
-  topics: TopicItem[];
   activeTopic: string;
-  searchRoute: string;
-  params?: Record<string, string>;
   labels: {
     filterByTopic: string;
     filters: string;
     apply: string;
     clearAll: string;
   };
+  params?: Record<string, string>;
+  searchRoute: string;
+  topics: TopicItem[];
 }
 
 function TopicList({
@@ -55,9 +55,7 @@ function TopicList({
             <span>{t}</span>
             <span
               className={`rounded-full px-2 py-0.5 text-xs ${
-                isActive
-                  ? "bg-red-500 text-white"
-                  : "bg-red-100 text-red-700"
+                isActive ? "bg-red-500 text-white" : "bg-red-100 text-red-700"
               }`}
             >
               {count}
