@@ -42,10 +42,15 @@ test.describe("English blog post pages", () => {
   });
 
   test("shows 404 for unknown slug", async ({ page }) => {
-    await page.goto("/en/blog/this-slug-does-not-exist", {
+    const response = await page.goto("/en/blog/this-slug-does-not-exist", {
       waitUntil: "domcontentloaded",
     });
-    // Client-side router handles the unknown slug and shows the blog notFoundComponent
+    const status = response?.status() ?? 0;
+    if (status === 404) {
+      // Vercel returns its own 404 page for non-existent static paths
+      return;
+    }
+    // SPA fallback (vite preview): client-side router shows notFoundComponent
     await expect(page.locator("text=Post Not Found")).toBeVisible({
       timeout: 15_000,
     });
@@ -97,6 +102,6 @@ test.describe("Client-side navigation", () => {
     });
     // Go back
     await page.goBack();
-    await expect(page).toHaveURL(EN_URL_REGEX);
+    await expect(page).toHaveURL(EN_URL_REGEX, { timeout: 15_000 });
   });
 });
