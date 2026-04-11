@@ -262,8 +262,8 @@ jobs:
           pnpm dlx @dotenvx/dotenvx run -- sh -c '
             echo "VERCEL_TOKEN=$VERCEL_TOKEN" >> "$GITHUB_ENV"
             echo "VERCEL_ORG_ID=$VERCEL_ORG_ID" >> "$GITHUB_ENV"
-            echo "UMAMI_WEBSITE_ID=$UMAMI_WEBSITE_ID" >> "$GITHUB_ENV"
-            echo "UMAMI_SCRIPT_SRC=$UMAMI_SCRIPT_SRC" >> "$GITHUB_ENV"
+            echo "UMAMI_WEBSITE_ID=$UMAMI_WEBSITE_ID" >> .env.local
+            echo "UMAMI_SCRIPT_SRC=$UMAMI_SCRIPT_SRC" >> .env.local
           '
 
       - name: Resolve Vercel Project ID
@@ -390,8 +390,8 @@ jobs:
           pnpm dlx @dotenvx/dotenvx run -- sh -c '
             echo "VERCEL_TOKEN=$VERCEL_TOKEN" >> "$GITHUB_ENV"
             echo "VERCEL_ORG_ID=$VERCEL_ORG_ID" >> "$GITHUB_ENV"
-            echo "UMAMI_WEBSITE_ID=$UMAMI_WEBSITE_ID" >> "$GITHUB_ENV"
-            echo "UMAMI_SCRIPT_SRC=$UMAMI_SCRIPT_SRC" >> "$GITHUB_ENV"
+            echo "UMAMI_WEBSITE_ID=$UMAMI_WEBSITE_ID" >> .env.local
+            echo "UMAMI_SCRIPT_SRC=$UMAMI_SCRIPT_SRC" >> .env.local
           '
 
       - name: Resolve Vercel Project ID
