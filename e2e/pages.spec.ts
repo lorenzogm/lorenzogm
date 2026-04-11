@@ -45,7 +45,12 @@ test.describe("English blog post pages", () => {
     await page.goto("/en/blog/this-slug-does-not-exist", {
       waitUntil: "domcontentloaded",
     });
-    await expect(page.locator("text=Post Not Found").first()).toBeVisible({
+    // On a fully static site, unknown slugs get the root 404 page
+    const notFoundLocator = page
+      .locator("text=Page Not Found")
+      .or(page.locator("text=Post Not Found"))
+      .first();
+    await expect(notFoundLocator).toBeVisible({
       timeout: 15_000,
     });
   });
