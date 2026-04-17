@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BlogCard } from "@/components/patterns/blog-card";
 import { TopicFilter } from "@/components/patterns/topic-filter";
-import { getAllPosts, searchPosts } from "@/lib/blog";
+import { getAllPosts, isPublished, searchPosts } from "@/lib/blog";
 import { type Lang, t } from "@/lib/i18n";
 
 interface SearchParams {
@@ -10,7 +10,8 @@ interface SearchParams {
 }
 
 function SearchPage() {
-  const { q, topic, posts, topics, lang } = Route.useLoaderData();
+  const { q, topic, posts: allPosts, topics, lang } = Route.useLoaderData();
+  const posts = allPosts.filter((p) => isPublished(p.date));
 
   return (
     <>

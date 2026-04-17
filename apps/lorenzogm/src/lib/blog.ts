@@ -30,6 +30,13 @@ function parseLocalDate(dateStr: string): Date {
   return new Date(y, m - 1, d);
 }
 
+/** Check if a post date is today or in the past (i.e. published). */
+export function isPublished(dateStr: string): boolean {
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  return parseLocalDate(dateStr) <= now;
+}
+
 function getFilesForLang(lang: string): Record<string, string> {
   return lang === "es" ? esMarkdownFiles : enMarkdownFiles;
 }
@@ -99,15 +106,8 @@ export function getAllPosts(lang = "en"): BlogPostMetadata[] {
     }
   }
 
-  // Filter out posts with future dates (scheduled posts)
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  const publishedPosts = allPostsData.filter(
-    (post) => parseLocalDate(post.date) <= now
-  );
-
   // Sort posts by date (newest first)
-  return publishedPosts.sort((a, b) => {
+  return allPostsData.sort((a, b) => {
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);
     return dateB.getTime() - dateA.getTime();
@@ -142,13 +142,6 @@ export async function getPostBySlug(
       `${matterResult.content.slice(0, 150)}...`;
 
     const postDate = normalizeDate(matterResult.data.date);
-
-    // Do not return posts with future dates (scheduled posts)
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    if (parseLocalDate(postDate) > now) {
-      return null;
-    }
 
     return {
       slug,

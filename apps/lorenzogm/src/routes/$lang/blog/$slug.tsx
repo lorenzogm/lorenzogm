@@ -1,10 +1,13 @@
 import { createFileRoute, notFound, useParams } from "@tanstack/react-router";
 import { ArticleDetailPage } from "@/components/pages/article-detail-page";
-import { getPostBySlug } from "@/lib/blog";
+import { getPostBySlug, isPublished } from "@/lib/blog";
 import { type Lang, t } from "@/lib/i18n";
 
 function BlogPostPage() {
   const post = Route.useLoaderData();
+  if (!isPublished(post.date)) {
+    return <NotFoundComponent />;
+  }
   return <ArticleDetailPage post={post} />;
 }
 

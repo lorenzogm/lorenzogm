@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArticleContent } from "@/components/elements/article-content";
 import { RelatedArticles } from "@/components/patterns/related-articles";
-import { getRelatedPosts } from "@/lib/blog";
+import { getRelatedPosts, isPublished } from "@/lib/blog";
 import { formatDate } from "@/lib/utils";
 
 interface BlogPost {
@@ -24,7 +24,9 @@ export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
   const lang = post.lang || "en";
   const relatedPosts =
     post.slug && post.tags?.length
-      ? getRelatedPosts(post.slug, post.tags, lang)
+      ? getRelatedPosts(post.slug, post.tags, lang).filter((p) =>
+          isPublished(p.date)
+        )
       : [];
 
   return (

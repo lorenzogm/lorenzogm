@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lorenzogm.com/en/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-17</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://lorenzogm.com/es/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-17</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://lorenzogm.com/en/topics/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-17</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lorenzogm.com/es/topics/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-17</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -48,6 +48,11 @@
   <url>
     <loc>https://lorenzogm.com/en/blog/blog-with-nextjs-and-contentful</loc>
     <lastmod>2020-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lorenzogm.com/en/blog/bmad-ui-a-visual-interface-for-ai-driven-development</loc>
+    <lastmod>2026-04-17</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -203,6 +208,11 @@
   <url>
     <loc>https://lorenzogm.com/es/blog/blog-with-nextjs-and-contentful</loc>
     <lastmod>2020-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lorenzogm.com/es/blog/bmad-ui-a-visual-interface-for-ai-driven-development</loc>
+    <lastmod>2026-04-17</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
