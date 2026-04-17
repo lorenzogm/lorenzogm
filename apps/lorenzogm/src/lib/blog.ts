@@ -24,6 +24,12 @@ const esMarkdownFiles = import.meta.glob("/content/*.es.md", {
 
 const CONTENT_PREFIX_REGEX = /^\/content\//;
 
+/** Parse a YYYY-MM-DD string as local midnight (not UTC). */
+function parseLocalDate(dateStr: string): Date {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
 function getFilesForLang(lang: string): Record<string, string> {
   return lang === "es" ? esMarkdownFiles : enMarkdownFiles;
 }
@@ -97,7 +103,7 @@ export function getAllPosts(lang = "en"): BlogPostMetadata[] {
   const now = new Date();
   now.setHours(0, 0, 0, 0);
   const publishedPosts = allPostsData.filter(
-    (post) => new Date(post.date) <= now
+    (post) => parseLocalDate(post.date) <= now
   );
 
   // Sort posts by date (newest first)
@@ -140,7 +146,7 @@ export async function getPostBySlug(
     // Do not return posts with future dates (scheduled posts)
     const now = new Date();
     now.setHours(0, 0, 0, 0);
-    if (new Date(postDate) > now) {
+    if (parseLocalDate(postDate) > now) {
       return null;
     }
 
