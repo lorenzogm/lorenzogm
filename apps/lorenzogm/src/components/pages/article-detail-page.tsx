@@ -68,15 +68,14 @@ export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
       </div>
 
       {post.image && (
-        <div className="relative mb-16 h-72 w-full overflow-hidden rounded-2xl shadow-2xl md:h-96">
+        <div className="mb-16 overflow-hidden rounded-2xl bg-white shadow-2xl">
           <img
             alt={post.title}
-            className="absolute inset-0 h-full w-full object-cover"
-            height={768}
+            className="block h-auto w-full"
+            height={630}
             src={post.image}
-            width={1365}
+            width={1200}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
         </div>
       )}
 
