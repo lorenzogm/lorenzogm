@@ -1,19 +1,19 @@
 ---
-title: "BMAD para Equipos de Software: Fases + RACI"
+title: "Desarrollo Agentic para Equipos de Software: Fases + RACI"
 date: "2026-05-04"
-tag: AI, BMAD, Process
-description: Cómo repartir las skills de BMAD entre project manager, business analyst, architect, designer, development y testing con una matriz RACI clara y una forma práctica de incorporar TEA sin perder trazabilidad.
+tag: AI, Agentic Development, Process
+description: Cómo estructurar desarrollo agentic en equipos de software con fases claras, ownership por rol, una matriz RACI y un loop de calidad que mantiene la trazabilidad dentro del flujo.
 image: "/bmad-phases-raci-summary-es.svg"
 author: Lorenzo GM
 ---
 
-# BMAD para Equipos de Software: Fases + RACI
+# Desarrollo Agentic para Equipos de Software: Fases + RACI
 
 Cuando un equipo empieza a trabajar con IA, el problema no suele ser si el modelo genera código. El problema real es otro: quién debe ejecutar cada workflow, en qué orden, cuánto contexto hay que preparar antes de delegar, y en qué momentos hace falta intervención humana.
 
-Ahí es donde BMAD encaja bien. No porque invente pasos nuevos, sino porque da estructura a pasos que ya existían en un desarrollo serio: discovery, requisitos, diseño, arquitectura, stories, implementación, revisión y testing.
+Ahí es donde el desarrollo agentic necesita un modelo operativo de verdad. BMAD encaja bien aquí no porque invente pasos nuevos, sino porque da estructura a pasos que ya existían en un desarrollo serio: discovery, requisitos, diseño, arquitectura, stories, implementación, revisión y testing.
 
-En este artículo explico cómo usar BMAD como flujo de equipo para seis roles habituales:
+En este artículo uso BMAD como ejemplo concreto de desarrollo agentic para seis roles habituales:
 
 - Business Analyst
 - Project Manager
@@ -22,11 +22,11 @@ En este artículo explico cómo usar BMAD como flujo de equipo para seis roles h
 - Developer
 - Tester
 
-La idea no es tratar BMAD como una lista de prompts. La idea es tratarlo como un sistema operativo de trabajo compartido.
+La idea no es tratar el desarrollo agentic como una lista de prompts. La idea es tratarlo como un sistema operativo de trabajo compartido, con ownership claro, artefactos claros y loops de feedback claros.
 
 ## La Idea Principal
 
-BMAD oficial organiza el trabajo en **cuatro fases**:
+Una forma práctica de estructurar desarrollo agentic es organizar el trabajo por fases. En BMAD, ese modelo aparece como **cuatro fases**:
 
 1. **Analysis**
 2. **Planning**
@@ -45,7 +45,7 @@ No buscamos meter burocracia. Buscamos ganar velocidad y eficiencia sin comprome
 
 ## Por Qué Este Flujo Funciona
 
-La ventaja práctica de BMAD no es solo ordenar roles. La ventaja real es que acelera decisiones y evita retrabajo porque cada fase tiene un objetivo claro, un set de workflows reconocible y una forma explícita de volver atrás cuando aparece feedback.
+La ventaja práctica del desarrollo agentic no es solo repartir trabajo entre personas e IA. La ventaja real es que acelera decisiones y evita retrabajo cuando cada fase tiene un objetivo claro, un set de workflows reconocible y una forma explícita de volver atrás cuando aparece feedback.
 
 Eso traduce la operación del equipo en tres beneficios concretos:
 
@@ -299,8 +299,8 @@ Si tuviera que resumir este modelo en una secuencia práctica, sería esta:
 
 La mejor forma de perder calidad con IA no es usar demasiada autonomía. Es usarla sin un sistema de trabajo claro.
 
-BMAD funciona bien para equipos porque convierte algo difuso en algo gobernable: quién decide, quién ejecuta, qué artefacto alimenta al siguiente, y cómo se reabsorbe el feedback sin romper el hilo del proyecto.
+El desarrollo agentic funciona bien para equipos cuando convierte algo difuso en algo gobernable: quién decide, quién ejecuta, qué artefacto alimenta al siguiente, y cómo se reabsorbe el feedback sin romper el hilo del proyecto. BMAD es una forma concreta de conseguirlo.
 
 Si tuviera que resumirlo en una sola frase, sería esta:
 
-> BMAD no acelera porque elimine pasos; acelera porque da contexto, orden y ownership a pasos que ya deberían existir.
+> El desarrollo agentic no acelera porque elimine pasos; acelera porque da contexto, orden y ownership a pasos que ya deberían existir.

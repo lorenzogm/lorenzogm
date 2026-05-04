@@ -1,19 +1,19 @@
 ---
-title: "BMAD for Software Teams: Phases + RACI"
+title: "Agentic Development for Software Teams: Phases + RACI"
 date: "2026-05-04"
-tag: AI, BMAD, Process
-description: How to assign BMAD skills across project management, business analysis, architecture, design, development, and testing with a clear RACI matrix and a practical way to incorporate TEA without losing traceability.
+tag: AI, Agentic Development, Process
+description: How software teams can structure agentic development with clear phases, role ownership, a RACI matrix, and a practical quality loop that keeps traceability inside the flow.
 image: "/bmad-phases-raci-summary-en.svg"
 author: Lorenzo GM
 ---
 
-# BMAD for Software Teams: Phases + RACI
+# Agentic Development for Software Teams: Phases + RACI
 
 When a team starts working with AI, the main problem is usually not whether the model can generate code. The real problem is different: who should run each workflow, in what order, how much context must exist before delegating, and where human intervention is still necessary.
 
-That is where BMAD works well. Not because it invents new steps, but because it gives structure to steps that already belong in any serious software process: discovery, requirements, design, architecture, stories, implementation, review, and testing.
+That is where agentic development needs a real operating model. BMAD works well here not because it invents new steps, but because it gives structure to steps that already belong in any serious software process: discovery, requirements, design, architecture, stories, implementation, review, and testing.
 
-In this article I will use BMAD as a team operating model for six common roles:
+In this article I use BMAD as a concrete example of agentic development for six common roles:
 
 - Business Analyst
 - Project Manager
@@ -22,11 +22,11 @@ In this article I will use BMAD as a team operating model for six common roles:
 - Developer
 - Tester
 
-The point is not to treat BMAD as a list of prompts. The point is to treat it as a shared delivery system.
+The point is not to treat agentic development as a list of prompts. The point is to treat it as a shared delivery system with clear ownership, clear artifacts, and clear feedback loops.
 
 ## The Core Idea
 
-Official BMAD organizes the work into **four phases**:
+One practical way to structure agentic development is to organize the work into phases. In BMAD, that model is expressed as **four phases**:
 
 1. **Analysis**
 2. **Planning**
@@ -45,7 +45,7 @@ The point is not to add bureaucracy. The point is to gain speed and efficiency w
 
 ## Why This Flow Works
 
-The practical advantage of BMAD is not just that it organizes roles. The real advantage is that it speeds up decisions and reduces rework because each phase has a clear goal, a recognizable set of workflows, and an explicit way to loop back when feedback arrives.
+The practical advantage of agentic development is not just that it distributes work across humans and AI. The real advantage is that it speeds up decisions and reduces rework when each phase has a clear goal, a recognizable set of workflows, and an explicit way to loop back when feedback arrives.
 
 That turns the operating model into three direct benefits:
 
@@ -299,8 +299,8 @@ If I had to summarize this model as a practical sequence, it would look like thi
 
 The easiest way to lose quality with AI is not to give it too much autonomy. It is to give it autonomy without a clear operating model.
 
-BMAD works well for teams because it turns something fuzzy into something governable: who decides, who executes, which artifact feeds the next one, and how feedback is absorbed without breaking the thread of the project.
+Agentic development works well for teams when it turns something fuzzy into something governable: who decides, who executes, which artifact feeds the next one, and how feedback is absorbed without breaking the thread of the project. BMAD is one concrete way to do that.
 
 If I had to reduce it to one sentence, it would be this:
 
-> BMAD does not speed teams up by removing steps. It speeds teams up by giving context, order, and ownership to steps that should already exist.
+> Agentic development does not speed teams up by removing steps. It speeds teams up by giving context, order, and ownership to steps that should already exist.
