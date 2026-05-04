@@ -41,9 +41,13 @@ export const Route = createFileRoute("/$lang/blog/$slug")({
     if (!loaderData) return {};
     const post = loaderData;
     const isEs = post.lang === "es";
+    const siteUrl = "https://lorenzogm.com";
     const url = `https://lorenzogm.com/${post.lang}/blog/${post.slug}`;
     const altLang = isEs ? "en" : "es";
     const altUrl = `https://lorenzogm.com/${altLang}/blog/${post.slug}`;
+    const imageUrl = post.image.startsWith("http")
+      ? post.image
+      : `${siteUrl}${post.image}`;
 
     return {
       meta: [
@@ -54,13 +58,16 @@ export const Route = createFileRoute("/$lang/blog/$slug")({
         { property: "og:description", content: post.excerpt },
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
-        { property: "og:image", content: post.image },
+        { property: "og:image", content: imageUrl },
+        { property: "og:image:alt", content: post.title },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
         { property: "og:locale", content: isEs ? "es_ES" : "en_US" },
         { property: "article:published_time", content: post.date },
         { property: "article:author", content: post.author },
         { name: "twitter:title", content: post.title },
         { name: "twitter:description", content: post.excerpt },
-        { name: "twitter:image", content: post.image },
+        { name: "twitter:image", content: imageUrl },
       ],
       links: [
         { rel: "canonical", href: url },

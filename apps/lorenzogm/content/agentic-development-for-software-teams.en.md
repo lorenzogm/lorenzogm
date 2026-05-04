@@ -3,7 +3,7 @@ title: "Agentic Development for Software Teams: Phases + RACI"
 date: "2026-05-04"
 tag: AI, Agentic Development, Process
 description: How software teams can structure agentic development with clear phases, role ownership, a RACI matrix, and a practical quality loop that keeps traceability inside the flow.
-image: "/agentic-development-for-software-teams-en.svg"
+image: "/agentic-development-for-software-teams-en.png"
 author: Lorenzo GM
 ---
 
