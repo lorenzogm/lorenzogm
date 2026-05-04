@@ -1,12 +1,13 @@
 ---
-title: "BMAD for Software Teams: RACI, Phases, TEA, and the Feedback Loop"
+title: "BMAD for Software Teams: Phases + RACI"
 date: "2026-05-04"
 tag: AI, BMAD, Process
 description: How to assign BMAD skills across project management, business analysis, architecture, design, development, and testing with a clear RACI matrix and a practical way to incorporate TEA without losing traceability.
+image: "/bmad-phases-raci-summary-en.svg"
 author: Lorenzo GM
 ---
 
-# BMAD for Software Teams: RACI, Phases, TEA, and the Feedback Loop
+# BMAD for Software Teams: Phases + RACI
 
 When a team starts working with AI, the main problem is usually not whether the model can generate code. The real problem is different: who should run each workflow, in what order, how much context must exist before delegating, and where human intervention is still necessary.
 

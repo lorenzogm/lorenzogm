@@ -1,0 +1,18 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">BMAD for Software Teams: Phases + RACI</title>
+  <desc id="desc">Featured image: speed, efficiency and quality kept inside the flow.</desc>
+
+  <rect width="1200" height="630" fill="#fefefe" />
+
+  <g font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+    <text x="600" y="130" font-size="16" font-weight="600" fill="#b91c1c" letter-spacing="6" text-anchor="middle">B M A D &#8201;&#183;&#8201; F O R &#8201; T E A M S</text>
+
+    <text x="600" y="298" font-size="92" font-weight="800" fill="#1a1a1a" letter-spacing="-2" text-anchor="middle">Speed. Efficiency.</text>
+    <text x="600" y="400" font-size="92" font-weight="800" fill="#b91c1c" letter-spacing="-2" text-anchor="middle">Quality inside.</text>
+
+    <line x1="556" y1="464" x2="644" y2="464" stroke="#b91c1c" stroke-width="3" />
+
+    <text x="600" y="528" font-size="22" fill="#525252" text-anchor="middle">Traceability, test design and gates stay in the loop</text>
+    <text x="600" y="560" font-size="22" fill="#525252" text-anchor="middle">&#8212; not bolted on at the end.</text>
+  </g>
+</svg>

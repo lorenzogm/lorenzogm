@@ -1,12 +1,13 @@
 ---
-title: "BMAD para Equipos de Software: RACI, Fases, TEA y Feedback Loop"
+title: "BMAD para Equipos de Software: Fases + RACI"
 date: "2026-05-04"
 tag: AI, BMAD, Process
 description: Cómo repartir las skills de BMAD entre project manager, business analyst, architect, designer, development y testing con una matriz RACI clara y una forma práctica de incorporar TEA sin perder trazabilidad.
+image: "/bmad-phases-raci-summary-es.svg"
 author: Lorenzo GM
 ---
 
-# BMAD para Equipos de Software: RACI, Fases, TEA y Feedback Loop
+# BMAD para Equipos de Software: Fases + RACI
 
 Cuando un equipo empieza a trabajar con IA, el problema no suele ser si el modelo genera código. El problema real es otro: quién debe ejecutar cada workflow, en qué orden, cuánto contexto hay que preparar antes de delegar, y en qué momentos hace falta intervención humana.
 
