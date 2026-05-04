@@ -31,6 +31,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://lorenzogm.com/en/blog/agentic-development-for-software-teams</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://lorenzogm.com/en/blog/ai-powered-error-fixing-with-datadog-sonarqube-mcp</loc>
     <lastmod>2025-06-17</lastmod>
     <priority>0.8</priority>
@@ -48,11 +53,6 @@
   <url>
     <loc>https://lorenzogm.com/en/blog/blog-with-nextjs-and-contentful</loc>
     <lastmod>2020-11-02</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://lorenzogm.com/en/blog/bmad-raci-workflow-for-software-teams</loc>
-    <lastmod>2026-05-04</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -196,6 +196,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://lorenzogm.com/es/blog/agentic-development-for-software-teams</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://lorenzogm.com/es/blog/ai-powered-error-fixing-with-datadog-sonarqube-mcp</loc>
     <lastmod>2025-06-17</lastmod>
     <priority>0.8</priority>
@@ -213,11 +218,6 @@
   <url>
     <loc>https://lorenzogm.com/es/blog/blog-with-nextjs-and-contentful</loc>
     <lastmod>2020-11-02</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://lorenzogm.com/es/blog/bmad-raci-workflow-for-software-teams</loc>
-    <lastmod>2026-05-04</lastmod>
     <priority>0.8</priority>
   </url>
   <url>

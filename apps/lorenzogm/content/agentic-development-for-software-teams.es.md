@@ -3,7 +3,7 @@ title: "Desarrollo Agentic para Equipos de Software: Fases + RACI"
 date: "2026-05-04"
 tag: AI, Agentic Development, Process
 description: Cómo estructurar desarrollo agentic en equipos de software con fases claras, ownership por rol, una matriz RACI y un loop de calidad que mantiene la trazabilidad dentro del flujo.
-image: "/bmad-phases-raci-summary-es.svg"
+image: "/agentic-development-for-software-teams-es.svg"
 author: Lorenzo GM
 ---
 
