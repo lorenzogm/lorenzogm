@@ -27,7 +27,9 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
           <img
             alt={post.title}
             className="h-auto w-full transition-transform duration-300 hover:scale-105"
+            height={630}
             src={post.image}
+            width={1200}
           />
         </div>
         <div className="p-6">

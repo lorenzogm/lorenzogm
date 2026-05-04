@@ -72,7 +72,9 @@ export function ArticleDetailPage({ post }: ArticleDetailPageProps) {
           <img
             alt={post.title}
             className="block h-auto w-full"
+            height={630}
             src={post.image}
+            width={1200}
           />
         </div>
       )}
