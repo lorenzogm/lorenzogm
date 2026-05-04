@@ -23,7 +23,7 @@ const esMarkdownFiles = import.meta.glob("/content/*.es.md", {
 }) as Record<string, string>;
 
 const CONTENT_PREFIX_REGEX = /^\/content\//;
-const DEFAULT_POST_IMAGE = "/placeholder-image.svg";
+const DEFAULT_POST_IMAGE = "/favicon.svg";
 
 /** Parse a YYYY-MM-DD string as local midnight (not UTC). */
 function parseLocalDate(dateStr: string): Date {
