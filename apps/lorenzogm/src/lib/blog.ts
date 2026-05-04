@@ -23,6 +23,7 @@ const esMarkdownFiles = import.meta.glob("/content/*.es.md", {
 }) as Record<string, string>;
 
 const CONTENT_PREFIX_REGEX = /^\/content\//;
+const DEFAULT_POST_IMAGE = "/placeholder-image.svg";
 
 /** Parse a YYYY-MM-DD string as local midnight (not UTC). */
 function parseLocalDate(dateStr: string): Date {
@@ -94,7 +95,7 @@ export function getAllPosts(lang = "en"): BlogPostMetadata[] {
         title: matterResult.data.title || "Untitled",
         date: normalizeDate(matterResult.data.date),
         excerpt,
-        image: matterResult.data.image || "/placeholder-image.jpg",
+        image: matterResult.data.image || DEFAULT_POST_IMAGE,
         author: matterResult.data.author || "Lorenzo GM",
         tags: matterResult.data.tag
           ? matterResult.data.tag.split(", ")
@@ -148,7 +149,7 @@ export async function getPostBySlug(
       title: matterResult.data.title || "Untitled",
       date: postDate,
       excerpt,
-      image: matterResult.data.image || "/placeholder-image.jpg",
+      image: matterResult.data.image || DEFAULT_POST_IMAGE,
       author: matterResult.data.author || "Lorenzo GM",
       tags: matterResult.data.tag
         ? matterResult.data.tag.split(", ")
