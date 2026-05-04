@@ -23,15 +23,11 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
         }}
         href={blogUrl}
       >
-        <div
-          className={`flex w-full items-center justify-center overflow-hidden bg-gray-50 ${featured ? "h-64 md:h-80" : "h-48"}`}
-        >
+        <div className="w-full overflow-hidden bg-gray-50">
           <img
             alt={post.title}
-            className="h-full w-full object-contain transition-transform duration-300 hover:scale-105"
-            height={630}
+            className="h-auto w-full transition-transform duration-300 hover:scale-105"
             src={post.image}
-            width={1200}
           />
         </div>
         <div className="p-6">
