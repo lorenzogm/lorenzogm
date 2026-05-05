@@ -69,7 +69,7 @@ Typical skills:
 - `bmad-technical-research` to validate feasibility, constraints, and technical tradeoffs
 - `bmad-product-brief` or `bmad-prfaq` to turn discovery into a sharper product proposal
 
-The weight here usually sits with the **Business Analyst**, **Project Manager**, **Architect**, and Design. In many teams, **Developer** and **Tester** are not even onboarded yet here and stay informed-only until the work reaches Implementation.
+The weight here usually sits with the **Business Analyst**, **Project Manager**, and **Architect**, with **Designer** contributing when the problem space touches user experience. **Developer** and **Tester** are not involved in this phase at all.
 
 ### 2. Planning
 
@@ -82,7 +82,7 @@ Typical skills:
 - `bmad-testarch-nfr` when the project needs NFR expectations or release criteria defined early
 - `bmad-testarch-trace` only in brownfield, to establish a coverage baseline before planning new work
 
-Primary ownership usually sits with the **Project Manager** and **Designer**, with input from the **Architect** so the PRD does not drift away from technical or quality reality. When `bmad-testarch-nfr` or `bmad-testarch-trace` enter the phase, the operating lead should shift to the **Architect**. In this model, **Developer** and **Tester** still remain informed-only until Implementation.
+Primary ownership usually sits with the **Project Manager** and **Designer**, with input from the **Architect** so the PRD does not drift away from technical or quality reality. When `bmad-testarch-nfr` or `bmad-testarch-trace` enter the phase, the operating lead should shift to the **Architect**. **Developer** and **Tester** are not part of this phase. Only the roles that directly shape the product definition participate here.
 
 In TEA, `bmad-testarch-trace` is not a Solutioning workflow. Its real place is **Phase 2** when brownfield baseline is needed, **Phase 4** when traceability is refreshed, and the **release gate** when the decision is closed.
 
@@ -99,13 +99,13 @@ Typical skills:
 - `bmad-testarch-framework` once per project if the testing foundation does not exist yet
 - `bmad-testarch-ci` once per project if the quality pipeline is not in place yet
 
-BMAD has a dedicated Architect agent. If your team has an explicit **Architect** role, this is where that role should own the cross-cutting technical decisions and the structural `bmad-testarch-*` work in this phase. In this setup, **Developer** and **Tester** may still stay outside the main loop even in Solutioning and remain `I` only. If it does not, that responsibility should be owned by a **senior developer or tech lead** instead.
+BMAD has a dedicated Architect agent. If your team has an explicit **Architect** role, this is where that role owns the phase. The Architect drives architecture, test design, framework, CI, and readiness checks. The **Project Manager** participates for epic and story breakdown but the technical decisions belong to the Architect. **Business Analyst**, **Designer**, **Developer**, and **Tester** are not part of this phase. If your team does not have an Architect role, that responsibility should be owned by a **senior developer or tech lead** instead.
 
 This is where `bmad-testarch-framework` and `bmad-testarch-ci` belong. If they still show up as pending work in Implementation, the gap is usually not delivery. The gap is unfinished Solutioning.
 
 ### 4. Implementation
 
-This is where the delivery loop starts.
+This is where the delivery loop starts. **Developer** and **Tester** join the flow here for the first time. **Business Analyst** and **Designer** are not needed in this phase—their work was completed in Analysis and Planning.
 
 At this point `bmad-testarch-framework` and `bmad-testarch-ci` should no longer reappear. If they are still needed here, Solutioning is being reopened.
 
@@ -163,57 +163,57 @@ Legend:
 
 ### Table 1. Analysis
 
-| Skill / Workflow | BA | PM | Architect | Designer | Dev | Tester |
-| --- | --- | --- | --- | --- | --- | --- |
-| `bmad-brainstorming` | R | A | C | C | I | I |
-| `bmad-market-research` / `bmad-domain-research` / `bmad-technical-research` | R | A | C | I | I | I |
-| `bmad-product-brief` / `bmad-prfaq` | R | A | C | C | I | I |
+| Skill / Workflow | BA | PM | Architect | Designer |
+| --- | --- | --- | --- | --- |
+| `bmad-brainstorming` | R | A | C | C |
+| `bmad-market-research` / `bmad-domain-research` / `bmad-technical-research` | R | A | C | — |
+| `bmad-product-brief` / `bmad-prfaq` | R | A | C | C |
 
 ### Table 2. Planning
 
-| Skill / Workflow | BA | PM | Architect | Designer | Dev | Tester |
-| --- | --- | --- | --- | --- | --- | --- |
-| `bmad-create-prd` | C | A/R | C | C | I | I |
-| `bmad-create-ux-design` | I | C | I | A/R | I | I |
-| `bmad-testarch-nfr` | I | C | A/R | I | I | I |
-| `bmad-testarch-trace` (brownfield baseline) | I | C | A/R | I | I | I |
+| Skill / Workflow | BA | PM | Architect | Designer |
+| --- | --- | --- | --- | --- |
+| `bmad-create-prd` | C | A/R | C | C |
+| `bmad-create-ux-design` | — | C | — | A/R |
+| `bmad-testarch-nfr` | — | C | A/R | — |
+| `bmad-testarch-trace` (brownfield baseline) | — | C | A/R | — |
 
 ### Table 3. Solutioning
 
-| Skill / Workflow | BA | PM | Architect | Designer | Dev | Tester |
-| --- | --- | --- | --- | --- | --- | --- |
-| `bmad-create-architecture` | I | C | A/R | I | I | I |
-| `bmad-create-epics-and-stories` | C | A/R | C | I | I | I |
-| `bmad-testarch-test-design` (system-level) | I | C | A/R | I | I | I |
-| `bmad-testarch-framework` | I | I | A/R | I | I | I |
-| `bmad-testarch-ci` | I | I | A/R | I | I | I |
-| `bmad-check-implementation-readiness` | I | C | A/R | I | I | I |
+| Skill / Workflow | PM | Architect |
+| --- | --- | --- |
+| `bmad-create-architecture` | C | A/R |
+| `bmad-create-epics-and-stories` | A/R | C |
+| `bmad-testarch-test-design` (system-level) | — | A/R |
+| `bmad-testarch-framework` | — | A/R |
+| `bmad-testarch-ci` | — | A/R |
+| `bmad-check-implementation-readiness` | C | A/R |
 
 ### Table 4. Implementation
 
-| Skill / Workflow | Cadence | BA | PM | Architect | Designer | Dev | Tester |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `bmad-sprint-planning` | Per epic / sprint | I | A | C | I | R | C |
-| `bmad-testarch-test-design` | Per epic | I | C | C | I | C | A/R |
-| `bmad-sprint-status` | Sprint tracking | I | A | I | I | R | C |
-| `bmad-create-story` | Per story | I | A | C | I | R | C |
-| `bmad-testarch-atdd` | Per story, optional | I | C | I | I | C | A/R |
-| `bmad-dev-story` | Per story | I | I | C | I | A/R | C |
-| `bmad-code-review` | Per story | I | I | C | I | A/R | C |
-| `bmad-qa-generate-e2e-tests` | Per story / strategy-dependent | I | I | I | I | C | A/R |
-| `bmad-testarch-automate` | Per story / feature | I | I | C | I | C | A/R |
-| `bmad-testarch-test-review` | Per epic or pre-release | I | I | C | I | C | A/R |
-| `bmad-testarch-trace` | Epic refresh + release gate | I | C | C | I | C | A/R |
-| `bmad-testarch-nfr` | Release gate if not done earlier | I | C | C | I | C | A/R |
-| `bmad-retrospective` | Sprint / epic close | I | A | I | I | R | C |
+| Skill / Workflow | Cadence | PM | Architect | Dev | Tester |
+| --- | --- | --- | --- | --- | --- |
+| `bmad-sprint-planning` | Per epic / sprint | A | C | R | C |
+| `bmad-testarch-test-design` | Per epic | C | C | C | A/R |
+| `bmad-sprint-status` | Sprint tracking | A | — | R | C |
+| `bmad-create-story` | Per story | A | C | R | C |
+| `bmad-testarch-atdd` | Per story, optional | — | — | C | A/R |
+| `bmad-dev-story` | Per story | — | C | A/R | C |
+| `bmad-code-review` | Per story | — | C | A/R | C |
+| `bmad-qa-generate-e2e-tests` | Per story / strategy-dependent | — | — | C | A/R |
+| `bmad-testarch-automate` | Per story / feature | — | C | C | A/R |
+| `bmad-testarch-test-review` | Per epic or pre-release | — | C | C | A/R |
+| `bmad-testarch-trace` | Epic refresh + release gate | C | C | C | A/R |
+| `bmad-testarch-nfr` | Release gate if not done earlier | C | C | C | A/R |
+| `bmad-retrospective` | Sprint / epic close | A | — | R | C |
 
 ### Table 5. Feedback and Replanning Loop
 
 | Skill / Workflow | BA | PM | Architect | Designer | Dev | Tester |
 | --- | --- | --- | --- | --- | --- | --- |
-| `bmad-correct-course` for a new functional requirement | R | A | C | C | C | C |
-| `bmad-correct-course` for a new UX/UI requirement | C | A | I | R | C | C |
-| `bmad-correct-course` for a bug or QA finding | I | A | C | I | C | R |
+| `bmad-correct-course` for a new functional requirement | R | A | C | — | C | — |
+| `bmad-correct-course` for a new UX/UI requirement | — | A | — | R | C | — |
+| `bmad-correct-course` for a bug or QA finding | — | A | C | — | C | R |
 
 The key point is that the feedback loop does not always start the same way. It can start from business, design, or QA, but BMAD uses the same workflow to recalculate impact and route the work back to the right phase.
 
@@ -229,9 +229,9 @@ BMAD has a **UX Designer** agent, not a separate **UI Designer** agent. That is 
 
 This version of the matrix includes a separate **Architect** role. If your team does not have that formal role, you can absorb that column into Development or Tech Lead, but it is better to do that explicitly than to let architecture ownership disappear by accident.
 
-### Development and Testing can join later
+### Development and Testing join in Implementation
 
-In this model, **Developer** and **Tester** do not need to be onboarded during Analysis or Planning, and they can remain `I` even in Solutioning. Their real operating weight starts in **Implementation**, where they begin executing, reviewing, and validating.
+In this model, **Developer** and **Tester** are not part of Analysis, Planning, or Solutioning. Their operating weight starts in **Implementation**, where they execute, review, and validate. Similarly, **Business Analyst** and **Designer** finish their contribution before Implementation and do not participate in the delivery loop.
 
 ### Testing may need more than the built-in QA workflow
 
