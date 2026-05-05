@@ -9,6 +9,8 @@ author: Lorenzo GM
 
 # Desarrollo Agentic para Equipos de Software: Fases + RACI
 
+> **Actualización (5 de mayo de 2026):** La matriz RACI se ha revisado para reducir participantes innecesarios en cada fase. Developer y Tester ahora solo aparecen en Implementation y en el Feedback Loop. Designer y Business Analyst se eliminan de Implementation. Solutioning pasa a estar liderado principalmente por el Architect. Gracias a [Markus Klimmasch](https://www.linkedin.com/in/markus-klimmasch-33860687/) por el feedback que motivó esta revisión.
+
 Cuando un equipo empieza a trabajar con IA, el problema no suele ser si el modelo genera código. El problema real es otro: quién debe ejecutar cada workflow, en qué orden, cuánto contexto hay que preparar antes de delegar, y en qué momentos hace falta intervención humana.
 
 Ahí es donde el desarrollo agentic necesita un modelo operativo de verdad. BMAD encaja bien aquí no porque invente pasos nuevos, sino porque da estructura a pasos que ya existían en un desarrollo serio: discovery, requisitos, diseño, arquitectura, stories, implementación, revisión y testing.
