@@ -165,49 +165,53 @@ Legend:
 
 ### Table 1. Analysis
 
-| Skill / Workflow | BA | PM | Architect | Designer |
+| Skill / Workflow | PM | BA | Architect | Designer |
 | --- | --- | --- | --- | --- |
-| `bmad-brainstorming` | R | A | C | C |
-| `bmad-market-research` / `bmad-domain-research` / `bmad-technical-research` | R | A | C | — |
-| `bmad-product-brief` / `bmad-prfaq` | R | A | C | C |
+| `bmad-brainstorming` (ideation) | C | R | — | — |
+| `bmad-brainstorming` (design) | C | — | — | R |
+| `bmad-market-research` | A | C | — | R |
+| `bmad-domain-research` | A | R | — | C |
+| `bmad-technical-research` | A | I | R | — |
+| `bmad-product-brief` | A | R | I | I |
+| `bmad-prfaq` | A | R | — | — |
 
 ### Table 2. Planning
 
-| Skill / Workflow | BA | PM | Architect | Designer |
+| Skill / Workflow | PM | BA | Architect | Designer |
 | --- | --- | --- | --- | --- |
-| `bmad-create-prd` | C | A/R | C | C |
-| `bmad-create-ux-design` | — | C | — | A/R |
-| `bmad-testarch-nfr` | — | C | A/R | — |
-| `bmad-testarch-trace` (brownfield baseline) | — | C | A/R | — |
+| `bmad-create-prd` | A/R | C | C | C |
+| `bmad-create-ux-design` | C | — | — | A/R |
+| `bmad-testarch-nfr` | I | — | A/R | — |
+| `bmad-testarch-trace` (brownfield baseline) | I | — | A/R | — |
 
 ### Table 3. Solutioning
 
-| Skill / Workflow | PM | Architect |
-| --- | --- | --- |
-| `bmad-create-architecture` | C | A/R |
-| `bmad-create-epics-and-stories` | A/R | C |
-| `bmad-testarch-test-design` (system-level) | — | A/R |
-| `bmad-testarch-framework` | — | A/R |
-| `bmad-testarch-ci` | — | A/R |
-| `bmad-check-implementation-readiness` | C | A/R |
+| Skill / Workflow | PM | BA | Architect | Designer |
+| --- | --- | --- | --- | --- |
+| `bmad-create-architecture` | I | — | A/R | — |
+| `bmad-create-epics-and-stories` | A | R | C | C |
+| `bmad-testarch-test-design` (system-level) | — | — | A/R | — |
+| `bmad-testarch-framework` | — | — | A/R | — |
+| `bmad-testarch-ci` | — | — | A/R | — |
+| `bmad-check-implementation-readiness` | C | I | A/R | I |
 
 ### Table 4. Implementation
 
 | Skill / Workflow | Cadence | PM | Architect | Dev | Tester |
 | --- | --- | --- | --- | --- | --- |
-| `bmad-sprint-planning` | Per epic / sprint | A | C | R | C |
-| `bmad-testarch-test-design` | Per epic | C | C | C | A/R |
-| `bmad-sprint-status` | Sprint tracking | A | — | R | C |
-| `bmad-create-story` | Per story | A | C | R | C |
-| `bmad-testarch-atdd` | Per story, optional | — | — | C | A/R |
-| `bmad-dev-story` | Per story | — | C | A/R | C |
-| `bmad-code-review` | Per story | — | C | A/R | C |
-| `bmad-qa-generate-e2e-tests` | Per story / strategy-dependent | — | — | C | A/R |
-| `bmad-testarch-automate` | Per story / feature | — | C | C | A/R |
-| `bmad-testarch-test-review` | Per epic or pre-release | — | C | C | A/R |
-| `bmad-testarch-trace` | Epic refresh + release gate | C | C | C | A/R |
-| `bmad-testarch-nfr` | Release gate if not done earlier | C | C | C | A/R |
-| `bmad-retrospective` | Sprint / epic close | A | — | R | C |
+| `bmad-sprint-planning` | Per epic / sprint | R | — | A | A |
+| `bmad-testarch-test-design` | Per epic | — | — | A | R |
+| `bmad-sprint-status` | Sprint tracking | — | — | R | — |
+| `bmad-create-story` | Per story | — | — | R | — |
+| `bmad-testarch-atdd` | Per story, optional | — | — | — | R |
+| `bmad-dev-story` | Per story | — | — | R | — |
+| `bmad-code-review` | Per story | — | — | R | — |
+| `bmad-qa-generate-e2e-tests` | Per story / strategy-dependent | — | — | — | R |
+| `bmad-testarch-automate` | Per story / feature | — | — | — | R |
+| `bmad-testarch-test-review` | Per epic or pre-release | — | — | — | R |
+| `bmad-testarch-trace` | Epic refresh + release gate | I | I | I | R |
+| `bmad-testarch-nfr` | Release gate if not done earlier | — | — | — | R |
+| `bmad-retrospective` | Sprint / epic close | I | I | R | — |
 
 ### Table 5. Feedback and Replanning Loop
 
