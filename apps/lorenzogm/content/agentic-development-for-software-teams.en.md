@@ -9,7 +9,7 @@ author: Lorenzo GM
 
 # Agentic Development for Software Teams: Phases + RACI
 
-> **Update (May 5, 2026):** The RACI matrix has been revised to reduce unnecessary participants per phase. Developer and Tester now only appear in Implementation and the Feedback Loop. Designer and Business Analyst are removed from Implementation. Solutioning is now driven primarily by the Architect. Thanks to [Markus Klimmasch](https://www.linkedin.com/in/markus-klimmasch-33860687/) for the feedback that motivated this revision.
+> **Update (May 5, 2026):** The RACI matrix has been revised to reduce unnecessary participants per phase. Thanks to [Markus Klimmasch](https://www.linkedin.com/in/markus-klimmasch-33860687/) for the feedback that motivated this revision.
 
 When a team starts working with AI, the main problem is usually not whether the model can generate code. The real problem is different: who should run each workflow, in what order, how much context must exist before delegating, and where human intervention is still necessary.
 
