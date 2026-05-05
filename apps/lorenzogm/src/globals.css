@@ -1,8 +1,13 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* Enable `dark:` Tailwind variants based on the user's OS/browser preference. */
-@custom-variant dark (@media (prefers-color-scheme: dark));
+/*
+ * Dark mode is driven by a `dark` class on the <html> element.
+ * A small inline script in the document head sets the class based on the
+ * stored preference (`localStorage.theme`) or, when none, on the OS / browser
+ * preference (`prefers-color-scheme`).
+ */
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --background: #fefefe;
@@ -20,28 +25,27 @@
   --red-50: #fef2f2;
   --code-bg: #0f172a;
   --code-border: #1e293b;
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #f5f5f5;
-    --surface: #18181b;
-    --surface-muted: #1f1f23;
-    --border-subtle: #27272a;
-    --text-muted: #d4d4d8;
-    --text-strong: #fafafa;
-    /* Brighter red for accessible contrast on dark backgrounds */
-    --primary-red: #f87171;
-    --primary-red-hover: #fca5a5;
-    --primary-red-light: rgba(248, 113, 113, 0.12);
-    --accent-red: #ef4444;
-    --red-100: rgba(248, 113, 113, 0.18);
-    --red-50: rgba(248, 113, 113, 0.08);
-    --code-bg: #09090b;
-    --code-border: #27272a;
-  }
+:root.dark {
+  --background: #0a0a0a;
+  --foreground: #f5f5f5;
+  --surface: #18181b;
+  --surface-muted: #1f1f23;
+  --border-subtle: #27272a;
+  --text-muted: #d4d4d8;
+  --text-strong: #fafafa;
+  /* Brighter red for accessible contrast on dark backgrounds */
+  --primary-red: #f87171;
+  --primary-red-hover: #fca5a5;
+  --primary-red-light: rgba(248, 113, 113, 0.12);
+  --accent-red: #ef4444;
+  --red-100: rgba(248, 113, 113, 0.18);
+  --red-50: rgba(248, 113, 113, 0.08);
+  --code-bg: #09090b;
+  --code-border: #27272a;
+  color-scheme: dark;
 }
 
 body {
@@ -415,11 +419,9 @@ body {
   backdrop-filter: blur(10px);
 }
 
-@media (prefers-color-scheme: dark) {
-  .glass {
-    background: rgba(24, 24, 27, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-  }
+.dark .glass {
+  background: rgba(24, 24, 27, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .glass-dark {

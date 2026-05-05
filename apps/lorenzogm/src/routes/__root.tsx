@@ -21,6 +21,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     <html lang={lang}>
       <head>
         <HeadContent />
+        {/* No-FOUC theme init: runs before paint to apply the right class. */}
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static script */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d)document.documentElement.classList.add('dark');}catch(e){}})();`,
+          }}
+        />
         {analyticsEnabled && (
           <script
             data-website-id={import.meta.env.UMAMI_WEBSITE_ID}

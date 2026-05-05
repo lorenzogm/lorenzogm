@@ -1,6 +1,7 @@
 import { useLocation } from "@tanstack/react-router";
 import { LanguageSwitcher } from "@/components/elements/language-switcher";
 import { Link } from "@/components/elements/link";
+import { ThemeToggle } from "@/components/elements/theme-toggle";
 
 export function LanguageAwareHeader() {
   const location = useLocation();
@@ -15,9 +16,10 @@ export function LanguageAwareHeader() {
   return (
     <div className="text-center">
       <div className="relative">
-        {/* Desktop language switcher - positioned at top right */}
-        <div className="absolute top-0 right-0 hidden md:block">
+        {/* Desktop language switcher + theme toggle - positioned at top right */}
+        <div className="absolute top-0 right-0 hidden items-center gap-3 md:flex">
           <LanguageSwitcher currentLang={currentLang} />
+          <ThemeToggle lang={currentLang} />
         </div>
         <Link
           className="inline-block transition-opacity duration-200 hover:opacity-80"
@@ -38,9 +40,10 @@ export function LanguageAwareHeader() {
         </p>
         <div className="mx-auto mt-6 h-1 w-20 rounded-full bg-gradient-to-r from-red-500 to-red-600 dark:from-red-400 dark:to-red-500" />
       </div>
-      {/* Mobile language switcher - positioned below the red line */}
-      <div className="mt-4 flex justify-center md:hidden">
+      {/* Mobile language switcher + theme toggle - positioned below the red line */}
+      <div className="mt-4 flex items-center justify-center gap-3 md:hidden">
         <LanguageSwitcher currentLang={currentLang} />
+        <ThemeToggle lang={currentLang} />
       </div>
     </div>
   );
