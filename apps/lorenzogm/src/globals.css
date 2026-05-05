@@ -1,21 +1,46 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Enable `dark:` Tailwind variants based on the user's OS/browser preference. */
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
 :root {
   --background: #fefefe;
   --foreground: #1a1a1a;
+  --surface: #ffffff;
+  --surface-muted: #f9fafb;
+  --border-subtle: #e5e7eb;
+  --text-muted: #374151;
+  --text-strong: #111827;
   --primary-red: #b91c1c;
   --primary-red-hover: #991b1b;
   --primary-red-light: #fef2f2;
   --accent-red: #dc2626;
   --red-100: #fee2e2;
   --red-50: #fef2f2;
+  --code-bg: #0f172a;
+  --code-border: #1e293b;
+  color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0f0f0f;
+    --background: #0a0a0a;
     --foreground: #f5f5f5;
+    --surface: #18181b;
+    --surface-muted: #1f1f23;
+    --border-subtle: #27272a;
+    --text-muted: #d4d4d8;
+    --text-strong: #fafafa;
+    /* Brighter red for accessible contrast on dark backgrounds */
+    --primary-red: #f87171;
+    --primary-red-hover: #fca5a5;
+    --primary-red-light: rgba(248, 113, 113, 0.12);
+    --accent-red: #ef4444;
+    --red-100: rgba(248, 113, 113, 0.18);
+    --red-50: rgba(248, 113, 113, 0.08);
+    --code-bg: #09090b;
+    --code-border: #27272a;
   }
 }
 
@@ -34,7 +59,7 @@ body {
   max-width: 100%;
   font-size: 1.125rem;
   line-height: 1.75;
-  color: #1f2937;
+  color: var(--text-muted);
 }
 
 /* Links */
@@ -66,13 +91,13 @@ body {
   margin-bottom: 1.5em;
   font-size: 1.125rem;
   line-height: 1.75;
-  color: #374151;
+  color: var(--text-muted);
 }
 .prose li {
   margin: 0.75em 0;
   font-size: 1.125rem;
   line-height: 1.75;
-  color: #374151;
+  color: var(--text-muted);
 }
 .prose li p {
   margin: 0.5em 0;
@@ -101,7 +126,7 @@ body {
   padding: 1.5em;
   margin: 2em 0;
   font-style: italic;
-  color: #6b7280;
+  color: var(--text-muted);
   background: var(--red-50);
   border-left: 4px solid var(--primary-red);
   border-radius: 0.5em;
@@ -131,7 +156,7 @@ body {
 .prose td {
   padding: 1em 1.25em;
   text-align: left;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-subtle);
 }
 .prose th {
   font-size: 0.875rem;
@@ -142,10 +167,10 @@ body {
   background-color: var(--red-50);
 }
 .prose td {
-  background-color: #ffffff;
+  background-color: var(--surface);
 }
 .prose tbody tr:nth-child(even) td {
-  background-color: #f9fafb;
+  background-color: var(--surface-muted);
 }
 
 /* Images */
@@ -179,13 +204,13 @@ body {
 /* Strong text */
 .prose strong {
   font-weight: 700;
-  color: #111827;
+  color: var(--text-strong);
 }
 
 /* Emphasis */
 .prose em {
   font-style: italic;
-  color: #374151;
+  color: var(--text-muted);
 }
 
 /* Headings */
@@ -194,7 +219,7 @@ body {
   font-size: 2.75rem;
   font-weight: 800;
   line-height: 1.1;
-  color: #0f172a;
+  color: var(--text-strong);
   letter-spacing: -0.025em;
 }
 .prose h2 {
@@ -205,7 +230,7 @@ body {
   font-size: 2.25rem;
   font-weight: 700;
   line-height: 1.2;
-  color: #1e293b;
+  color: var(--text-strong);
 }
 .prose h2:after {
   position: absolute;
@@ -223,7 +248,7 @@ body {
   font-size: 1.75rem;
   font-weight: 600;
   line-height: 1.3;
-  color: #334155;
+  color: var(--text-strong);
 }
 .prose h4,
 .prose h5,
@@ -231,7 +256,7 @@ body {
   margin-top: 1.5em;
   margin-bottom: 0.75em;
   font-weight: 600;
-  color: #475569;
+  color: var(--text-muted);
 }
 .prose h4 {
   font-size: 1.375rem;
@@ -263,8 +288,8 @@ body {
   margin: 2.5em 0;
   overflow-x: auto;
   color: #e2e8f0;
-  background: #0f172a;
-  border: 1px solid #1e293b;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
   border-radius: 1em;
   box-shadow:
     0 8px 25px -5px rgba(0, 0, 0, 0.1),
@@ -390,6 +415,13 @@ body {
   backdrop-filter: blur(10px);
 }
 
+@media (prefers-color-scheme: dark) {
+  .glass {
+    background: rgba(24, 24, 27, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
+
 .glass-dark {
   background: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -448,7 +480,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--surface-muted);
 }
 
 ::-webkit-scrollbar-thumb {

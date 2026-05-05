@@ -16,12 +16,14 @@ function NotFoundComponent() {
   const l = lang as Lang;
   return (
     <div className="py-16 text-center">
-      <h1 className="mb-4 font-bold text-4xl text-gray-900">
+      <h1 className="mb-4 font-bold text-4xl text-gray-900 dark:text-zinc-100">
         {t(l, "postNotFound")}
       </h1>
-      <p className="mb-8 text-gray-600">{t(l, "postNotFoundMessage")}</p>
+      <p className="mb-8 text-gray-600 dark:text-zinc-400">
+        {t(l, "postNotFoundMessage")}
+      </p>
       <a
-        className="font-semibold text-red-600 hover:text-red-700"
+        className="font-semibold text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
         href={`/${lang}`}
       >
         ← {t(l, "backToHome")}

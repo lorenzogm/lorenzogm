@@ -13,7 +13,9 @@ export function RelatedArticles({ posts, lang }: RelatedArticlesProps) {
 
   return (
     <section className="mt-16">
-      <h2 className="mb-8 font-bold text-3xl text-gray-900">{heading}</h2>
+      <h2 className="mb-8 font-bold text-3xl text-gray-900 dark:text-zinc-100">
+        {heading}
+      </h2>
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <BlogCard key={post.slug} post={post} />

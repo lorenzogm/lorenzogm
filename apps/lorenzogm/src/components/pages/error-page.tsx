@@ -23,9 +23,9 @@ export function ErrorPage({
 
   return (
     <div className="py-16 text-center">
-      <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
+      <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 dark:bg-red-950/60">
         <svg
-          className="h-8 w-8 text-red-600"
+          className="h-8 w-8 text-red-600 dark:text-red-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -40,8 +40,10 @@ export function ErrorPage({
         </svg>
       </div>
 
-      <h2 className="mb-4 font-bold text-2xl text-gray-900">{title}</h2>
-      <p className="mx-auto mb-8 max-w-md text-gray-600 text-lg leading-relaxed">
+      <h2 className="mb-4 font-bold text-2xl text-gray-900 dark:text-zinc-100">
+        {title}
+      </h2>
+      <p className="mx-auto mb-8 max-w-md text-gray-600 text-lg leading-relaxed dark:text-zinc-400">
         {message}
       </p>
 
@@ -70,7 +72,7 @@ export function ErrorPage({
 
         {showRetryButton && (
           <Button
-            className="inline-flex transform items-center rounded-xl border-2 border-red-200 bg-white px-6 py-3 font-semibold text-red-600 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:border-red-300 hover:bg-red-50 hover:shadow-xl"
+            className="inline-flex transform items-center rounded-xl border-2 border-red-200 bg-white px-6 py-3 font-semibold text-red-600 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:border-red-300 hover:bg-red-50 hover:shadow-xl dark:border-red-900/60 dark:bg-zinc-900 dark:text-red-400 dark:hover:border-red-700 dark:hover:bg-red-950/40"
             event={{ category: "Error Page", action: "Try Again" }}
             onClick={handleRetry}
           >

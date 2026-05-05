@@ -11,7 +11,7 @@ function TopicPage() {
     <>
       <div className="mb-8">
         <Link
-          className="mb-4 inline-flex items-center text-red-600 text-sm transition-colors hover:text-red-700"
+          className="mb-4 inline-flex items-center text-red-600 text-sm transition-colors hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
           params={{ lang }}
           to="/$lang"
         >
@@ -31,10 +31,10 @@ function TopicPage() {
           </svg>
           {t(lang, "allPosts")}
         </Link>
-        <h1 className="font-bold text-3xl text-gray-900">
+        <h1 className="font-bold text-3xl text-gray-900 dark:text-zinc-100">
           {t(lang, "postsAbout")} &ldquo;{topic}&rdquo;
         </h1>
-        <p className="mt-2 text-gray-500">
+        <p className="mt-2 text-gray-500 dark:text-zinc-500">
           {posts.length}{" "}
           {posts.length === 1
             ? t(lang, "articleFound")

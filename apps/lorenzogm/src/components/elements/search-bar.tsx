@@ -33,7 +33,7 @@ export function SearchBar() {
     <form className="mx-auto w-full max-w-xl" onSubmit={handleSubmit}>
       <div className="relative">
         <input
-          className="w-full rounded-full border border-gray-300 bg-gray-50 py-3 pr-20 pl-5 text-gray-900 placeholder-gray-400 transition-colors focus:border-red-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-200"
+          className="w-full rounded-full border border-gray-300 bg-gray-50 py-3 pr-20 pl-5 text-gray-900 placeholder-gray-400 transition-colors focus:border-red-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-200 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder-zinc-500 dark:focus:border-red-400 dark:focus:bg-zinc-900 dark:focus:ring-red-500/30"
           onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
           type="text"
@@ -41,7 +41,7 @@ export function SearchBar() {
         />
         {query && (
           <button
-            className="absolute top-1/2 right-10 -translate-y-1/2 rounded-full p-1 text-gray-400 transition-colors hover:text-gray-600"
+            className="absolute top-1/2 right-10 -translate-y-1/2 rounded-full p-1 text-gray-400 transition-colors hover:text-gray-600 dark:text-zinc-500 dark:hover:text-zinc-300"
             onClick={handleClear}
             type="button"
           >
@@ -62,7 +62,7 @@ export function SearchBar() {
           </button>
         )}
         <button
-          className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-1 text-gray-400 transition-colors hover:text-red-600"
+          className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-1 text-gray-400 transition-colors hover:text-red-600 dark:text-zinc-500 dark:hover:text-red-400"
           type="submit"
         >
           <svg

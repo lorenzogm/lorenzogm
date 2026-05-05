@@ -21,11 +21,13 @@ export default function RedirectPage({
   }, [navigate, redirectTo]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-zinc-950">
       <div className="text-center">
-        <h1 className="mb-4 font-bold text-2xl text-gray-900">{title}</h1>
-        <p className="text-gray-600">{message}</p>
-        <p className="mt-4 text-gray-500 text-sm">
+        <h1 className="mb-4 font-bold text-2xl text-gray-900 dark:text-zinc-100">
+          {title}
+        </h1>
+        <p className="text-gray-600 dark:text-zinc-400">{message}</p>
+        <p className="mt-4 text-gray-500 text-sm dark:text-zinc-500">
           If you are not redirected automatically,{" "}
           <Link
             event={{

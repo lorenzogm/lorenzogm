@@ -9,10 +9,10 @@ function TopicsPage() {
   return (
     <>
       <div className="mb-8">
-        <h1 className="font-bold text-3xl text-gray-900">
+        <h1 className="font-bold text-3xl text-gray-900 dark:text-zinc-100">
           {t(lang, "topics")}
         </h1>
-        <p className="mt-2 text-gray-500">
+        <p className="mt-2 text-gray-500 dark:text-zinc-500">
           {t(lang, "browseAllTopics")} {topics.length} {t(lang, "topicsLabel")}
         </p>
       </div>

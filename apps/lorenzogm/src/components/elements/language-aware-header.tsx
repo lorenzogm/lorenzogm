@@ -29,14 +29,14 @@ export function LanguageAwareHeader() {
           href={homeUrl}
           unstyled
         >
-          <h1 className="mb-3 font-bold text-5xl text-gray-900 md:text-6xl">
-            Lorenzo<span className="text-red-600"> GM</span>
+          <h1 className="mb-3 font-bold text-5xl text-gray-900 md:text-6xl dark:text-zinc-100">
+            Lorenzo<span className="text-red-600 dark:text-red-400"> GM</span>
           </h1>
         </Link>
-        <p className="mx-auto max-w-2xl text-gray-600 text-xl leading-relaxed">
+        <p className="mx-auto max-w-2xl text-gray-600 text-xl leading-relaxed dark:text-zinc-400">
           {subtitle}
         </p>
-        <div className="mx-auto mt-6 h-1 w-20 rounded-full bg-gradient-to-r from-red-500 to-red-600" />
+        <div className="mx-auto mt-6 h-1 w-20 rounded-full bg-gradient-to-r from-red-500 to-red-600 dark:from-red-400 dark:to-red-500" />
       </div>
       {/* Mobile language switcher - positioned below the red line */}
       <div className="mt-4 flex justify-center md:hidden">

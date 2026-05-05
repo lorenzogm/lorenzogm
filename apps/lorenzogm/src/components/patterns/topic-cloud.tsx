@@ -17,20 +17,20 @@ export function TopicCloud({ topics, lang = "en", limit }: TopicCloudProps) {
     <div className="mb-12 flex flex-wrap gap-2">
       {displayed.map(({ topic, count }) => (
         <Link
-          className="inline-flex items-center gap-1.5 rounded-full border border-red-200/50 bg-red-50 px-4 py-2 font-semibold text-red-700 text-sm transition-colors duration-200 hover:bg-red-100"
+          className="inline-flex items-center gap-1.5 rounded-full border border-red-200/50 bg-red-50 px-4 py-2 font-semibold text-red-700 text-sm transition-colors duration-200 hover:bg-red-100 dark:border-red-900/40 dark:bg-red-950/40 dark:text-red-300 dark:hover:bg-red-900/40"
           key={topic}
           params={{ lang, topic: topic.toLowerCase() }}
           to="/$lang/topics/$topic"
         >
           {topic}
-          <span className="rounded-full bg-red-200/60 px-1.5 py-0.5 text-red-800 text-xs">
+          <span className="rounded-full bg-red-200/60 px-1.5 py-0.5 text-red-800 text-xs dark:bg-red-900/60 dark:text-red-200">
             {count}
           </span>
         </Link>
       ))}
       {hasMore && (
         <Link
-          className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-4 py-2 font-semibold text-gray-600 text-sm transition-colors duration-200 hover:bg-gray-100"
+          className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-4 py-2 font-semibold text-gray-600 text-sm transition-colors duration-200 hover:bg-gray-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
           params={{ lang }}
           to="/$lang/topics"
         >

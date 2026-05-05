@@ -17,7 +17,7 @@ function SearchPage() {
     <>
       <div className="mb-8">
         <Link
-          className="mb-4 inline-flex items-center text-red-600 text-sm transition-colors hover:text-red-700"
+          className="mb-4 inline-flex items-center text-red-600 text-sm transition-colors hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
           params={{ lang }}
           to="/$lang"
         >
@@ -37,12 +37,12 @@ function SearchPage() {
           </svg>
           {t(lang, "allPosts")}
         </Link>
-        <h1 className="font-bold text-3xl text-gray-900">
+        <h1 className="font-bold text-3xl text-gray-900 dark:text-zinc-100">
           {q
             ? `${t(lang, "searchResultsFor")} "${q}"`
             : t(lang, "searchResults")}
         </h1>
-        <p className="mt-2 text-gray-500">
+        <p className="mt-2 text-gray-500 dark:text-zinc-500">
           {posts.length}{" "}
           {posts.length === 1
             ? t(lang, "articleFound")
@@ -75,7 +75,7 @@ function SearchPage() {
             </div>
           ) : (
             <div className="py-16 text-center">
-              <p className="text-gray-500 text-lg">
+              <p className="text-gray-500 text-lg dark:text-zinc-500">
                 {t(lang, "noArticlesFound")}
               </p>
             </div>

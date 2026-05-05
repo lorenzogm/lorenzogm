@@ -12,7 +12,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
   const readMoreText = post.lang === "es" ? "Leer más" : "Read more";
 
   return (
-    <article className="overflow-hidden rounded-xl border border-red-100/50 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <article className="overflow-hidden rounded-xl border border-red-100/50 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-red-900/40 dark:bg-zinc-900 dark:shadow-black/30 dark:hover:shadow-black/50">
       <Button
         className="block w-full text-left"
         event={{
@@ -23,7 +23,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
         }}
         href={blogUrl}
       >
-        <div className="w-full overflow-hidden bg-gray-50">
+        <div className="w-full overflow-hidden bg-gray-50 dark:bg-zinc-800">
           <img
             alt={post.title}
             className="h-auto w-full transition-transform duration-300 hover:scale-105"
@@ -33,28 +33,28 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
           />
         </div>
         <div className="p-6">
-          <div className="mb-3 flex items-center text-gray-500 text-sm">
+          <div className="mb-3 flex items-center text-gray-500 text-sm dark:text-zinc-500">
             <time className="font-medium" dateTime={post.date}>
               {formatDate(post.date)}
             </time>
-            <span className="mx-2 text-red-400">•</span>
+            <span className="mx-2 text-red-400 dark:text-red-500">•</span>
             <span className="font-medium">{post.author}</span>
           </div>
 
           <h2
-            className={`${featured ? "text-2xl md:text-3xl" : "text-xl"} mb-3 font-bold text-gray-900 leading-tight transition-colors duration-200 hover:text-red-600`}
+            className={`${featured ? "text-2xl md:text-3xl" : "text-xl"} mb-3 font-bold text-gray-900 leading-tight transition-colors duration-200 hover:text-red-600 dark:text-zinc-100 dark:hover:text-red-400`}
           >
             {post.title}
           </h2>
 
-          <p className="mb-4 line-clamp-3 text-gray-600 leading-relaxed">
+          <p className="mb-4 line-clamp-3 text-gray-600 leading-relaxed dark:text-zinc-400">
             {post.excerpt}
           </p>
 
           <div className="mb-4 flex flex-wrap gap-2">
             {post.tags.map((tag) => (
               <span
-                className="inline-block rounded-full border border-red-200/50 bg-red-50 px-3 py-1 font-semibold text-red-700 text-xs transition-colors duration-200 hover:bg-red-100"
+                className="inline-block rounded-full border border-red-200/50 bg-red-50 px-3 py-1 font-semibold text-red-700 text-xs transition-colors duration-200 hover:bg-red-100 dark:border-red-900/40 dark:bg-red-950/40 dark:text-red-300 dark:hover:bg-red-900/40"
                 key={tag}
               >
                 {tag}
@@ -62,7 +62,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
             ))}
           </div>
 
-          <div className="group flex items-center font-semibold text-red-600 text-sm transition-colors duration-200 hover:text-red-700">
+          <div className="group flex items-center font-semibold text-red-600 text-sm transition-colors duration-200 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
             {readMoreText}
             <svg
               className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"

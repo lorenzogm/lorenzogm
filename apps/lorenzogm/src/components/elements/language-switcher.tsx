@@ -29,7 +29,7 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
   return (
     <div className="flex items-center space-x-2 text-sm">
       <span
-        className={`rounded px-2 py-1 ${isEnglish ? "bg-red-600 text-white" : "text-gray-600 hover:text-gray-900"}`}
+        className={`rounded px-2 py-1 ${isEnglish ? "bg-red-600 text-white dark:bg-red-500" : "text-gray-600 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-zinc-100"}`}
       >
         {isEnglish ? (
           englishLabel
@@ -47,9 +47,9 @@ export function LanguageSwitcher({ currentLang }: LanguageSwitcherProps) {
           </Link>
         )}
       </span>
-      <span className="text-gray-400">|</span>
+      <span className="text-gray-400 dark:text-zinc-600">|</span>
       <span
-        className={`rounded px-2 py-1 ${isEnglish ? "text-gray-600 hover:text-gray-900" : "bg-red-600 text-white"}`}
+        className={`rounded px-2 py-1 ${isEnglish ? "text-gray-600 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-zinc-100" : "bg-red-600 text-white dark:bg-red-500"}`}
       >
         {isEnglish ? (
           <Link

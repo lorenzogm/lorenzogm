@@ -42,25 +42,33 @@ function RootComponent() {
     <RootDocument>
       <div className="flex min-h-screen flex-col">
         {/* Header */}
-        <Container as="header" className="bg-white py-12" fullWidth>
+        <Container
+          as="header"
+          className="bg-white py-12 dark:bg-zinc-950"
+          fullWidth
+        >
           <LanguageAwareHeader />
         </Container>
 
         {/* Search */}
-        <Container className="bg-white pb-8" fullWidth>
+        <Container className="bg-white pb-8 dark:bg-zinc-950" fullWidth>
           <SearchBar />
         </Container>
 
-        <Container as="main" className="flex-1 bg-white py-16" fullWidth>
+        <Container
+          as="main"
+          className="flex-1 bg-white py-16 dark:bg-zinc-950"
+          fullWidth
+        >
           <Outlet />
         </Container>
 
         <Container
           as="footer"
-          className="mt-auto border-gray-200 border-t bg-white py-6 text-center"
+          className="mt-auto border-gray-200 border-t bg-white py-6 text-center dark:border-zinc-800 dark:bg-zinc-950"
           fullWidth
         >
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-zinc-400">
             © {new Date().getFullYear()} Lorenzo GM.
           </p>
         </Container>
@@ -72,14 +80,16 @@ function RootComponent() {
 function NotFoundComponent() {
   return (
     <RootDocument>
-      <div className="flex min-h-screen items-center justify-center bg-gray-50">
-        <div className="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg">
+      <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-zinc-950">
+        <div className="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg dark:bg-zinc-900 dark:shadow-black/40">
           <div className="mb-6">
-            <h1 className="mb-2 font-bold text-6xl text-gray-300">404</h1>
-            <h2 className="mb-4 font-bold text-2xl text-gray-900">
+            <h1 className="mb-2 font-bold text-6xl text-gray-300 dark:text-zinc-700">
+              404
+            </h1>
+            <h2 className="mb-4 font-bold text-2xl text-gray-900 dark:text-zinc-100">
               Page Not Found
             </h2>
-            <p className="mb-6 text-gray-600">
+            <p className="mb-6 text-gray-600 dark:text-zinc-400">
               Sorry, we couldn&apos;t find the page you&apos;re looking for.
             </p>
           </div>

@@ -10,12 +10,12 @@ function Home() {
 
   return (
     <>
-      <h2 className="mb-4 font-bold text-2xl text-gray-900">
+      <h2 className="mb-4 font-bold text-2xl text-gray-900 dark:text-zinc-100">
         {t(lang, "searchBlogByTopic")}
       </h2>
       <TopicCloud lang={lang} limit={8} topics={topics} />
 
-      <h2 className="mb-8 font-bold text-2xl text-gray-900">
+      <h2 className="mb-8 font-bold text-2xl text-gray-900 dark:text-zinc-100">
         {t(lang, "articles")}
       </h2>
       <div className="space-y-12">
@@ -34,9 +34,9 @@ function Home() {
 
       {posts.length === 0 && (
         <div className="py-16 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 dark:bg-red-950/60">
             <svg
-              className="h-8 w-8 text-red-600"
+              className="h-8 w-8 text-red-600 dark:text-red-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -50,7 +50,9 @@ function Home() {
               />
             </svg>
           </div>
-          <p className="text-gray-500 text-lg">{t(lang, "noPosts")}</p>
+          <p className="text-gray-500 text-lg dark:text-zinc-500">
+            {t(lang, "noPosts")}
+          </p>
         </div>
       )}
     </>
