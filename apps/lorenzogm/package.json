@@ -17,7 +17,7 @@
     "buffer": "6.0.3",
     "date-fns": "4.1.0",
     "gray-matter": "4.0.3",
-    "react": "19.2.5",
+    "react": "19.2.6",
     "react-dom": "19.2.5",
     "remark": "15.0.1",
     "remark-gfm": "4.0.1",
