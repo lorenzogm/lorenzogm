@@ -3,7 +3,7 @@ title: "El Ciclo de Vida del Desarrollo de Software Agéntico"
 date: "2026-05-22"
 tag: AI, Desarrollo Agéntico, Proceso, Skills
 description: Un flujo de trabajo estructurado para el desarrollo de software con agentes de IA — desde la definición del épico hasta la verificación E2E, usando skills probadas y una separación clara entre planificación y construcción.
-image: https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80
+image: /agentic-software-development-life-cycle-en.png
 author: Lorenzo GM
 ---
 
