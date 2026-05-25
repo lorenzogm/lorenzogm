@@ -3,7 +3,7 @@ title: "The Agentic Software Development Life Cycle"
 date: "2026-05-22"
 tag: AI, Agentic Development, Process, Skills
 description: A structured workflow for software development with AI agents — from epic definition to E2E verification, using proven skills and a clear separation between planning and building.
-image: https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80
+image: "/agentic-software-development-life-cycle-en.png"
 author: Lorenzo GM
 ---
 
@@ -134,7 +134,7 @@ The result is a cycle that can be handed off, resumed, and iterated — with AI 
 | Build | `/tdd` | Implement with test-driven development |
 | Build | `/qa` | Verify acceptance criteria end-to-end |
 
-All skills except `/qa` are from [Matt Pocock's open-source skills library](https://github.com/mattpocock/skills). `/qa` is a custom skill built for this workflow on top of `agent-browser`.
+All skills except `/qa` are from [Matt Pocock's open-source skills library](https://github.com/mattpocock/skills). `/qa` is a custom skill available at [github.com/lorenzogm/skills](https://github.com/lorenzogm/skills), built on top of `agent-browser`.
 
 ---
 

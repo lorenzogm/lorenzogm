@@ -134,7 +134,7 @@ El resultado es un ciclo que puede traspasarse, reanudarse e iterarse — con ag
 | Construcción | `/tdd` | Implementar con desarrollo guiado por tests |
 | Construcción | `/qa` | Verificar criterios de aceptación de extremo a extremo |
 
-Todas las skills excepto `/qa` son de la [librería de skills open-source de Matt Pocock](https://github.com/mattpocock/skills). `/qa` es una skill personalizada construida para este flujo de trabajo sobre `agent-browser`.
+Todas las skills excepto `/qa` son de la [librería de skills open-source de Matt Pocock](https://github.com/mattpocock/skills). `/qa` es una skill personalizada disponible en [github.com/lorenzogm/skills](https://github.com/lorenzogm/skills), construida sobre `agent-browser`.
 
 ---
 
