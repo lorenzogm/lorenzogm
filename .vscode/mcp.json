@@ -42,10 +42,6 @@
       "command": "npx",
       "args": ["lighthouse-mcp"]
     },
-    "terraform": {
-      "command": "docker",
-      "args": ["run", "-i", "--rm", "hashicorp/terraform-mcp-server"]
-    },
     "atlassian": {
       "command": "docker",
       "args": [
