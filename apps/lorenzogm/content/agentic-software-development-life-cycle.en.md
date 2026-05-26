@@ -1,6 +1,6 @@
 ---
 title: "The Agentic Software Development Life Cycle"
-date: "2026-05-22"
+date: "2024-06-09"
 tag: AI, Agentic Development, Process, Skills
 description: A structured workflow for software development with AI agents — from epic definition to E2E verification, using proven skills and a clear separation between planning and building.
 image: "/agentic-software-development-life-cycle-en.png"
