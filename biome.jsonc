@@ -7,9 +7,15 @@
     "useIgnoreFile": true,
     "defaultBranch": "main"
   },
+  // Static assets are shipped as-is and must not be reformatted.
+  "files": {
+    "includes": ["!**/public"]
+  },
   "linter": {
     "rules": {
-      "suspicious": {},
+      "suspicious": {
+        "noShadow": "off"
+      },
       "a11y": {},
       "performance": {
         "noImgElement": "off"
@@ -32,9 +38,6 @@
         "useParseIntRadix": "off",
         "useExhaustiveDependencies": "off",
         "noUnusedFunctionParameters": "off"
-      },
-      "nursery": {
-        "noShadow": "off"
       }
     }
   }

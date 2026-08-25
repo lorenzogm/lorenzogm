@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lorenzogm.com/en/</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://lorenzogm.com/es/</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://lorenzogm.com/en/topics/</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://lorenzogm.com/es/topics/</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -36,6 +36,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://lorenzogm.com/en/blog/agentic-software-development-life-cycle-v2</loc>
+    <lastmod>2026-08-25</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lorenzogm.com/en/blog/agentic-software-development-life-cycle</loc>
+    <lastmod>2024-06-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://lorenzogm.com/en/blog/ai-powered-error-fixing-with-datadog-sonarqube-mcp</loc>
     <lastmod>2025-06-17</lastmod>
     <priority>0.8</priority>
@@ -43,6 +53,11 @@
   <url>
     <loc>https://lorenzogm.com/en/blog/array-types-in-typescript</loc>
     <lastmod>2021-11-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lorenzogm.com/en/blog/autonomous-agentic-development-with-github-actions</loc>
+    <lastmod>2026-06-03</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -68,6 +83,11 @@
   <url>
     <loc>https://lorenzogm.com/en/blog/bulding-a-library-of-components</loc>
     <lastmod>2022-08-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lorenzogm.com/en/blog/cloud-agentic-development-with-queues</loc>
+    <lastmod>2026-07-14</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -201,6 +221,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://lorenzogm.com/es/blog/agentic-software-development-life-cycle-v2</loc>
+    <lastmod>2026-08-25</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lorenzogm.com/es/blog/agentic-software-development-life-cycle</loc>
+    <lastmod>2024-06-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://lorenzogm.com/es/blog/ai-powered-error-fixing-with-datadog-sonarqube-mcp</loc>
     <lastmod>2025-06-17</lastmod>
     <priority>0.8</priority>
@@ -208,6 +238,11 @@
   <url>
     <loc>https://lorenzogm.com/es/blog/array-types-in-typescript</loc>
     <lastmod>2021-11-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lorenzogm.com/es/blog/autonomous-agentic-development-with-github-actions</loc>
+    <lastmod>2026-06-03</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -233,6 +268,11 @@
   <url>
     <loc>https://lorenzogm.com/es/blog/bulding-a-library-of-components</loc>
     <lastmod>2022-08-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lorenzogm.com/es/blog/cloud-agentic-development-with-queues</loc>
+    <lastmod>2026-07-14</lastmod>
     <priority>0.8</priority>
   </url>
   <url>

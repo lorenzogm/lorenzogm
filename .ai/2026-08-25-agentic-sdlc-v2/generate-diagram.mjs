@@ -15,14 +15,17 @@ import { join } from "node:path";
 
 const APP_DIR = "/Users/lorenzogm/lorenzogm/lorenzogm/apps/lorenzogm";
 // Playwright is only installed in the web app workspace, so resolve it from there.
-const { chromium } = await import(`${APP_DIR}/node_modules/@playwright/test/index.mjs`);
+const { chromium } = await import(
+  `${APP_DIR}/node_modules/@playwright/test/index.mjs`
+);
 
 const OUT_DIR = `${APP_DIR}/public`;
 const SLUG = "agentic-software-development-life-cycle-v2";
 
 const CONTENT = {
   en: {
-    title: 'The <span class="accent">Agentic</span> Software Development Life Cycle',
+    title:
+      'The <span class="accent">Agentic</span> Software Development Life Cycle',
     subtitle: "A structured, AI-augmented workflow from idea to shipped code.",
     legendBot: "can run unattended in the Software Factory",
     legendHand: "needs a human approval before moving on",
@@ -32,26 +35,39 @@ const CONTENT = {
     prototypeDesc:
       "Design artefacts and prototypes that ground the experience before planning begins.",
     backlog: "Backlog",
-    backlogDesc: "Specs (epics) and tickets (stories) are stored in the issue tracker.",
+    backlogDesc:
+      "Specs (epics) and tickets (stories) are stored in the issue tracker.",
     development: "Development",
     steps: {
-      "plan-idea": "AI asks you business questions to develop your idea and reach a shared understanding.",
-      "plan-spec": "Synthesise the conversation into a spec — the epic — and publish it to the issue tracker.",
-      "plan-tickets": "Break the spec into tickets — the stories — each declaring the tickets that block it.",
+      "plan-idea":
+        "AI asks you business questions to develop your idea and reach a shared understanding.",
+      "plan-spec":
+        "Synthesise the conversation into a spec — the epic — and publish it to the issue tracker.",
+      "plan-tickets":
+        "Break the spec into tickets — the stories — each declaring the tickets that block it.",
       "xd-discover": "Intake and inspiration — diverge on the problem space.",
-      "xd-frame": "Narrative, strategy and principles — converge on a direction.",
+      "xd-frame":
+        "Narrative, strategy and principles — converge on a direction.",
       "xd-define": "Define the experience to take into prototyping.",
-      "plan-prototype-to-tickets": "Turn the prototype into tickets — the stories — ready for the backlog.",
-      "dev-implementation-plan": "AI asks you technical questions to define the implementation plan.",
-      "dev-implement": "Implement the tickets from the plan, using TDD at the agreed seams.",
-      "dev-code-review": "Review the implementation against the plan and the codebase standards.",
-      "dev-qa": "Test the functionality against the stories' acceptance criteria and the quality gates.",
-      "dev-ship": "Open the PR, add reviewers, and make sure the pipelines pass.",
+      "plan-prototype-to-tickets":
+        "Turn the prototype into tickets — the stories — ready for the backlog.",
+      "dev-implementation-plan":
+        "AI asks you technical questions to define the implementation plan.",
+      "dev-implement":
+        "Implement the tickets from the plan, using TDD at the agreed seams.",
+      "dev-code-review":
+        "Review the implementation against the plan and the codebase standards.",
+      "dev-qa":
+        "Test the functionality against the stories' acceptance criteria and the quality gates.",
+      "dev-ship":
+        "Open the PR, add reviewers, and make sure the pipelines pass.",
     },
   },
   es: {
-    title: 'El Ciclo de Vida de Desarrollo de Software <span class="accent">Agéntico</span>',
-    subtitle: "Un flujo estructurado y aumentado con IA, de la idea al código en producción.",
+    title:
+      'El Ciclo de Vida de Desarrollo de Software <span class="accent">Agéntico</span>',
+    subtitle:
+      "Un flujo estructurado y aumentado con IA, de la idea al código en producción.",
     legendBot: "puede ejecutarse sin supervisión en la Software Factory",
     legendHand: "necesita aprobación humana antes de continuar",
     planning: "Planificación",
@@ -60,21 +76,33 @@ const CONTENT = {
     prototypeDesc:
       "Artefactos de diseño y prototipos que aterrizan la experiencia antes de planificar.",
     backlog: "Backlog",
-    backlogDesc: "Las specs (epics) y los tickets (historias) viven en el gestor de incidencias.",
+    backlogDesc:
+      "Las specs (epics) y los tickets (historias) viven en el gestor de incidencias.",
     development: "Desarrollo",
     steps: {
-      "plan-idea": "La IA te hace preguntas de negocio para desarrollar tu idea y llegar a un entendimiento común.",
-      "plan-spec": "Sintetiza la conversación en una spec — el epic — y la publica en el gestor de incidencias.",
-      "plan-tickets": "Divide la spec en tickets — las historias — declarando qué tickets la bloquean.",
-      "xd-discover": "Recogida de información e inspiración: divergir sobre el espacio del problema.",
-      "xd-frame": "Narrativa, estrategia y principios: converger en una dirección.",
+      "plan-idea":
+        "La IA te hace preguntas de negocio para desarrollar tu idea y llegar a un entendimiento común.",
+      "plan-spec":
+        "Sintetiza la conversación en una spec — el epic — y la publica en el gestor de incidencias.",
+      "plan-tickets":
+        "Divide la spec en tickets — las historias — declarando qué tickets la bloquean.",
+      "xd-discover":
+        "Recogida de información e inspiración: divergir sobre el espacio del problema.",
+      "xd-frame":
+        "Narrativa, estrategia y principios: converger en una dirección.",
       "xd-define": "Define la experiencia que entra en prototipado.",
-      "plan-prototype-to-tickets": "Convierte el prototipo en tickets — las historias — listos para el backlog.",
-      "dev-implementation-plan": "La IA te hace preguntas técnicas para definir el plan de implementación.",
-      "dev-implement": "Implementa los tickets del plan, con TDD en las costuras acordadas.",
-      "dev-code-review": "Revisa la implementación contra el plan y los estándares del código.",
-      "dev-qa": "Prueba la funcionalidad contra los criterios de aceptación y los quality gates.",
-      "dev-ship": "Abre la PR, añade revisores y comprueba que los pipelines pasan.",
+      "plan-prototype-to-tickets":
+        "Convierte el prototipo en tickets — las historias — listos para el backlog.",
+      "dev-implementation-plan":
+        "La IA te hace preguntas técnicas para definir el plan de implementación.",
+      "dev-implement":
+        "Implementa los tickets del plan, con TDD en las costuras acordadas.",
+      "dev-code-review":
+        "Revisa la implementación contra el plan y los estándares del código.",
+      "dev-qa":
+        "Prueba la funcionalidad contra los criterios de aceptación y los quality gates.",
+      "dev-ship":
+        "Abre la PR, añade revisores y comprueba que los pipelines pasan.",
     },
   },
 };
